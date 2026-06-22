@@ -167,8 +167,8 @@ button { font-family: inherit; cursor: pointer; }
 .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; flex: 1; }
 .field-row { display: flex; gap: 10px; }
 .field label { font-size: 8.5pt; font-weight: 600; color: #64748b; }
-.field.check { flex-direction: row; align-items: center; }
-.field.check label { font-size: 9pt; color: #334155; display: flex; gap: 6px; align-items: center; }
+.field.check { flex-direction: row; align-items: center; flex: 0 0 auto; gap: 12px; flex-wrap: wrap; }
+.field.check label { font-size: 9pt; color: #334155; display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
 .field input, .field select, textarea, .grid-row input {
   font-family: inherit; font-size: 10pt; color: #1f2937;
   border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 10px; background: #fff; width: 100%;
