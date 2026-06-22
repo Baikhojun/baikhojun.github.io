@@ -240,6 +240,22 @@ textarea { width: 100%; resize: vertical; }
 .stat-table td { padding: 5px 6px; border: 1px solid #e2e8f0; text-align: center; }
 .stat-table td.cat-name { text-align: left; font-weight: 600; padding-left: 8px; }
 
+/* 교대근무 배지 (셀 하단) */
+.shift-badge { margin-top: auto; align-self: flex-start; font-size: 6.5pt; font-weight: 800; color: #fff; padding: 0.5px 5px; border-radius: 999px; line-height: 1.45; }
+
+/* 교대근무 입력 그리드 (모달) */
+.shift-grid { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin: 10px 0; }
+.sg-dow { display: grid; grid-template-columns: repeat(7, 1fr); background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
+.sg-dow div { text-align: center; font-size: 8.5pt; font-weight: 700; color: #334155; padding: 5px 0; }
+.sg-dow .sun { color: #dc2626; } .sg-dow .sat { color: #2563eb; }
+.sg-body { display: grid; grid-template-columns: repeat(7, 1fr); }
+.sg-cell { min-height: 48px; border-right: 1px solid #eef2f7; border-bottom: 1px solid #eef2f7; background: #fff; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #334155; padding: 4px 2px; }
+.sg-cell:nth-child(7n) { border-right: none; }
+.sg-cell.empty { background: #fafafa; cursor: default; }
+.sg-cell b { font-weight: 700; font-size: 9.5pt; }
+.sg-cell span { font-size: 8pt; font-weight: 800; min-height: 11px; }
+.sg-cell:not(.empty):hover { outline: 2px solid #93c5fd; outline-offset: -2px; }
+
 /* ===== 인쇄 ===== */
 @media print {
   @page { size: A4 landscape; margin: 0; }

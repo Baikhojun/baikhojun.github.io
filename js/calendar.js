@@ -44,6 +44,8 @@
     });
     var leaveBy = {};
     (month.leaves || []).forEach(function (l) { leaveBy[l.date] = l; });
+    var shiftBy = {};
+    (month.shifts || []).forEach(function (s) { shiftBy[s.date] = s; });
 
     var firstDow = new Date(y, m - 1, 1).getDay();
     var days = WS.daysInMonth(y, m);
@@ -81,6 +83,11 @@
         html += '<div class="ev' + (e.major ? ' major' : '') + '" data-ev="' + e.id + '" ' +
           'style="border-color:' + c.bd + ';background:' + c.bg + ';">' + WS.esc(e.text) + timeTag + '</div>';
       });
+      var sh = shiftBy[dateStr];
+      if (sh) {
+        var stt = WS.shiftType(sh.type) || { abbr: '?', color: '#64748b' };
+        html += '<div class="shift-badge" title="' + WS.esc(sh.type) + '" style="background:' + stt.color + ';">' + WS.esc(stt.abbr) + '</div>';
+      }
       html += '<div class="cell-hint">＋</div>';
       html += '</div>';
     }
@@ -100,7 +107,12 @@
     WS.LEAVE_TYPES.forEach(function (t) {
       if (used[t.key]) items += '<div class="legend-item"><div class="legend-swatch" style="background:' + t.color + ';"></div>' + WS.esc(t.key) + '</div>';
     });
-    return '<div class="panel"><div class="panel-title">공정 분류 / 휴무</div><div class="legend">' + items + '</div></div>';
+    var usedSh = {};
+    (month.shifts || []).forEach(function (s) { usedSh[s.type] = true; });
+    WS.SHIFT_TYPES.forEach(function (t) {
+      if (usedSh[t.key]) items += '<div class="legend-item"><div class="legend-swatch" style="background:' + t.color + ';"></div>' + t.abbr + ' · ' + t.key + '</div>';
+    });
+    return '<div class="panel"><div class="panel-title">공정 분류 / 휴무 / 교대</div><div class="legend">' + items + '</div></div>';
   }
 
   function renderProgress(data, month, y, m) {

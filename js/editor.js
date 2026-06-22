@@ -47,6 +47,12 @@
       WS.LEAVE_TYPES.forEach(function (t) { o += '<option value="' + t.key + '"' + (sel === t.key ? ' selected' : '') + '>' + t.key + '</option>'; });
       return o;
     }
+    function shiftOptions(sel) {
+      var o = '<option value="">없음</option>';
+      WS.SHIFT_TYPES.forEach(function (t) { o += '<option value="' + t.key + '"' + (sel === t.key ? ' selected' : '') + '>' + t.abbr + ' · ' + t.key + '</option>'; });
+      return o;
+    }
+    function curShift() { var s = (month.shifts || []).filter(function (x) { return x.date === dateStr; })[0]; return s ? s.type : ''; }
     function sameDateEvents() { return month.events.filter(function (e) { return e.date === dateStr; }); }
     function eventRows() {
       var evs = sameDateEvents();
@@ -72,9 +78,10 @@
     function body() {
       var lv = curLeave();
       return '' +
+        '<div class="field"><label>공휴일 / 휴무 (비우면 평일)</label><input id="ed-holiday" type="text" placeholder="예: 어린이날" value="' + WS.esc(holidayName()) + '"></div>' +
         '<div class="field-row">' +
-          '<div class="field"><label>공휴일 / 휴무 (비우면 평일)</label><input id="ed-holiday" type="text" placeholder="예: 어린이날" value="' + WS.esc(holidayName()) + '"></div>' +
           '<div class="field"><label>휴가 / 근무형태</label><select id="ed-leave">' + leaveOptions(lv ? lv.type : '') + '</select></div>' +
+          '<div class="field"><label>교대근무</label><select id="ed-shift">' + shiftOptions(curShift()) + '</select></div>' +
         '</div>' +
         '<div class="section-label">이 날의 일정</div>' +
         '<div id="ed-list">' + eventRows() + '</div>' +
@@ -197,6 +204,12 @@
       if (type) month.leaves.push({ id: WS.uid('l'), date: dateStr, type: type });
       WS.Store.save(); WS.App.refresh();
     });
+    $('ed-shift').addEventListener('change', function () {
+      var type = $('ed-shift').value;
+      month.shifts = (month.shifts || []).filter(function (x) { return x.date !== dateStr; });
+      if (type) month.shifts.push({ date: dateStr, type: type });
+      WS.Store.save(); WS.App.refresh();
+    });
 
     bindList();
   };
@@ -276,11 +289,18 @@
       $('set-cats').querySelectorAll('[data-delcat]').forEach(function (b) {
         b.addEventListener('click', function () {
           var id = b.getAttribute('data-delcat');
-          var used = Object.keys(data.months).some(function (k) { return data.months[k].events.some(function (e) { return e.catId === id; }); });
-          if (used) { root.alert('이 공정을 사용하는 일정이 있어 삭제할 수 없습니다. 먼저 해당 일정을 변경/삭제하세요.'); return; }
           if (data.categories.length <= 1) { root.alert('최소 1개의 공정은 필요합니다.'); return; }
+          var used = 0;
+          Object.keys(data.months).forEach(function (k) { used += data.months[k].events.filter(function (e) { return e.catId === id; }).length; });
+          if (used > 0 && !root.confirm('이 공정을 사용하는 일정 ' + used + '건도 함께 삭제됩니다.\n범례·진행률 표에서도 제거됩니다. 계속할까요?')) return;
           readCatInputs();
           data.categories = data.categories.filter(function (c) { return c.id !== id; });
+          Object.keys(data.months).forEach(function (k) {
+            var mo = data.months[k];
+            mo.events = mo.events.filter(function (e) { return e.catId !== id; });
+            if (mo.progressOverride) delete mo.progressOverride[id];
+          });
+          WS.Store.save(); WS.App.refresh();
           $('set-cats').innerHTML = catRows(); bindCats();
         });
       });
@@ -449,7 +469,61 @@
       '<div class="section-label">공정별 투입</div>' +
       '<table class="stat-table"><thead><tr><th style="text-align:left;">공정</th><th>투입일수</th><th>일정수</th></tr></thead><tbody>' + catRows + '</tbody></table>' +
       '<div class="section-label">휴가 / 근무형태</div>' +
-      '<table class="stat-table"><thead><tr><th style="text-align:left;">유형</th><th>횟수</th></tr></thead><tbody>' + leaveRows + '</tbody></table>';
+      '<table class="stat-table"><thead><tr><th style="text-align:left;">유형</th><th>횟수</th></tr></thead><tbody>' + leaveRows + '</tbody></table>' +
+      (s.shifts && s.shifts.length ?
+        '<div class="section-label">교대근무</div><table class="stat-table"><thead><tr><th style="text-align:left;">유형</th><th>일수</th></tr></thead><tbody>' +
+        s.shifts.map(function (x) { var stt = WS.shiftType(x.type) || {}; return '<tr><td class="cat-name" style="border-left:3px solid ' + (stt.color || '#64748b') + ';">' + x.abbr + ' · ' + x.type + '</td><td>' + x.count + '일</td></tr>'; }).join('') +
+        '</tbody></table>' : '');
     openModal(st.year + '년 ' + st.month + '월 통계', body);
+  };
+
+  // ============ 교대근무 월 일괄 입력 ============
+  WS.Editor.openShifts = function () {
+    var st = WS.App.state, key = st.key;
+    var month = WS.Store.getMonth(key, true);
+    function shiftOf(date) { var s = month.shifts.filter(function (x) { return x.date === date; })[0]; return s ? s.type : ''; }
+    function legendHtml() {
+      return '<div class="legend" style="grid-template-columns:repeat(4,1fr);">' + WS.SHIFT_TYPES.map(function (t) {
+        return '<div class="legend-item"><div class="legend-swatch" style="background:' + t.color + ';"></div>' + t.abbr + ' · ' + t.key + '</div>';
+      }).join('') + '</div>';
+    }
+    function gridHtml() {
+      var firstDow = new Date(st.year, st.month - 1, 1).getDay();
+      var days = WS.daysInMonth(st.year, st.month);
+      var rows = Math.ceil((firstDow + days) / 7), cells = rows * 7;
+      var h = '<div class="sg-dow"><div class="sun">일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div class="sat">토</div></div><div class="sg-body">';
+      for (var i = 0; i < cells; i++) {
+        var d = i - firstDow + 1;
+        if (d < 1 || d > days) { h += '<div class="sg-cell empty"></div>'; continue; }
+        var date = st.year + '-' + pad(st.month) + '-' + pad(d);
+        var stt = WS.shiftType(shiftOf(date));
+        var style = stt ? ' style="background:' + stt.color + ';color:#fff;border-color:' + stt.color + ';"' : '';
+        h += '<button class="sg-cell" data-date="' + date + '"' + style + '><b>' + d + '</b><span>' + (stt ? stt.abbr : '') + '</span></button>';
+      }
+      return h + '</div>';
+    }
+    var body = '<div class="muted">날짜를 클릭하면 D → E → N → Off → 없음 순서로 바뀝니다. (하루 1개)</div>' +
+      legendHtml() + '<div class="shift-grid">' + gridHtml() + '</div>' +
+      '<div class="btn-row"><button class="btn ghost sm danger" id="sh-clear">이 달 교대 전체 지우기</button></div>';
+    var card = openModal('🌓 교대근무 입력 (' + st.year + '년 ' + st.month + '월)', body, null, true);
+
+    var order = ['', 'Day', 'Evening', 'Night', 'Off'];
+    function rerender() { card.querySelector('.shift-grid').innerHTML = gridHtml(); bindCells(); }
+    function bindCells() {
+      card.querySelectorAll('.sg-cell[data-date]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var date = b.getAttribute('data-date'), cur = shiftOf(date);
+          var next = order[(order.indexOf(cur) + 1) % order.length];
+          month.shifts = month.shifts.filter(function (x) { return x.date !== date; });
+          if (next) month.shifts.push({ date: date, type: next });
+          WS.Store.save(); WS.App.refresh(); rerender();
+        });
+      });
+    }
+    bindCells();
+    card.querySelector('#sh-clear').addEventListener('click', function () {
+      if (!root.confirm('이 달의 교대근무 입력을 모두 지울까요?')) return;
+      month.shifts = []; WS.Store.save(); WS.App.refresh(); rerender();
+    });
   };
 })(typeof window !== 'undefined' ? window : globalThis);

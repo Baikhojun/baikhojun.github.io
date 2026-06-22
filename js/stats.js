@@ -36,6 +36,11 @@
       if (wd !== 0 && wd !== 6 && !holidaySet[ds]) workdays++;
     }
 
-    return { totalEvents: month.events.length, perCat: perCat, leaves: leaves, leaveDays: leaveDays, workdays: workdays, holidays: (month.holidays || []).length };
+    var shiftCount = {};
+    (month.shifts || []).forEach(function (s) { shiftCount[s.type] = (shiftCount[s.type] || 0) + 1; });
+    var shifts = WS.SHIFT_TYPES.map(function (t) { return { type: t.key, abbr: t.abbr, count: shiftCount[t.key] || 0 }; })
+      .filter(function (x) { return x.count > 0; });
+
+    return { totalEvents: month.events.length, perCat: perCat, leaves: leaves, leaveDays: leaveDays, workdays: workdays, holidays: (month.holidays || []).length, shifts: shifts };
   };
 })(typeof window !== 'undefined' ? window : globalThis);

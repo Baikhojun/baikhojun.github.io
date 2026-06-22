@@ -120,6 +120,7 @@
       $('btn-settings').addEventListener('click', function () { WS.Editor.openSettings(); });
       $('btn-search').addEventListener('click', function () { WS.Editor.openSearch(); });
       $('btn-stats').addEventListener('click', function () { WS.Editor.openStats(); });
+      $('btn-shift').addEventListener('click', function () { WS.Editor.openShifts(); });
       $('btn-undo').addEventListener('click', function () { self.undo(); });
       $('btn-png').addEventListener('click', function () { self.savePng(); });
       $('btn-print').addEventListener('click', function () { WS.Print.print(); });

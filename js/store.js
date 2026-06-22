@@ -29,6 +29,15 @@
     return WS.LEAVE_TYPES.filter(function (t) { return t.key === key; })[0] || null;
   };
 
+  // 교대근무 유형(하루 1개) - 약자/색상
+  WS.SHIFT_TYPES = [
+    { key: 'Day', abbr: 'D', color: '#0284c7' },
+    { key: 'Evening', abbr: 'E', color: '#ea580c' },
+    { key: 'Night', abbr: 'N', color: '#4f46e5' },
+    { key: 'Off', abbr: 'Of', color: '#64748b' }
+  ];
+  WS.shiftType = function (key) { return WS.SHIFT_TYPES.filter(function (t) { return t.key === key; })[0] || null; };
+
   WS.circled = function (i) { return i >= 0 && i < 20 ? String.fromCharCode(0x2460 + i) : '(' + (i + 1) + ')'; };
   WS.color = function (idx) { return WS.PALETTE[((idx % WS.PALETTE.length) + WS.PALETTE.length) % WS.PALETTE.length]; };
   // 공정 색상: 커스텀(cat.color) 우선, 배경은 같은 색 13% 틴트(8자리 hex)
@@ -79,6 +88,7 @@
         { date: '2026-05-05', name: '어린이날' }, { date: '2026-05-24', name: '부처님오신날' }, { date: '2026-05-25', name: '대체 휴일' }
       ],
       leaves: [],
+      shifts: [],
       events: events,
       progressOverride: {
         c1: [0, 100, 100, 100, 100], c2: [0, 0, 80, 100, 100], c3: [0, 0, 100, 100, 100],
@@ -111,7 +121,7 @@
   };
 
   WS.emptyMonth = function () {
-    return { holidays: [], leaves: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '' };
+    return { holidays: [], leaves: [], shifts: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '' };
   };
 
   // ----- 저장소 -----
@@ -171,6 +181,7 @@
         var m = months[k] || {};
         if (!Array.isArray(m.holidays)) m.holidays = [];
         if (!Array.isArray(m.leaves)) m.leaves = [];
+        if (!Array.isArray(m.shifts)) m.shifts = [];
         if (!Array.isArray(m.events)) m.events = [];
         if (!m.progressOverride || typeof m.progressOverride !== 'object') m.progressOverride = {};
         if (m.summaryOverride === undefined) m.summaryOverride = null;
@@ -204,6 +215,7 @@
       var dst = WS.emptyMonth();
       dst.events = src.events.map(function (e) { return { id: WS.uid('e'), date: remap(e.date), catId: e.catId, text: e.text, time: e.time, major: e.major }; });
       dst.leaves = (src.leaves || []).map(function (l) { return { id: WS.uid('l'), date: remap(l.date), type: l.type }; });
+      dst.shifts = (src.shifts || []).map(function (s) { return { date: remap(s.date), type: s.type }; });
       dst.footerNote = src.footerNote || '';
       this.data.months[dstKey] = dst;
       return true;
