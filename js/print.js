@@ -48,4 +48,34 @@
   WS.Print.print = function () {
     try { root.print(); } catch (e) { console.error('[Print] 인쇄 실패: %s', e && e.message); }
   };
+
+  // html2canvas 지연 로드(필요할 때만, CDN)
+  function loadH2C() {
+    if (root.html2canvas) return Promise.resolve(root.html2canvas);
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+      s.onload = function () { root.html2canvas ? resolve(root.html2canvas) : reject(new Error('html2canvas 로드 실패')); };
+      s.onerror = function () { reject(new Error('이미지 라이브러리 로드 실패(오프라인일 수 있음). 인쇄·PDF를 이용하세요.')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  // 시트를 PNG로 저장(배율 영향 제거 후 캡처)
+  WS.Print.png = function (filename) {
+    return loadH2C().then(function (h2c) {
+      var e = els();
+      var pT = e.sheet.style.transform, pW = e.stage.style.width, pH = e.stage.style.height;
+      e.sheet.style.transform = 'none'; e.stage.style.width = 'auto'; e.stage.style.height = 'auto';
+      function restore() { e.sheet.style.transform = pT; e.stage.style.width = pW; e.stage.style.height = pH; }
+      return h2c(e.sheet, { backgroundColor: '#ffffff', scale: 2 }).then(function (canvas) {
+        restore();
+        var a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = filename || '업무일정표.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        return true;
+      }, function (err) { restore(); throw err; });
+    });
+  };
 })(typeof window !== 'undefined' ? window : globalThis);

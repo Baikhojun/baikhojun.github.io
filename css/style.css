@@ -207,6 +207,39 @@ textarea { width: 100%; resize: vertical; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* 휴가 / 근무형태 태그 */
+.leave-tag { font-size: 6.6pt; font-weight: 700; line-height: 1.2; padding: 0.5px 4px; border: 1px solid; border-radius: 3px; margin-bottom: 1.5px; align-self: flex-start; }
+.cell.leave-full { background: #f0fdfa; }
+.cell.holiday.leave-full { background: #fef2f2; }
+
+/* 신규 모달 요소 */
+.modal-card.wide { max-width: 600px; }
+.linkbtn { border: none; background: none; color: #2563eb; font-size: 8.5pt; font-weight: 700; cursor: pointer; padding: 0 0 0 6px; }
+.linkbtn:hover { text-decoration: underline; }
+.tiny { font-size: 8pt; color: #64748b; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+.catrow input[type="color"] { width: 30px; height: 30px; padding: 2px; border: 1px solid #cbd5e1; border-radius: 6px; flex: 0 0 auto; cursor: pointer; }
+.mini:disabled { opacity: .35; cursor: default; }
+.btn:disabled { opacity: .45; cursor: default; }
+
+.sync-warn { font-size: 8.5pt; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; line-height: 1.5; }
+.sync-status { font-size: 9pt; color: #475569; margin-top: 6px; min-height: 16px; }
+
+/* 검색 */
+.search-results { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; max-height: 50vh; overflow: auto; }
+.sc-item { text-align: left; border: 1px solid #eef2f7; background: #fff; border-radius: 8px; padding: 8px 10px; font-size: 9.5pt; color: #334155; cursor: pointer; }
+.sc-item:hover { border-color: #2563eb; background: #eff6ff; }
+.sc-item small { color: #94a3b8; }
+
+/* 통계 */
+.stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
+.stat-card { background: #f8fafc; border: 1px solid #eef2f7; border-radius: 10px; padding: 10px; text-align: center; }
+.stat-card .n { font-size: 17pt; font-weight: 800; color: #1e3a8a; }
+.stat-card .l { font-size: 8pt; color: #64748b; margin-top: 2px; }
+.stat-table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+.stat-table th { background: #f1f5f9; color: #334155; padding: 5px 6px; border: 1px solid #e2e8f0; text-align: center; font-size: 9pt; }
+.stat-table td { padding: 5px 6px; border: 1px solid #e2e8f0; text-align: center; }
+.stat-table td.cat-name { text-align: left; font-weight: 600; padding-left: 8px; }
+
 /* ===== 인쇄 ===== */
 @media print {
   @page { size: A4 landscape; margin: 0; }

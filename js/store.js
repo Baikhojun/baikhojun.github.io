@@ -1,43 +1,45 @@
-// 이 파일의 역할: 내부 DB(localStorage) 저장소 - 데이터 스키마/기본값/CRUD/내보내기·가져오기
+// 이 파일의 역할: 내부 DB(localStorage) 저장소 - 스키마(v2)/기본값/CRUD/내보내기·가져오기/실행취소/지난달복사
 ;(function (root) {
   'use strict';
   var WS = (root.WS = root.WS || {});
 
   // ----- 상수 -----
-  WS.STORAGE_KEY = 'ws.schedule.v1';
-  WS.SCHEMA_VERSION = 1;
+  WS.STORAGE_KEY = 'ws.schedule.v1';     // 데이터 저장 키(스키마는 내부 version 필드로 관리)
+  WS.SYNC_TOKEN_KEY = 'ws.sync.token';   // GitHub 토큰(데이터와 분리 저장 → 내보내기에 미포함)
+  WS.SCHEMA_VERSION = 2;
 
-  // 공정 번호별 고정 색상 (border / background) — 7번째 이후는 순환
+  // 공정 번호별 기본 색상(border / background) — 7번째 이후 순환. 공정별 커스텀 색상이 있으면 그것을 우선.
   WS.PALETTE = [
-    { bd: '#7c3aed', bg: '#f3e8ff' }, // ① 보라
-    { bd: '#2563eb', bg: '#dbeafe' }, // ② 파랑
-    { bd: '#f59e0b', bg: '#fef3c7' }, // ③ 주황
-    { bd: '#059669', bg: '#d1fae5' }, // ④ 초록
-    { bd: '#db2777', bg: '#fce7f3' }, // ⑤ 분홍
-    { bd: '#0891b2', bg: '#cffafe' }, // ⑥ 청록
-    { bd: '#e11d48', bg: '#ffe4e6' }, // ⑦ 적색
-    { bd: '#475569', bg: '#f1f5f9' }  // ⑧ 회색
+    { bd: '#7c3aed', bg: '#f3e8ff' }, { bd: '#2563eb', bg: '#dbeafe' },
+    { bd: '#f59e0b', bg: '#fef3c7' }, { bd: '#059669', bg: '#d1fae5' },
+    { bd: '#db2777', bg: '#fce7f3' }, { bd: '#0891b2', bg: '#cffafe' },
+    { bd: '#e11d48', bg: '#ffe4e6' }, { bd: '#475569', bg: '#f1f5f9' }
   ];
 
-  // 원문자 ①②③… (인덱스 0부터)
-  WS.circled = function (i) {
-    return i >= 0 && i < 20 ? String.fromCharCode(0x2460 + i) : '(' + (i + 1) + ')';
-  };
-  WS.color = function (idx) {
-    return WS.PALETTE[((idx % WS.PALETTE.length) + WS.PALETTE.length) % WS.PALETTE.length];
+  // 휴가 / 근무형태 유형
+  WS.LEAVE_TYPES = [
+    { key: '연차', color: '#0d9488', full: true },
+    { key: '오전반차', color: '#0d9488', full: false },
+    { key: '오후반차', color: '#0d9488', full: false },
+    { key: '출장', color: '#7c3aed', full: false },
+    { key: '재택', color: '#1d4ed8', full: false },
+    { key: '외근', color: '#ea580c', full: false }
+  ];
+  WS.leaveType = function (key) {
+    return WS.LEAVE_TYPES.filter(function (t) { return t.key === key; })[0] || null;
   };
 
-  // 고유 id 생성
+  WS.circled = function (i) { return i >= 0 && i < 20 ? String.fromCharCode(0x2460 + i) : '(' + (i + 1) + ')'; };
+  WS.color = function (idx) { return WS.PALETTE[((idx % WS.PALETTE.length) + WS.PALETTE.length) % WS.PALETTE.length]; };
+  // 공정 색상: 커스텀(cat.color) 우선, 배경은 같은 색 13% 틴트(8자리 hex)
+  WS.catColor = function (cat, idx) {
+    if (cat && cat.color) return { bd: cat.color, bg: cat.color + '22' };
+    return WS.color(idx);
+  };
+
   var _seq = 0;
-  WS.uid = function (prefix) {
-    _seq += 1;
-    return (prefix || 'id') + '_' + Date.now().toString(36) + '_' + _seq.toString(36);
-  };
-
-  // YYYY-MM 키
-  WS.monthKey = function (year, month) {
-    return year + '-' + String(month).padStart(2, '0');
-  };
+  WS.uid = function (prefix) { _seq += 1; return (prefix || 'id') + '_' + Date.now().toString(36) + '_' + _seq.toString(36); };
+  WS.monthKey = function (year, month) { return year + '-' + String(month).padStart(2, '0'); };
 
   WS.DEFAULT_CATEGORIES = function () {
     return [
@@ -50,7 +52,6 @@
     ];
   };
 
-  // 첫 실행 시 보여줄 2026년 5월 예시 데이터(기존 템플릿 재현)
   function seedMay2026() {
     function ev(date, catId, text, opts) {
       opts = opts || {};
@@ -75,19 +76,13 @@
     ];
     return {
       holidays: [
-        { date: '2026-05-05', name: '어린이날' },
-        { date: '2026-05-24', name: '부처님오신날' },
-        { date: '2026-05-25', name: '대체 휴일' }
+        { date: '2026-05-05', name: '어린이날' }, { date: '2026-05-24', name: '부처님오신날' }, { date: '2026-05-25', name: '대체 휴일' }
       ],
+      leaves: [],
       events: events,
-      // 기존 템플릿의 손계산 진행률을 그대로 재현(주차별 누적 %)
       progressOverride: {
-        c1: [0, 100, 100, 100, 100],
-        c2: [0, 0, 80, 100, 100],
-        c3: [0, 0, 100, 100, 100],
-        c4: [0, 0, 40, 80, 100],
-        c5: [0, 0, 0, 50, 100],
-        c6: [0, 0, 36, 71, 100]
+        c1: [0, 100, 100, 100, 100], c2: [0, 0, 80, 100, 100], c3: [0, 0, 100, 100, 100],
+        c4: [0, 0, 40, 80, 100], c5: [0, 0, 0, 50, 100], c6: [0, 0, 36, 71, 100]
       },
       summaryOverride: [
         '5/8 (금) 오후 — 계약관리 업무교육',
@@ -110,100 +105,121 @@
       meta: { dept: '정보실', author: '백호준 과장' },
       categories: WS.DEFAULT_CATEGORIES(),
       months: { '2026-05': seedMay2026() },
-      ui: { lastMonth: '2026-05' }
+      ui: { lastMonth: '2026-05' },
+      sync: { owner: '', repo: '', path: 'data/schedule-data.json', branch: 'main' }
     };
   };
 
-  // 빈 달 구조
   WS.emptyMonth = function () {
-    return { holidays: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '' };
+    return { holidays: [], leaves: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '' };
   };
 
   // ----- 저장소 -----
   WS.Store = {
     data: null,
+    _history: [],   // 실행취소용 직전 상태 스냅샷
+    _last: null,
 
     load: function () {
       try {
         var raw = root.localStorage ? root.localStorage.getItem(WS.STORAGE_KEY) : null;
-        if (raw) {
-          this.data = JSON.parse(raw);
-          this._migrate();
-        } else {
-          this.data = WS.seed();
-          this.save();
-        }
+        if (raw) { this.data = JSON.parse(raw); this._migrate(); }
+        else { this.data = WS.seed(); this._writeLS(); }
       } catch (e) {
-        console.error('[Store.load] 데이터 로드 실패, 기본값 사용: %s', e && e.message);
+        console.error('[Store.load] 로드 실패, 기본값 사용: %s', e && e.message);
         this.data = WS.seed();
       }
+      this._last = JSON.stringify(this.data);
+      this._history = [];
       return this.data;
     },
 
-    save: function () {
+    _writeLS: function () {
+      if (root.localStorage) root.localStorage.setItem(WS.STORAGE_KEY, JSON.stringify(this.data));
+    },
+
+    save: function (skipHistory) {
       try {
-        if (root.localStorage) {
-          root.localStorage.setItem(WS.STORAGE_KEY, JSON.stringify(this.data));
+        if (!skipHistory && this._last != null) {
+          this._history.push(this._last);
+          if (this._history.length > 30) this._history.shift();
         }
+        this._writeLS();
+        this._last = JSON.stringify(this.data);
         return true;
-      } catch (e) {
-        console.error('[Store.save] 저장 실패: %s', e && e.message);
-        return false;
-      }
+      } catch (e) { console.error('[Store.save] 저장 실패: %s', e && e.message); return false; }
+    },
+
+    canUndo: function () { return this._history.length > 0; },
+    undo: function () {
+      if (!this._history.length) return false;
+      var prev = this._history.pop();
+      try { this.data = JSON.parse(prev); if (root.localStorage) root.localStorage.setItem(WS.STORAGE_KEY, prev); }
+      catch (e) { console.error('[Store.undo] 실패: %s', e && e.message); return false; }
+      this._last = prev;
+      return true;
     },
 
     _migrate: function () {
       if (!this.data || typeof this.data !== 'object') { this.data = WS.seed(); return; }
       if (!this.data.meta) this.data.meta = { dept: '', author: '' };
-      if (!Array.isArray(this.data.categories) || !this.data.categories.length) {
-        this.data.categories = WS.DEFAULT_CATEGORIES();
-      }
+      if (!Array.isArray(this.data.categories) || !this.data.categories.length) this.data.categories = WS.DEFAULT_CATEGORIES();
       if (!this.data.months || typeof this.data.months !== 'object') this.data.months = {};
+      // 월 구조 보정(휴가 배열 등)
+      var months = this.data.months;
+      Object.keys(months).forEach(function (k) {
+        var m = months[k] || {};
+        if (!Array.isArray(m.holidays)) m.holidays = [];
+        if (!Array.isArray(m.leaves)) m.leaves = [];
+        if (!Array.isArray(m.events)) m.events = [];
+        if (!m.progressOverride || typeof m.progressOverride !== 'object') m.progressOverride = {};
+        if (m.summaryOverride === undefined) m.summaryOverride = null;
+        if (typeof m.footerNote !== 'string') m.footerNote = '';
+        months[k] = m;
+      });
       if (!this.data.ui) this.data.ui = { lastMonth: null };
+      if (!this.data.sync) this.data.sync = { owner: '', repo: '', path: 'data/schedule-data.json', branch: 'main' };
       this.data.version = WS.SCHEMA_VERSION;
     },
 
-    // 달 데이터 반환(없으면 생성 옵션)
     getMonth: function (key, createIfMissing) {
-      if (!this.data.months[key] && createIfMissing) {
-        this.data.months[key] = WS.emptyMonth();
-      }
+      if (!this.data.months[key] && createIfMissing) this.data.months[key] = WS.emptyMonth();
       return this.data.months[key] || WS.emptyMonth();
     },
+    savedMonthKeys: function () { return Object.keys(this.data.months).sort(); },
+    findCategory: function (id) { return this.data.categories.filter(function (c) { return c.id === id; })[0] || null; },
+    eventsOn: function (key, date) { return this.getMonth(key).events.filter(function (e) { return e.date === date; }); },
+    leaveOn: function (key, date) { return this.getMonth(key).leaves.filter(function (l) { return l.date === date; })[0] || null; },
 
-    savedMonthKeys: function () {
-      return Object.keys(this.data.months).sort();
-    },
-
-    findCategory: function (id) {
-      return this.data.categories.filter(function (c) { return c.id === id; })[0] || null;
-    },
-
-    eventsOn: function (key, date) {
-      var m = this.getMonth(key);
-      return m.events.filter(function (e) { return e.date === date; });
-    },
-
-    // 내보내기 / 가져오기
-    exportJSON: function () {
-      return JSON.stringify(this.data, null, 2);
-    },
-
-    importJSON: function (str) {
-      var parsed = JSON.parse(str); // 호출부에서 try/catch
-      if (!parsed || typeof parsed !== 'object' || !parsed.months) {
-        throw new Error('올바른 일정표 데이터 파일이 아닙니다.');
+    // 지난 달(또는 임의 달) 일정·휴가를 대상 달로 복제(요일 아닌 날짜 기준, 말일 초과는 말일로 클램프)
+    copyMonth: function (srcKey, dstKey) {
+      var src = this.data.months[srcKey];
+      if (!src) return false;
+      var dp = dstKey.split('-').map(Number);
+      var dim = new Date(dp[0], dp[1], 0).getDate();
+      function remap(dateStr) {
+        var d = Number(dateStr.split('-')[2]); if (d > dim) d = dim;
+        return dstKey + '-' + String(d).padStart(2, '0');
       }
-      this.data = parsed;
-      this._migrate();
-      this.save();
-      return this.data;
+      var dst = WS.emptyMonth();
+      dst.events = src.events.map(function (e) { return { id: WS.uid('e'), date: remap(e.date), catId: e.catId, text: e.text, time: e.time, major: e.major }; });
+      dst.leaves = (src.leaves || []).map(function (l) { return { id: WS.uid('l'), date: remap(l.date), type: l.type }; });
+      dst.footerNote = src.footerNote || '';
+      this.data.months[dstKey] = dst;
+      return true;
     },
 
-    resetAll: function () {
-      this.data = WS.seed();
-      this.save();
+    // 토큰(데이터와 분리)
+    getToken: function () { try { return (root.localStorage && root.localStorage.getItem(WS.SYNC_TOKEN_KEY)) || ''; } catch (e) { return ''; } },
+    setToken: function (t) { try { if (root.localStorage) { if (t) root.localStorage.setItem(WS.SYNC_TOKEN_KEY, t); else root.localStorage.removeItem(WS.SYNC_TOKEN_KEY); } } catch (e) {} },
+
+    exportJSON: function () { return JSON.stringify(this.data, null, 2); },
+    importJSON: function (str) {
+      var parsed = JSON.parse(str);
+      if (!parsed || typeof parsed !== 'object' || !parsed.months) throw new Error('올바른 일정표 데이터 파일이 아닙니다.');
+      this.data = parsed; this._migrate(); this.save(true);
       return this.data;
-    }
+    },
+    resetAll: function () { this.data = WS.seed(); this.save(true); return this.data; }
   };
 })(typeof window !== 'undefined' ? window : globalThis);

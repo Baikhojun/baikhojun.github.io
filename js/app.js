@@ -23,7 +23,34 @@
       root.requestAnimationFrame(function () { root.requestAnimationFrame(function () { WS.Print.fit(); }); });
       root.addEventListener('load', function () { WS.Print.fit(); });
       root.addEventListener('resize', function () { WS.Print.reapply(); });
+      root.addEventListener('keydown', function (e) {
+        var t = e.target, tag = t && t.tagName;
+        var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable);
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z') && !typing) { e.preventDefault(); self.undo(); }
+      });
       this.updateMonthLabel();
+    },
+
+    // 동기화/초기화 후 데이터 재적용 + 마지막 달로 이동
+    reloadData: function () {
+      this.state.data = WS.Store.data;
+      var last = (WS.Store.data.ui && WS.Store.data.ui.lastMonth) || WS.Store.savedMonthKeys()[0] || '2026-05';
+      var p = last.split('-').map(Number);
+      this.go(p[0], p[1]);
+    },
+
+    undo: function () {
+      if (WS.Store.undo()) { this.state.data = WS.Store.data; this.refresh(); this.toast('실행취소했습니다.'); }
+      else this.toast('되돌릴 작업이 없습니다.');
+    },
+
+    savePng: function () {
+      var self = this;
+      this.toast('이미지 생성 중...');
+      var name = (this.state.data.meta.dept || '') + '_' + (this.state.data.meta.author || '') + '_' + this.state.year + '년_' + this.state.month + '월_업무일정표.png';
+      name = name.replace(/\s+/g, '');
+      WS.Print.png(name).then(function () { self.toast('PNG로 저장했습니다.'); })
+        .catch(function (e) { console.error('[savePng] %s', e && e.message); self.toast(e && e.message || 'PNG 저장 실패'); });
     },
 
     setMonth: function (y, m) {
@@ -60,6 +87,8 @@
       var saved = !!this.state.data.months[this.state.key];
       var badge = $('save-badge');
       if (badge) badge.textContent = saved ? '저장됨' : '새 달(미입력)';
+      var undoBtn = $('btn-undo');
+      if (undoBtn) undoBtn.disabled = !WS.Store.canUndo();
     },
 
     refresh: function () {
@@ -89,6 +118,10 @@
         WS.Editor.openDay(self.state.year + '-' + pad(self.state.month) + '-' + pad(day));
       });
       $('btn-settings').addEventListener('click', function () { WS.Editor.openSettings(); });
+      $('btn-search').addEventListener('click', function () { WS.Editor.openSearch(); });
+      $('btn-stats').addEventListener('click', function () { WS.Editor.openStats(); });
+      $('btn-undo').addEventListener('click', function () { self.undo(); });
+      $('btn-png').addEventListener('click', function () { self.savePng(); });
       $('btn-print').addEventListener('click', function () { WS.Print.print(); });
       $('btn-export').addEventListener('click', function () { self.exportData(); });
       $('btn-import').addEventListener('click', function () { $('file-input').click(); });

@@ -42,6 +42,8 @@
     (month.events || []).forEach(function (e) {
       (evBy[e.date] = evBy[e.date] || []).push(e);
     });
+    var leaveBy = {};
+    (month.leaves || []).forEach(function (l) { leaveBy[l.date] = l; });
 
     var firstDow = new Date(y, m - 1, 1).getDay();
     var days = WS.daysInMonth(y, m);
@@ -63,11 +65,18 @@
       if (col === 6) cls += ' sat';
       var hname = holidayBy[dateStr];
       if (hname) cls += ' holiday';
+      var lv = leaveBy[dateStr];
+      var lt = lv ? WS.leaveType(lv.type) : null;
+      if (lt && lt.full) cls += ' leave-full';
       html += '<div class="' + cls + '" data-date="' + dateStr + '">';
       html += '<div class="date">' + d + '</div>';
       if (hname) html += '<div class="holiday-tag">' + WS.esc(hname) + '</div>';
+      if (lv) {
+        var lc = lt ? lt.color : '#0d9488';
+        html += '<div class="leave-tag" style="color:' + lc + ';border-color:' + lc + ';background:' + lc + '18;">' + WS.esc(lv.type) + '</div>';
+      }
       (evBy[dateStr] || []).forEach(function (e) {
-        var c = WS.color(idx[e.catId] || 0);
+        var c = WS.catColor(catById[e.catId], idx[e.catId] || 0);
         var timeTag = e.time ? ' <span class="key">(' + WS.esc(e.time) + ')</span>' : '';
         html += '<div class="ev' + (e.major ? ' major' : '') + '" data-ev="' + e.id + '" ' +
           'style="border-color:' + c.bd + ';background:' + c.bg + ';">' + WS.esc(e.text) + timeTag + '</div>';
@@ -79,14 +88,19 @@
     return html;
   }
 
-  function renderLegend(data) {
+  function renderLegend(data, month) {
     var items = data.categories.map(function (c, i) {
-      var col = WS.color(i);
+      var col = WS.catColor(c, i);
       return '<div class="legend-item"><div class="legend-swatch" style="background:' + col.bd + ';"></div>' +
         WS.circled(i) + ' ' + WS.esc(c.name) + '</div>';
     }).join('');
     items += '<div class="legend-item"><div class="legend-swatch" style="background:#dc2626;"></div>공휴일 / 대체 휴일</div>';
-    return '<div class="panel"><div class="panel-title">공정 분류</div><div class="legend">' + items + '</div></div>';
+    var used = {};
+    (month.leaves || []).forEach(function (l) { used[l.type] = true; });
+    WS.LEAVE_TYPES.forEach(function (t) {
+      if (used[t.key]) items += '<div class="legend-item"><div class="legend-swatch" style="background:' + t.color + ';"></div>' + WS.esc(t.key) + '</div>';
+    });
+    return '<div class="panel"><div class="panel-title">공정 분류 / 휴무</div><div class="legend">' + items + '</div></div>';
   }
 
   function renderProgress(data, month, y, m) {
@@ -94,7 +108,7 @@
     var ths = '';
     for (var w = 0; w < ep.weeks; w++) ths += '<th>' + (w + 1) + '주차</th>';
     var body = data.categories.map(function (c, i) {
-      var col = WS.color(i);
+      var col = WS.catColor(c, i);
       var tds = ep.rows[c.id].map(function (v, w) {
         var bold = v === 100 ? '<b>100%</b>' : (v + '%');
         return '<td class="prog-cell" data-cat="' + c.id + '" data-week="' + w + '" contenteditable="true">' + bold + '</td>';
@@ -133,7 +147,7 @@
       '<div class="body">' +
         renderCalendar(data, month, y, m) +
         '<div class="right-panel">' +
-          renderLegend(data) +
+          renderLegend(data, month) +
           renderProgress(data, month, y, m) +
           renderSummary(data, month, y, m) +
         '</div>' +
