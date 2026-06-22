@@ -96,11 +96,14 @@
   }
 
   function renderLegend(data, month) {
-    var items = data.categories.map(function (c, i) {
+    var inactive = month.inactiveCats || [];
+    var items = '';
+    data.categories.forEach(function (c, i) {
+      if (inactive.indexOf(c.id) >= 0) return; // 이번 달 숨김 공정 제외
       var col = WS.catColor(c, i);
-      return '<div class="legend-item"><div class="legend-swatch" style="background:' + col.bd + ';"></div>' +
+      items += '<div class="legend-item"><div class="legend-swatch" style="background:' + col.bd + ';"></div>' +
         WS.circled(i) + ' ' + WS.esc(c.name) + '</div>';
-    }).join('');
+    });
     items += '<div class="legend-item"><div class="legend-swatch" style="background:#dc2626;"></div>공휴일 / 대체 휴일</div>';
     var used = {};
     (month.leaves || []).forEach(function (l) { used[l.type] = true; });
@@ -116,18 +119,22 @@
   }
 
   function renderProgress(data, month, y, m) {
-    var ep = WS.effectiveProgress(month, data.categories, y, m);
+    var inactive = month.inactiveCats || [];
+    var activeCats = data.categories.filter(function (c) { return inactive.indexOf(c.id) < 0; });
+    var ep = WS.effectiveProgress(month, activeCats, y, m); // 평균도 활성 공정 기준
     var ths = '';
     for (var w = 0; w < ep.weeks; w++) ths += '<th>' + (w + 1) + '주차</th>';
-    var body = data.categories.map(function (c, i) {
+    var body = '';
+    data.categories.forEach(function (c, i) {
+      if (inactive.indexOf(c.id) >= 0) return; // 이번 달 숨김 공정 제외
       var col = WS.catColor(c, i);
       var tds = ep.rows[c.id].map(function (v, w) {
         var bold = v === 100 ? '<b>100%</b>' : (v + '%');
         return '<td class="prog-cell" data-cat="' + c.id + '" data-week="' + w + '" contenteditable="true">' + bold + '</td>';
       }).join('');
-      return '<tr><td class="cat-name" style="border-left:3px solid ' + col.bd + ';">' +
+      body += '<tr><td class="cat-name" style="border-left:3px solid ' + col.bd + ';">' +
         WS.circled(i) + ' ' + WS.esc(c.short || c.name) + '</td>' + tds + '</tr>';
-    }).join('');
+    });
     var avg = ep.average.map(function (v) { return '<td>' + v + '%</td>'; }).join('');
     body += '<tr class="total-row"><td class="cat-name">전체 평균</td>' + avg + '</tr>';
     return '<div class="panel"><div class="panel-title">주차별 누적 진행률 <span class="hint-text">(셀 클릭 후 직접 수정)</span></div>' +

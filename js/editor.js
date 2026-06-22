@@ -104,7 +104,7 @@
         '</div>';
     }
 
-    var card = openModal(st.month + '월 ' + d + '일 (' + dowOf(dateStr) + ') 일정', body());
+    var card = openModal(st.month + '월 ' + d + '일 (' + dowOf(dateStr) + ') 일정', body(), null, true);
 
     function refreshList() { $('ed-list').innerHTML = eventRows(); bindList(); }
     function resetForm() {
@@ -221,16 +221,19 @@
     var month = WS.Store.getMonth(st.key, true);
 
     function catRows() {
+      var inactive = month.inactiveCats || [];
       return data.categories.map(function (c, i) {
         var eff = WS.catColor(c, i).bd;
-        return '<div class="grid-row catrow" data-cid="' + c.id + '">' +
+        var active = inactive.indexOf(c.id) < 0;
+        return '<div class="grid-row catrow' + (active ? '' : ' off') + '" data-cid="' + c.id + '">' +
+          '<label class="tiny" title="이번 달 표시(해제 시 이 달 범례·진행률에서 숨김)"><input type="checkbox" class="set-cat-active"' + (active ? ' checked' : '') + '> 표시</label>' +
           '<input type="color" class="set-cat-color" value="' + (c.color || eff) + '" title="색상">' +
           '<label class="tiny"><input type="checkbox" class="set-cat-custom"' + (c.color ? ' checked' : '') + '> 커스텀</label>' +
           '<input class="set-cat-name" value="' + WS.esc(c.name) + '" placeholder="정식 명칭">' +
           '<input class="set-cat-short" value="' + WS.esc(c.short) + '" placeholder="짧은 표기">' +
           '<button class="mini" data-up="' + c.id + '">↑</button>' +
           '<button class="mini" data-down="' + c.id + '">↓</button>' +
-          '<button class="mini danger" data-delcat="' + c.id + '">삭제</button></div>';
+          '<button class="mini danger" data-delcat="' + c.id + '" title="완전 삭제(일정도 함께)">삭제</button></div>';
       }).join('');
     }
     function holRows() {
@@ -258,7 +261,7 @@
         '<div class="field"><label>부서명</label><input id="set-dept" value="' + WS.esc(data.meta.dept) + '"></div>' +
         '<div class="field"><label>작성자</label><input id="set-author" value="' + WS.esc(data.meta.author) + '"></div>' +
       '</div>' +
-      '<div class="section-label">공정 분류 (색상·순서 직접 지정 가능)</div>' +
+      '<div class="section-label">공정 분류 — \'표시\' 해제 시 이번 달(' + st.month + '월) 범례·진행률에서 숨김 (삭제 아님, 과거 달·일정은 유지)</div>' +
       '<div id="set-cats">' + catRows() + '</div>' +
       '<button class="btn ghost sm" id="set-addcat">＋ 공정 추가</button>' +
       '<div class="section-label">이번 달 공휴일 (' + st.month + '월)</div>' +
@@ -313,6 +316,17 @@
       }
       $('set-cats').querySelectorAll('[data-up]').forEach(function (b) { b.addEventListener('click', function () { move(b.getAttribute('data-up'), -1); }); });
       $('set-cats').querySelectorAll('[data-down]').forEach(function (b) { b.addEventListener('click', function () { move(b.getAttribute('data-down'), 1); }); });
+      $('set-cats').querySelectorAll('.set-cat-active').forEach(function (chk) {
+        chk.addEventListener('change', function () {
+          var rowEl = chk.closest('.catrow'), id = rowEl.getAttribute('data-cid');
+          month.inactiveCats = month.inactiveCats || [];
+          var idx = month.inactiveCats.indexOf(id);
+          if (chk.checked) { if (idx >= 0) month.inactiveCats.splice(idx, 1); }
+          else { if (idx < 0) month.inactiveCats.push(id); }
+          rowEl.classList.toggle('off', !chk.checked);
+          WS.Store.save(); WS.App.refresh();
+        });
+      });
     }
     function bindHolDel() {
       $('set-hols').querySelectorAll('[data-delhol]').forEach(function (b) {

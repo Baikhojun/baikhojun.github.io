@@ -89,6 +89,7 @@
       ],
       leaves: [],
       shifts: [],
+      inactiveCats: [],
       events: events,
       progressOverride: {
         c1: [0, 100, 100, 100, 100], c2: [0, 0, 80, 100, 100], c3: [0, 0, 100, 100, 100],
@@ -121,7 +122,7 @@
   };
 
   WS.emptyMonth = function () {
-    return { holidays: [], leaves: [], shifts: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '' };
+    return { holidays: [], leaves: [], shifts: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '', inactiveCats: [] };
   };
 
   // ----- 저장소 -----
@@ -182,6 +183,7 @@
         if (!Array.isArray(m.holidays)) m.holidays = [];
         if (!Array.isArray(m.leaves)) m.leaves = [];
         if (!Array.isArray(m.shifts)) m.shifts = [];
+        if (!Array.isArray(m.inactiveCats)) m.inactiveCats = [];
         if (!Array.isArray(m.events)) m.events = [];
         if (!m.progressOverride || typeof m.progressOverride !== 'object') m.progressOverride = {};
         if (m.summaryOverride === undefined) m.summaryOverride = null;
@@ -216,6 +218,7 @@
       dst.events = src.events.map(function (e) { return { id: WS.uid('e'), date: remap(e.date), catId: e.catId, text: e.text, time: e.time, major: e.major }; });
       dst.leaves = (src.leaves || []).map(function (l) { return { id: WS.uid('l'), date: remap(l.date), type: l.type }; });
       dst.shifts = (src.shifts || []).map(function (s) { return { date: remap(s.date), type: s.type }; });
+      dst.inactiveCats = (src.inactiveCats || []).slice();
       dst.footerNote = src.footerNote || '';
       this.data.months[dstKey] = dst;
       return true;
