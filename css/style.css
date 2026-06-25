@@ -151,36 +151,36 @@ button { font-family: inherit; cursor: pointer; }
 #modal-root:empty { display: none; }
 .modal-overlay {
   position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, .45);
-  display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow: auto;
+  display: flex; align-items: flex-start; justify-content: center; padding: 18px 16px; overflow: auto;
 }
 .modal-card { width: 100%; max-width: 480px; background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.3); overflow: hidden; }
 .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #eef2f7; }
 .modal-head h3 { font-size: 12.5pt; color: #1e3a8a; }
 .modal-x { width: 30px; height: 30px; border: none; background: #f1f5f9; border-radius: 8px; font-size: 11pt; color: #64748b; }
 .modal-x:hover { background: #e2e8f0; }
-.modal-body { padding: 16px 18px; max-height: 70vh; overflow: auto; }
+.modal-body { padding: 13px 18px; max-height: calc(100vh - 116px); overflow: auto; }
 .modal-foot { padding: 12px 18px; border-top: 1px solid #eef2f7; display: flex; justify-content: flex-end; gap: 8px; }
 
-.section-label { font-size: 9.5pt; font-weight: 700; color: #334155; margin: 14px 0 6px; }
+.section-label { font-size: 9.5pt; font-weight: 700; color: #334155; margin: 9px 0 5px; }
 .section-label:first-child { margin-top: 0; }
 .danger-label { color: #b91c1c; }
-.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; flex: 1; }
+.field { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; flex: 1; }
 .field-row { display: flex; gap: 10px; }
 .field label { font-size: 8.5pt; font-weight: 600; color: #64748b; }
 .field.check { flex-direction: row; align-items: center; flex: 0 0 auto; gap: 12px; flex-wrap: wrap; }
 .field.check label { font-size: 9pt; color: #334155; display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
 .field input, .field select, textarea, .grid-row input {
   font-family: inherit; font-size: 10pt; color: #1f2937;
-  border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 10px; background: #fff; width: 100%;
+  border: 1px solid #cbd5e1; border-radius: 8px; padding: 7px 10px; background: #fff; width: 100%;
 }
 textarea { width: 100%; resize: vertical; }
 .field input:focus, .field select:focus, textarea:focus, .grid-row input:focus { outline: 2px solid #93c5fd; outline-offset: -1px; border-color: #2563eb; }
 
-.ed-form { margin-top: 12px; padding: 12px; background: #f8fafc; border: 1px solid #eef2f7; border-radius: 10px; }
+.ed-form { margin-top: 8px; padding: 10px; background: #f8fafc; border: 1px solid #eef2f7; border-radius: 10px; }
 .btn-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .muted { color: #94a3b8; font-size: 9pt; padding: 6px 0; }
 
-.ev-row { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 1px solid #eef2f7; border-radius: 8px; margin-bottom: 6px; background: #fff; }
+.ev-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border: 1px solid #eef2f7; border-radius: 8px; margin-bottom: 4px; background: #fff; }
 .ev-row-text { flex: 1; font-size: 9.5pt; }
 .ev-row-text small { color: #94a3b8; }
 .ev-row-text em { color: #2563eb; font-style: normal; font-weight: 700; }

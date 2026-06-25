@@ -24,6 +24,10 @@
       root.addEventListener('load', function () { WS.Print.fit(); });
       root.addEventListener('resize', function () { WS.Print.reapply(); });
       root.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          var mr = $('modal-root');
+          if (mr && mr.firstChild) { e.preventDefault(); WS.Editor.close(); return; }
+        }
         var t = e.target, tag = t && t.tagName;
         var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable);
         if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z') && !typing) { e.preventDefault(); self.undo(); }
