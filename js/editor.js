@@ -516,12 +516,16 @@
       }
       return h + '</div>';
     }
-    var body = '<div class="muted">날짜를 클릭하면 D → E → N → Off → 없음 순서로 바뀝니다. (하루 1개)</div>' +
+    var body = '<div class="section-label">한 번에 입력 (1일부터, 한 글자씩)</div>' +
+      '<div class="muted" style="margin-bottom:6px;line-height:1.5;">e=Evening, d=Day, n=Night, o=Off · 대소문자·콤마·공백 무시하고 글자만 인식. 입력이 모자라면 그만큼만 채웁니다.</div>' +
+      '<div class="bulk-row"><input id="sh-bulk" type="text" placeholder="예: eeeoonnnooeeeooddnnoo... (1일부터)" autocomplete="off" spellcheck="false"><button class="btn primary" id="sh-apply">넣기</button></div>' +
+      '<div class="muted" style="margin:8px 0 4px;">또는 아래에서 날짜를 클릭하면 D → E → N → Off → 없음 순환.</div>' +
       legendHtml() + '<div class="shift-grid">' + gridHtml() + '</div>' +
       '<div class="btn-row"><button class="btn ghost sm danger" id="sh-clear">이 달 교대 전체 지우기</button></div>';
     var card = openModal('🌓 교대근무 입력 (' + st.year + '년 ' + st.month + '월)', body, null, true);
 
     var order = ['', 'Day', 'Evening', 'Night', 'Off'];
+    var LETTER = { e: 'Evening', d: 'Day', o: 'Off', n: 'Night' };
     function rerender() { card.querySelector('.shift-grid').innerHTML = gridHtml(); bindCells(); }
     function bindCells() {
       card.querySelectorAll('.sg-cell[data-date]').forEach(function (b) {
@@ -535,6 +539,20 @@
       });
     }
     bindCells();
+    card.querySelector('#sh-apply').addEventListener('click', function () {
+      var raw = $('sh-bulk').value || '';
+      var seq = [];
+      for (var i = 0; i < raw.length; i++) { var ch = raw.charAt(i).toLowerCase(); if (LETTER[ch]) seq.push(LETTER[ch]); }
+      if (!seq.length) { WS.App.toast('인식할 글자(e/d/o/n)가 없습니다.'); return; }
+      var days = WS.daysInMonth(st.year, st.month);
+      var count = Math.min(seq.length, days);
+      var byDate = {};
+      for (var d = 1; d <= count; d++) byDate[st.year + '-' + pad(st.month) + '-' + pad(d)] = seq[d - 1];
+      month.shifts = month.shifts.filter(function (x) { return !(x.date in byDate); }); // 채울 날짜는 덮어쓰기, 나머지는 유지
+      Object.keys(byDate).forEach(function (dt) { month.shifts.push({ date: dt, type: byDate[dt] }); });
+      WS.Store.save(); WS.App.refresh(); rerender();
+      WS.App.toast('1일~' + count + '일 입력 완료' + (seq.length > days ? ' (입력이 많아 ' + days + '일까지만)' : '') + '.');
+    });
     card.querySelector('#sh-clear').addEventListener('click', function () {
       if (!root.confirm('이 달의 교대근무 입력을 모두 지울까요?')) return;
       month.shifts = []; WS.Store.save(); WS.App.refresh(); rerender();

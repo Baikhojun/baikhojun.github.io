@@ -246,6 +246,11 @@ textarea { width: 100%; resize: vertical; }
 /* 교대근무 배지 (셀 하단) */
 .shift-badge { margin-top: auto; align-self: flex-start; font-size: 6.5pt; font-weight: 800; color: #fff; padding: 0.5px 5px; border-radius: 999px; line-height: 1.45; }
 
+/* 교대근무 일괄 입력칸 */
+.bulk-row { display: flex; gap: 8px; align-items: stretch; }
+.bulk-row input { flex: 1; font-family: inherit; font-size: 11pt; letter-spacing: 1px; color: #1f2937; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 11px; }
+.bulk-row input:focus { outline: 2px solid #93c5fd; outline-offset: -1px; border-color: #2563eb; }
+
 /* 교대근무 입력 그리드 (모달) */
 .shift-grid { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin: 10px 0; }
 .sg-dow { display: grid; grid-template-columns: repeat(7, 1fr); background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
