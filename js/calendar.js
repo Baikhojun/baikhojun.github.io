@@ -49,6 +49,8 @@
     var persBy = {};
     (month.personal || []).forEach(function (p) { (persBy[p.date] = persBy[p.date] || []).push(p); });
 
+    var _t = new Date();
+    var todayStr = _t.getFullYear() + '-' + pad(_t.getMonth() + 1) + '-' + pad(_t.getDate());
     var firstDow = new Date(y, m - 1, 1).getDay();
     var days = WS.daysInMonth(y, m);
     var rows = Math.ceil((firstDow + days) / 7);
@@ -69,6 +71,7 @@
       if (col === 6) cls += ' sat';
       var hname = holidayBy[dateStr];
       if (hname) cls += ' holiday';
+      if (dateStr === todayStr) cls += ' today';
       var lv = leaveBy[dateStr];
       var lt = lv ? WS.leaveType(lv.type) : null;
       if (lt && lt.full) cls += ' leave-full';

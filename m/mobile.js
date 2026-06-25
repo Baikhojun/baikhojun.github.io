@@ -1,6 +1,7 @@
 // 이 파일의 역할: 모바일 조회 로직 - 동기화 데이터 fetch → 월별 세로 리스트 렌더(조회 전용)
 ;(function () {
   'use strict';
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {} // 로드 후 맨 위로 복원되는 것 방지
   var WS = window.WS;
   var DOW = ['일', '월', '화', '수', '목', '금', '토'];
   var data = null, cur = null;
@@ -10,6 +11,7 @@
   function el(id) { return document.getElementById(id); }
   function daysInMonth(y, m) { return new Date(y, m, 0).getDate(); }
   function ymNow() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1); }
+  function todayStr() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
   function hhmm() { var d = new Date(); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
 
   function normalize(j) {
@@ -26,15 +28,15 @@
     el('m-app').innerHTML = '<div class="mloading">불러오는 중…</div>';
     fetch('../data/schedule-data.json?t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error('no-data'); return r.json(); })
-      .then(function (j) { data = normalize(j); var keys = Object.keys(data.months).sort(); cur = (data.ui && data.ui.lastMonth) || keys[keys.length - 1] || ymNow(); render(); })
+      .then(function (j) { data = normalize(j); cur = ymNow(); render(true); }) // 접속 시 항상 오늘 달 + 오늘로 스크롤
       .catch(function (e) { console.error('[mobile.load] %s', e && e.message); showNoData(); });
   }
 
   function catIndex() { var m = {}; data.categories.forEach(function (c, i) { m[c.id] = i; }); return m; }
   function findCat(id) { return data.categories.filter(function (c) { return c.id === id; })[0]; }
 
-  function render() {
-    var p = cur.split('-').map(Number), y = p[0], mo = p[1];
+  function render(focusToday) {
+    var p = cur.split('-').map(Number), y = p[0], mo = p[1], td = todayStr();
     el('m-month').textContent = y + '년 ' + mo + '월';
     var month = data.months[cur] || { holidays: [], leaves: [], shifts: [], personal: [], events: [] };
     var idx = catIndex();
@@ -54,7 +56,7 @@
       var stt = sh ? WS.shiftType(sh.type) : null, lt = lv ? WS.leaveType(lv.type) : null;
       var empty = !hol && !sh && !lv && !evs.length && !pers.length;
       var datecls = 'mdate' + ((dow === 0 || hol) ? ' sun' : '') + (dow === 6 ? ' sat' : '');
-      html += '<div class="mday' + (empty ? ' empty' : '') + '">';
+      html += '<div class="mday' + (empty ? ' empty' : '') + (date === td ? ' today' : '') + '">';
       html += '<div class="' + datecls + '"><b>' + d + '</b><span>' + DOW[dow] + '</span></div><div class="mcontent">';
       if (hol) html += '<div class="mhol">' + esc(hol) + '</div>';
       if (stt) html += '<span class="mshift" style="background:' + stt.color + '">' + esc(stt.abbr) + ' · ' + esc(stt.key) + '</span>';
@@ -69,6 +71,12 @@
     }
     el('m-app').innerHTML = html;
     el('m-foot').textContent = '조회 전용 · 불러온 시각 ' + hhmm() + ' · 수정은 PC에서 (동기화 업로드 후 반영)';
+    var doFocus = function () {
+      if (focusToday) { var t = document.querySelector('.mday.today'); if (t) { t.scrollIntoView({ block: 'center' }); return; } }
+      window.scrollTo(0, 0);
+    };
+    requestAnimationFrame(doFocus);
+    setTimeout(doFocus, 160); // 스크롤 복원 이후 한 번 더 보정
   }
 
   function showNoData() {
@@ -82,13 +90,13 @@
   function move(delta) {
     var p = cur.split('-').map(Number), y = p[0], m = p[1] + delta;
     if (m < 1) { m = 12; y--; } if (m > 12) { m = 1; y++; }
-    cur = y + '-' + pad(m); render();
+    cur = y + '-' + pad(m); render(false);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     el('m-prev').addEventListener('click', function () { if (data) move(-1); });
     el('m-next').addEventListener('click', function () { if (data) move(1); });
-    el('m-today').addEventListener('click', function () { if (data) { cur = ymNow(); render(); } });
+    el('m-today').addEventListener('click', function () { if (data) { cur = ymNow(); render(true); } });
     el('m-reload').addEventListener('click', load);
     load();
   });

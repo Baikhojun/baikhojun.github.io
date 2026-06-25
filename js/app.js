@@ -12,9 +12,9 @@
     init: function () {
       var data = WS.Store.load();
       this.state.data = data;
-      var last = (data.ui && data.ui.lastMonth) || '2026-05';
-      var p = last.split('-').map(Number);
-      this.state.year = p[0]; this.state.month = p[1]; this.state.key = last;
+      var now = new Date(); // 접속 시 항상 오늘 달로
+      this.state.year = now.getFullYear(); this.state.month = now.getMonth() + 1;
+      this.state.key = WS.monthKey(this.state.year, this.state.month);
       this.bindToolbar();
       this.bindSheet();
       this.refresh();
