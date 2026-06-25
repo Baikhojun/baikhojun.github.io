@@ -38,6 +38,10 @@
   ];
   WS.shiftType = function (key) { return WS.SHIFT_TYPES.filter(function (t) { return t.key === key; })[0] || null; };
 
+  // 개인 일정: 공정과 구분되게 '글자색'만 입힘. 빠른 선택용 색상 + 기본색.
+  WS.PERSONAL_COLORS = ['#db2777', '#0d9488', '#4f46e5', '#b45309', '#e11d48', '#475569'];
+  WS.PERSONAL_DEFAULT = '#db2777';
+
   WS.circled = function (i) { return i >= 0 && i < 20 ? String.fromCharCode(0x2460 + i) : '(' + (i + 1) + ')'; };
   WS.color = function (idx) { return WS.PALETTE[((idx % WS.PALETTE.length) + WS.PALETTE.length) % WS.PALETTE.length]; };
   // 공정 색상: 커스텀(cat.color) 우선, 배경은 같은 색 13% 틴트(8자리 hex)
@@ -89,6 +93,7 @@
       ],
       leaves: [],
       shifts: [],
+      personal: [],
       inactiveCats: [],
       events: events,
       progressOverride: {
@@ -122,7 +127,7 @@
   };
 
   WS.emptyMonth = function () {
-    return { holidays: [], leaves: [], shifts: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '', inactiveCats: [] };
+    return { holidays: [], leaves: [], shifts: [], personal: [], events: [], progressOverride: {}, summaryOverride: null, footerNote: '', inactiveCats: [] };
   };
 
   // ----- 저장소 -----
@@ -183,6 +188,7 @@
         if (!Array.isArray(m.holidays)) m.holidays = [];
         if (!Array.isArray(m.leaves)) m.leaves = [];
         if (!Array.isArray(m.shifts)) m.shifts = [];
+        if (!Array.isArray(m.personal)) m.personal = [];
         if (!Array.isArray(m.inactiveCats)) m.inactiveCats = [];
         if (!Array.isArray(m.events)) m.events = [];
         if (!m.progressOverride || typeof m.progressOverride !== 'object') m.progressOverride = {};
@@ -218,6 +224,7 @@
       dst.events = src.events.map(function (e) { return { id: WS.uid('e'), date: remap(e.date), catId: e.catId, text: e.text, time: e.time, major: e.major }; });
       dst.leaves = (src.leaves || []).map(function (l) { return { id: WS.uid('l'), date: remap(l.date), type: l.type }; });
       dst.shifts = (src.shifts || []).map(function (s) { return { date: remap(s.date), type: s.type }; });
+      dst.personal = (src.personal || []).map(function (p) { return { id: WS.uid('p'), date: remap(p.date), text: p.text, color: p.color }; });
       dst.inactiveCats = (src.inactiveCats || []).slice();
       dst.footerNote = src.footerNote || '';
       this.data.months[dstKey] = dst;

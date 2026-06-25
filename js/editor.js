@@ -33,6 +33,7 @@
     var data = st.data;
     var key = dateStr.slice(0, 7);
     var month = WS.Store.getMonth(key, true);
+    if (!Array.isArray(month.personal)) month.personal = [];
     var d = Number(dateStr.split('-')[2]);
     var dim = WS.daysInMonth(st.year, st.month);
     var editingId = null;
@@ -53,6 +54,20 @@
       return o;
     }
     function curShift() { var s = (month.shifts || []).filter(function (x) { return x.date === dateStr; })[0]; return s ? s.type : ''; }
+    function persRows() {
+      var ps = month.personal.filter(function (p) { return p.date === dateStr; });
+      if (!ps.length) return '<div class="muted">등록된 개인 일정이 없습니다.</div>';
+      return ps.map(function (p) {
+        return '<div class="ev-row" data-pers="' + p.id + '">' +
+          '<span class="dot" style="background:' + (p.color || WS.PERSONAL_DEFAULT) + '"></span>' +
+          '<span class="ev-row-text" style="color:' + (p.color || WS.PERSONAL_DEFAULT) + ';font-weight:700;">' + WS.esc(p.text) + '</span>' +
+          '<button class="mini" data-pedit="' + p.id + '">수정</button>' +
+          '<button class="mini danger" data-pdel="' + p.id + '">삭제</button></div>';
+      }).join('');
+    }
+    function persSwatches() {
+      return WS.PERSONAL_COLORS.map(function (c) { return '<button type="button" class="pers-sw" data-color="' + c + '" style="background:' + c + '" title="' + c + '"></button>'; }).join('');
+    }
     function sameDateEvents() { return month.events.filter(function (e) { return e.date === dateStr; }); }
     function eventRows() {
       var evs = sameDateEvents();
@@ -101,6 +116,16 @@
             '</div>' +
           '</div>' +
           '<div class="btn-row"><button class="btn primary" id="ed-add">추가</button><button class="btn ghost" id="ed-cancel" style="display:none;">편집 취소</button></div>' +
+        '</div>' +
+        '<div class="section-label">📌 개인 일정 <span class="hint-inline">(공정과 구분 · 글자색만 · 예: 17시 강남 호준)</span></div>' +
+        '<div id="pers-list">' + persRows() + '</div>' +
+        '<div class="ed-form">' +
+          '<div class="field-row">' +
+            '<div class="field"><label>내용</label><input id="pers-text" type="text" placeholder="예: 17시 강남 호준" maxlength="40"></div>' +
+            '<div class="field pcolor"><label>글자색</label><input id="pers-color" type="color" value="' + WS.PERSONAL_DEFAULT + '"></div>' +
+          '</div>' +
+          '<div class="pers-swatches" id="pers-swatches"></div>' +
+          '<div class="btn-row"><button class="btn primary" id="pers-add">개인일정 추가</button><button class="btn ghost" id="pers-cancel" style="display:none;">편집 취소</button></div>' +
         '</div>';
     }
 
@@ -212,6 +237,41 @@
     });
 
     bindList();
+
+    // ----- 개인 일정 -----
+    $('pers-swatches').innerHTML = persSwatches();
+    var pEditId = null;
+    function refreshPers() { $('pers-list').innerHTML = persRows(); bindPers(); }
+    function resetPers() { pEditId = null; $('pers-text').value = ''; $('pers-add').textContent = '개인일정 추가'; $('pers-cancel').style.display = 'none'; }
+    function bindPers() {
+      $('pers-list').querySelectorAll('[data-pdel]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          month.personal = month.personal.filter(function (p) { return p.id !== b.getAttribute('data-pdel'); });
+          WS.Store.save(); WS.App.refresh(); refreshPers(); resetPers();
+        });
+      });
+      $('pers-list').querySelectorAll('[data-pedit]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var p = month.personal.filter(function (x) { return x.id === b.getAttribute('data-pedit'); })[0];
+          if (!p) return;
+          pEditId = p.id; $('pers-text').value = p.text; $('pers-color').value = p.color || WS.PERSONAL_DEFAULT;
+          $('pers-add').textContent = '저장'; $('pers-cancel').style.display = ''; $('pers-text').focus();
+        });
+      });
+    }
+    $('pers-swatches').querySelectorAll('.pers-sw').forEach(function (b) {
+      b.addEventListener('click', function () { $('pers-color').value = b.getAttribute('data-color'); });
+    });
+    $('pers-add').addEventListener('click', function () {
+      var text = $('pers-text').value.trim(); if (!text) { $('pers-text').focus(); return; }
+      var color = $('pers-color').value;
+      if (pEditId) { var p = month.personal.filter(function (x) { return x.id === pEditId; })[0]; if (p) { p.text = text; p.color = color; } }
+      else { month.personal.push({ id: WS.uid('p'), date: dateStr, text: text, color: color }); }
+      WS.Store.save(); WS.App.refresh(); refreshPers(); resetPers();
+    });
+    $('pers-cancel').addEventListener('click', resetPers);
+    $('pers-text').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('pers-add').click(); });
+    bindPers();
   };
 
   // ============ 설정 ============
