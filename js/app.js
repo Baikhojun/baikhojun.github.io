@@ -23,6 +23,7 @@
       root.requestAnimationFrame(function () { root.requestAnimationFrame(function () { WS.Print.fit(); }); });
       root.addEventListener('load', function () { WS.Print.fit(); });
       root.addEventListener('resize', function () { WS.Print.reapply(); });
+      WS.Store.onSave = function () { WS.App.autoSyncTick(); }; // 저장될 때마다 자동 동기화 시도
       root.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           var mr = $('modal-root');
@@ -55,6 +56,34 @@
       name = name.replace(/\s+/g, '');
       WS.Print.png(name).then(function () { self.toast('PNG로 저장했습니다.'); })
         .catch(function (e) { console.error('[savePng] %s', e && e.message); self.toast(e && e.message || 'PNG 저장 실패'); });
+    },
+
+    // 자동 동기화(입력 후 5초 디바운스 → 변경 시 업로드)
+    autoSyncTick: function () {
+      if (!WS.Sync.autoEnabled() || !WS.Store.getToken()) return;
+      var self = this;
+      clearTimeout(this._syncTimer);
+      this._syncTimer = setTimeout(function () { self._doAutoSync(); }, 5000);
+    },
+    _doAutoSync: function () {
+      var token = WS.Store.getToken();
+      if (!token || !WS.Sync.autoEnabled()) return;
+      var key = WS.Sync.contentKey();
+      if (key === WS.Sync._lastSynced) return; // 변경 없음 → 재업로드 안 함
+      var self = this;
+      this.setSyncBadge('☁ 동기화 중…', '#b45309');
+      WS.Sync.upload(token).then(function () {
+        WS.Sync._lastSynced = key;
+        self.setSyncBadge('☁ 동기화됨', '#16a34a');
+      }).catch(function (e) {
+        self.setSyncBadge('⚠ 동기화 실패', '#dc2626');
+        console.error('[autoSync] %s', e && e.message);
+      });
+    },
+    setSyncBadge: function (text, color) {
+      var b = $('sync-badge');
+      if (!b) return;
+      b.style.display = ''; b.textContent = text; b.style.color = color || '#16a34a';
     },
 
     setMonth: function (y, m) {
@@ -93,6 +122,8 @@
       if (badge) badge.textContent = saved ? '저장됨' : '새 달(미입력)';
       var undoBtn = $('btn-undo');
       if (undoBtn) undoBtn.disabled = !WS.Store.canUndo();
+      var sb = $('sync-badge');
+      if (sb && !WS.Sync.autoEnabled()) sb.style.display = 'none';
     },
 
     refresh: function () {

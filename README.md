@@ -74,6 +74,8 @@ git push
 설정(⚙) → "GitHub 동기화"에서 사용합니다.
 1. **GitHub 토큰(PAT) 발급**: GitHub → Settings → Developer settings → Personal access tokens. 이 저장소에 대한 **Contents 읽기/쓰기** 권한을 주세요. (Fine-grained 토큰 권장)
 2. owner/repo/경로/브랜치를 확인하고 토큰을 붙여넣은 뒤 **⬆ GitHub에 저장** / **⬇ GitHub에서 불러오기**.
+3. **자동 동기화**: "입력할 때마다 자동 동기화"를 켜면, 수정 후 약 5초 뒤 변경분만 자동 업로드합니다(상단 ☁ 표시). 변경 없으면 올리지 않습니다.
+   - 토큰은 **Classic 토큰 + `repo` 권한**(가장 확실) 또는 Fine-grained(해당 저장소 **Contents: Read and write**)를 쓰세요. 403이면 권한/저장소 선택을 확인하세요.
 - ⚠ **공개 저장소에 올리면 일정 데이터가 인터넷에 공개됩니다.** 민감한 내용이면 별도 **비공개 저장소**(owner/repo를 그 저장소로 지정)를 쓰세요.
 - 토큰은 **이 브라우저(localStorage)에만** 저장되고, JSON 내보내기 파일에는 **포함되지 않습니다**. 공용 PC에서는 사용 후 설정에서 토큰을 비우세요.
 

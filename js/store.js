@@ -135,6 +135,7 @@
     data: null,
     _history: [],   // 실행취소용 직전 상태 스냅샷
     _last: null,
+    onSave: null,   // 저장 후 후크(자동 동기화 연결용)
 
     load: function () {
       try {
@@ -162,6 +163,7 @@
         }
         this._writeLS();
         this._last = JSON.stringify(this.data);
+        if (typeof this.onSave === 'function') { try { this.onSave(); } catch (e) {} }
         return true;
       } catch (e) { console.error('[Store.save] 저장 실패: %s', e && e.message); return false; }
     },

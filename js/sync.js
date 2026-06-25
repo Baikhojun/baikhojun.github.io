@@ -14,6 +14,14 @@
     if (/\.github\.io$/.test(host)) return { owner: host.split('.')[0], repo: host, path: 'data/schedule-data.json', branch: 'main' };
     return { owner: '', repo: '', path: 'data/schedule-data.json', branch: 'main' };
   };
+  WS.Sync.autoEnabled = function () { return !!(WS.Store.data && WS.Store.data.sync && WS.Store.data.sync.auto); };
+  WS.Sync._lastSynced = null; // 마지막 업로드된 내용 키(불필요한 재업로드 방지)
+  // 동기화 대상 내용만(토큰/마지막 본 달 등 제외)
+  WS.Sync.contentKey = function () {
+    var d = WS.Store.data || {};
+    return JSON.stringify({ meta: d.meta, categories: d.categories, months: d.months });
+  };
+
   WS.Sync.config = function () {
     var s = (WS.Store.data && WS.Store.data.sync) || {};
     var def = WS.Sync.defaults();

@@ -339,7 +339,8 @@
         '<div class="field"><label>파일 경로</label><input id="sync-path" value="' + WS.esc(cfg.path) + '"></div>' +
         '<div class="field"><label>브랜치</label><input id="sync-branch" value="' + WS.esc(cfg.branch) + '"></div>' +
       '</div>' +
-      '<div class="field"><label>GitHub 토큰 (PAT, repo 권한)</label><input id="sync-token" type="password" value="' + WS.esc(WS.Store.getToken()) + '" placeholder="ghp_..."></div>' +
+      '<div class="field"><label>GitHub 토큰 (PAT, repo 권한)</label><input id="sync-token" type="password" value="' + WS.esc(WS.Store.getToken()) + '" placeholder="ghp_... 또는 github_pat_..."></div>' +
+      '<div class="field check"><label><input id="sync-auto" type="checkbox"' + (data.sync && data.sync.auto ? ' checked' : '') + '> 입력할 때마다 자동 동기화 (토큰 필요)</label></div>' +
       '<div class="btn-row"><button class="btn" id="sync-up">⬆ GitHub에 저장</button><button class="btn" id="sync-down">⬇ GitHub에서 불러오기</button></div>' +
       '<div id="sync-status" class="sync-status"></div>' +
       '<div class="section-label danger-label">데이터</div>' +
@@ -418,19 +419,20 @@
       data.sync = data.sync || {};
       data.sync.owner = $('sync-owner').value.trim(); data.sync.repo = $('sync-repo').value.trim();
       data.sync.path = $('sync-path').value.trim() || 'data/schedule-data.json'; data.sync.branch = $('sync-branch').value.trim() || 'main';
+      data.sync.auto = $('sync-auto').checked;
     }
     function setSyncStatus(msg) { $('sync-status').textContent = msg; }
     $('sync-up').addEventListener('click', function () {
       readSyncCfg(); var token = $('sync-token').value.trim(); WS.Store.setToken(token); WS.Store.save();
       setSyncStatus('업로드 중...');
-      WS.Sync.upload(token).then(function () { setSyncStatus('✅ GitHub 저장 완료'); WS.App.toast('GitHub에 저장했습니다.'); })
+      WS.Sync.upload(token).then(function () { WS.Sync._lastSynced = WS.Sync.contentKey(); setSyncStatus('✅ GitHub 저장 완료'); WS.App.toast('GitHub에 저장했습니다.'); })
         .catch(function (e) { setSyncStatus('❌ ' + e.message); });
     });
     $('sync-down').addEventListener('click', function () {
       readSyncCfg(); var token = $('sync-token').value.trim(); WS.Store.setToken(token); WS.Store.save();
       if (!root.confirm('GitHub의 데이터로 현재 내용을 덮어씁니다. 계속할까요?')) return;
       setSyncStatus('내려받는 중...');
-      WS.Sync.download(token).then(function () { WS.Editor.close(); WS.App.reloadData(); WS.App.toast('GitHub에서 불러왔습니다.'); })
+      WS.Sync.download(token).then(function () { WS.Sync._lastSynced = WS.Sync.contentKey(); WS.Editor.close(); WS.App.reloadData(); WS.App.toast('GitHub에서 불러왔습니다.'); })
         .catch(function (e) { setSyncStatus('❌ ' + e.message); });
     });
 
