@@ -100,4 +100,11 @@
     el('m-reload').addEventListener('click', load);
     load();
   });
+
+  // PWA: 서비스워커 등록(오프라인 + 홈화면 설치)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function (e) { console.warn('[SW] 등록 실패: ' + (e && e.message)); });
+    });
+  }
 })();
