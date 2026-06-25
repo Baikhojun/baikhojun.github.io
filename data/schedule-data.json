@@ -34,6 +34,11 @@
       "id": "c6",
       "name": "계약관리 소스코드 분석",
       "short": "소스 분석"
+    },
+    {
+      "id": "c_mqst6g9y_1",
+      "name": "새 공정",
+      "short": "새 공정"
     }
   ],
   "months": {
@@ -52,13 +57,9 @@
           "name": "대체 휴일"
         }
       ],
-      "leaves": [],
-      "shifts": [],
-      "personal": [],
-      "inactiveCats": [],
       "events": [
         {
-          "id": "e_mqsylws8_1",
+          "id": "e_mqolskvf_1",
           "date": "2026-05-08",
           "catId": "c1",
           "text": "계약관리 업무교육",
@@ -66,7 +67,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws8_2",
+          "id": "e_mqolskvf_2",
           "date": "2026-05-11",
           "catId": "c2",
           "text": "AI보고서 작성",
@@ -74,7 +75,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws8_3",
+          "id": "e_mqolskvf_3",
           "date": "2026-05-11",
           "catId": "c4",
           "text": "AI교육 PPT",
@@ -82,7 +83,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws8_4",
+          "id": "e_mqolskvf_4",
           "date": "2026-05-11",
           "catId": "c6",
           "text": "소스 분석",
@@ -90,7 +91,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws8_5",
+          "id": "e_mqolskvf_5",
           "date": "2026-05-12",
           "catId": "c2",
           "text": "AI보고서 작성",
@@ -98,7 +99,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws8_6",
+          "id": "e_mqolskvf_6",
           "date": "2026-05-12",
           "catId": "c4",
           "text": "AI교육 PPT",
@@ -106,7 +107,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws8_7",
+          "id": "e_mqolskvf_7",
           "date": "2026-05-12",
           "catId": "c6",
           "text": "소스 분석",
@@ -114,7 +115,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_8",
+          "id": "e_mqolskvf_8",
           "date": "2026-05-13",
           "catId": "c2",
           "text": "AI보고서 작성",
@@ -122,7 +123,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_9",
+          "id": "e_mqolskvf_9",
           "date": "2026-05-13",
           "catId": "c4",
           "text": "AI교육 PPT",
@@ -130,7 +131,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_a",
+          "id": "e_mqolskvf_a",
           "date": "2026-05-13",
           "catId": "c6",
           "text": "소스 분석",
@@ -138,7 +139,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_b",
+          "id": "e_mqolskvf_b",
           "date": "2026-05-14",
           "catId": "c3",
           "text": "EPC 전체회의(예상)",
@@ -146,7 +147,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_c",
+          "id": "e_mqolskvf_c",
           "date": "2026-05-14",
           "catId": "c6",
           "text": "소스 분석",
@@ -154,7 +155,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_d",
+          "id": "e_mqolskvf_d",
           "date": "2026-05-15",
           "catId": "c2",
           "text": "AI보고서 작성 완료",
@@ -162,7 +163,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_e",
+          "id": "e_mqolskvf_e",
           "date": "2026-05-15",
           "catId": "c4",
           "text": "PPT 완료",
@@ -170,7 +171,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_f",
+          "id": "e_mqolskvf_f",
           "date": "2026-05-15",
           "catId": "c6",
           "text": "소스 분석",
@@ -178,7 +179,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_g",
+          "id": "e_mqolskvf_g",
           "date": "2026-05-18",
           "catId": "c2",
           "text": "AI보고서 보고",
@@ -186,7 +187,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_h",
+          "id": "e_mqolskvf_h",
           "date": "2026-05-18",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -194,7 +195,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_i",
+          "id": "e_mqolskvf_i",
           "date": "2026-05-18",
           "catId": "c6",
           "text": "소스 분석",
@@ -202,7 +203,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_j",
+          "id": "e_mqolskvf_j",
           "date": "2026-05-19",
           "catId": "c4",
           "text": "AI교육 예비교육 1차",
@@ -210,7 +211,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_k",
+          "id": "e_mqolskvf_k",
           "date": "2026-05-19",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -218,7 +219,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_l",
+          "id": "e_mqolskvf_l",
           "date": "2026-05-19",
           "catId": "c6",
           "text": "소스 분석",
@@ -226,7 +227,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_m",
+          "id": "e_mqolskvf_m",
           "date": "2026-05-20",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -234,7 +235,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_n",
+          "id": "e_mqolskvf_n",
           "date": "2026-05-20",
           "catId": "c6",
           "text": "소스 분석",
@@ -242,7 +243,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_o",
+          "id": "e_mqolskvf_o",
           "date": "2026-05-21",
           "catId": "c4",
           "text": "AI교육 예비교육 2차",
@@ -250,7 +251,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_p",
+          "id": "e_mqolskvf_p",
           "date": "2026-05-21",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -258,7 +259,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_q",
+          "id": "e_mqolskvf_q",
           "date": "2026-05-21",
           "catId": "c6",
           "text": "소스 분석",
@@ -266,7 +267,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_r",
+          "id": "e_mqolskvf_r",
           "date": "2026-05-22",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -274,7 +275,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_s",
+          "id": "e_mqolskvf_s",
           "date": "2026-05-22",
           "catId": "c6",
           "text": "소스 분석",
@@ -282,7 +283,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_t",
+          "id": "e_mqolskvf_t",
           "date": "2026-05-26",
           "catId": "c4",
           "text": "관리부서 AI교육 실시",
@@ -290,7 +291,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_u",
+          "id": "e_mqolskvf_u",
           "date": "2026-05-26",
           "catId": "c6",
           "text": "소스 분석",
@@ -298,7 +299,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_v",
+          "id": "e_mqolskvf_v",
           "date": "2026-05-27",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -306,7 +307,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_w",
+          "id": "e_mqolskvf_w",
           "date": "2026-05-27",
           "catId": "c6",
           "text": "소스 분석",
@@ -314,7 +315,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_x",
+          "id": "e_mqolskvf_x",
           "date": "2026-05-28",
           "catId": "c5",
           "text": "EPC 외주개발",
@@ -322,7 +323,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_y",
+          "id": "e_mqolskvf_y",
           "date": "2026-05-28",
           "catId": "c6",
           "text": "소스 분석",
@@ -330,7 +331,7 @@
           "major": false
         },
         {
-          "id": "e_mqsylws9_z",
+          "id": "e_mqolskvf_z",
           "date": "2026-05-29",
           "catId": "c5",
           "text": "EPC 외주개발 마무리",
@@ -338,7 +339,7 @@
           "major": true
         },
         {
-          "id": "e_mqsylws9_10",
+          "id": "e_mqolskvf_10",
           "date": "2026-05-29",
           "catId": "c6",
           "text": "소스 분석 완료",
@@ -401,16 +402,284 @@
         "5/26 (화) — 관리부서 AI교육 1회 실시",
         "5/29 (금) — EPC 외주계약 개발 / 소스코드 분석 마무리"
       ],
-      "footerNote": "※ EPC 전체회의 일자(5/14) 및 AI교육 예비교육 일자(5/19, 5/21)는 협의 후 조정 가능"
+      "footerNote": "※ EPC 전체회의 일자(5/14) 및 AI교육 예비교육 일자(5/19, 5/21)는 협의 후 조정 가능",
+      "leaves": [],
+      "shifts": [],
+      "inactiveCats": [],
+      "personal": []
+    },
+    "2026-06": {
+      "holidays": [],
+      "leaves": [],
+      "shifts": [
+        {
+          "date": "2026-06-23",
+          "type": "Off"
+        },
+        {
+          "date": "2026-06-29",
+          "type": "Day"
+        },
+        {
+          "date": "2026-06-30",
+          "type": "Day"
+        },
+        {
+          "date": "2026-06-24",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-06-25",
+          "type": "Night"
+        },
+        {
+          "date": "2026-06-26",
+          "type": "Night"
+        },
+        {
+          "date": "2026-06-27",
+          "type": "Off"
+        },
+        {
+          "date": "2026-06-28",
+          "type": "Off"
+        }
+      ],
+      "events": [],
+      "progressOverride": {},
+      "summaryOverride": null,
+      "footerNote": "",
+      "inactiveCats": [
+        "c3",
+        "c4"
+      ],
+      "personal": [
+        {
+          "id": "p_mqsu806d_1",
+          "date": "2026-06-27",
+          "text": "15시 양재호반써밋 계약",
+          "color": "#e11d48"
+        }
+      ]
+    },
+    "2026-07": {
+      "holidays": [],
+      "leaves": [],
+      "shifts": [
+        {
+          "date": "2026-07-01",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-02",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-03",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-04",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-05",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-06",
+          "type": "Night"
+        },
+        {
+          "date": "2026-07-07",
+          "type": "Night"
+        },
+        {
+          "date": "2026-07-08",
+          "type": "Night"
+        },
+        {
+          "date": "2026-07-09",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-10",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-11",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-12",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-13",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-14",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-15",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-16",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-17",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-18",
+          "type": "Night"
+        },
+        {
+          "date": "2026-07-19",
+          "type": "Night"
+        },
+        {
+          "date": "2026-07-20",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-21",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-22",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-23",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-07-24",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-25",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-26",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-27",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-28",
+          "type": "Off"
+        },
+        {
+          "date": "2026-07-29",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-30",
+          "type": "Day"
+        },
+        {
+          "date": "2026-07-31",
+          "type": "Off"
+        }
+      ],
+      "events": [],
+      "progressOverride": {},
+      "summaryOverride": null,
+      "footerNote": "",
+      "inactiveCats": [],
+      "personal": [
+        {
+          "id": "p_mqsu8fcr_2",
+          "date": "2026-07-01",
+          "text": "헬스등록하기",
+          "color": "#0d9488"
+        },
+        {
+          "id": "p_mqsu8o7x_3",
+          "date": "2026-07-04",
+          "text": "광주",
+          "color": "#e11d48"
+        },
+        {
+          "id": "p_mqsu8wir_4",
+          "date": "2026-07-05",
+          "text": "광주",
+          "color": "#db2777"
+        },
+        {
+          "id": "p_mqsu97y5_5",
+          "date": "2026-07-15",
+          "text": "17시 신사눈지방",
+          "color": "#4f46e5"
+        },
+        {
+          "id": "p_mqsu9fmd_6",
+          "date": "2026-07-15",
+          "text": "민팃 26만원 입금",
+          "color": "#0d9488"
+        },
+        {
+          "id": "p_mqsu9z7m_7",
+          "date": "2026-07-06",
+          "text": "청첩장 샘플 만들기",
+          "color": "#b45309"
+        },
+        {
+          "id": "p_mqsuab28_8",
+          "date": "2026-07-20",
+          "text": "은행 대출 신청 예정(입주5주전)",
+          "color": "#4f46e5"
+        },
+        {
+          "id": "p_mqsuapvt_9",
+          "date": "2026-07-24",
+          "text": "은조 전세대출 800 상환하기",
+          "color": "#0d9488"
+        }
+      ]
+    },
+    "2026-08": {
+      "holidays": [],
+      "leaves": [],
+      "shifts": [],
+      "personal": [
+        {
+          "id": "p_mqsub3at_a",
+          "date": "2026-08-03",
+          "text": "혼인신고 진행",
+          "color": "#b45309"
+        },
+        {
+          "id": "p_mqsube17_b",
+          "date": "2026-08-28",
+          "text": "양재호반써민 잠근 처리 및 입주 예정",
+          "color": "#e11d48"
+        }
+      ],
+      "events": [],
+      "progressOverride": {},
+      "summaryOverride": null,
+      "footerNote": "",
+      "inactiveCats": []
     }
   },
   "ui": {
-    "lastMonth": "2026-05"
+    "lastMonth": "2026-06"
   },
   "sync": {
-    "owner": "",
-    "repo": "",
+    "owner": "baikhojun",
+    "repo": "baikhojun.github.io",
     "path": "data/schedule-data.json",
-    "branch": "main"
+    "branch": "main",
+    "auto": true
   }
 }
