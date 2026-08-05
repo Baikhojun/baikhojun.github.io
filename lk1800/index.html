@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<!-- 이 파일의 역할: 라지킹 LK1800 매트리스 비교 리포트 모바일 전용 화면 (iPhone 15 Pro 393x852 기준) -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b2340">
+<meta name="description" content="라지킹 LK1800 브랜드리스 vs 베스트슬립 10개 모델 정밀 비교 — 내장재 대비 가격, 품질 점수, 가성비 TOP3">
+<title>LK1800 매트리스 비교 · 브랜드리스 vs 베스트슬립</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LK1800">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f4f5f8; --card:#fff; --ink:#1a1d2e; --sub:#5c6178; --mute:#8b90a6;
+  --line:#e3e5ed; --line2:#eef0f5;
+  --bl:#2b4a8f; --bs:#8a4531;
+  --good:#1e7a5f; --warn:#b3541e; --bad:#c02d2d;
+  --c1:#2563eb; --c2:#059669; --c3:#7c3aed; --c4:#d97706; --c5:#0891b2; --c6:#db2777;
+  --hd:#1b2340;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Apple SD Gothic Neo','Noto Sans CJK KR','Malgun Gothic',sans-serif;
+  font-size:15px; line-height:1.6; letter-spacing:-.2px;
+  max-width:520px; margin:0 auto;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom));
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ── 헤더 ── */
+.hd{
+  position:sticky; top:0; z-index:30; background:var(--hd); color:#fff;
+  padding:12px 16px 11px; padding-top:calc(11px + env(safe-area-inset-top));
+}
+.hd h1{font-size:17px;font-weight:800;line-height:1.35;letter-spacing:-.4px}
+.hd .meta{font-size:11.5px;color:#a8b0cc;margin-top:4px;line-height:1.5}
+
+/* ── 탭 ── */
+.tabs{
+  position:sticky; top:0; z-index:29; background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex; gap:5px; overflow-x:auto; scrollbar-width:none;
+  padding:8px 10px; -webkit-overflow-scrolling:touch;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto; min-height:38px; padding:0 11px; border-radius:19px;
+  font-size:13px; font-weight:700; color:var(--sub); background:var(--line2);
+  display:flex; align-items:center; white-space:nowrap;
+}
+.tab[aria-selected="true"]{background:var(--hd);color:#fff}
+
+/* ── 공통 ── */
+main{padding:14px 12px 8px}
+section[hidden]{display:none}
+h2{font-size:16.5px;font-weight:800;letter-spacing:-.3px;margin:2px 2px 4px}
+.lead{font-size:13.5px;color:var(--sub);margin:0 2px 12px;line-height:1.62}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.note{font-size:12px;color:var(--mute);line-height:1.6;margin:8px 2px 0}
+.hr{height:1px;background:var(--line2);margin:11px 0}
+.chip{display:inline-block;font-size:11px;font-weight:800;border-radius:5px;padding:2px 7px;color:#fff;vertical-align:1px}
+.chip.bl{background:var(--bl)} .chip.bs{background:var(--bs)}
+.est{color:var(--warn);font-weight:800}
+
+/* ── 결론 배너 ── */
+.verdict{background:var(--hd);color:#fff;border-radius:14px;padding:15px 16px;margin-bottom:12px}
+.verdict b{display:block;font-size:19px;font-weight:800;letter-spacing:-.5px;line-height:1.35}
+.verdict p{font-size:13px;color:#b9c0da;margin-top:7px;line-height:1.62}
+
+/* ── 시상대 ── */
+.pod{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px;display:flex;gap:13px}
+.pod.first{border-color:var(--hd);border-width:2px}
+.pod .rk{flex:0 0 30px;font-size:25px;font-weight:800;color:var(--mute);line-height:1.1;text-align:center}
+.pod.first .rk{color:var(--hd)}
+.pod .bd{flex:1;min-width:0}
+.pod .nm{font-size:16px;font-weight:800;letter-spacing:-.3px}
+.pod .big{font-size:22px;font-weight:800;letter-spacing:-.8px;margin-top:6px;line-height:1.1}
+.pod .big small{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:0;margin-left:5px}
+.pod .sm{font-size:12.5px;color:var(--sub);margin-top:5px}
+.pod .why{font-size:13px;color:var(--sub);margin-top:8px;line-height:1.6;word-break:keep-all}
+
+/* ── 스탯 ── */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.st{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 13px}
+.st b{display:block;font-size:20px;font-weight:800;letter-spacing:-.7px;line-height:1.15}
+.st span{display:block;font-size:11.5px;color:var(--mute);margin-top:4px;line-height:1.45}
+.st.g b{color:var(--good)} .st.w b{color:var(--warn)}
+
+/* ── Q&A ── */
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 14px;margin-bottom:9px}
+.qa .row{padding:11px 0;border-bottom:1px solid var(--line2)}
+.qa .row:last-child{border-bottom:none}
+.qa .q{font-size:12px;font-weight:800;color:var(--mute)}
+.qa .a{font-size:14px;font-weight:700;margin-top:3px;line-height:1.5}
+.qa .a em{font-style:normal;color:var(--bl)}
+
+/* ── 지표 바 리스트 ── */
+.segs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:0 2px 11px}
+.segs::-webkit-scrollbar{display:none}
+.seg{flex:1 1 auto;min-height:36px;padding:0 6px;border-radius:18px;font-size:12.5px;font-weight:700;background:var(--line2);color:var(--sub);display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.seg[aria-pressed="true"]{background:var(--bl);color:#fff}
+.bar{margin-bottom:11px}
+.bar .top{display:flex;align-items:baseline;gap:6px;margin-bottom:5px}
+.bar .top .n{font-size:14px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .top .v{font-size:14px;font-weight:800;letter-spacing:-.3px}
+.bar .track{height:9px;background:var(--line2);border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;border-radius:5px;background:var(--bl)}
+.bar.b2 .fill{background:var(--bs)}
+.bar.win .top .v{color:var(--good)}
+
+/* ── 품질 순위 ── */
+.rank{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:9px;overflow:hidden}
+.rank>summary{padding:12px 14px;list-style:none;display:flex;align-items:center;gap:11px;min-height:44px}
+.rank>summary::-webkit-details-marker{display:none}
+.rank .no{flex:0 0 22px;font-size:16px;font-weight:800;color:var(--mute);text-align:center}
+.rank .mid{flex:1;min-width:0}
+.rank .nm2{font-size:15px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:6px}
+.rank .stack{display:flex;height:7px;border-radius:4px;overflow:hidden;margin-top:7px;background:var(--line2)}
+.rank .stack i{display:block;height:100%}
+.rank .tot{flex:0 0 auto;text-align:right}
+.rank .tot b{display:block;font-size:19px;font-weight:800;letter-spacing:-.6px;line-height:1.1}
+.rank .tot span{display:block;font-size:10.5px;color:var(--mute)}
+.rank .body{padding:0 14px 13px;border-top:1px solid var(--line2)}
+.dim{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--line2)}
+.dim:last-child{border-bottom:none}
+.dim .dot{flex:0 0 9px;height:9px;border-radius:3px}
+.dim .dn{flex:1;font-size:13px;color:var(--sub)}
+.dim .dtr{flex:0 0 78px;height:7px;background:var(--line2);border-radius:4px;overflow:hidden}
+.dim .dfl{height:100%;border-radius:4px}
+.dim .dv{flex:0 0 52px;text-align:right;font-size:12.5px;font-weight:800;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:9px 13px;padding:2px 4px 4px}
+.legend span{font-size:11.5px;color:var(--sub);display:flex;align-items:center;gap:5px}
+.legend i{width:9px;height:9px;border-radius:3px;display:block}
+
+/* ── 매칭 ── */
+.mt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.mt .vs{display:grid;grid-template-columns:1fr 26px 1fr;align-items:center;gap:4px}
+.mt .side{min-width:0}
+.mt .side .s1{font-size:14.5px;font-weight:800;letter-spacing:-.3px;word-break:keep-all}
+.mt .side .s2{font-size:11.5px;color:var(--mute);margin-top:3px;font-variant-numeric:tabular-nums}
+.mt .side.r{text-align:right}
+.mt .mid2{text-align:center;font-size:11px;font-weight:800;color:var(--mute)}
+.mt .gap{margin-top:10px;background:var(--line2);border-radius:9px;padding:7px 11px;font-size:12.5px;font-weight:800;color:var(--bl);text-align:center}
+.mt .txt{font-size:13px;color:var(--sub);margin-top:9px;line-height:1.62;word-break:keep-all}
+
+/* ── 사양 원장 ── */
+.spec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:9px;overflow:hidden}
+.spec>summary{padding:13px 14px;list-style:none;min-height:44px;display:flex;align-items:center;gap:9px}
+.spec>summary::-webkit-details-marker{display:none}
+.spec .sn{flex:1;min-width:0;font-size:15px;font-weight:800;letter-spacing:-.3px}
+.spec .sp{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.spec .arw{flex:0 0 12px;font-size:11px;color:var(--mute);transition:transform .15s}
+.spec[open] .arw{transform:rotate(90deg)}
+.kv{padding:0 14px 12px;border-top:1px solid var(--line2)}
+.kv .r{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line2)}
+.kv .r:last-child{border-bottom:none}
+.kv .k{flex:0 0 68px;font-size:12px;font-weight:800;color:var(--mute);padding-top:1px}
+.kv .v{flex:1;min-width:0;font-size:13.5px;line-height:1.55;word-break:keep-all}
+
+/* ── 콜아웃 ── */
+.co{border-radius:14px;padding:13px 14px;margin-bottom:9px;border:1px solid}
+.co b{display:block;font-size:14.5px;font-weight:800;margin-bottom:6px;line-height:1.45;word-break:keep-all}
+.co p{font-size:13px;line-height:1.65;word-break:keep-all}
+.co.d{background:#fdf1f1;border-color:#f2cfcf;color:#7d2020}
+.co.d b{color:var(--bad)}
+.co.w{background:#fdf6ec;border-color:#f0dcc0;color:#78491d}
+.co.w b{color:var(--warn)}
+.co.i{background:#eef3fc;border-color:#ccd9f0;color:#26406f}
+.co.i b{color:var(--bl)}
+
+/* ── 시나리오 ── */
+.sc{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid var(--line2);align-items:flex-start}
+.sc:last-child{border-bottom:none}
+.sc .sl{flex:1;min-width:0;font-size:12.5px;color:var(--sub);line-height:1.5;word-break:keep-all}
+.sc .sr{flex:0 0 128px;font-size:12px;font-weight:700;text-align:right;line-height:1.55}
+.sc .sr b{color:var(--good);font-weight:800}
+
+footer{text-align:center;font-size:11.5px;color:var(--mute);padding:16px 18px 8px;line-height:1.65}
+footer a{color:var(--bl)}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <h1>라지킹 LK1800 정밀 비교</h1>
+  <div class="meta">브랜드리스 6종 · 베스트슬립 4종 · 6개 항목 100점 채점 · 2026.8 기준</div>
+</header>
+
+<nav class="tabs" id="tabs" role="tablist"></nav>
+
+<main>
+  <section id="s-sum"></section>
+  <section id="s-cost" hidden></section>
+  <section id="s-qual" hidden></section>
+  <section id="s-val" hidden></section>
+  <section id="s-match" hidden></section>
+  <section id="s-spec" hidden></section>
+  <section id="s-warn" hidden></section>
+</main>
+
+<footer>
+  출처 · 네이버 브랜드스토어 상세페이지 캡처(브랜드리스 전 6종, 베스트슬립 New Z7),
+  bestsleep.us 공식 견적서, 롯데하이마트·다나와·에누리 실판매가,
+  mattressguide.co.kr 공식 쇼룸 가이드(코일 수)<br><br>
+  가격은 2026년 8월 확인 기준이며 변동될 수 있습니다.
+</footer>
+
+<script>
+/* ── 데이터: 10개 모델 ───────────────────────────────── */
+var M = [
+ {n:"리차지 17",s:"리차지17",b:"BL",t:"엔트리",p:1517000,cf:1,
+  pn:"네이버 스토어 확정가",coil:1250,
+  cn:"1,250개 공개 (마이크로 코일 없음)",th:28,wy:10,
+  wn:"10년",na:"없음 (텐셀 CFT 원단)",st:"일체형 하이퍼 유로탑",
+  al:"TitanSil (Ti-Si)",fm:"2경도 + 경도 주문제작 가능",
+  rt:"4.80 / 578건 (최근 4.43 하락)",
+  d:[15.0,4.3,4.5,6.6,11.7,7.0]},
+ {n:"뉴 녹턴 T450",s:"녹턴T450",b:"BL",t:"가성비 주력",p:1727000,cf:1,
+  pn:"네이버 스토어 확정가",coil:2410,
+  cn:"추정 2,410 (스파이널 1,250 + 마이크로 1,160)",th:32,wy:15,
+  wn:"15년 (2040년까지)",na:"없음",st:"분리형 토퍼 (표기 상충)",
+  al:"TitanSil (Ti-Si)",fm:"2경도 · 리스팅 '미디엄' 표기 상충",
+  rt:"4.85 / 1,375건 (최근 4.89)",
+  d:[17.4,4.3,10.7,8.9,13.5,4.0]},
+ {n:"판타소스 T570",s:"판타소스T570",b:"BL",t:"중상급",p:1867000,cf:1,
+  pn:"네이버 스토어 확정가",coil:2410,
+  cn:"추정 2,410 (더블쿠션 스파이널 + 마이크로)",th:33,wy:15,
+  wn:"15년 (20년 주장 병존 — 상충)",na:"말총 패드",st:"분리형 토퍼",
+  al:"표기 상충 (Ti-Si / 바나듐-티타늄)",fm:"2경도 (MS / MH)",
+  rt:"4.82 / 56건 (최근 4.81)",
+  d:[17.9,10.8,11.4,8.9,10.2,5.0]},
+ {n:"모피어스 T750",s:"모피어스T750",b:"BL",t:"프리미엄",p:2382000,cf:1,
+  pn:"네이버 스토어 확정가",coil:2410,
+  cn:"2,410개/Q 공개 (구형 동일 구성)",th:39,wy:25,
+  wn:"25년 (2051년까지) — 브랜드 최장",na:"말총 다량",
+  st:"분리형 토퍼 + 더블 유로탑",
+  al:"VA·TI·NIUM (V-Ti) · POSCO 성적서 공개",fm:"2경도 (MS / MH)",
+  rt:"4.87 / 3,943건 (최근 4.94) — 리뷰 최다",
+  d:[19.4,14.4,13.1,13.1,14.7,5.0]},
+ {n:"이켈로스 T1000",s:"이켈로스T1000",b:"BL",t:"플래그십",p:2622000,cf:1,
+  pn:"네이버 스토어 확정가",coil:2410,
+  cn:"미공개 — 추정 2,410+ (토퍼 2매 구조)",th:44,wy:20,
+  wn:"20년 (2046년까지)",na:"말총 + 알파카울",
+  st:"분리형 토퍼 2매 (더블 유로탑)",
+  al:"VA·TI·NIUM (V-Ti) + 맥스파인",fm:"2경도 (MS / MH)",
+  rt:"4.92 / 259건 (최근 4.97) — 라인업 최고",
+  d:[20.4,16.9,14.6,11.1,12.2,5.0]},
+ {n:"오네이로스 T2500",s:"오네이로스T2500",b:"BL",t:"하이엔드",p:3492000,cf:1,
+  pn:"스토어 확정가 (상세페이지 표는 337.2만 — 12만원 차이)",coil:2410,
+  cn:"미공개 — 더블쿠션 + V-Ti 강화 코일",th:38,wy:25,
+  wn:"25년 (기존 15년 + 10년 연장)",
+  na:"말총 + 알파카울 + 코코넛 코이어",
+  st:"양면 토퍼 + 양면 바디 (4조합)",
+  al:"VA·TI·NIUM + 맥스파인 · 국제특허",fm:"4가지 경도 조합 — 최상",
+  rt:"3.00 / 1건 — 시장 검증 전",
+  d:[20.9,19.5,13.4,13.1,0.7,10.0]},
+ {n:"Z5",s:"Z5",b:"BS",t:"Z 중급",p:2184310,cf:0,
+  pn:"LK2000 255.7만 → LK1800 환산 (208~227만 범위)",coil:1276,
+  cn:"추정 1,276 (클러스터 1,005 × 27% 증량)",th:37,wy:null,
+  wn:"미확인 — 사전조사 '1년 무상 + 10년 유상'",na:"없음",
+  st:"분리형 / 일체형 표기 상충",
+  al:"이중열처리 6+7회전 혼합",fm:"3경도 (에덴 = 순수 미디엄)",
+  rt:"4.90 / 10건 (최근 5.0)",
+  d:[16.6,5.9,9.2,1.2,9.2,9.0]},
+ {n:"New Z7",s:"New Z7",b:"BS",t:"Z 상급",p:2607000,cf:1,
+  pn:"LK1800 정규 리스팅 확정가 (23% 할인)",coil:2366,
+  cn:"인터클러스터 1,206 공개 + 마이크로 (추정 1,160)",th:34,wy:15,
+  wn:"15년",na:"없음 (천연소재 미탑재)",
+  st:"일체형 유로탑 — 리뉴얼로 분리 불가",
+  al:"Ti-Si · 6+7회전 혼합",fm:"3경도 (순수 미디엄 有)",
+  rt:"리뷰 0건 — 신규 리스팅",
+  d:[15.8,4.8,5.6,8.9,0.0,9.0]},
+ {n:"Z8B",s:"Z8B",b:"BS",t:"플래그십",p:3871085,cf:0,
+  pn:"K 348.7만 → LK1800 환산 (382~393만 범위)",coil:3325,
+  cn:"3,325개/Q · 코일 41% 증량 공개",th:35,wy:20,
+  wn:"20년 (구형 15년 → 상향)",na:"천연 양모",
+  st:"분리형 유로탑 (토퍼 교체)",
+  al:"Ti-Si · 6+7회전 혼합",fm:"3경도 (순수 미디엄 有)",
+  rt:"5.00 / 4건",
+  d:[20.4,12.5,12.3,11.1,8.6,9.0]},
+ {n:"Z10B",s:"Z10B",b:"BS",t:"최상위",p:5125552,cf:0,
+  pn:"K 461.7만 → LK1800 환산 (506~521만 범위)",coil:5172,
+  cn:"5,172개/Q (사전조사) · 페이지 미기재",th:46,wy:30,
+  wn:"30년 — 전체 최장",na:"천연 양모",
+  st:"분리형 유로탑 (토퍼 교체)",
+  al:"하이퍼셀 32mm 10회전",fm:"2경도 — 순수 미디엄 없음",
+  rt:"리뷰 0건 — 신규 리스팅",
+  d:[25.0,13.0,14.5,15.0,0.0,5.0]}
+];
+
+var DIM = [
+  {k:"스프링",max:25,c:"var(--c1)"},
+  {k:"내장재",max:20,c:"var(--c2)"},
+  {k:"구조·볼륨",max:15,c:"var(--c3)"},
+  {k:"보증",max:15,c:"var(--c4)"},
+  {k:"검증·평점",max:15,c:"var(--c5)"},
+  {k:"경도 선택권",max:10,c:"var(--c6)"}
+];
+
+/* ── 계산 ─────────────────────────────────────────── */
+function qty(m){return m.d.reduce(function(a,b){return a+b},0)}
+function mat(m){return m.d[0]+m.d[1]+m.d[2]}
+function perMat(m){return m.p/mat(m)}
+function perQ(m){return m.p/qty(m)}
+function perCoil(m){return m.p/m.coil}
+function perCm(m){return m.p/m.th}
+function perYr(m){return m.wy?m.p/m.wy:null}
+/* 표시되는 항목 점수(소수 1자리)의 합을 총점으로 쓰므로, 기준값도 같은 데이터에서 산출 */
+var BEST = Math.min.apply(null, M.map(perQ));
+function brandAvg(b){
+  var g=M.filter(function(m){return m.b===b});
+  return g.reduce(function(a,m){return a+perQ(m)},0)/g.length;
+}
+var AVG_BL = brandAvg('BL'), AVG_BS = brandAvg('BS');
+
+function won(n){return Math.round(n).toLocaleString('ko-KR')}
+function man(n){return (n/10000).toFixed(1)+'만'}
+function f1(n){return n.toFixed(1)}
+function bc(m){return m.b==='BL'?'var(--bl)':'var(--bs)'}
+function bchip(m){return '<span class="chip '+(m.b==='BL'?'bl':'bs')+'">'+(m.b==='BL'?'브랜드리스':'베스트슬립')+'</span>'}
+function pTag(m){return won(m.p)+'원'+(m.cf?'':'<span class="est">*</span>')}
+
+/* ── 탭 ───────────────────────────────────────────── */
+var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
+          ["s-val","가성비"],["s-match","1:1 비교"],["s-spec","사양"],["s-warn","주의"]];
+
+(function(){
+  var nav=document.getElementById('tabs');
+  nav.innerHTML=TABS.map(function(t,i){
+    return '<button class="tab" role="tab" data-s="'+t[0]+'" aria-selected="'+(i===0)+'">'+t[1]+'</button>';
+  }).join('');
+  nav.addEventListener('click',function(e){
+    var b=e.target.closest('.tab'); if(!b)return;
+    nav.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    TABS.forEach(function(t){document.getElementById(t[0]).hidden=(t[0]!==b.dataset.s)});
+    window.scrollTo({top:0,behavior:'instant'});
+    b.scrollIntoView({block:'nearest',inline:'nearest'});
+  });
+})();
+
+/* ── 1) 요약 ──────────────────────────────────────── */
+(function(){
+  var top=M.slice().sort(function(a,b){return perQ(a)-perQ(b)}).slice(0,3);
+  var why=[
+    "말총을 넣은 모델 중 가장 저렴합니다. 천연소재 진입선을 186.7만원까지 끌어내렸고, 그 위 말총 모델(모피어스 T750)보다 51.5만원 싸요.",
+    "리뷰 1,375건·평점 4.85로 검증이 가장 두껍습니다. 천연소재는 없지만 분리형 토퍼와 보증 15년을 갖췄고, 실패 확률이 제일 낮은 선택입니다.",
+    "품질 {q}점으로 절대 순위 2위인데 가성비도 3위입니다. 값과 품질을 동시에 잡는 유일한 구간이에요. 보증 25년은 브랜드 최장이고 리뷰 3,943건으로 검증도 가장 두껍습니다."
+  ];
+  var h='<div class="verdict"><b>브랜드리스가 원가 효율 '+(AVG_BS/AVG_BL).toFixed(2)+'배 우위</b>'
+    +'<p>품질 1점을 사는 값이 브랜드리스 '+won(AVG_BL)+'원 대 베스트슬립 '+won(AVG_BS)
+    +'원입니다. 가성비 TOP5는 브랜드리스가 5자리를 전부 가져갔습니다.</p></div>';
+  h+='<h2>가성비 TOP 3</h2><p class="lead">품질 100점을 가격으로 나눈 값입니다. 가중치를 8가지로 바꿔 재계산해도 이 세 모델이 상위를 지켰습니다.</p>';
+  top.forEach(function(m,i){
+    h+='<div class="pod'+(i===0?' first':'')+'"><div class="rk">'+(i+1)+'</div><div class="bd">'
+      +'<div class="nm">'+m.n+' '+bchip(m)+'</div>'
+      +'<div class="big">'+won(perQ(m))+'<small>원 / 품질 1점</small></div>'
+      +'<div class="sm">'+man(m.p)+'원 · 품질 '+f1(qty(m))+'점 · 가성비지수 '+((BEST/perQ(m))*100).toFixed(1)+'</div>'
+      +'<div class="why">'+why[i].replace('{q}',f1(qty(m)))+'</div></div></div>';
+  });
+  var bestMat=M.slice().sort(function(a,b){return perMat(a)-perMat(b)})[0];
+  var bestQ=M.slice().sort(function(a,b){return qty(b)-qty(a)});
+  h+='<div class="stats">'
+    +'<div class="st g"><b>'+won(AVG_BL)+'원</b><span>브랜드리스<br>품질 1점당 평균</span></div>'
+    +'<div class="st w"><b>'+won(AVG_BS)+'원</b><span>베스트슬립<br>품질 1점당 평균</span></div>'
+    +'<div class="st"><b>'+(AVG_BS/AVG_BL).toFixed(2)+'배</b><span>브랜드리스가 우수한<br>원가 효율 배수</span></div>'
+    +'<div class="st"><b>5 / 5</b><span>가성비 TOP5 중<br>브랜드리스 모델 수</span></div>'
+    +'</div>';
+  h+='<h2>질문별 요약</h2><div class="qa">'
+    +'<div class="row"><div class="q">① 내장재 대비 가격이 가장 좋은 제품</div><div class="a"><em>'
+    +bestMat.n+'</em> — 내장재 1점당 '+won(perMat(bestMat))+'원</div></div>'
+    +'<div class="row"><div class="q">② 가격 제외 품질 1위</div><div class="a"><em>'+bestQ[0].n+'</em> — '
+    +f1(qty(bestQ[0]))+'점 (2위 '+bestQ[1].n+' '+f1(qty(bestQ[1]))+'점)</div></div>'
+    +'<div class="row"><div class="q">③ 항목별 점수</div><div class="a">스프링 25 · 내장재 20 · 구조 15 · 보증 15 · 검증 15 · 경도 10 <span style="color:var(--mute);font-weight:400">→ 품질 탭</span></div></div>'
+    +'<div class="row"><div class="q">④ 가성비 TOP3</div><div class="a"><em>판타소스 T570 · 뉴 녹턴 T450 · 모피어스 T750</em></div></div>'
+    +'</div>';
+  document.getElementById('s-sum').innerHTML=h;
+})();
+
+/* ── 2) 원가성 ────────────────────────────────────── */
+(function(){
+  var MET=[
+    {id:"mat",lb:"내장재 1점당",ax:"내장재 실속 1점당 가격",
+     g:perMat,nt:"내장재 실속은 스프링(25)+내장재(20)+구조·볼륨(15)을 합친 60점 만점 지표입니다. 보증·리뷰·경도를 뺀 '몸값' 항목만 봤습니다."},
+    {id:"coil",lb:"코일 1개당",ax:"코일 1개당 가격 (Q사이즈 기준)",
+     g:perCoil,nt:"오네이로스 T2500과 이켈로스 T1000은 코일 수를 공개하지 않아 2,410개로 보수 추정했습니다. 실제로는 더 많을 가능성이 높아 두 모델에 불리하게 계산된 값입니다."},
+    {id:"cm",lb:"두께 1cm당",ax:"총두께 1cm당 가격",
+     g:perCm,nt:"두께는 내장재 물량의 대리 지표입니다. 다만 두꺼울수록 라지킹 시트 호환과 승강기 반입이 까다로워지는 역효과가 있습니다."},
+    {id:"yr",lb:"보증 1년당",ax:"스프링 보증 1년당 가격",
+     g:perYr,nt:"양 브랜드 모두 보증 대상은 바디 스프링뿐이고 토퍼·베이스는 제외입니다. Z5는 보증 연수가 확인되지 않아 제외했습니다."}
+  ];
+  var cur=0;
+  var el=document.getElementById('s-cost');
+
+  function draw(){
+    var c=MET[cur];
+    var rows=M.map(function(m){return {m:m,v:c.g(m)}})
+              .filter(function(r){return r.v!==null})
+              .sort(function(a,b){return a.v-b.v});
+    var mx=rows[rows.length-1].v;
+    var h='<h2>① 내장재 대비 가격</h2>'
+      +'<p class="lead">"내장재 대비 가격이 좋은 제품"을 네 각도로 산출했습니다. 어느 지표를 써도 상위권은 브랜드리스가 차지하지만 1위는 지표마다 바뀝니다. 아래 버튼으로 바꿔 보세요.</p>'
+      +'<div class="segs">'+MET.map(function(x,i){
+        return '<button class="seg" data-i="'+i+'" aria-pressed="'+(i===cur)+'">'+x.lb+'</button>';
+      }).join('')+'</div>'
+      +'<div class="card"><div style="font-size:12.5px;font-weight:800;color:var(--mute);margin-bottom:11px">'
+      +c.ax+' · 낮을수록 우수</div>';
+    rows.forEach(function(r,i){
+      h+='<div class="bar'+(r.m.b==='BS'?' b2':'')+(i===0?' win':'')+'">'
+        +'<div class="top"><span class="n">'+(i+1)+'. '+r.m.n+'</span>'
+        +'<span class="v">'+won(r.v)+'원</span></div>'
+        +'<div class="track"><i class="fill" style="width:'+(r.v/mx*100).toFixed(1)+'%;display:block"></i></div></div>';
+    });
+    h+='</div><p class="note">'+c.nt+'</p>'
+      +'<p class="note"><b class="est">*</b> 표시는 스토어 확정가가 아닌 환산 추정치입니다(Z5는 LK2000, Z8B·Z10B는 K 기준). 환산 계수는 브랜드리스 확정가 6종에서 역산한 K→LK1800 1.110배, LK2000→LK1800 0.854배를 적용했습니다.</p>'
+      +'<div class="card"><div style="font-size:12.5px;font-weight:800;color:var(--mute);margin-bottom:9px">전 지표 한눈에 보기</div>';
+    M.slice().sort(function(a,b){return perMat(a)-perMat(b)}).forEach(function(m,i){
+      h+='<div class="kv" style="padding:0"><div class="r" style="border-bottom:'+(i===M.length-1?'none':'1px solid var(--line2)')+'">'
+        +'<div class="k" style="flex:0 0 96px;color:var(--ink);font-size:12.5px">'+m.n+'</div>'
+        +'<div class="v" style="font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums">'
+        +pTag(m)+'<br>내장재 '+won(perMat(m))+' · 코일 '+won(perCoil(m))
+        +'<br>cm '+won(perCm(m))+' · 보증 '+(perYr(m)?won(perYr(m)):'미확인')
+        +'</div></div></div>';
+    });
+    h+='</div>';
+    el.innerHTML=h;
+    el.querySelector('.segs').addEventListener('click',function(e){
+      var b=e.target.closest('.seg'); if(!b)return;
+      cur=+b.dataset.i; draw();
+    });
+  }
+  draw();
+})();
+
+/* ── 3) 품질 ──────────────────────────────────────── */
+(function(){
+  var rk=M.slice().sort(function(a,b){return qty(b)-qty(a)});
+  var h='<h2>② 가격 제외 품질 순위</h2>'
+    +'<p class="lead">가격을 완전히 배제하고 6개 항목만으로 채점했습니다. 상위 3자리는 브랜드리스지만 4·5위 베스트슬립 블랙 라벨과의 간격은 크지 않습니다. 카드를 탭하면 항목별 점수가 펼쳐집니다.</p>'
+    +'<div class="legend">'+DIM.map(function(d){
+      return '<span><i style="background:'+d.c+'"></i>'+d.k+' '+d.max+'</span>';
+    }).join('')+'</div>';
+  rk.forEach(function(m,i){
+    var tot=qty(m);
+    h+='<details class="rank"'+(i===0?' open':'')+'><summary>'
+      +'<span class="no">'+(i+1)+'</span><span class="mid">'
+      +'<span class="nm2">'+m.n+' '+bchip(m)+'</span>'
+      +'<span class="stack">'+m.d.map(function(v,j){
+          return '<i style="background:'+DIM[j].c+';width:'+(v/100*100).toFixed(1)+'%"></i>';
+        }).join('')+'</span></span>'
+      +'<span class="tot"><b>'+f1(tot)+'</b><span>／100</span></span></summary>'
+      +'<div class="body">'+m.d.map(function(v,j){
+        return '<div class="dim"><i class="dot" style="background:'+DIM[j].c+'"></i>'
+          +'<span class="dn">'+DIM[j].k+'</span>'
+          +'<span class="dtr"><i class="dfl" style="background:'+DIM[j].c+';width:'+(v/DIM[j].max*100).toFixed(0)+'%;display:block"></i></span>'
+          +'<span class="dv">'+f1(v)+' / '+DIM[j].max+'</span></div>';
+      }).join('')+'</div></details>';
+  });
+  h+='<p class="note"><b>채점 근거</b> — 스프링: 코일 수(Q 기준, 0.55승 압축)+합금·회전수+엣지·존 지지 / 내장재: 천연소재 등급+폼 레이어 다양성 / 구조: 토퍼 분리·교체성+총두께 / 보증: 스프링 보증 연수(30년 만점, 0.75승) / 검증: 최근 6개월 가중 평점+리뷰 수 로그 스케일 / 경도: 순수 미디엄 포함 여부와 조합 수</p>'
+    +'<p class="note">가성비 1·2위였던 판타소스와 녹턴은 절대 품질로는 중위권(6·7위)입니다. 가성비 3위 모피어스 T750만 양쪽에서 상위에 듭니다.</p>';
+  document.getElementById('s-qual').innerHTML=h;
+})();
+
+/* ── 4) 가성비 ────────────────────────────────────── */
+(function(){
+  var rk=M.slice().sort(function(a,b){return perQ(a)-perQ(b)});
+  var mx=perQ(rk[rk.length-1]);
+  var h='<h2>③ 가성비 순위</h2>'
+    +'<p class="lead">품질 1점을 얼마에 사는지입니다. 가성비지수는 1위(판타소스 T570 = 100)를 기준으로 정규화했습니다.</p>'
+    +'<div class="card">';
+  rk.forEach(function(m,i){
+    h+='<div class="bar'+(m.b==='BS'?' b2':'')+(i<3?' win':'')+'">'
+      +'<div class="top"><span class="n">'+(i+1)+'. '+m.n+'</span>'
+      +'<span class="v">'+won(perQ(m))+'원</span></div>'
+      +'<div class="track"><i class="fill" style="width:'+(perQ(m)/mx*100).toFixed(1)+'%;display:block"></i></div>'
+      +'<div style="font-size:11.5px;color:var(--mute);margin-top:4px;font-variant-numeric:tabular-nums">'
+      +pTag(m)+' · 품질 '+f1(qty(m))+'점 · 지수 '+((BEST/perQ(m))*100).toFixed(1)+'</div></div>';
+  });
+  var last=rk[rk.length-1], lastIdx=(BEST/perQ(last))*100;
+  h+='</div>'
+    +'<p class="note">베스트슬립 최상위 '+last.n+'는 지수 '+lastIdx.toFixed(1)
+    +'입니다. 같은 돈으로 얻는 품질이 '+rk[0].n+'의 '+Math.round(lastIdx)+'% 수준이라는 뜻입니다.</p>';
+
+  var SC=[
+    ["기준 가중치","판타소스 T570"],
+    ["Z5 보증 10년 가정","판타소스 T570"],
+    ["오네이로스 337.2만 적용","판타소스 T570"],
+    ["리뷰 비중 0 (신제품 불리 제거)","판타소스 T570"],
+    ["리뷰 비중 2배","뉴 녹턴 T450"],
+    ["스프링·내장재 중심","판타소스 T570"],
+    ["보증 중심 (내구성 최우선)","뉴 녹턴 T450"],
+    ["베스트슬립 환산가 −10%","판타소스 T570"]
+  ];
+  var S2=["뉴 녹턴 T450","뉴 녹턴 T450","뉴 녹턴 T450","모피어스 T750",
+          "리차지 17","모피어스 T750","모피어스 T750","뉴 녹턴 T450"];
+  var S3=["모피어스 T750","모피어스 T750","모피어스 T750","뉴 녹턴 T450",
+          "모피어스 T750","이켈로스 T1000","판타소스 T570","모피어스 T750"];
+  h+='<h2 style="margin-top:20px">가중치를 흔들어도 유지되는가</h2>'
+    +'<p class="lead">점수화는 가중치에 따라 뒤집힐 수 있으므로 8개 시나리오로 재계산했습니다. 베스트슬립 모델은 어떤 시나리오에서도 TOP3는 물론 TOP5에도 들지 못했습니다.</p>'
+    +'<div class="card">';
+  SC.forEach(function(s,i){
+    h+='<div class="sc"><span class="sl">'+s[0]+'</span><span class="sr">'
+      +'<b>1. '+s[1]+'</b><br>2. '+S2[i]+'<br>3. '+S3[i]+'</span></div>';
+  });
+  h+='</div>'
+    +'<div class="card"><div style="font-size:12.5px;font-weight:800;color:var(--mute);margin-bottom:11px">8개 시나리오 TOP3 누적 점수 (1위 3점·2위 2점·3위 1점, 만점 24)</div>';
+  [["판타소스 T570",19],["뉴 녹턴 T450",15],["모피어스 T750",11],["리차지 17",2],["이켈로스 T1000",1]]
+    .forEach(function(x){
+      h+='<div class="bar"><div class="top"><span class="n">'+x[0]+'</span>'
+        +'<span class="v">'+x[1]+'점</span></div>'
+        +'<div class="track"><i class="fill" style="width:'+(x[1]/24*100).toFixed(1)+'%;display:block"></i></div></div>';
+    });
+  h+='</div>';
+  document.getElementById('s-val').innerHTML=h;
+})();
+
+/* ── 5) 1:1 매칭 ──────────────────────────────────── */
+(function(){
+  function find(n){return M.filter(function(m){return m.n===n})[0]}
+  /* 점수·가격차는 모델 데이터에서 직접 산출해 다른 탭과 어긋나지 않게 함
+     {gp}=품질 격차, {pd}=가격차(만원), {nv}=검증 제외 점수 대비 */
+  var MT=[
+    {a:"New Z7",c:"이켈로스 T1000",
+     v:"가격차가 {pd}인데 품질은 {gp}점 벌어집니다. 이 구간은 비교 자체가 성립하지 않아요. Z7은 일체형이라 토퍼 교체가 불가능하고 천연소재도 없는데, T1000은 분리형 토퍼 2매에 말총·알파카울, 보증 20년입니다."},
+    {a:"Z5",c:"판타소스 T570",
+     v:"T570이 {pd} 더 싸면서 {gp}점 앞섭니다. Z5가 이기는 건 순수 미디엄 경도(에덴)와 LIFEEDGE뿐이고, 보증 연수가 확인되지 않는 게 결정적 감점입니다."},
+    {a:"Z5",c:"모피어스 T750",
+     v:"T750이 {pd} 비싸지만 {gp}점 앞섭니다. 20만원 차이로 말총 다량·바나듐티타늄·보증 25년·리뷰 3,943건을 얻는 셈입니다."},
+    {a:"Z8B",c:"오네이로스 T2500",
+     v:"T2500이 {pd} 싸고 {gp}점 앞섭니다. 다만 T2500은 리뷰 1건·평점 3.0이라 검증 리스크가 큽니다. 검증 항목을 빼면 {nv}로 T2500이 크게 앞섭니다."},
+    {a:"Z10B",c:"오네이로스 T2500",
+     v:"Z10B가 {pd} 더 비싼데 {gp}점 뒤집니다. Z10B가 확실히 이기는 건 코일 5,172개와 보증 30년이지만, 천연소재가 양모 하나뿐이고 순수 미디엄 경도가 없습니다."}
+  ];
+  var h='<h2>④ 동가격대 1:1 매칭</h2>'
+    +'<p class="lead">두 브랜드는 같은 대표(서진원)·같은 주소의 계열사이고 쇼룸도 공유합니다. 그래서 가격대가 겹치는 구간에서 어느 쪽을 집어야 하는지가 실질적인 질문입니다.</p>';
+  MT.forEach(function(x){
+    var A=find(x.a), C=find(x.c);
+    var gp=qty(C)-qty(A), pd=Math.abs(C.p-A.p);
+    var txt=x.v.replace('{gp}',f1(gp))
+               .replace('{pd}',man(pd)+'원')
+               .replace('{nv}',f1(qty(C)-C.d[4])+' 대 '+f1(qty(A)-A.d[4]));
+    h+='<div class="mt"><div class="vs">'
+      +'<div class="side"><div class="s1">'+A.n+'</div><div class="s2">'+man(A.p)+'원 · '+f1(qty(A))+'점</div></div>'
+      +'<div class="mid2">VS</div>'
+      +'<div class="side r"><div class="s1">'+C.n+'</div><div class="s2">'+man(C.p)+'원 · '+f1(qty(C))+'점</div></div>'
+      +'</div><div class="gap">'+C.n+' 품질 +'+f1(gp)+'점</div>'
+      +'<div class="txt">'+txt+'</div></div>';
+  });
+  h+='<p class="note">베스트슬립 쪽 가격은 Z5·Z8B·Z10B가 환산 추정치입니다. 환산가를 10% 낮춰도 순위와 결론은 바뀌지 않았습니다.</p>';
+  document.getElementById('s-match').innerHTML=h;
+})();
+
+/* ── 6) 사양 원장 ─────────────────────────────────── */
+(function(){
+  var h='<h2>⑤ 전 모델 사양 원장</h2>'
+    +'<p class="lead">LK1800 가격 낮은 순입니다. 모델명을 탭하면 전체 사양이 펼쳐집니다.</p>';
+  M.slice().sort(function(a,b){return a.p-b.p}).forEach(function(m){
+    h+='<details class="spec"><summary>'
+      +'<span class="arw">▶</span>'
+      +'<span class="sn">'+m.n+' '+bchip(m)+'</span>'
+      +'<span class="sp" style="color:'+bc(m)+'">'+man(m.p)+'원'+(m.cf?'':'<span class="est">*</span>')+'</span></summary>'
+      +'<div class="kv">'
+      +'<div class="r"><div class="k">포지션</div><div class="v">'+(m.b==='BL'?'브랜드리스':'베스트슬립')+' · '+m.t+'</div></div>'
+      +'<div class="r"><div class="k">가격</div><div class="v">'+won(m.p)+'원<br><span style="font-size:12px;color:var(--mute)">'+m.pn+'</span></div></div>'
+      +'<div class="r"><div class="k">구조</div><div class="v">'+m.st+'</div></div>'
+      +'<div class="r"><div class="k">코일</div><div class="v">'+m.cn+'</div></div>'
+      +'<div class="r"><div class="k">스프링</div><div class="v">'+m.al+'</div></div>'
+      +'<div class="r"><div class="k">천연소재</div><div class="v">'+m.na+'</div></div>'
+      +'<div class="r"><div class="k">두께</div><div class="v">'+m.th+'cm</div></div>'
+      +'<div class="r"><div class="k">보증</div><div class="v">'+m.wn+'</div></div>'
+      +'<div class="r"><div class="k">경도</div><div class="v">'+m.fm+'</div></div>'
+      +'<div class="r"><div class="k">평점</div><div class="v">'+m.rt+'</div></div>'
+      +'<div class="r"><div class="k">종합</div><div class="v"><b>'+f1(qty(m))+' / 100점</b> · 품질 1점당 '+won(perQ(m))+'원</div></div>'
+      +'</div></details>';
+  });
+  document.getElementById('s-spec').innerHTML=h;
+})();
+
+/* ── 7) 주의사항 ──────────────────────────────────── */
+(function(){
+  var CF=[
+    ["오네이로스 T2500","스토어 349.2만 vs 상세페이지 337.2만 (12만원 차이)","어느 쪽이 실제 결제가이고 12만원 차이의 사유가 무엇인지"],
+    ["판타소스 T570","보증 15년(본문) vs 20년(업그레이드 안내) · 합금 Ti-Si vs 바나듐티타늄","보증서에 찍히는 연수와 실제 탑재 합금 명칭"],
+    ["뉴 녹턴 T450","리스팅 '미디엄' vs 스펙표 MS/MH 2경도 · 분리형 vs 일체형 유로탑","배송되는 제품의 경도와 토퍼 분리 여부"],
+    ["Z5","리스팅 '일체형' vs 상세페이지 '분리형(토퍼 교체 가능)' · 보증 연수 미표기","토퍼 교체 가능 여부와 스프링 무상보증 연수"],
+    ["New Z7","리뉴얼로 토퍼 분리 불가로 전환 · 배너는 VA·TI·NIUM, 배지는 Ti-Si","토퍼 교체가 정말 불가능한지, 실제 합금이 무엇인지"],
+    ["Z8B · Z10B","LK1800 가격 미공개 · 코일 수가 상세페이지에 미기재","LK1800 견적가와 LK1800 기준 실제 코일 수"],
+    ["이켈로스 T1000","보증 20년으로 하위 모델 T750(25년)보다 짧음","상위 모델의 보증이 더 짧은 이유 (오기 여부)"]
+  ];
+  var h='<h2>⑥ 주문 전 확인할 것</h2>'
+    +'<div class="co d"><b>라지킹은 양 브랜드 모두 100일 체험·단순변심 반품·교환이 전부 불가</b>'
+    +'<p>브랜드리스 스펙표 붉은 각주와 베스트슬립 공식 견적서가 동일하게 명시합니다. 베스트슬립 견적서는 100일 체험 대상을 "모피어스21·녹턴19·리차지17·Q3000의 S·SS·D·Q·K 상단 매트리스만"으로 못 박고 라지킹을 명시적으로 제외합니다. 되돌릴 방법이 없으니 쇼룸 체험이 사실상 필수입니다.</p></div>'
+    +'<div class="co w"><b>라지킹은 2분할 제작이 기본 — 일체형은 추가금</b>'
+    +'<p>베스트슬립 공식 견적서 기준 가로 1,700mm 이상 유로탑·필로우탑은 2개로 분리 제작되며, 일체형 주문 시 15만원 이상 추가금이 붙고 운반 책임이 구매자에게 넘어갑니다. 브랜드리스도 K 이상은 2분할이 기본입니다. LK1800은 승강기 17~19인승 이상이 필요하고, 미달 시 사다리차 비용(10만원 이상)이 별도입니다.</p></div>'
+    +'<div class="co i"><b>가격 확정성 자체가 브랜드리스의 우위</b>'
+    +'<p>브랜드리스는 LK1800 6종 전부 스토어 확정가가 노출됩니다. 베스트슬립은 New Z7만 LK1800 정규 리스팅이고 Z5·Z8B·Z10B·Z9·Z10·Z11은 주문제작 견적이라 이 리포트의 환산가가 실제 견적과 다를 수 있습니다. 정찰제라 협상 여지도 없으니, 쇼룸에서 LK1800 견적을 받아 여기 환산가와 대조해 보세요.</p></div>'
+    +'<h2 style="margin-top:20px">표기 상충 — 판매자에게 직접 물을 것</h2>'
+    +'<p class="lead">상세페이지 안에서 서로 어긋나는 항목입니다. 라지킹은 반품이 안 되므로 주문 전에 확인해야 합니다.</p>';
+  CF.forEach(function(c){
+    h+='<div class="card"><div style="font-size:14.5px;font-weight:800;letter-spacing:-.3px">'+c[0]+'</div>'
+      +'<div style="font-size:13px;color:var(--sub);margin-top:6px;line-height:1.6;word-break:keep-all">'+c[1]+'</div>'
+      +'<div class="hr"></div>'
+      +'<div style="font-size:13px;line-height:1.6;word-break:keep-all"><b style="color:var(--bl)">확인 질문 · </b>'+c[2]+'</div></div>';
+  });
+  h+='<h2 style="margin-top:20px">이 분석의 한계</h2>'
+    +'<p class="lead">폼 밀도(kg/m³)는 두 브랜드 모두 전 모델 미공개이므로 내장재 점수는 레이어 종류와 천연소재 등급으로 대체 평가했습니다. 코일 수는 오네이로스 T2500·이켈로스 T1000이 미공개라 모피어스 T750의 확정치 2,410개로 보수 추정했는데, 상위 모델이므로 실제로는 더 많을 가능성이 높고 그만큼 두 모델에 불리하게 계산됐습니다. Z8B 3,325개·Z10B 5,172개는 상세페이지가 아닌 사전 조사 수치입니다.</p>'
+    +'<p class="lead">Z9·Z10·Z11은 LK1800 가격을 확보하지 못해 비교에서 제외했습니다. 특히 <b>Z11</b>(듀얼 셀코일 coil-on-coil + 메리노울 + 말총패드, 3년 후 토퍼 무상교환)은 품질만 보면 상위 진입이 가능한 유일한 베스트슬립 모델이므로, 쇼룸에서 LK1800 견적을 받아볼 가치가 있습니다.</p>';
+  document.getElementById('s-warn').innerHTML=h;
+})();
+</script>
+</body>
+</html>
