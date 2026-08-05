@@ -196,6 +196,49 @@ h2{font-size:16.5px;font-weight:800;letter-spacing:-.3px;margin:2px 2px 4px}
 .sc .sr{flex:0 0 128px;font-size:12px;font-weight:700;text-align:right;line-height:1.55}
 .sc .sr b{color:var(--good);font-weight:800}
 
+/* ── 라인업 카드 링크화 ── */
+a.lu{display:block;color:inherit;text-decoration:none}
+a.lu:active{background:#f8fafe;border-color:#c3d0ea}
+.lu .go{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:#03c75a;
+  border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:2px;letter-spacing:-.2px}
+.lu .rn2{margin-top:8px;padding-top:8px;border-top:2px solid var(--line2)}
+.lu .rn2 div{font-size:12px;color:var(--sub);line-height:1.6;display:flex;gap:6px}
+.lu .rn2 div span:first-child{flex:0 0 52px;font-weight:800;color:var(--warn)}
+.lu .rn2 b{font-weight:800;color:var(--ink)}
+.lu .rn2 .off span:first-child{color:var(--mute)}
+
+/* ── 렌탈 ── */
+.rt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.rt .rh{display:flex;align-items:baseline;gap:7px;margin-bottom:10px}
+.rt .rh .n4{font-size:15.5px;font-weight:800;letter-spacing:-.35px;flex:1;min-width:0;word-break:keep-all}
+.rt .rh .pc{flex:0 0 auto;font-size:14px;font-weight:800;color:var(--bad);letter-spacing:-.3px}
+.rt .two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px}
+.rt .two>div{border-radius:9px;padding:9px 10px;border:1px solid}
+.rt .two .buy{background:#eff3fb;border-color:#cfdbf1}
+.rt .two .ren{background:#fdf6ec;border-color:#f0dcc0}
+.rt .two em{display:block;font-style:normal;font-size:10.5px;font-weight:800;margin-bottom:4px}
+.rt .two .buy em{color:var(--bl)} .rt .two .ren em{color:var(--warn)}
+.rt .two b{display:block;font-size:16px;font-weight:800;letter-spacing:-.6px;line-height:1.2}
+.rt .two s{display:block;font-size:11px;color:var(--mute);margin-top:4px;text-decoration:none;
+  font-variant-numeric:tabular-nums;line-height:1.5}
+.rt .apr{background:var(--line2);border-radius:9px;padding:8px 10px;font-size:11.5px;
+  color:var(--sub);line-height:1.6}
+.rt .apr b{color:var(--bad);font-weight:800}
+.rt .tx{font-size:12.5px;color:var(--sub);line-height:1.62;margin-top:9px;word-break:keep-all}
+
+/* ── 표 행 (관리유형 · 중도해지) ── */
+.tb{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 14px;margin-bottom:9px}
+.tb .h5{display:flex;gap:6px;padding:9px 0 7px;border-bottom:1px solid var(--line);
+  font-size:10.5px;font-weight:800;color:var(--mute);letter-spacing:-.2px}
+.tb .r5{display:flex;gap:6px;padding:9px 0;border-bottom:1px solid var(--line2);align-items:baseline}
+.tb .r5:last-child{border-bottom:none}
+.tb .c1{flex:1;min-width:0;font-size:12.5px;font-weight:700;word-break:keep-all;line-height:1.4}
+.tb .c2,.tb .c3{flex:0 0 76px;text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums;
+  font-weight:700;line-height:1.4}
+.tb .c3{color:var(--sub);font-weight:400;font-size:11.5px}
+.tb .r5.base .c1,.tb .r5.base .c2{color:var(--good)}
+.tb .r5.bad .c2{color:var(--bad)}
+
 /* ── 동률 배지 ── */
 .tie{display:inline-block;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;
   background:#eef0f5;color:var(--mute);margin-left:5px;vertical-align:1px;letter-spacing:-.2px}
@@ -239,7 +282,7 @@ footer a{color:var(--bl)}
 <header class="hd">
   <h1>라지킹 LK1800 정밀 비교</h1>
   <div class="meta">브랜드리스 6종 · 베스트슬립 4종 · 6개 항목 100점 채점 · 2026.8 기준<br>
-  <b style="color:#cfd6ee">v2 개정</b> — 검증 축 재설계 · 이켈로스 두께 정정 · 동률 구간 표기</div>
+  <b style="color:#cfd6ee">v2.1</b> — 검증 축 재설계 · 이켈로스 두께 정정 · 동률 표기 · 렌탈 분석</div>
 </header>
 
 <nav class="tabs" id="tabs" role="tablist"></nav>
@@ -249,6 +292,7 @@ footer a{color:var(--bl)}
   <section id="s-cost" hidden></section>
   <section id="s-qual" hidden></section>
   <section id="s-val" hidden></section>
+  <section id="s-rent" hidden></section>
   <section id="s-match" hidden></section>
   <section id="s-xv" hidden></section>
   <section id="s-spec" hidden></section>
@@ -257,6 +301,7 @@ footer a{color:var(--bl)}
 
 <footer>
   출처 · 네이버 브랜드스토어 상세페이지 캡처(브랜드리스 전 6종, 베스트슬립 New Z7),
+  네이버 스토어 렌탈 리스팅 3종 + 오네이로스 T2500 렌탈정보 팝업 캡처,
   bestsleep.us 공식 견적서, 롯데하이마트·다나와·에누리 실판매가,
   mattressguide.co.kr 공식 쇼룸 가이드(코일 수)<br><br>
   가격은 2026년 8월 확인 기준이며 변동될 수 있습니다.
@@ -366,6 +411,42 @@ var TIERS = [
   cb:{t:"적립",a:60680,d:"라인프렌즈 카드 4%"},ins:true}
 ];
 
+/* ── 네이버 브랜드스토어 상품 링크 (리차지 17은 미확보) ── */
+var URL = {
+ "오네이로스 T2500":"https://brand.naver.com/brandless/products/12996606697",
+ "이켈로스 T1000"  :"https://brand.naver.com/brandless/products/8523298162",
+ "모피어스 T750"   :"https://brand.naver.com/brandless/products/3212983111",
+ "판타소스 T570"   :"https://brand.naver.com/brandless/products/12190792825",
+ "뉴 녹턴 T450"    :"https://brand.naver.com/brandless/products/13629019194"
+};
+
+/* ── 렌탈 리스팅 (2026.8 네이버 스토어 · 침구풀패키지 · 계약 60개월 = 의무사용 60개월) ──
+   mo   = 직접관리 월 렌탈료
+   care = 방문 주기(개월) → 직접관리 대비 월 추가액 (T2500 렌탈정보 팝업 캡처 기준)
+   렌탈 리스팅은 3종뿐이고 모두 리뷰 0건 신규입니다. */
+var RENT_N = 60;
+var RENT = {
+ "오네이로스 T2500":{mo:73700, care:{12:9000, 6:17000, 4:26000}},
+ "이켈로스 T1000"  :{mo:59700},
+ "모피어스 T750"   :{mo:55700}
+};
+/* 침구풀패키지 가치 가정 — 구성·가치가 공개되지 않아 3개 값을 병기 */
+var BED = [0, 300000, 500000];
+/* 중도해지 약관 (캡처 기준): 설치 14일 경과 후 등록비 20만 + 회수비 15만 + 잔여렌탈료 합계의 차등 요율 */
+var PEN = {reg:200000, ret:150000};
+function penRate(mth){return mth<=12?0.30:(mth<=24?0.20:0.10)}
+
+/* 렌탈을 "(구매가 + 침구가치)를 원금으로 한 60개월 할부"로 보았을 때의 명목 연이율(%) */
+function apr(pv, pmt, n){
+  var lo=0, hi=0.05, i, v;
+  for(var k=0;k<300;k++){
+    i=(lo+hi)/2;
+    v=pmt*(1-Math.pow(1+i,-n))/i;
+    if(v>pv) lo=i; else hi=i;
+  }
+  return (lo+hi)/2*12*100;
+}
+
 var DIM = [
   {k:"스프링",max:27,c:"var(--c1)"},
   {k:"내장재",max:22,c:"var(--c2)"},
@@ -426,8 +507,8 @@ function pTag(m){return won(m.p)+'원'+(m.cf?'':'<span class="est">*</span>')}
 
 /* ── 탭 ───────────────────────────────────────────── */
 var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
-          ["s-val","가성비"],["s-match","1:1"],["s-xv","교차검증"],
-          ["s-spec","사양"],["s-warn","주의"]];
+          ["s-val","가성비"],["s-rent","렌탈"],["s-match","1:1"],
+          ["s-xv","교차검증"],["s-spec","사양"],["s-warn","주의"]];
 
 (function(){
   var nav=document.getElementById('tabs');
@@ -457,14 +538,17 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   /* ── 브랜드리스 등급 순위 · 네이버 실가격 (요약 탭 최상단) ── */
   var h='<h2>브랜드리스 등급 순위 · 네이버 실가격</h2>'
     +'<p class="lead">브랜드리스 라인업만 상위 등급부터 정리했습니다. 가격은 네이버 브랜드스토어 '
-    +'<b>상품 가격</b>이고 적립 포인트는 차감하지 않았습니다. 적립·할인은 아래에 따로 적어 뒀습니다.</p>';
+    +'<b>상품 가격</b>이고 적립 포인트는 차감하지 않았습니다. <b>카드를 누르면 네이버 스토어로 이동</b>합니다. '
+    +'렌탈은 직접관리 기준이며 자세한 손익은 렌탈 탭에 있습니다.</p>';
   TIERS.forEach(function(t,i){
     var m=M.filter(function(x){return x.n===t.n})[0];
     var pctMp=(t.mp/m.p*100).toFixed(2);
-    h+='<div class="lu"><div class="r1">'
+    var u=URL[m.n];
+    h+=(u?'<a class="lu" href="'+u+'" target="_blank" rel="noopener">':'<div class="lu">')
+      +'<div class="r1">'
       +'<div class="rn">'+(i+1)+'</div>'
       +'<div class="mid3"><span class="tier" style="background:'+t.c+'">'+t.tier+'</span>'
-      +'<div class="nm3">'+m.n+'</div>'
+      +'<div class="nm3">'+m.n+(u?'<span class="go">스토어 ↗</span>':'')+'</div>'
       +'<div class="sub3">'+(t.lf?'경도 '+t.lf:'경도 표기 없음')+' · 평점 '+m.rt.split(/ [(—]/)[0]+'</div></div>'
       +'<div class="pr"><b>'+won(m.p)+'원</b>'
       +(t.lp?'<s>정상가 '+won(t.lp)+'원</s>':'')+'</div>'
@@ -475,7 +559,18 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
       +'<div><span>할부</span><span'+(t.ins?'':' class="wl"')+'>'
       +(t.ins?'12개월 무이자 · 60개월 특별금리':'무이자 할부 없음 (60개월 특별금리만)')+'</span></div>'
       +(t.ln?'<div><span>비고</span><span>'+t.ln+'</span></div>':'')
-      +'</div></div>';
+      +'</div>';
+    /* 구매가 · 렌탈 60개월 총액 · 월 렌탈료(직접관리) */
+    var r=RENT[m.n];
+    h+='<div class="rn2">';
+    if(r){
+      h+='<div><span>렌탈</span><span>월 <b>'+won(r.mo)+'원</b> (직접관리)</span></div>'
+        +'<div><span>60개월</span><span>총 <b>'+won(r.mo*RENT_N)+'원</b>'
+        +' · 구매가 '+won(m.p)+'원</span></div>';
+    } else {
+      h+='<div class="off"><span>렌탈</span><span>리스팅 없음 — 구매 전용 ('+won(m.p)+'원)</span></div>';
+    }
+    h+='</div>'+(u?'</a>':'</div>');
   });
   var lo=TIERS[TIERS.length-1], hi=TIERS[0];
   var loP=M.filter(function(x){return x.n===lo.n})[0].p, hiP=M.filter(function(x){return x.n===hi.n})[0].p;
@@ -486,7 +581,14 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
     +'<p class="note"><b class="est">확인 필요</b> — 오네이로스 T2500은 최상위 등급인데 <b>무이자 할부가 없고</b> '
     +'멤버십 적립률도 2.81%로 가장 낮습니다(리차지 17은 4.22%). 349.2만원을 60개월 특별금리로 나누면 이자가 붙으니 '
     +'일시불 여력이 없다면 실부담이 표시가보다 커집니다. 또 뉴 녹턴 T450 리스팅은 경도가 '
-    +'<b>미디엄 단일</b>로만 표기되어 스펙표의 2경도(MS/MH)와 어긋납니다.</p>';
+    +'<b>미디엄 단일</b>로만 표기되어 스펙표의 2경도(MS/MH)와 어긋납니다.</p>'
+    +'<p class="note"><b>렌탈은 상위 3종만</b> 리스팅이 있습니다. 60개월 총액이 구매가보다 '
+    +man(RENT["오네이로스 T2500"].mo*RENT_N-3492000)+'~'
+    +man(RENT["모피어스 T750"].mo*RENT_N-2382000)+'원 더 들고, 이 차액은 사실상 이자입니다 — '
+    +'구매가가 낮은 모피어스 T750이 비율로는 가장 불리(+'
+    +((RENT["모피어스 T750"].mo*RENT_N/2382000-1)*100).toFixed(1)+'%)합니다. '
+    +'관리유형·중도해지·소유권 문제는 <b>렌탈 탭</b>에 정리했습니다. '
+    +'리차지 17은 상품 링크를 확보하지 못해 카드 이동이 되지 않습니다.</p>';
 
   h+='<div class="hr"></div>';
   h+='<div class="verdict"><b>브랜드리스가 원가 효율 '+(AVG_BS/AVG_BL).toFixed(2)+'배 우위</b>'
@@ -691,7 +793,136 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   document.getElementById('s-val').innerHTML=h;
 })();
 
-/* ── 5) 1:1 매칭 ──────────────────────────────────── */
+/* ── 5) 렌탈 vs 구매 ──────────────────────────────── */
+(function(){
+  function find(n){return M.filter(function(m){return m.n===n})[0]}
+  var keys=Object.keys(RENT).sort(function(a,b){return RENT[b].mo-RENT[a].mo});
+  var prem=keys.map(function(k){return RENT[k].mo*RENT_N-find(k).p});
+  var pcts=keys.map(function(k){return (RENT[k].mo*RENT_N/find(k).p-1)*100});
+  var worst=keys[pcts.indexOf(Math.max.apply(null,pcts))];
+  var least=keys[pcts.indexOf(Math.min.apply(null,pcts))];
+
+  var h='<h2>렌탈 vs 구매</h2>'
+    +'<p class="lead">네이버 스토어에 <b>침구풀패키지 렌탈</b> 리스팅이 있는 3종을 단품 구매가와 맞대어 봤습니다. '
+    +'계약 60개월이 곧 의무사용 60개월입니다. 아래 수치는 모두 <b>직접관리</b> 기준입니다.</p>';
+
+  h+='<div class="verdict"><b>렌탈 = 60개월 할부 + 이자 '
+    +Math.round(Math.min.apply(null,prem)/10000)+'~'
+    +Math.round(Math.max.apply(null,prem)/10000)+'만원</b>'
+    +'<p>렌탈 프리미엄이 세 모델 모두 93~96만원으로 <b>절대액이 거의 같습니다</b>. '
+    +'그래서 구매가가 낮은 모델일수록 비율 부담이 커집니다. '
+    +'12개월 무이자로 살 수 있다면 구매가 명확히 유리합니다.</p></div>';
+
+  keys.forEach(function(k){
+    var m=find(k), r=RENT[k], tot=r.mo*RENT_N, pm=tot-m.p, ratio=tot/m.p;
+    var rs=BED.map(function(b){return apr(m.p+b, r.mo, RENT_N).toFixed(1)+'%'});
+    var tag=(k===worst?' · 비율 손해 최대':(k===least?' · 비율 손해 최소':''));
+    h+='<div class="rt"><div class="rh"><span class="n4">'+m.n+'</span>'
+      +'<span class="pc">+'+((ratio-1)*100).toFixed(1)+'%</span></div>'
+      +'<div class="two">'
+      +'<div class="buy"><em>단품 구매</em><b>'+man(m.p)+'원</b>'
+      +'<s>스토어 확정가<br>일시불 또는 할부</s></div>'
+      +'<div class="ren"><em>렌탈 60개월</em><b>'+man(tot)+'원</b>'
+      +'<s>월 '+won(r.mo)+'원<br>× 60개월</s></div>'
+      +'</div>'
+      +'<div class="apr">렌탈 프리미엄 <b>+'+won(pm)+'원</b> (구매가의 '+ratio.toFixed(2)+'배)'+tag+'<br>'
+      +'내재 연이율 — 침구 가치 0원 <b>'+rs[0]+'</b> · 30만원 '+rs[1]+' · 50만원 '+rs[2]+'</div>'
+      +'<div class="tx">'
+      +(m.n==='오네이로스 T2500'
+        ?'이 모델만 <b>무이자 할부가 없습니다</b> (60개월 특별금리만). 구매해도 이자를 내야 하므로 '
+         +'세 모델 중 렌탈의 상대적 불리함이 가장 작습니다. 프리미엄 비율도 최저입니다.'
+        :'스토어에서 <b>12개월 무이자</b>가 되므로 구매 시 이자는 0원입니다 — 월 '
+         +won(m.p/12)+'원 × 12개월. 이 선택지를 쓸 수 있다면 렌탈 프리미엄 '+man(pm)
+         +'원은 그대로 손실입니다.')
+      +'</div></div>';
+  });
+  h+='<p class="note">내재 연이율은 렌탈을 "(구매가 + 침구 가치)를 원금으로 한 60개월 할부"로 간주해 역산한 '
+    +'명목 연이율입니다. 침구풀패키지의 구성과 가치가 공개되지 않고 리스팅에도 '
+    +'"렌탈 전용 제품이라 일시불 권장가 산정이 어렵다"는 문구가 있어, 매트리스 단품 스토어가 대비로 계산하고 '
+    +'침구 가치 3개 가정을 병기했습니다. 침구가 비싸다고 볼수록 실제 이율은 낮아집니다. '
+    +'렌탈 리스팅 3종은 모두 리뷰 0건 신규입니다.</p>';
+
+  /* 관리유형별 — 렌탈정보 팝업 캡처가 있는 T2500 기준 */
+  var cm=find("오네이로스 T2500"), cr=RENT["오네이로스 T2500"], cbase=cr.mo*RENT_N;
+  var CARE=[[null,"직접관리"],[12,"12개월에 한 번 방문"],[6,"6개월에 한 번 방문"],[4,"4개월에 한 번 방문"]];
+  h+='<h2 style="margin-top:20px">관리유형을 올리면 얼마인가</h2>'
+    +'<p class="lead">오네이로스 T2500 렌탈정보 팝업 기준입니다. 방문 케어를 붙일 때 늘어나는 금액을 '
+    +'방문 횟수로 나눠 <b>회당 단가</b>를 뽑았습니다.</p>'
+    +'<div class="tb"><div class="h5"><span class="c1">관리유형</span>'
+    +'<span class="c2">월 렌탈료</span><span class="c3">60개월 총액</span></div>';
+  CARE.forEach(function(c){
+    var cyc=c[0], mo=cr.mo+(cyc?cr.care[cyc]:0), tot=mo*RENT_N, diff=tot-cbase;
+    var visits=cyc?RENT_N/cyc:0;
+    h+='<div class="r5'+(cyc?'':' base')+'"><span class="c1">'+c[1]
+      +(visits?'<br><span style="font-size:11px;color:var(--mute);font-weight:400">'
+        +visits+'회 · 회당 '+won(diff/visits)+'원</span>':'')
+      +'</span><span class="c2">'+won(mo)+'원</span>'
+      +'<span class="c3">'+man(tot)+'원'+(diff?'<br>+'+man(diff)+'원':'<br>기준')+'</span></div>';
+  });
+  h+='</div>'
+    +'<p class="note">방문 케어 1회가 <b>10.2~10.8만원</b> 꼴입니다. 전문 매트리스 클리닝 1회 시장가가 '
+    +'대략 8~15만원이므로 <b>묶음 할인 효과는 없습니다</b>. 필요할 때 단건으로 외부 업체를 부르는 것과 '
+    +'비용이 크게 다르지 않다는 뜻입니다. 이켈로스·모피어스 렌탈도 같은 구조로 보이지만 팝업 캡처가 '
+    +'T2500 것뿐이라 금액은 확인이 필요합니다.</p>';
+
+  /* 중도해지 — 가성비 상위인 T750 기준 */
+  var pm2=find("모피어스 T750"), pr=RENT["모피어스 T750"];
+  h+='<h2 style="margin-top:20px">중도에 끊으면 얼마인가</h2>'
+    +'<p class="lead">모피어스 T750 렌탈(월 '+won(pr.mo)+'원) 기준입니다. 설치 14일이 지난 뒤 해지하면 '
+    +'<b>렌탈등록비 '+man(PEN.reg)+'원 + 회수비 '+man(PEN.ret)+'원 + 잔여 렌탈료의 10~30%</b>가 붙습니다. '
+    +'실효 월비용은 그때까지 낸 돈과 위약금을 합쳐 사용 개월로 나눈 값입니다.</p>'
+    +'<div class="tb"><div class="h5"><span class="c1">해지 시점</span>'
+    +'<span class="c2">총 부담</span><span class="c3">실효 월비용</span></div>';
+  [6,12,24,36,60].forEach(function(mth){
+    var paid=pr.mo*mth, done=(mth===RENT_N);
+    var pen=done?0:(pr.mo*(RENT_N-mth)*penRate(mth)+PEN.reg+PEN.ret);
+    var tot=paid+pen;
+    h+='<div class="r5'+(done?' base':(mth<=12?' bad':''))+'">'
+      +'<span class="c1">'+(done?'만기 완주 (60개월)':mth+'개월 후')
+      +'<br><span style="font-size:11px;color:var(--mute);font-weight:400">'
+      +(done?'위약금 없음':'요율 '+(penRate(mth)*100)+'% · 위약금 '+man(pen)+'원')
+      +'</span></span>'
+      +'<span class="c2">'+man(tot)+'원</span>'
+      +'<span class="c3">'+won(tot/mth)+'원</span></div>';
+  });
+  h+='</div>'
+    +'<p class="note">등록비 20만 + 회수비 15만이 <b>고정</b>이라 초기 해지에 특히 무겁습니다. '
+    +'6개월 만에 끊으면 실효 월비용이 26.4만원까지 올라 매트리스를 두 번 사는 수준이 됩니다. '
+    +'1년·2년 경계 시점의 요율 적용(30%인지 20%인지)은 계약서로 확인해야 합니다. '
+    +'설치 14일 이내 철회도 등록비·회수비·잔여 30% 구조가 그대로 적용됩니다.</p>';
+
+  h+='<h2 style="margin-top:20px">그래서 렌탈은 언제 답인가</h2>'
+    +'<div class="co i"><b>이 세 경우에만 렌탈이 말이 됩니다</b>'
+    +'<p><b>① 초기비용 0원이 필요할 때</b> — 목돈도 할부 한도도 없다면 렌탈이 유일한 진입로입니다. '
+    +'다만 60개월 특별금리 구매와 총액을 반드시 비교하세요.<br><br>'
+    +'<b>② 방문 케어를 실제로 쓸 때</b> — 회당 10만원대는 시장가 수준이므로 손해는 아닙니다. '
+    +'다만 5년간 정말 부를지 생각해 보세요.<br><br>'
+    +'<b>③ 침구를 일괄로 갖춰야 할 때</b> — 침구 가치를 50만원으로 보면 내재 연이율이 4~6%로 떨어져 '
+    +'일반 할부 금리와 비슷해집니다. 구성 목록과 개별 가격을 받아 이 가정이 맞는지 확인해야 합니다.</p></div>';
+
+  h+='<div class="co d"><b>계약 전에 반드시 확인할 두 가지</b>'
+    +'<p><b>소유권 이전 여부</b>가 리스팅에 없습니다. 만료 후 반납하는 구조라면 위 계산은 전부 무의미하게 '
+    +'불리해집니다 — 442만원을 내고 남는 게 없다는 뜻이니까요. 상담에서 소유권 이전형인지 반납형인지 '
+    +'먼저 물어야 합니다.<br><br>'
+    +'<b>렌탈은 100일 교환 대상에서 제외</b>이고 60개월 의무사용입니다. 몸에 맞지 않아도 5년 락인입니다. '
+    +'LK1800은 구매해도 체험·반품이 안 되므로, 쇼룸 체험 없이 렌탈 계약하는 것은 이 리포트에서 '
+    +'가장 위험한 조합입니다. 철거비·이전설치비·분실파손비도 조건부로 별도 청구됩니다.</p></div>';
+
+  h+='<div class="co w"><b>가성비 1위와 렌탈 유불리가 어긋납니다</b>'
+    +'<p>가성비 동률 1군인 <b>모피어스 T750</b>은 구매가가 낮아 렌탈 프리미엄 비율이 가장 큽니다(+'
+    +Math.max.apply(null,pcts).toFixed(1)+'%). T750으로 갈 거라면 <b>구매가 정답에 가깝습니다</b>. '
+    +'굳이 렌탈을 쓴다면 비율 손해가 가장 작고(+'+Math.min.apply(null,pcts).toFixed(1)
+    +'%) 무이자 할부도 없는 <b>오네이로스 T2500</b>이 상대적으로 덜 나쁜 선택입니다. '
+    +'다만 T2500은 품질 1위이면서 가성비는 '+(TIE.rk.map(function(x){return x.n}).indexOf("오네이로스 T2500")+1)
+    +'위이므로, 애초에 가성비를 기준으로 고르는 모델은 아닙니다.</p></div>';
+
+  h+='<p class="note">출처 · 2026.8 네이버 스토어 렌탈 리스팅 3종과 오네이로스 T2500 렌탈정보 팝업 캡처. '
+    +'렌탈료·약관은 상담 시점과 프로모션에 따라 달라질 수 있습니다. 판타소스 T570·뉴 녹턴 T450·리차지 17은 '
+    +'렌탈 리스팅이 확인되지 않아 제외했습니다.</p>';
+  document.getElementById('s-rent').innerHTML=h;
+})();
+
+/* ── 6) 1:1 매칭 ──────────────────────────────────── */
 (function(){
   function find(n){return M.filter(function(m){return m.n===n})[0]}
   /* 점수·가격차는 모델 데이터에서 직접 산출해 다른 탭과 어긋나지 않게 함
@@ -727,7 +958,7 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   document.getElementById('s-match').innerHTML=h;
 })();
 
-/* ── 6) 다른 분석과의 교차검증 ─────────────────────── */
+/* ── 7) 다른 분석과의 교차검증 ─────────────────────── */
 (function(){
   /* 대조 항목: [라벨, 스코어카드 결론, 내 리포트 결론, 일치도] */
   var CMP=[
@@ -876,7 +1107,7 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   document.getElementById('s-xv').innerHTML=h;
 })();
 
-/* ── 7) 사양 원장 ─────────────────────────────────── */
+/* ── 8) 사양 원장 ─────────────────────────────────── */
 (function(){
   var h='<h2>⑤ 전 모델 사양 원장</h2>'
     +'<p class="lead">LK1800 가격 낮은 순입니다. 모델명을 탭하면 전체 사양이 펼쳐집니다.</p>';
@@ -903,7 +1134,7 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   document.getElementById('s-spec').innerHTML=h;
 })();
 
-/* ── 7) 주의사항 ──────────────────────────────────── */
+/* ── 9) 주의사항 ──────────────────────────────────── */
 (function(){
   var CF=[
     ["오네이로스 T2500","스토어 349.2만 vs 상세페이지 337.2만 (12만원 차이)","어느 쪽이 실제 결제가이고 12만원 차이의 사유가 무엇인지"],
@@ -916,7 +1147,8 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   ];
   var h='<h2>⑥ 주문 전 확인할 것</h2>'
     +'<div class="co d"><b>라지킹은 양 브랜드 모두 100일 체험·단순변심 반품·교환이 전부 불가</b>'
-    +'<p>브랜드리스 스펙표 붉은 각주와 베스트슬립 공식 견적서가 동일하게 명시합니다. 베스트슬립 견적서는 100일 체험 대상을 "모피어스21·녹턴19·리차지17·Q3000의 S·SS·D·Q·K 상단 매트리스만"으로 못 박고 라지킹을 명시적으로 제외합니다. 되돌릴 방법이 없으니 쇼룸 체험이 사실상 필수입니다.</p></div>'
+    +'<p>브랜드리스 스펙표 붉은 각주와 베스트슬립 공식 견적서가 동일하게 명시합니다. 베스트슬립 견적서는 100일 체험 대상을 "모피어스21·녹턴19·리차지17·Q3000의 S·SS·D·Q·K 상단 매트리스만"으로 못 박고 라지킹을 명시적으로 제외합니다. 되돌릴 방법이 없으니 쇼룸 체험이 사실상 필수입니다. '
+    +'<b>렌탈은 여기에 60개월 의무사용이 더 얹힙니다</b> — 체험 없이 렌탈 계약하는 것이 가장 위험한 조합입니다(렌탈 탭 참고).</p></div>'
     +'<div class="co w"><b>라지킹은 2분할 제작이 기본 — 일체형은 추가금</b>'
     +'<p>베스트슬립 공식 견적서 기준 가로 1,700mm 이상 유로탑·필로우탑은 2개로 분리 제작되며, 일체형 주문 시 15만원 이상 추가금이 붙고 운반 책임이 구매자에게 넘어갑니다. 브랜드리스도 K 이상은 2분할이 기본입니다. LK1800은 승강기 17~19인승 이상이 필요하고, 미달 시 사다리차 비용(10만원 이상)이 별도입니다.</p></div>'
     +'<div class="co i"><b>가격 확정성 자체가 브랜드리스의 우위</b>'
