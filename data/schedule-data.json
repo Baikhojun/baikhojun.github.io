@@ -463,7 +463,12 @@
       ]
     },
     "2026-07": {
-      "holidays": [],
+      "holidays": [
+        {
+          "date": "2026-07-17",
+          "name": "제헌절"
+        }
+      ],
       "leaves": [],
       "shifts": [
         {
@@ -650,7 +655,132 @@
     "2026-08": {
       "holidays": [],
       "leaves": [],
-      "shifts": [],
+      "shifts": [
+        {
+          "date": "2026-08-01",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-02",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-08-03",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-08-04",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-08-05",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-06",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-07",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-08",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-09",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-10",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-11",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-12",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-13",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-14",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-15",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-16",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-17",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-18",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-19",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-20",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-21",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-22",
+          "type": "Night"
+        },
+        {
+          "date": "2026-08-23",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-24",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-25",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-26",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-27",
+          "type": "Day"
+        },
+        {
+          "date": "2026-08-28",
+          "type": "Off"
+        },
+        {
+          "date": "2026-08-29",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-08-30",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-08-31",
+          "type": "Evening"
+        }
+      ],
       "personal": [
         {
           "id": "p_mqsub3at_a",
@@ -663,6 +793,30 @@
           "date": "2026-08-28",
           "text": "양재호반써민 잠근 처리 및 입주 예정",
           "color": "#e11d48"
+        },
+        {
+          "id": "p_mr30gzqd_1",
+          "date": "2026-08-06",
+          "text": "12시 맞춤정장 아르코발레노 강남점",
+          "color": "#db2777"
+        }
+      ],
+      "events": [],
+      "progressOverride": {},
+      "summaryOverride": null,
+      "footerNote": "",
+      "inactiveCats": []
+    },
+    "2026-09": {
+      "holidays": [],
+      "leaves": [],
+      "shifts": [],
+      "personal": [
+        {
+          "id": "p_mqu8ej73_c",
+          "date": "2026-09-25",
+          "text": "윌라3개월 종료 해지하기",
+          "color": "#4f46e5"
         }
       ],
       "events": [],
@@ -673,7 +827,7 @@
     }
   },
   "ui": {
-    "lastMonth": "2026-06"
+    "lastMonth": "2026-08"
   },
   "sync": {
     "owner": "baikhojun",
