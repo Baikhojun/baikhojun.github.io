@@ -196,6 +196,40 @@ h2{font-size:16.5px;font-weight:800;letter-spacing:-.3px;margin:2px 2px 4px}
 .sc .sr{flex:0 0 128px;font-size:12px;font-weight:700;text-align:right;line-height:1.55}
 .sc .sr b{color:var(--good);font-weight:800}
 
+/* ── 동률 배지 ── */
+.tie{display:inline-block;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;
+  background:#eef0f5;color:var(--mute);margin-left:5px;vertical-align:1px;letter-spacing:-.2px}
+.tie.t1{background:#e3f2ec;color:var(--good)}
+
+/* ── 교차검증 ── */
+.duo{margin-bottom:9px}
+.duo .cl{font-size:11.5px;font-weight:800;color:var(--mute);margin-bottom:5px;display:flex;align-items:center}
+.duo .pair{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.duo .pair>div{border-radius:9px;padding:8px 9px;font-size:12.5px;line-height:1.5;
+  word-break:keep-all;border:1px solid}
+.duo .pair .a{background:#faf5f1;border-color:#ead9cf;color:#6b3a26}
+.duo .pair .b{background:#eff3fb;border-color:#cfdbf1;color:#22406f}
+.duo .pair em{display:block;font-style:normal;font-size:10px;font-weight:800;margin-bottom:4px;letter-spacing:-.2px}
+.duo .pair .a em{color:var(--bs)} .duo .pair .b em{color:var(--bl)}
+.agr{flex:0 0 auto;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:auto}
+.agr.y{background:#e3f2ec;color:var(--good)}
+.agr.p{background:#fdf6ec;color:var(--warn)}
+.agr.n{background:#fdeeee;color:var(--bad)}
+
+/* ── 수정 내역 ── */
+.fx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.fx>.ft{font-size:14.5px;font-weight:800;letter-spacing:-.3px;line-height:1.45;word-break:keep-all}
+.fx>.ft i{font-style:normal;color:var(--mute);margin-right:5px}
+.fx .st2{margin-top:9px;padding-top:9px;border-top:1px solid var(--line2)}
+.fx .st2 .r3{display:flex;gap:8px;padding:5px 0;font-size:12.5px;line-height:1.55;word-break:keep-all}
+.fx .st2 .r3 span:first-child{flex:0 0 40px;font-size:11px;font-weight:800;color:var(--mute);padding-top:2px}
+.fx .st2 .r3 span:last-child{flex:1;min-width:0;color:var(--sub)}
+.arr{display:flex;align-items:center;gap:7px;margin-top:9px;padding:8px 10px;
+  background:var(--line2);border-radius:9px;font-size:12.5px;font-weight:800;flex-wrap:wrap}
+.arr s{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1px}
+.arr b{color:var(--bl)}
+.arr i{font-style:normal;color:var(--mute);font-weight:700}
+
 footer{text-align:center;font-size:11.5px;color:var(--mute);padding:16px 18px 8px;line-height:1.65}
 footer a{color:var(--bl)}
 </style>
@@ -204,7 +238,8 @@ footer a{color:var(--bl)}
 
 <header class="hd">
   <h1>라지킹 LK1800 정밀 비교</h1>
-  <div class="meta">브랜드리스 6종 · 베스트슬립 4종 · 6개 항목 100점 채점 · 2026.8 기준</div>
+  <div class="meta">브랜드리스 6종 · 베스트슬립 4종 · 6개 항목 100점 채점 · 2026.8 기준<br>
+  <b style="color:#cfd6ee">v2 개정</b> — 검증 축 재설계 · 이켈로스 두께 정정 · 동률 구간 표기</div>
 </header>
 
 <nav class="tabs" id="tabs" role="tablist"></nav>
@@ -215,6 +250,7 @@ footer a{color:var(--bl)}
   <section id="s-qual" hidden></section>
   <section id="s-val" hidden></section>
   <section id="s-match" hidden></section>
+  <section id="s-xv" hidden></section>
   <section id="s-spec" hidden></section>
   <section id="s-warn" hidden></section>
 </main>
@@ -228,44 +264,47 @@ footer a{color:var(--bl)}
 
 <script>
 /* ── 데이터: 10개 모델 ───────────────────────────────── */
+/* d = [스프링27, 내장재22, 구조·볼륨16, 보증15, 검증10, 경도10]  — v2 배분
+   v2 변경: 검증 축 15→10점(베이즈 수축), 남은 5점을 스프링+2·내장재+2·구조+1로 이전
+            이켈로스 T1000 두께 44→35cm 정정 (토퍼 15 + 바디 20) */
 var M = [
  {n:"리차지 17",s:"리차지17",b:"BL",t:"엔트리",p:1517000,cf:1,
   pn:"네이버 스토어 확정가",coil:1250,
   cn:"1,250개 공개 (마이크로 코일 없음)",th:28,wy:10,
   wn:"10년",na:"없음 (텐셀 CFT 원단)",st:"일체형 하이퍼 유로탑",
   al:"TitanSil (Ti-Si)",fm:"2경도 + 경도 주문제작 가능",
-  rt:"4.80 / 578건 (최근 4.43 하락)",
-  d:[15.0,4.3,4.5,6.6,11.7,7.0]},
+  rt:"4.80 / 578건 (최근 4.43 하락)",sk:4.601,
+  d:[16.2,4.7,4.8,6.6,6.0,7.0]},
  {n:"뉴 녹턴 T450",s:"녹턴T450",b:"BL",t:"가성비 주력",p:1727000,cf:1,
   pn:"네이버 스토어 확정가",coil:2410,
   cn:"추정 2,410 (스파이널 1,250 + 마이크로 1,160)",th:32,wy:15,
   wn:"15년 (2040년까지)",na:"없음",st:"분리형 토퍼 (표기 상충)",
   al:"TitanSil (Ti-Si)",fm:"2경도 · 리스팅 '미디엄' 표기 상충",
-  rt:"4.85 / 1,375건 (최근 4.89)",
-  d:[17.4,4.3,10.7,8.9,13.5,4.0]},
+  rt:"4.85 / 1,375건 (최근 4.89)",sk:4.874,
+  d:[18.8,4.7,11.4,8.9,8.3,4.0]},
  {n:"판타소스 T570",s:"판타소스T570",b:"BL",t:"중상급",p:1867000,cf:1,
   pn:"네이버 스토어 확정가",coil:2410,
   cn:"추정 2,410 (더블쿠션 스파이널 + 마이크로)",th:33,wy:15,
   wn:"15년 (20년 주장 병존 — 상충)",na:"말총 패드",st:"분리형 토퍼",
   al:"표기 상충 (Ti-Si / 바나듐-티타늄)",fm:"2경도 (MS / MH)",
-  rt:"4.82 / 56건 (최근 4.81)",
-  d:[17.9,10.8,11.4,8.9,10.2,5.0]},
+  rt:"4.82 / 56건 (최근 4.81)",sk:4.844,
+  d:[19.3,11.9,12.2,8.9,5.5,5.0]},
  {n:"모피어스 T750",s:"모피어스T750",b:"BL",t:"프리미엄",p:2382000,cf:1,
   pn:"네이버 스토어 확정가",coil:2410,
   cn:"2,410개/Q 공개 (구형 동일 구성)",th:39,wy:25,
   wn:"25년 (2051년까지) — 브랜드 최장",na:"말총 다량",
   st:"분리형 토퍼 + 더블 유로탑",
   al:"VA·TI·NIUM (V-Ti) · POSCO 성적서 공개",fm:"2경도 (MS / MH)",
-  rt:"4.87 / 3,943건 (최근 4.94) — 리뷰 최다",
-  d:[19.4,14.4,13.1,13.1,14.7,5.0]},
+  rt:"4.87 / 3,943건 (최근 4.94) — 리뷰 최다",sk:4.911,
+  d:[21.0,15.8,14.0,13.1,9.5,5.0]},
  {n:"이켈로스 T1000",s:"이켈로스T1000",b:"BL",t:"플래그십",p:2622000,cf:1,
   pn:"네이버 스토어 확정가",coil:2410,
-  cn:"미공개 — 추정 2,410+ (토퍼 2매 구조)",th:44,wy:20,
+  cn:"미공개 — 추정 2,410+ (토퍼 2매 구조)",th:35,wy:20,
   wn:"20년 (2046년까지)",na:"말총 + 알파카울",
-  st:"분리형 토퍼 2매 (더블 유로탑)",
+  st:"분리형 토퍼 2매 (더블 유로탑) · 토퍼 15cm + 바디 20cm",
   al:"VA·TI·NIUM (V-Ti) + 맥스파인",fm:"2경도 (MS / MH)",
-  rt:"4.92 / 259건 (최근 4.97) — 라인업 최고",
-  d:[20.4,16.9,14.6,11.1,12.2,5.0]},
+  rt:"4.92 / 259건 (최근 4.97) — 라인업 최고",sk:4.938,
+  d:[22.0,18.6,13.6,11.1,7.3,5.0]},
  {n:"오네이로스 T2500",s:"오네이로스T2500",b:"BL",t:"하이엔드",p:3492000,cf:1,
   pn:"스토어 확정가 (상세페이지 표는 337.2만 — 12만원 차이)",coil:2410,
   cn:"미공개 — 더블쿠션 + V-Ti 강화 코일",th:38,wy:25,
@@ -273,40 +312,40 @@ var M = [
   na:"말총 + 알파카울 + 코코넛 코이어",
   st:"양면 토퍼 + 양면 바디 (4조합)",
   al:"VA·TI·NIUM + 맥스파인 · 국제특허",fm:"4가지 경도 조합 — 최상",
-  rt:"3.00 / 1건 — 시장 검증 전",
-  d:[20.9,19.5,13.4,13.1,0.7,10.0]},
+  rt:"3.00 / 1건 — 시장 검증 전",sk:4.836,
+  d:[22.6,21.5,14.3,13.1,2.6,10.0]},
  {n:"Z5",s:"Z5",b:"BS",t:"Z 중급",p:2184310,cf:0,
   pn:"LK2000 255.7만 → LK1800 환산 (208~227만 범위)",coil:1276,
   cn:"추정 1,276 (클러스터 1,005 × 27% 증량)",th:37,wy:null,
   wn:"미확인 — 사전조사 '1년 무상 + 10년 유상'",na:"없음",
   st:"분리형 / 일체형 표기 상충",
   al:"이중열처리 6+7회전 혼합",fm:"3경도 (에덴 = 순수 미디엄)",
-  rt:"4.90 / 10건 (최근 5.0)",
-  d:[16.6,5.9,9.2,1.2,9.2,9.0]},
+  rt:"4.90 / 10건 (최근 5.0)",sk:4.888,
+  d:[17.9,6.5,9.8,1.2,4.3,9.0]},
  {n:"New Z7",s:"New Z7",b:"BS",t:"Z 상급",p:2607000,cf:1,
   pn:"LK1800 정규 리스팅 확정가 (23% 할인)",coil:2366,
   cn:"인터클러스터 1,206 공개 + 마이크로 (추정 1,160)",th:34,wy:15,
   wn:"15년",na:"없음 (천연소재 미탑재)",
   st:"일체형 유로탑 — 리뉴얼로 분리 불가",
   al:"Ti-Si · 6+7회전 혼합",fm:"3경도 (순수 미디엄 有)",
-  rt:"리뷰 0건 — 신규 리스팅",
-  d:[15.8,4.8,5.6,8.9,0.0,9.0]},
+  rt:"리뷰 0건 — 신규 리스팅",sk:4.873,
+  d:[17.1,5.3,6.0,8.9,2.2,9.0]},
  {n:"Z8B",s:"Z8B",b:"BS",t:"플래그십",p:3871085,cf:0,
   pn:"K 348.7만 → LK1800 환산 (382~393만 범위)",coil:3325,
   cn:"3,325개/Q · 코일 41% 증량 공개",th:35,wy:20,
   wn:"20년 (구형 15년 → 상향)",na:"천연 양모",
   st:"분리형 유로탑 (토퍼 교체)",
   al:"Ti-Si · 6+7회전 혼합",fm:"3경도 (순수 미디엄 有)",
-  rt:"5.00 / 4건",
-  d:[20.4,12.5,12.3,11.1,8.6,9.0]},
+  rt:"5.00 / 4건",sk:4.882,
+  d:[22.0,13.8,13.1,11.1,3.7,9.0]},
  {n:"Z10B",s:"Z10B",b:"BS",t:"최상위",p:5125552,cf:0,
   pn:"K 461.7만 → LK1800 환산 (506~521만 범위)",coil:5172,
   cn:"5,172개/Q (사전조사) · 페이지 미기재",th:46,wy:30,
   wn:"30년 — 전체 최장",na:"천연 양모",
   st:"분리형 유로탑 (토퍼 교체)",
   al:"하이퍼셀 32mm 10회전",fm:"2경도 — 순수 미디엄 없음",
-  rt:"리뷰 0건 — 신규 리스팅",
-  d:[25.0,13.0,14.5,15.0,0.0,5.0]}
+  rt:"리뷰 0건 — 신규 리스팅",sk:4.873,
+  d:[27.0,14.3,15.5,15.0,2.2,5.0]}
 ];
 
 /* ── 브랜드리스 네이버 브랜드스토어 리스팅 실측 (2026.8 확인) ──
@@ -328,13 +367,17 @@ var TIERS = [
 ];
 
 var DIM = [
-  {k:"스프링",max:25,c:"var(--c1)"},
-  {k:"내장재",max:20,c:"var(--c2)"},
-  {k:"구조·볼륨",max:15,c:"var(--c3)"},
+  {k:"스프링",max:27,c:"var(--c1)"},
+  {k:"내장재",max:22,c:"var(--c2)"},
+  {k:"구조·볼륨",max:16,c:"var(--c3)"},
   {k:"보증",max:15,c:"var(--c4)"},
-  {k:"검증·평점",max:15,c:"var(--c5)"},
+  {k:"검증 (수축)",max:10,c:"var(--c5)"},
   {k:"경도 선택권",max:10,c:"var(--c6)"}
 ];
+
+/* 몬테카를로 20만 회 (각 축 ±0.5점 균등오차) — 1점당 가격 1위 확률 */
+var MC = {"판타소스 T570":91.5,"모피어스 T750":6.3,"뉴 녹턴 T450":2.2};
+var MC_N = "20만";
 
 /* ── 계산 ─────────────────────────────────────────── */
 function qty(m){return m.d.reduce(function(a,b){return a+b},0)}
@@ -352,6 +395,28 @@ function brandAvg(b){
 }
 var AVG_BL = brandAvg('BL'), AVG_BS = brandAvg('BS');
 
+/* ── 동률 구간 ──
+   항목 점수가 0.1점 격자이고 실제 판단 오차는 축당 ±0.5점 수준이므로
+   총점 오차는 약 ±1.2점(1.5~2%)입니다. 1점당 가격 차이가 4% 안이면
+   순서를 주장할 수 없어 같은 군으로 묶습니다. */
+var TIE_GAP = 0.04;
+var TIE = (function(){
+  var rk=M.slice().sort(function(a,b){return perQ(a)-perQ(b)});
+  var band={}, g=1, prev=perQ(rk[0]);
+  rk.forEach(function(m,i){
+    if(i>0){ if((perQ(m)-prev)/prev>=TIE_GAP) g++; prev=perQ(m); }
+    band[m.n]=g;
+  });
+  var size={};
+  rk.forEach(function(m){size[band[m.n]]=(size[band[m.n]]||0)+1});
+  return {g:band,size:size,rk:rk};
+})();
+function tieTag(m){
+  var g=TIE.g[m.n];
+  if(TIE.size[g]<2) return '';
+  return '<span class="tie'+(g===1?' t1':'')+'">동률 '+g+'군</span>';
+}
+
 function won(n){return Math.round(n).toLocaleString('ko-KR')}
 function man(n){return (n/10000).toFixed(1)+'만'}
 function f1(n){return n.toFixed(1)}
@@ -361,7 +426,8 @@ function pTag(m){return won(m.p)+'원'+(m.cf?'':'<span class="est">*</span>')}
 
 /* ── 탭 ───────────────────────────────────────────── */
 var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
-          ["s-val","가성비"],["s-match","1:1 비교"],["s-spec","사양"],["s-warn","주의"]];
+          ["s-val","가성비"],["s-match","1:1"],["s-xv","교차검증"],
+          ["s-spec","사양"],["s-warn","주의"]];
 
 (function(){
   var nav=document.getElementById('tabs');
@@ -380,11 +446,14 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
 /* ── 1) 요약 ──────────────────────────────────────── */
 (function(){
   var top=M.slice().sort(function(a,b){return perQ(a)-perQ(b)}).slice(0,3);
-  var why=[
-    "말총을 넣은 모델 중 가장 저렴합니다. 천연소재 진입선을 186.7만원까지 끌어내렸고, 그 위 말총 모델(모피어스 T750)보다 51.5만원 싸요.",
-    "리뷰 1,375건·평점 4.85로 검증이 가장 두껍습니다. 천연소재는 없지만 분리형 토퍼와 보증 15년을 갖췄고, 실패 확률이 제일 낮은 선택입니다.",
-    "품질 {q}점으로 절대 순위 2위인데 가성비도 3위입니다. 값과 품질을 동시에 잡는 유일한 구간이에요. 보증 25년은 브랜드 최장이고 리뷰 3,943건으로 검증도 가장 두껍습니다."
-  ];
+  /* 순위가 아니라 모델명으로 묶어 둡니다 — 재채점으로 순서가 바뀌어도 설명이 어긋나지 않게. */
+  var WHY={
+    "판타소스 T570":"말총을 넣은 모델 중 가장 저렴합니다. 천연소재 진입선을 186.7만원까지 끌어내렸고, 그 위 말총 모델(모피어스 T750)보다 51.5만원 싸요. 몬테카를로 "+MC_N+" 회 중 "+MC["판타소스 T570"]+"%에서 1위를 지켰습니다.",
+    "모피어스 T750":"품질 {q}점으로 절대 순위 3위인데 가성비도 상위입니다. 값과 품질을 동시에 잡는 유일한 구간이에요. 보증 25년은 브랜드 최장이고 리뷰 3,943건으로 검증이 가장 두껍습니다. 보증을 최우선으로 두면 이 모델이 1위가 됩니다.",
+    "뉴 녹턴 T450":"리뷰 1,375건·평점 4.85로 검증이 두껍습니다. 천연소재는 없어 내장재 점수가 4.7/22에 그치지만, 분리형 토퍼와 보증 15년을 갖췄고 두께 1cm당 가격이 전체 최저입니다.",
+    "리차지 17":"가장 저렴한 진입 모델입니다. 다만 리뷰 578건에서 최근 6개월 평점이 4.43으로 떨어져, 표본이 충분한 모델 중 유일하게 하락 신호가 잡힙니다.",
+    "이켈로스 T1000":"내장재 18.6/22로 2위입니다. 다만 두께가 35cm(토퍼 15 + 바디 20)로 확인되면서 구조 점수가 내려갔고, 보증 20년이 하위 모델 T750(25년)보다 짧습니다."
+  };
   /* ── 브랜드리스 등급 순위 · 네이버 실가격 (요약 탭 최상단) ── */
   var h='<h2>브랜드리스 등급 순위 · 네이버 실가격</h2>'
     +'<p class="lead">브랜드리스 라인업만 상위 등급부터 정리했습니다. 가격은 네이버 브랜드스토어 '
@@ -423,14 +492,23 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   h+='<div class="verdict"><b>브랜드리스가 원가 효율 '+(AVG_BS/AVG_BL).toFixed(2)+'배 우위</b>'
     +'<p>품질 1점을 사는 값이 브랜드리스 '+won(AVG_BL)+'원 대 베스트슬립 '+won(AVG_BS)
     +'원입니다. 가성비 TOP5는 브랜드리스가 5자리를 전부 가져갔습니다.</p></div>';
-  h+='<h2>가성비 TOP 3</h2><p class="lead">품질 100점을 가격으로 나눈 값입니다. 가중치를 8가지로 바꿔 재계산해도 이 세 모델이 상위를 지켰습니다.</p>';
+  var spread=(perQ(top[2])-perQ(top[0]))/perQ(top[0])*100;
+  h+='<h2>가성비 TOP 3 <span class="tie t1">세 모델 동률</span></h2>'
+    +'<p class="lead">품질 100점을 가격으로 나눈 값입니다. 가중치를 8가지로 바꿔 재계산해도 이 세 모델이 상위를 지켰습니다. '
+    +'다만 <b>세 모델의 간격은 '+spread.toFixed(1)+'%로 채점 오차 안</b>이므로 1·2·3위 서열이 아니라 '
+    +'"이 셋 중 하나"로 읽어야 합니다.</p>';
   top.forEach(function(m,i){
     h+='<div class="pod'+(i===0?' first':'')+'"><div class="rk">'+(i+1)+'</div><div class="bd">'
       +'<div class="nm">'+m.n+' '+bchip(m)+'</div>'
       +'<div class="big">'+won(perQ(m))+'<small>원 / 품질 1점</small></div>'
-      +'<div class="sm">'+man(m.p)+'원 · 품질 '+f1(qty(m))+'점 · 가성비지수 '+((BEST/perQ(m))*100).toFixed(1)+'</div>'
-      +'<div class="why">'+why[i].replace('{q}',f1(qty(m)))+'</div></div></div>';
+      +'<div class="sm">'+man(m.p)+'원 · 품질 '+f1(qty(m))+'점 · 지수 '+((BEST/perQ(m))*100).toFixed(1)
+      +(MC[m.n]!==undefined?' · 1위 '+MC[m.n]+'%':'')+'</div>'
+      +'<div class="why">'+(WHY[m.n]||'').replace('{q}',f1(qty(m)))+'</div></div></div>';
   });
+  h+='<p class="note"><b>1위 확률</b>은 6개 항목에 각각 ±0.5점 오차를 넣고 '+MC_N
+    +' 회 재계산했을 때 그 모델이 1위로 나온 비율입니다. 세 모델의 TOP3 진입은 '
+    +MC_N+' 회 전부에서 유지됐지만, 1위 자리는 판타소스 T570이 '+MC["판타소스 T570"]
+    +'%로 우세한 정도입니다.</p>';
   var bestMat=M.slice().sort(function(a,b){return perMat(a)-perMat(b)})[0];
   var bestQ=M.slice().sort(function(a,b){return qty(b)-qty(a)});
   h+='<div class="stats">'
@@ -444,9 +522,16 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
     +bestMat.n+'</em> — 내장재 1점당 '+won(perMat(bestMat))+'원</div></div>'
     +'<div class="row"><div class="q">② 가격 제외 품질 1위</div><div class="a"><em>'+bestQ[0].n+'</em> — '
     +f1(qty(bestQ[0]))+'점 (2위 '+bestQ[1].n+' '+f1(qty(bestQ[1]))+'점)</div></div>'
-    +'<div class="row"><div class="q">③ 항목별 점수</div><div class="a">스프링 25 · 내장재 20 · 구조 15 · 보증 15 · 검증 15 · 경도 10 <span style="color:var(--mute);font-weight:400">→ 품질 탭</span></div></div>'
-    +'<div class="row"><div class="q">④ 가성비 TOP3</div><div class="a"><em>판타소스 T570 · 뉴 녹턴 T450 · 모피어스 T750</em></div></div>'
-    +'</div>';
+    +'<div class="row"><div class="q">③ 항목별 점수</div><div class="a">'
+    +DIM.map(function(d){return d.k.replace(' (수축)','')+' '+d.max}).join(' · ')
+    +' <span style="color:var(--mute);font-weight:400">→ 품질 탭</span></div></div>'
+    +'<div class="row"><div class="q">④ 가성비 TOP3 (동률)</div><div class="a"><em>'
+    +top.map(function(m){return m.n}).join(' · ')+'</em></div></div>'
+    +'</div>'
+    +'<p class="note"><b>v2 개정 안내</b> — 이켈로스 T1000 두께를 44cm에서 <b>35cm(토퍼 15 + 바디 20)</b>로 정정했고, '
+    +'리뷰 축은 표본 1건에 과도한 벌점이 가지 않도록 15점에서 10점으로 줄이고 베이즈 수축을 적용했습니다. '
+    +'그 결과 품질 1위가 이켈로스 T1000에서 오네이로스 T2500으로 바뀌었습니다. '
+    +'무엇을 왜 고쳤는지는 <b>교차검증 탭</b>에 전부 적어 뒀습니다.</p>';
   document.getElementById('s-sum').innerHTML=h;
 })();
 
@@ -454,11 +539,11 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
 (function(){
   var MET=[
     {id:"mat",lb:"내장재 1점당",ax:"내장재 실속 1점당 가격",
-     g:perMat,nt:"내장재 실속은 스프링(25)+내장재(20)+구조·볼륨(15)을 합친 60점 만점 지표입니다. 보증·리뷰·경도를 뺀 '몸값' 항목만 봤습니다."},
+     g:perMat,nt:"내장재 실속은 스프링(27)+내장재(22)+구조·볼륨(16)을 합친 65점 만점 지표입니다. 보증·리뷰·경도를 뺀 '몸값' 항목만 봤습니다."},
     {id:"coil",lb:"코일 1개당",ax:"코일 1개당 가격 (Q사이즈 기준)",
      g:perCoil,nt:"오네이로스 T2500과 이켈로스 T1000은 코일 수를 공개하지 않아 2,410개로 보수 추정했습니다. 실제로는 더 많을 가능성이 높아 두 모델에 불리하게 계산된 값입니다."},
     {id:"cm",lb:"두께 1cm당",ax:"총두께 1cm당 가격",
-     g:perCm,nt:"두께는 내장재 물량의 대리 지표입니다. 다만 두꺼울수록 라지킹 시트 호환과 승강기 반입이 까다로워지는 역효과가 있습니다."},
+     g:perCm,nt:"두께는 내장재 물량의 대리 지표입니다. 다만 두꺼울수록 라지킹 시트 호환과 승강기 반입이 까다로워지는 역효과가 있습니다. 이켈로스 T1000은 35cm(토퍼 15 + 바디 20)로 정정해 반영했습니다."},
     {id:"yr",lb:"보증 1년당",ax:"스프링 보증 1년당 가격",
      g:perYr,nt:"양 브랜드 모두 보증 대상은 바디 스프링뿐이고 토퍼·베이스는 제외입니다. Z5는 보증 연수가 확인되지 않아 제외했습니다."}
   ];
@@ -508,8 +593,11 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
 /* ── 3) 품질 ──────────────────────────────────────── */
 (function(){
   var rk=M.slice().sort(function(a,b){return qty(b)-qty(a)});
+  var bsTop=rk.filter(function(m){return m.b==='BS'})[0];
   var h='<h2>② 가격 제외 품질 순위</h2>'
-    +'<p class="lead">가격을 완전히 배제하고 6개 항목만으로 채점했습니다. 상위 3자리는 브랜드리스지만 4·5위 베스트슬립 블랙 라벨과의 간격은 크지 않습니다. 카드를 탭하면 항목별 점수가 펼쳐집니다.</p>'
+    +'<p class="lead">가격을 완전히 배제하고 6개 항목만으로 채점했습니다. 1위는 오네이로스 T2500이고 '
+    +bsTop.n+'가 '+(rk.indexOf(bsTop)+1)+'위로 바로 뒤를 따릅니다 — 품질만 보면 두 브랜드 최상위의 간격은 '
+    +f1(qty(rk[0])-qty(bsTop))+'점뿐입니다. 카드를 탭하면 항목별 점수가 펼쳐집니다.</p>'
     +'<div class="legend">'+DIM.map(function(d){
       return '<span><i style="background:'+d.c+'"></i>'+d.k+' '+d.max+'</span>';
     }).join('')+'</div>';
@@ -529,60 +617,76 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
           +'<span class="dv">'+f1(v)+' / '+DIM[j].max+'</span></div>';
       }).join('')+'</div></details>';
   });
-  h+='<p class="note"><b>채점 근거</b> — 스프링: 코일 수(Q 기준, 0.55승 압축)+합금·회전수+엣지·존 지지 / 내장재: 천연소재 등급+폼 레이어 다양성 / 구조: 토퍼 분리·교체성+총두께 / 보증: 스프링 보증 연수(30년 만점, 0.75승) / 검증: 최근 6개월 가중 평점+리뷰 수 로그 스케일 / 경도: 순수 미디엄 포함 여부와 조합 수</p>'
-    +'<p class="note">가성비 1·2위였던 판타소스와 녹턴은 절대 품질로는 중위권(6·7위)입니다. 가성비 3위 모피어스 T750만 양쪽에서 상위에 듭니다.</p>';
+  h+='<p class="note"><b>채점 근거</b> — 스프링: 코일 수(Q 기준, 0.55승 압축)+합금·회전수+엣지·존 지지 / 내장재: 천연소재 등급+폼 레이어 다양성 / 구조: 토퍼 분리·교체성+총두께 / 보증: 스프링 보증 연수(30년 만점, 0.75승) / 경도: 순수 미디엄 포함 여부와 조합 수</p>'
+    +'<p class="note"><b>검증 축은 v2에서 다시 설계했습니다</b> — 표본 신뢰도 7점(리뷰 수 로그)에 '
+    +'베이즈 수축 평점 3점을 더한 10점입니다. 리뷰 1건의 별점을 그대로 믿지 않고 전체 평균(★4.873, 6,226건)으로 '
+    +'끌어당긴 뒤 채점하며, 리뷰가 없는 모델은 0점이 아니라 평균값을 받습니다. 리뷰가 없다는 것은 '
+    +'"나쁘다"가 아니라 "모른다"이기 때문입니다.</p>'
+    +'<p class="note">가성비 상위인 판타소스·녹턴은 절대 품질로는 중위권('
+    +(rk.map(function(m){return m.n}).indexOf('판타소스 T570')+1)+'·'
+    +(rk.map(function(m){return m.n}).indexOf('뉴 녹턴 T450')+1)+'위)입니다. '
+    +'모피어스 T750만 품질 '+(rk.map(function(m){return m.n}).indexOf('모피어스 T750')+1)
+    +'위와 가성비 상위를 동시에 잡습니다.</p>';
   document.getElementById('s-qual').innerHTML=h;
 })();
 
 /* ── 4) 가성비 ────────────────────────────────────── */
 (function(){
-  var rk=M.slice().sort(function(a,b){return perQ(a)-perQ(b)});
+  var rk=TIE.rk;
   var mx=perQ(rk[rk.length-1]);
   var h='<h2>③ 가성비 순위</h2>'
-    +'<p class="lead">품질 1점을 얼마에 사는지입니다. 가성비지수는 1위(판타소스 T570 = 100)를 기준으로 정규화했습니다.</p>'
+    +'<p class="lead">품질 1점을 얼마에 사는지입니다. 가성비지수는 1위('+rk[0].n+' = 100)를 기준으로 정규화했습니다. '
+    +'차이가 '+(TIE_GAP*100)+'% 안이면 채점 오차와 구분되지 않으므로 <b>같은 동률군</b>으로 묶었습니다.</p>'
     +'<div class="card">';
   rk.forEach(function(m,i){
-    h+='<div class="bar'+(m.b==='BS'?' b2':'')+(i<3?' win':'')+'">'
-      +'<div class="top"><span class="n">'+(i+1)+'. '+m.n+'</span>'
+    h+='<div class="bar'+(m.b==='BS'?' b2':'')+(TIE.g[m.n]===1?' win':'')+'">'
+      +'<div class="top"><span class="n">'+(i+1)+'. '+m.n+tieTag(m)+'</span>'
       +'<span class="v">'+won(perQ(m))+'원</span></div>'
       +'<div class="track"><i class="fill" style="width:'+(perQ(m)/mx*100).toFixed(1)+'%;display:block"></i></div>'
       +'<div style="font-size:11.5px;color:var(--mute);margin-top:4px;font-variant-numeric:tabular-nums">'
-      +pTag(m)+' · 품질 '+f1(qty(m))+'점 · 지수 '+((BEST/perQ(m))*100).toFixed(1)+'</div></div>';
+      +pTag(m)+' · 품질 '+f1(qty(m))+'점 · 지수 '+((BEST/perQ(m))*100).toFixed(1)
+      +(MC[m.n]!==undefined?' · 1위 확률 '+MC[m.n]+'%':'')+'</div></div>';
   });
   var last=rk[rk.length-1], lastIdx=(BEST/perQ(last))*100;
+  var g1=rk.filter(function(m){return TIE.g[m.n]===1});
   h+='</div>'
+    +'<p class="note"><b>동률 1군</b>('+g1.map(function(m){return m.n}).join(' · ')+')은 '
+    +MC_N+' 회 몬테카를로에서 TOP3 진입이 100% 유지됐습니다. 다만 1위 확률은 '
+    +g1.map(function(m){return m.n+' '+(MC[m.n]||0)+'%'}).join(' · ')
+    +'로 갈리므로, 이 셋 사이에서는 순위가 아니라 <b>무엇을 중시하는지</b>로 골라야 합니다. '
+    +'천연소재 최저가면 판타소스, 보증·검증이면 모피어스, 두께 대비 가격이면 녹턴입니다.</p>'
     +'<p class="note">베스트슬립 최상위 '+last.n+'는 지수 '+lastIdx.toFixed(1)
     +'입니다. 같은 돈으로 얻는 품질이 '+rk[0].n+'의 '+Math.round(lastIdx)+'% 수준이라는 뜻입니다.</p>';
 
+  /* v2 배분(27/22/16/15/10/10)을 기준으로 8개 시나리오 재계산한 결과 */
   var SC=[
-    ["기준 가중치","판타소스 T570"],
-    ["Z5 보증 10년 가정","판타소스 T570"],
-    ["오네이로스 337.2만 적용","판타소스 T570"],
-    ["리뷰 비중 0 (신제품 불리 제거)","판타소스 T570"],
-    ["리뷰 비중 2배","뉴 녹턴 T450"],
-    ["스프링·내장재 중심","판타소스 T570"],
-    ["보증 중심 (내구성 최우선)","뉴 녹턴 T450"],
-    ["베스트슬립 환산가 −10%","판타소스 T570"]
+    ["기준 가중치",["판타소스 T570","모피어스 T750","뉴 녹턴 T450"]],
+    ["검증 비중 0 — 리뷰 정보 완전 배제",["판타소스 T570","모피어스 T750","뉴 녹턴 T450"]],
+    ["검증 비중 2배 (20점) — 리뷰 중시",["뉴 녹턴 T450","모피어스 T750","판타소스 T570"]],
+    ["스프링·내장재 중심",["판타소스 T570","모피어스 T750","뉴 녹턴 T450"]],
+    ["보증 중심 (내구성 최우선)",["모피어스 T750","판타소스 T570","뉴 녹턴 T450"]],
+    ["경도·구조 중심 (체감 우선)",["판타소스 T570","뉴 녹턴 T450","모피어스 T750"]],
+    ["Z5 보증 10년 가정",["판타소스 T570","모피어스 T750","뉴 녹턴 T450"]],
+    ["베스트슬립 환산가 −10%",["판타소스 T570","모피어스 T750","뉴 녹턴 T450"]]
   ];
-  var S2=["뉴 녹턴 T450","뉴 녹턴 T450","뉴 녹턴 T450","모피어스 T750",
-          "리차지 17","모피어스 T750","모피어스 T750","뉴 녹턴 T450"];
-  var S3=["모피어스 T750","모피어스 T750","모피어스 T750","뉴 녹턴 T450",
-          "모피어스 T750","이켈로스 T1000","판타소스 T570","모피어스 T750"];
+  var tally={};
+  SC.forEach(function(s){ s[1].forEach(function(n,j){ tally[n]=(tally[n]||0)+(3-j) }) });
   h+='<h2 style="margin-top:20px">가중치를 흔들어도 유지되는가</h2>'
-    +'<p class="lead">점수화는 가중치에 따라 뒤집힐 수 있으므로 8개 시나리오로 재계산했습니다. 베스트슬립 모델은 어떤 시나리오에서도 TOP3는 물론 TOP5에도 들지 못했습니다.</p>'
+    +'<p class="lead">점수화는 가중치에 따라 뒤집힐 수 있으므로 8개 시나리오로 재계산했습니다. '
+    +'<b>같은 세 모델이 8회 전부 TOP3를 채웠고</b> 베스트슬립 모델은 한 번도 진입하지 못했습니다. '
+    +'대신 세 모델 내부 순서는 시나리오마다 바뀝니다 — 이것이 위 동률 판정의 근거입니다.</p>'
     +'<div class="card">';
-  SC.forEach(function(s,i){
+  SC.forEach(function(s){
     h+='<div class="sc"><span class="sl">'+s[0]+'</span><span class="sr">'
-      +'<b>1. '+s[1]+'</b><br>2. '+S2[i]+'<br>3. '+S3[i]+'</span></div>';
+      +'<b>1. '+s[1][0]+'</b><br>2. '+s[1][1]+'<br>3. '+s[1][2]+'</span></div>';
   });
   h+='</div>'
     +'<div class="card"><div style="font-size:12.5px;font-weight:800;color:var(--mute);margin-bottom:11px">8개 시나리오 TOP3 누적 점수 (1위 3점·2위 2점·3위 1점, 만점 24)</div>';
-  [["판타소스 T570",19],["뉴 녹턴 T450",15],["모피어스 T750",11],["리차지 17",2],["이켈로스 T1000",1]]
-    .forEach(function(x){
-      h+='<div class="bar"><div class="top"><span class="n">'+x[0]+'</span>'
-        +'<span class="v">'+x[1]+'점</span></div>'
-        +'<div class="track"><i class="fill" style="width:'+(x[1]/24*100).toFixed(1)+'%;display:block"></i></div></div>';
-    });
+  Object.keys(tally).sort(function(a,b){return tally[b]-tally[a]}).forEach(function(k){
+    h+='<div class="bar"><div class="top"><span class="n">'+k+'</span>'
+      +'<span class="v">'+tally[k]+'점</span></div>'
+      +'<div class="track"><i class="fill" style="width:'+(tally[k]/24*100).toFixed(1)+'%;display:block"></i></div></div>';
+  });
   h+='</div>';
   document.getElementById('s-val').innerHTML=h;
 })();
@@ -594,13 +698,13 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
      {gp}=품질 격차, {pd}=가격차(만원), {nv}=검증 제외 점수 대비 */
   var MT=[
     {a:"New Z7",c:"이켈로스 T1000",
-     v:"가격차가 {pd}인데 품질은 {gp}점 벌어집니다. 이 구간은 비교 자체가 성립하지 않아요. Z7은 일체형이라 토퍼 교체가 불가능하고 천연소재도 없는데, T1000은 분리형 토퍼 2매에 말총·알파카울, 보증 20년입니다."},
+     v:"가격차가 {pd}인데 품질은 {gp}점 벌어집니다. 이 구간은 비교 자체가 성립하지 않아요. Z7은 일체형이라 토퍼 교체가 불가능하고 천연소재도 없는데, T1000은 토퍼 15cm(더블 유로탑 분리형) + 바디 20cm에 말총·알파카울, 보증 20년입니다."},
     {a:"Z5",c:"판타소스 T570",
      v:"T570이 {pd} 더 싸면서 {gp}점 앞섭니다. Z5가 이기는 건 순수 미디엄 경도(에덴)와 LIFEEDGE뿐이고, 보증 연수가 확인되지 않는 게 결정적 감점입니다."},
     {a:"Z5",c:"모피어스 T750",
      v:"T750이 {pd} 비싸지만 {gp}점 앞섭니다. 20만원 차이로 말총 다량·바나듐티타늄·보증 25년·리뷰 3,943건을 얻는 셈입니다."},
     {a:"Z8B",c:"오네이로스 T2500",
-     v:"T2500이 {pd} 싸고 {gp}점 앞섭니다. 다만 T2500은 리뷰 1건·평점 3.0이라 검증 리스크가 큽니다. 검증 항목을 빼면 {nv}로 T2500이 크게 앞섭니다."},
+     v:"T2500이 {pd} 싸고 {gp}점 앞섭니다. 다만 T2500은 리뷰 1건·평점 3.0이라 검증 리스크가 남습니다 — 다만 Z8B도 리뷰 4건이라 두 모델 모두 표본이 없는 셈입니다. 검증 항목을 빼면 {nv}로 T2500이 더 벌립니다."},
     {a:"Z10B",c:"오네이로스 T2500",
      v:"Z10B가 {pd} 더 비싼데 {gp}점 뒤집니다. Z10B가 확실히 이기는 건 코일 5,172개와 보증 30년이지만, 천연소재가 양모 하나뿐이고 순수 미디엄 경도가 없습니다."}
   ];
@@ -623,7 +727,156 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   document.getElementById('s-match').innerHTML=h;
 })();
 
-/* ── 6) 사양 원장 ─────────────────────────────────── */
+/* ── 6) 다른 분석과의 교차검증 ─────────────────────── */
+(function(){
+  /* 대조 항목: [라벨, 스코어카드 결론, 내 리포트 결론, 일치도] */
+  var CMP=[
+    ["가격 제외 품질 1위","오네이로스 T2500<br>비가격 58.5 / 80점","오네이로스 T2500<br>품질 84.1 / 100점","y","일치"],
+    ["브랜드 우열","브랜드리스 전면 우위<br>가성비 상위 6자리 독식","브랜드리스 1.63배 우위<br>가성비 TOP5 5자리 독식","y","일치"],
+    ["베스트슬립 최상위 Z10B","가중 가성비 8위 / 10","가성비지수 45.8 — 최하위","y","일치"],
+    ["Z8B LK1800 환산가","385.0만원","387.1만원 (차이 0.5%)","y","수렴"],
+    ["Z10B LK1800 환산가","510.0만원","512.5만원 (차이 0.5%)","y","수렴"],
+    ["이켈로스 T1000 두께","약 35cm 추정","35cm 확정<br>(v1 44cm → 정정)","y","스코어카드 정답"],
+    ["가성비 TOP3","T750 · T1000 · T450","T570 · T750 · T450<br>(세 모델 동률)","p","2 / 3 겹침"],
+    ["가성비 1위","모피어스 T750<br>가중 7.40 / 10","판타소스 T570<br>29,729원 / 품질 1점","n","불일치"],
+    ["Z5 LK1800 환산가","240.0만원 (근거 미제시)","218.4만원<br>(LK2000 × 0.854)","n","9.9% 차이"]
+  ];
+  var h='<h2>다른 분석과의 교차검증</h2>'
+    +'<p class="lead">같은 10개 모델을 다른 방식으로 채점한 스코어카드 자료와 대조했습니다. '
+    +'두 분석이 <b>독립적으로 같은 결론</b>에 도달한 항목은 신뢰도가 올라가고, 갈리는 항목은 '
+    +'어느 쪽 가정을 받아들이느냐의 문제입니다.</p>';
+
+  h+='<div class="co i"><b>먼저 — 스코어카드의 계산 자체는 정확합니다</b>'
+    +'<p>10개 모델 × 3종(가격점수·비가격 합계·가중 종합) 총 30개 값을 자체 규칙으로 재계산했더니 '
+    +'<b>불일치 0건</b>이었습니다. 산술 오류는 없습니다. 결론이 갈리는 이유는 전부 방법론 선택 차이입니다.</p></div>';
+
+  h+='<h2 style="margin-top:18px">결론 대조</h2>'
+    +'<p class="lead">9개 항목 중 6개가 일치하거나 수렴, 1개는 부분 일치, 2개가 불일치입니다.</p>';
+  CMP.forEach(function(c){
+    h+='<div class="duo"><div class="cl">'+c[0]
+      +'<span class="agr '+c[3]+'">'+c[4]+'</span></div><div class="pair">'
+      +'<div class="a"><em>스코어카드</em>'+c[1]+'</div>'
+      +'<div class="b"><em>내 리포트 v2</em>'+c[2]+'</div></div></div>';
+  });
+  h+='<p class="note"><b>환산가 수렴이 가장 중요한 소득입니다.</b> Z8B·Z10B의 LK1800 가격은 어디에도 '
+    +'공개되지 않아 양쪽 모두 추정했는데, 서로 다른 방법으로 계산해 <b>0.5% 이내</b>에서 만났습니다. '
+    +'385만·510만 선이라는 추정은 이제 근거가 두 개입니다. 반면 Z5는 21.6만원(9.9%) 벌어져 '
+    +'어느 쪽도 확정이라 말할 수 없으니 쇼룸 견적으로 확인해야 합니다.</p>';
+
+  h+='<h2 style="margin-top:20px">왜 가성비 1위가 갈리나</h2>'
+    +'<p class="lead">스코어카드는 모피어스 T750, 저는 판타소스 T570을 1위로 냅니다. 원인은 세 가지입니다.</p>';
+
+  h+='<div class="fx"><div class="ft"><i>①</i>"가성비"를 나누기가 아니라 더하기로 계산했습니다</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>공식</span><span>스코어카드: 종합점수 = 0.25 × 가격점수 + 0.75 × 품질평균 '
+    +'— 가격과 품질을 <b>더하는</b> 방식입니다. 그런데 가성비의 정의는 가치 ÷ 가격, 즉 <b>나누기</b>입니다.</span></div>'
+    +'<div class="r3"><span>검증</span><span>스코어카드 자기 데이터(비가격 합계 ÷ 가격)로 비율을 다시 계산했습니다. '
+    +'뉴 녹턴 T450 0.2577 · 판타소스 T570 0.2464 · 모피어스 T750 0.2393 · 리차지 17 0.2307 · 이켈로스 T1000 0.2174점/만원.</span></div>'
+    +'<div class="r3"><span>결과</span><span>같은 숫자인데 <b>이켈로스 T1000이 2위에서 5위로</b> 내려가고 '
+    +'판타소스 T570이 4위에서 2위로 올라옵니다. 가산식은 비싼 모델의 높은 품질점수가 가격 열위를 '
+    +'상쇄해 주기 때문에 고가 모델에 유리하게 작동합니다.</span></div>'
+    +'</div></div>';
+
+  h+='<div class="fx"><div class="ft"><i>②</i>결론이 "가격 비중 25%"라는 한 줄에 달려 있습니다</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>계산</span><span>모피어스 T750을 1위에서 끌어내리는 데 필요한 가격 비중을 모델별로 풀었습니다.</span></div>'
+    +'<div class="r3"><span>임계</span><span>가격 비중 <b>41.3%</b>를 넘으면 뉴 녹턴 T450이 1위, '
+    +'<b>45.8%</b>에서 리차지 17, <b>48.4%</b>에서 판타소스 T570이 1위가 됩니다.</span></div>'
+    +'<div class="r3"><span>판단</span><span>스코어카드가 쓴 25%는 "가성비"라는 이름의 지표로는 낮은 편입니다. '
+    +'비중을 조금만 올리면 1위가 바뀌는데, 자료에는 25%를 고른 근거가 없습니다. '
+    +'비율식은 이 선택 자체를 없애기 때문에 저는 비율식을 씁니다.</span></div>'
+    +'</div></div>';
+
+  h+='<div class="fx"><div class="ft"><i>③</i>"가격 제외" 순위에 가격이 새어 들어갔습니다</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>문제</span><span>스코어카드의 비가격 80점에는 <b>포지션</b> 축(엔트리~하이엔드 등급)이 '
+    +'들어 있습니다. 포지션 점수와 LK1800 가격의 스피어만 순위상관은 <b>0.863</b> — 사실상 가격의 대리변수입니다.</span></div>'
+    +'<div class="r3"><span>모순</span><span>자료도 이걸 알고 있어서 "포지션은 가격과 중복되므로 가중치 0%"라고 '
+    +'각주를 달았습니다. 그런데 80점 비가격 합계표에는 그대로 포함시켰습니다.</span></div>'
+    +'<div class="r3"><span>영향</span><span>포지션을 빼면(70점 만점) 비가격 1위가 '
+    +'오네이로스 T2500(58.5 → 48.5)에서 <b>모피어스 T750(57.0 → 49.5)</b>으로 뒤집힙니다. '
+    +'"가격을 배제한 순위"라는 표의 1위가 가격 변수 하나로 결정된 셈입니다.</span></div>'
+    +'</div></div>';
+
+  h+='<h2 style="margin-top:20px">제 리포트에서 고친 것</h2>'
+    +'<p class="lead">스코어카드를 감사하면서 같은 잣대를 제 리포트에도 댔습니다. 세 가지를 고쳐 v2로 올렸습니다.</p>';
+
+  h+='<div class="fx"><div class="ft"><i>①</i>검증 축 과가중 — 15점을 10점으로 줄이고 베이즈 수축 적용</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>문제</span><span>v1은 오네이로스 T2500의 <b>리뷰 1건·★3.0</b>에 검증 0.7 / 15점을 줬습니다. '
+    +'리뷰 0건인 New Z7·Z10B는 0점이었습니다. 표본 1건에 15% 가중을 거는 것은 과적합입니다.</span></div>'
+    +'<div class="r3"><span>진단</span><span>10개 모델 리뷰 6,226건의 표본가중 평균은 ★4.873입니다. '
+    +'사전강도 50건으로 베이즈 수축하면 ★3.0은 4.836으로 거의 완전히 평균으로 돌아오고, '
+    +'10개 모델의 평점 폭은 <b>0.106점</b>으로 압축됩니다. 즉 평점 축에는 모델을 가르는 정보가 거의 없습니다.</span></div>'
+    +'<div class="r3"><span>수정</span><span>검증 10점 = 표본 신뢰도 7점(리뷰 수 로그) + 수축 평점 3점. '
+    +'리뷰 없음은 0점이 아니라 사전평균을 부여합니다. 줄인 5점은 스프링 +2 · 내장재 +2 · 구조 +1로 옮겼습니다 '
+    +'— 정보량이 적은 축의 비중을 실제 사양 축으로 이전한 것입니다.</span></div>'
+    +'<div class="r3"><span>결과</span><span>오네이로스 검증이 0.7/15(4.7%)에서 <b>2.6/10(26%)</b>으로 올랐고, '
+    +'리뷰 0건 모델도 2.2점을 받습니다. 반대로 리차지 17은 표본 578건에서 최근 6개월 4.43으로 '
+    +'<b>실제 하락</b>이 잡히므로 평점 항목 최저(0.6/3)가 됐습니다. 표본이 많을 때만 별점을 신뢰하는 구조입니다.</span></div>'
+    +'</div>'
+    +'<div class="arr"><s>이켈로스 T1000 품질 1위</s><i>→</i><b>오네이로스 T2500 품질 1위 (84.1점)</b></div>'
+    +'</div>';
+
+  h+='<div class="fx"><div class="ft"><i>②</i>허위 정밀도 — 동률 구간을 표시하도록 바꿨습니다</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>문제</span><span>v1은 29,081 / 29,371 / 29,887원을 1·2·3위로 발표했습니다. '
+    +'간격은 1% 남짓인데 항목 점수는 0.1점 단위로 적혀 있어 실제보다 정밀해 보였습니다.</span></div>'
+    +'<div class="r3"><span>진단</span><span>6개 축에 각각 ±0.5점 오차를 넣고 '+MC_N+' 회 재계산했습니다. '
+    +'1위 확률은 판타소스 T570 '+MC["판타소스 T570"]+'% · 모피어스 T750 '+MC["모피어스 T750"]+'% · '
+    +'뉴 녹턴 T450 '+MC["뉴 녹턴 T450"]+'%. 반면 <b>세 모델의 TOP3 진입은 '+MC_N+' 회 전부에서 유지</b>됐습니다. '
+    +'즉 구성원은 확실하고 내부 순서만 불확실합니다.</span></div>'
+    +'<div class="r3"><span>수정</span><span>1점당 가격 차이가 '+(TIE_GAP*100)+'% 안이면 동률군으로 묶어 표기하고, '
+    +'가성비 탭에 1위 확률을 함께 적었습니다. 8개 가중치 시나리오에서도 세 모델이 8회 전부 TOP3를 '
+    +'채우되 내부 순서는 계속 바뀝니다 — 같은 결론입니다.</span></div>'
+    +'</div>'
+    +'<div class="arr"><s>가성비 1·2·3위</s><i>→</i><b>동률 1군 · 1위 확률 병기</b></div>'
+    +'</div>';
+
+  h+='<div class="fx"><div class="ft"><i>③</i>데이터 오류 — 이켈로스 T1000 두께를 정정했습니다</div>'
+    +'<div class="st2">'
+    +'<div class="r3"><span>문제</span><span>v1은 총두께를 44cm로 잡았습니다. 실제는 '
+    +'<b>토퍼 15cm + 바디 20cm = 35cm</b>입니다. 스코어카드의 "약 35cm" 추정이 맞았습니다.</span></div>'
+    +'<div class="r3"><span>영향</span><span>구조·볼륨 점수가 14.6에서 13.6으로 내려가고, 두께 1cm당 가격은 '
+    +'<b>5.96만원에서 7.49만원</b>으로 올라 이 지표 상위권에서 밀려났습니다.</span></div>'
+    +'<div class="r3"><span>교훈</span><span>두께처럼 단순한 값이 품질 1위 자리를 바꿉니다. '
+    +'제조사가 총두께를 명시하지 않고 레이어별로만 적을 때 생기는 오류이므로, '
+    +'다른 모델의 두께도 쇼룸에서 실측 확인할 가치가 있습니다.</span></div>'
+    +'</div>'
+    +'<div class="arr"><s>44cm · 구조 14.6점</s><i>→</i><b>35cm · 구조 13.6점</b></div>'
+    +'</div>';
+
+  h+='<h2 style="margin-top:20px">두 분석이 함께 갖는 한계</h2>'
+    +'<div class="co w"><b>어느 쪽도 해결하지 못한 것들</b>'
+    +'<p><b>폼 밀도</b>(kg/m³)는 두 브랜드 전 모델이 미공개입니다. 내장재 점수는 소재 종류와 '
+    +'천연소재 등급으로 대체 평가했으므로, 같은 "말총 패드"라도 실제 물량 차이는 반영되지 않습니다.<br><br>'
+    +'<b>점수 격자</b>는 스코어카드가 0.5점, 제 리포트가 0.1점 단위입니다. 두 자료 모두 이 해상도보다 '
+    +'작은 차이로 순위를 매긴 구간이 있고, 그 구간의 서열은 통계적으로 구분되지 않습니다.<br><br>'
+    +'<b>코일 수</b>는 오네이로스 T2500·이켈로스 T1000이 미공개라 하위 모델 T750의 확정치 2,410개로 '
+    +'보수 추정했습니다. 상위 모델이므로 실제로는 더 많을 가능성이 높고, 그만큼 두 모델에 불리하게 계산됐습니다.<br><br>'
+    +'<b>Z5 환산가</b>는 240.0만 대 218.4만으로 9.9% 벌어져 있습니다. 이 차이만으로 Z5의 '
+    +'가성비 순위가 한 칸 움직이므로, Z5를 후보에 넣는다면 견적 확인이 필수입니다.</p></div>';
+
+  h+='<h2 style="margin-top:20px">그래서 결론이 바뀌었나</h2>'
+    +'<div class="card">'
+    +'<div style="font-size:13px;font-weight:800;color:var(--bad);margin-bottom:6px">바뀐 것</div>'
+    +'<div style="font-size:13px;color:var(--sub);line-height:1.65;word-break:keep-all">'
+    +'품질 1위가 이켈로스 T1000에서 <b>오네이로스 T2500</b>으로 이동했습니다(검증 벌점 완화 + 두께 정정). '
+    +'가성비 2·3위는 뉴 녹턴 T450과 모피어스 T750이 자리를 맞바꿨지만, 이 구간은 애초에 동률입니다.</div>'
+    +'<div class="hr"></div>'
+    +'<div style="font-size:13px;font-weight:800;color:var(--good);margin-bottom:6px">바뀌지 않은 것</div>'
+    +'<div style="font-size:13px;color:var(--sub);line-height:1.65;word-break:keep-all">'
+    +'가성비 TOP3 구성원(판타소스 T570 · 모피어스 T750 · 뉴 녹턴 T450), 브랜드리스의 원가 효율 우위'
+    +'('+(AVG_BS/AVG_BL).toFixed(2)+'배), 가성비 TOP5를 브랜드리스가 전부 차지하는 구도, '
+    +'8개 가중치 시나리오 전부에서 베스트슬립이 TOP3에 진입하지 못하는 결과 — 모두 그대로입니다. '
+    +'<b>구매 결정에 필요한 답은 바뀌지 않았습니다.</b></div>'
+    +'</div>';
+  h+='<p class="note">교차검증에 사용한 스코어카드 자료는 사용자가 제공한 별도 분석 파일'
+    +'(lk1800_scorecard_브랜드리스_vs_베스트슬립.html)이며, 가격 25% + 비가격 8축 가중평균 방식입니다.</p>';
+  document.getElementById('s-xv').innerHTML=h;
+})();
+
+/* ── 7) 사양 원장 ─────────────────────────────────── */
 (function(){
   var h='<h2>⑤ 전 모델 사양 원장</h2>'
     +'<p class="lead">LK1800 가격 낮은 순입니다. 모델명을 탭하면 전체 사양이 펼쳐집니다.</p>';
@@ -642,7 +895,8 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
       +'<div class="r"><div class="k">두께</div><div class="v">'+m.th+'cm</div></div>'
       +'<div class="r"><div class="k">보증</div><div class="v">'+m.wn+'</div></div>'
       +'<div class="r"><div class="k">경도</div><div class="v">'+m.fm+'</div></div>'
-      +'<div class="r"><div class="k">평점</div><div class="v">'+m.rt+'</div></div>'
+      +'<div class="r"><div class="k">평점</div><div class="v">'+m.rt
+      +'<br><span style="font-size:12px;color:var(--mute)">베이즈 수축 후 ★'+m.sk.toFixed(3)+' (채점에 사용)</span></div></div>'
       +'<div class="r"><div class="k">종합</div><div class="v"><b>'+f1(qty(m))+' / 100점</b> · 품질 1점당 '+won(perQ(m))+'원</div></div>'
       +'</div></details>';
   });
@@ -658,7 +912,7 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
     ["Z5","리스팅 '일체형' vs 상세페이지 '분리형(토퍼 교체 가능)' · 보증 연수 미표기","토퍼 교체 가능 여부와 스프링 무상보증 연수"],
     ["New Z7","리뉴얼로 토퍼 분리 불가로 전환 · 배너는 VA·TI·NIUM, 배지는 Ti-Si","토퍼 교체가 정말 불가능한지, 실제 합금이 무엇인지"],
     ["Z8B · Z10B","LK1800 가격 미공개 · 코일 수가 상세페이지에 미기재","LK1800 견적가와 LK1800 기준 실제 코일 수"],
-    ["이켈로스 T1000","보증 20년으로 하위 모델 T750(25년)보다 짧음","상위 모델의 보증이 더 짧은 이유 (오기 여부)"]
+    ["이켈로스 T1000","보증 20년으로 하위 모델 T750(25년)보다 짧음 · 총두께 미표기 (토퍼 15cm + 바디 20cm = 35cm로 합산)","상위 모델의 보증이 더 짧은 이유(오기 여부)와 실제 총두께 35cm 확인"]
   ];
   var h='<h2>⑥ 주문 전 확인할 것</h2>'
     +'<div class="co d"><b>라지킹은 양 브랜드 모두 100일 체험·단순변심 반품·교환이 전부 불가</b>'
@@ -677,6 +931,11 @@ var TABS=[["s-sum","요약"],["s-cost","원가성"],["s-qual","품질"],
   });
   h+='<h2 style="margin-top:20px">이 분석의 한계</h2>'
     +'<p class="lead">폼 밀도(kg/m³)는 두 브랜드 모두 전 모델 미공개이므로 내장재 점수는 레이어 종류와 천연소재 등급으로 대체 평가했습니다. 코일 수는 오네이로스 T2500·이켈로스 T1000이 미공개라 모피어스 T750의 확정치 2,410개로 보수 추정했는데, 상위 모델이므로 실제로는 더 많을 가능성이 높고 그만큼 두 모델에 불리하게 계산됐습니다. Z8B 3,325개·Z10B 5,172개는 상세페이지가 아닌 사전 조사 수치입니다.</p>'
+    +'<p class="lead"><b>점수의 정밀도에는 한계가 있습니다.</b> 항목 점수를 0.1점 단위로 적었지만 실제 판단 오차는 '
+    +'축당 ±0.5점 수준이므로 총점 오차는 약 ±1.2점입니다. 그래서 1점당 가격 차이가 '+(TIE_GAP*100)
+    +'% 안인 모델은 동률로 묶어 표기했습니다. 상위 세 모델의 순서를 "1위·2위·3위"로 읽으면 '
+    +'없는 정밀도를 믿는 것이 됩니다. 채점 방식을 어떻게 고쳤고 다른 분석과 어디서 갈리는지는 '
+    +'<b>교차검증 탭</b>에 정리해 뒀습니다.</p>'
     +'<p class="lead">Z9·Z10·Z11은 LK1800 가격을 확보하지 못해 비교에서 제외했습니다. 특히 <b>Z11</b>(듀얼 셀코일 coil-on-coil + 메리노울 + 말총패드, 3년 후 토퍼 무상교환)은 품질만 보면 상위 진입이 가능한 유일한 베스트슬립 모델이므로, 쇼룸에서 LK1800 견적을 받아볼 가치가 있습니다.</p>';
   document.getElementById('s-warn').innerHTML=h;
 })();
