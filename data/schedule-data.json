@@ -822,7 +822,128 @@
     "2026-09": {
       "holidays": [],
       "leaves": [],
-      "shifts": [],
+      "shifts": [
+        {
+          "date": "2026-09-01",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-02",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-03",
+          "type": "Night"
+        },
+        {
+          "date": "2026-09-04",
+          "type": "Night"
+        },
+        {
+          "date": "2026-09-05",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-06",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-07",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-08",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-09",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-10",
+          "type": "Night"
+        },
+        {
+          "date": "2026-09-11",
+          "type": "Night"
+        },
+        {
+          "date": "2026-09-12",
+          "type": "Night"
+        },
+        {
+          "date": "2026-09-13",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-14",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-15",
+          "type": "Day"
+        },
+        {
+          "date": "2026-09-16",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-17",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-18",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-19",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-20",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-21",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-22",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-23",
+          "type": "Evening"
+        },
+        {
+          "date": "2026-09-24",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-25",
+          "type": "Day"
+        },
+        {
+          "date": "2026-09-26",
+          "type": "Day"
+        },
+        {
+          "date": "2026-09-27",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-28",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-29",
+          "type": "Off"
+        },
+        {
+          "date": "2026-09-30",
+          "type": "Night"
+        }
+      ],
       "personal": [
         {
           "id": "p_mqu8ej73_c",
@@ -839,7 +960,7 @@
     }
   },
   "ui": {
-    "lastMonth": "2026-08"
+    "lastMonth": "2026-09"
   },
   "sync": {
     "owner": "baikhojun",
