@@ -12,7 +12,8 @@
   WS.Sync.defaults = function () {
     var host = (root.location && root.location.hostname) || '';
     if (/\.github\.io$/.test(host)) return { owner: host.split('.')[0], repo: host, path: 'data/schedule-data.json', branch: 'main' };
-    return { owner: '', repo: '', path: 'data/schedule-data.json', branch: 'main' };
+    // 커스텀 도메인(예: is-a.dev)에서는 호스트명으로 추정 불가 → 실제 저장소를 기본값으로 사용
+    return { owner: 'Baikhojun', repo: 'baikhojun.github.io', path: 'data/schedule-data.json', branch: 'main' };
   };
   WS.Sync.autoEnabled = function () { return !!(WS.Store.data && WS.Store.data.sync && WS.Store.data.sync.auto); };
   WS.Sync._lastSynced = null; // 마지막 업로드된 내용 키(불필요한 재업로드 방지)

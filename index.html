@@ -1,71 +1,107 @@
 <!DOCTYPE html>
-<!-- 이 파일의 역할: 업무 일정표 웹앱의 화면 골격(툴바 + 시트 영역 + 모달/토스트 컨테이너) -->
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>업무 일정표</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>unfade — front-end projects</title>
+  <meta name="description" content="unfade — small, dependency-free web tools built with vanilla HTML, CSS and JavaScript.">
+  <style>
+    :root {
+      --bg: #fafaf8; --fg: #1c1e21; --muted: #6b7280; --card: #ffffff;
+      --line: #e5e7eb; --accent: #0d7a5f; --accent-soft: #e6f4f0; --code-bg: #f3f4f6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101214; --fg: #e6e8ea; --muted: #9aa2ab; --card: #17191c;
+        --line: #2a2e33; --accent: #3ecfa5; --accent-soft: #12332b; --code-bg: #1e2226;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg); color: var(--fg);
+      font: 16px/1.65 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+    main { width: min(720px, 92vw); margin: 0 auto; flex: 1; }
+    header { padding: 4.5rem 0 2.5rem; }
+    .handle { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+    .handle::before { content: "~/"; color: var(--accent); font-weight: 400; }
+    .tagline { color: var(--muted); margin-top: .6rem; max-width: 34rem; }
+    .tagline code {
+      background: var(--code-bg); border-radius: 4px; padding: .1em .4em;
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .9em;
+    }
+    h2 {
+      font-size: .85rem; text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted); margin: 2.2rem 0 1rem; font-weight: 600;
+    }
+    .card {
+      display: block; background: var(--card); border: 1px solid var(--line);
+      border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: .9rem;
+      text-decoration: none; color: inherit; transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .card h3 { font-size: 1.05rem; margin-bottom: .25rem; }
+    .card h3 .arrow { color: var(--accent); font-weight: 400; }
+    .card p { color: var(--muted); font-size: .92rem; }
+    .tags { margin-top: .6rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-size: .72rem; font-family: ui-monospace, Consolas, monospace;
+      background: var(--accent-soft); color: var(--accent);
+      border-radius: 999px; padding: .15em .7em;
+    }
+    .principles { list-style: none; display: grid; gap: .55rem; }
+    .principles li { color: var(--muted); font-size: .95rem; padding-left: 1.2rem; position: relative; }
+    .principles li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+    footer {
+      border-top: 1px solid var(--line); margin-top: 3.5rem; padding: 1.4rem 0 2rem;
+      color: var(--muted); font-size: .85rem; text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <header>
+      <div class="handle">unfade</div>
+      <p class="tagline">
+        I build small, dependency-free web tools — plain <code>HTML</code>, <code>CSS</code> and
+        <code>JavaScript</code>, no frameworks, no build step. Everything here runs entirely in the
+        browser and is hosted on GitHub Pages.
+      </p>
+    </header>
 
-  <!-- 상단 툴바 (인쇄 시 숨김) -->
-  <header class="appbar">
-    <div class="bar-left">
-      <div class="brand">📅 업무 일정표</div>
-      <a href="m/index.html" target="_blank" class="chip" style="text-decoration:none;">📱 폰</a>
-      <div class="nav">
-        <button id="btn-prev" class="icon" title="이전 달">◀</button>
-        <button id="month-label" class="month-btn" title="월 이동 / 기록 보기">2026년 5월</button>
-        <button id="btn-next" class="icon" title="다음 달">▶</button>
-        <button id="btn-today" class="chip">오늘</button>
-        <span id="save-badge" class="badge">저장됨</span>
-        <span id="sync-badge" class="badge" style="display:none;"></span>
-      </div>
-    </div>
-    <div class="bar-right">
-      <button id="btn-add" class="btn">＋ 일정</button>
-      <button id="btn-shift" class="btn">🌓 교대</button>
-      <button id="btn-search" class="btn">🔍 검색</button>
-      <button id="btn-stats" class="btn">📊 통계</button>
-      <button id="btn-settings" class="btn">⚙ 설정</button>
-      <button id="btn-undo" class="btn" title="실행취소 (Ctrl+Z)">↩ 실행취소</button>
-      <span class="sep"></span>
-      <div class="zoom">
-        <button id="btn-zout" class="icon" title="축소">−</button>
-        <span id="zoom-label">100%</span>
-        <button id="btn-zin" class="icon" title="확대">＋</button>
-        <button id="btn-zfit" class="chip">화면맞춤</button>
-      </div>
-      <span class="sep"></span>
-      <button id="btn-export" class="btn">⬇ 내보내기</button>
-      <button id="btn-import" class="btn">⬆ 가져오기</button>
-      <button id="btn-png" class="btn">🖼 PNG</button>
-      <button id="btn-print" class="btn primary">🖨 인쇄·PDF</button>
-    </div>
-  </header>
+    <h2>Projects</h2>
 
-  <!-- 시트 영역 -->
-  <main id="canvas" class="canvas">
-    <div id="stage" class="stage">
-      <div id="sheet" class="sheet"></div>
-    </div>
+    <a class="card" href="/schedule/">
+      <h3>Schedule Board <span class="arrow">↗</span></h3>
+      <p>A client-side team scheduling calendar: month grid, category editor, workload statistics,
+         print layout, and optional data sync through the GitHub Contents API — all in vanilla JS
+         with zero dependencies.</p>
+      <div class="tags">
+        <span class="tag">vanilla js</span><span class="tag">github rest api</span>
+        <span class="tag">localstorage</span><span class="tag">print css</span>
+      </div>
+    </a>
+
+    <a class="card" href="/m/">
+      <h3>Schedule Board — Mobile PWA <span class="arrow">↗</span></h3>
+      <p>Installable mobile companion for the schedule board: web app manifest, service-worker
+         caching for offline use, and a touch-first read-only view of the same data file.</p>
+      <div class="tags">
+        <span class="tag">pwa</span><span class="tag">service worker</span>
+        <span class="tag">offline-first</span>
+      </div>
+    </a>
+
+    <h2>How I build</h2>
+    <ul class="principles">
+      <li>Zero dependencies — if the platform can do it, use the platform.</li>
+      <li>Single-purpose tools that load instantly and work offline.</li>
+      <li>Data stays in plain JSON, synced with the GitHub API instead of a backend.</li>
+      <li>Progressive enhancement: the page is useful before any script runs.</li>
+    </ul>
   </main>
 
-  <!-- 모달 / 토스트 / 파일 입력 -->
-  <div id="modal-root"></div>
-  <div id="toast" class="toast"></div>
-  <input id="file-input" type="file" accept="application/json,.json" hidden>
-
-  <!-- 스크립트 (의존성 순서대로) -->
-  <script src="js/store.js"></script>
-  <script src="js/holidays.js"></script>
-  <script src="js/compute.js"></script>
-  <script src="js/sync.js"></script>
-  <script src="js/stats.js"></script>
-  <script src="js/calendar.js"></script>
-  <script src="js/editor.js"></script>
-  <script src="js/print.js"></script>
-  <script src="js/app.js"></script>
+  <footer>unfade · hand-written HTML/CSS/JS · hosted on GitHub Pages</footer>
 </body>
 </html>
