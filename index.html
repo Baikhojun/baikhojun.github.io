@@ -40,9 +40,7 @@
       border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: .9rem;
       text-decoration: none; color: inherit; transition: border-color .15s, transform .15s;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-1px); }
     .card h3 { font-size: 1.05rem; margin-bottom: .25rem; }
-    .card h3 .arrow { color: var(--accent); font-weight: 400; }
     .card p { color: var(--muted); font-size: .92rem; }
     .tags { margin-top: .6rem; display: flex; flex-wrap: wrap; gap: .4rem; }
     .tag {
@@ -72,8 +70,8 @@
 
     <h2>Projects</h2>
 
-    <a class="card" href="/schedule/">
-      <h3>Schedule Board <span class="arrow">↗</span></h3>
+    <article class="card">
+      <h3>Schedule Board</h3>
       <p>A client-side team scheduling calendar: month grid, category editor, workload statistics,
          print layout, and optional data sync through the GitHub Contents API — all in vanilla JS
          with zero dependencies.</p>
@@ -81,17 +79,27 @@
         <span class="tag">vanilla js</span><span class="tag">github rest api</span>
         <span class="tag">localstorage</span><span class="tag">print css</span>
       </div>
-    </a>
+    </article>
 
-    <a class="card" href="/m/">
-      <h3>Schedule Board — Mobile PWA <span class="arrow">↗</span></h3>
+    <article class="card">
+      <h3>Schedule Board — Mobile PWA</h3>
       <p>Installable mobile companion for the schedule board: web app manifest, service-worker
          caching for offline use, and a touch-first read-only view of the same data file.</p>
       <div class="tags">
         <span class="tag">pwa</span><span class="tag">service worker</span>
         <span class="tag">offline-first</span>
       </div>
-    </a>
+    </article>
+
+    <article class="card">
+      <h3>Offline Decoder</h3>
+      <p>A single-file HTML tool that parses product model codes in the browser: rule tables,
+         scoring, and a mobile layout — no backend, no build step, data baked into the page.</p>
+      <div class="tags">
+        <span class="tag">vanilla js</span><span class="tag">single-file</span>
+        <span class="tag">offline</span>
+      </div>
+    </article>
 
     <h2>How I build</h2>
     <ul class="principles">

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /plan
+Disallow: /cukoo
+Disallow: /cuckoo
+Disallow: /schedule
+Disallow: /m
+Disallow: /lk1800
+Disallow: /data
