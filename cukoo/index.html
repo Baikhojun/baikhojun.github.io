@@ -3,7 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
+<script>
+/* 모바일 기기 → 모바일 버전(m/) 자동 이동. ?pc 를 붙이면 PC 버전 유지. 로컬 파일(file://)에서는 동작 안 함. */
+(function(){
+  try{
+    if(location.protocol!=="http:"&&location.protocol!=="https:")return;
+    if(/[?&]pc(=|&|$)/.test(location.search))return;
+    if(!/Android|iPhone|iPod|Windows Phone|Mobile/i.test(navigator.userAgent))return;
+    var p=location.pathname;
+    if(/\/m\/?(index\.html)?$/.test(p))return;
+    location.replace(p.replace(/[^\/]*$/,"")+"m/");
+  }catch(e){}
+})();
+</script>
 <title>쿠쿠 밥솥 모델코드 해독기 v3</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -584,7 +596,8 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
     데이터: 쿠쿠 공식몰(cuckoo.co.kr) 2026-08-25 수집(대용량밥솥 제외) · 출시(등록월)는 다나와 등록월 기준<br>
     절대가격 기준선은 이 도구의 자체 산출값입니다: 같은 스펙 최저가 · 색상 형제 최저가 · 상위스펙 대체재 가격 · 연식 감가를 조합해
     "이 이상 주면 손해"인 절대상한과 특가/역대급 컷을 만듭니다. 투자·구매 손실을 보장하지 않으며, 최종 판단 전 현재 가격을 직접 확인하세요.<br>
-    최대기압 · 에너지효율등급 · 소비전력은 모델명 코드에 없어, 다나와·공식몰 크롤 실측값으로 보완해 표시합니다 (미확보 모델은 상세페이지 확인).
+    최대기압 · 에너지효율등급 · 소비전력은 모델명 코드에 없어, 다나와·공식몰 크롤 실측값으로 보완해 표시합니다 (미확보 모델은 상세페이지 확인).<span id="molink"></span>
+    <span id="hitbox" style="display:block;margin-top:8px;min-height:14px;color:transparent;user-select:all;-webkit-user-select:all;font-family:var(--mono);font-size:10px" aria-hidden="true"></span>
   </footer>
 </div>
 
@@ -1572,6 +1585,29 @@ if(!_th)_th=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").match
 applyTheme(_th);
 if(_tt)_tt.addEventListener("click",()=>{_th=_th==="dark"?"light":"dark";
   try{localStorage.setItem("cuckoo_theme",_th)}catch(e){}applyTheme(_th);});
+
+/* 웹 서빙일 때만: 모바일 링크 + 방문자 집계(GoatCounter) + 드래그하면 보이는 숨김 카운터 */
+if(location.protocol==="http:"||location.protocol==="https:"){
+  const _ml=document.getElementById("molink");
+  if(_ml)_ml.innerHTML=' · <a href="m/" style="color:inherit;font-weight:700">📱 모바일 버전 보기</a>';
+  const _gc=document.createElement("script");
+  _gc.setAttribute("data-goatcounter","https://unfade.goatcounter.com/count");
+  _gc.async=true;_gc.src="https://gc.zgo.at/count.js";
+  document.head.appendChild(_gc);
+  (async()=>{
+    const el=document.getElementById("hitbox");if(!el)return;
+    const cnt=async(p,qs)=>{try{
+      const r=await fetch("https://unfade.goatcounter.com/counter/"+p+".json"+(qs||""));
+      if(!r.ok)return "-";
+      return String((await r.json()).count||"-").replace(/[\s  ]/g,",");
+    }catch(e){return "-"}};
+    const d=new Date();
+    const today=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    const [tot,tod,pg]=await Promise.all([
+      cnt("TOTAL"), cnt("TOTAL","?start="+today), cnt(location.pathname)]);
+    el.textContent="UNFADE STATS · TODAY(전체) "+tod+" · 이 페이지 누적 "+pg+" · 사이트 전체 누적 "+tot;
+  })();
+}
 
 drawBrowse();
 drawWeights();

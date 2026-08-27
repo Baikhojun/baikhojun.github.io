@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0D2A25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -665,7 +664,8 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
 
   <footer>
     데이터: 쿠쿠 공식몰(cuckoo.co.kr) 2026-08-25 수집(대용량밥솥 제외) · 출시(등록월)는 다나와 등록월 기준.<br>
-    절대가격 기준선은 이 도구의 자체 산출값입니다. 구매 손실을 보장하지 않으며, 최종 판단 전 현재 가격을 직접 확인하세요.
+    절대가격 기준선은 이 도구의 자체 산출값입니다. 구매 손실을 보장하지 않으며, 최종 판단 전 현재 가격을 직접 확인하세요.<span id="pclink"></span>
+    <span id="hitbox" style="display:block;margin-top:8px;min-height:14px;color:transparent;user-select:all;-webkit-user-select:all;font-family:var(--mono);font-size:10px" aria-hidden="true"></span>
   </footer>
 </main>
 
@@ -1677,6 +1677,29 @@ if(!_th)_th=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").match
 applyTheme(_th);
 if(_tt)_tt.addEventListener("click",()=>{_th=_th==="dark"?"light":"dark";
   try{localStorage.setItem("cuckoo_theme",_th)}catch(e){}applyTheme(_th);});
+
+/* 웹 서빙일 때만: PC 링크(?pc = 자동이동 우회) + 방문자 집계(GoatCounter) + 드래그하면 보이는 숨김 카운터 */
+if(location.protocol==="http:"||location.protocol==="https:"){
+  const _pl=document.getElementById("pclink");
+  if(_pl)_pl.innerHTML='<br><a href="../?pc" style="color:inherit;font-weight:700">🖥️ PC 버전 보기</a>';
+  const _gc=document.createElement("script");
+  _gc.setAttribute("data-goatcounter","https://unfade.goatcounter.com/count");
+  _gc.async=true;_gc.src="https://gc.zgo.at/count.js";
+  document.head.appendChild(_gc);
+  (async()=>{
+    const el=document.getElementById("hitbox");if(!el)return;
+    const cnt=async(p,qs)=>{try{
+      const r=await fetch("https://unfade.goatcounter.com/counter/"+p+".json"+(qs||""));
+      if(!r.ok)return "-";
+      return String((await r.json()).count||"-").replace(/[\s  ]/g,",");
+    }catch(e){return "-"}};
+    const d=new Date();
+    const today=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    const [tot,tod,pg]=await Promise.all([
+      cnt("TOTAL"), cnt("TOTAL","?start="+today), cnt(location.pathname)]);
+    el.textContent="UNFADE STATS · TODAY(전체) "+tod+" · 이 페이지 누적 "+pg+" · 사이트 전체 누적 "+tot;
+  })();
+}
 
 drawBrowse();
 drawRecent();
