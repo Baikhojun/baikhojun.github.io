@@ -1,5 +1,5 @@
 // 이 파일의 역할: PWA 서비스워커 - 앱 셸 캐시(오프라인) + 데이터는 네트워크 우선
-var CACHE = 'ws-m-v2';
+var CACHE = 'ws-m-v3';
 var SHELL = ['./', './index.html', './mobile.css', './mobile.js', '../js/store.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
