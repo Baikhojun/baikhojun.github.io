@@ -8,3 +8,4 @@ Disallow: /m
 Disallow: /lk1800
 Disallow: /data
 Disallow: /tv
+Disallow: /house
