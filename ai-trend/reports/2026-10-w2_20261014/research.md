@@ -1143,7 +1143,7 @@ API 가격(USD/100만 토큰, 확인일 2026-10-14):
 - [x] 모든 페이지에 noindex, nofollow가 있고, robots.txt에 Disallow: /ai-trend가 있는가? — **통과** · noindex는 발행본·아카이브 첫 화면·latest 3곳 모두 확인. robots.txt 끝에 Disallow: /ai-trend 한 줄 추가(기존 줄 유지)
 - [x] 사이트 첫 화면과 다른 프로젝트에 ai-trend 링크를 추가하지 않았는가? — **통과** · 사이트 첫 화면(index.html)·공용 셸 메뉴·다른 도구 파일은 수정하지 않음. ai-trend 쪽에서 공용 셸 파일을 참조만 함
 - [x] 커밋에 ai-trend/와 robots.txt 한 줄 외의 변경이 없는가? — **통과** · 발행 커밋은 ai-trend/와 robots.txt 한 줄만. 사용자 요청에 따른 저장소 루트 README.md 개편은 별도 커밋으로 분리(지시서 부록 D v1.2에 1회 예외로 기록)
-- [ ] 푸시 후 발행본 주소, ai-trend/, ai-trend/latest/가 실제로 열리고 최신호를 가리키는가? — **보류** · 푸시 뒤 GitHub Pages 반영을 기다려 실제 주소에서 확인 — 결과를 이 기록에 갱신
+- [x] 푸시 후 발행본 주소, ai-trend/, ai-trend/latest/가 실제로 열리고 최신호를 가리키는가? — **통과** · 2026-10-14 푸시 약 20초 뒤 실제 사이트에서 확인: 발행본·ai-trend/·latest/·reports.json·PDF·PPTX·조사근거·데이터·og.png·글꼴·공용 셸 파일·robots.txt 15개 주소 모두 200, latest/는 이 호로 이동, 과거 호 선택 상자에 reports.json 목록 표시, 방문 집계 스크립트 로드. 이때 아카이브 첫 화면의 글꼴 토큰이 이스케이프되어 기본 글꼴로 보이는 결함을 찾아 고쳐 다시 게시
 - [x] Open Graph 태그와 og.png가 있고, 파비콘·Unfade 크레딧·방문 집계가 들어갔는가? — **통과** · OG 태그(절대 주소)와 og.png(1200×630), 사이트 공용 파비콘 3종(사이트 루트에 실제 파일 있음), 바닥글 Unfade 새 창 링크, GoatCounter(house와 같은 코드, 웹 접속 시에만·로컬 검수 주소 제외). latest/는 cuckoo/와 같은 이동 전용 페이지
 
 **권리와 보안**

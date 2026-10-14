@@ -24,7 +24,7 @@
 /* 밝은 뉴스 디자인 시스템(_system/AI_Trend_Light_Design_System.md) — A 표지 + B 카드 + 발행 목록 띠 */
 @font-face { font-family: "Pretendard Local"; font-weight: 45 920; font-display: swap;
   src: url("assets/fonts/PretendardVariable.woff2") format("woff2-variations"), url("assets/fonts/PretendardVariable.woff2") format("woff2"); }
-{{ tokens_css }}
+{{ tokens_css | safe }}{# 토큰 CSS는 design_tokens.json 에서 만든 신뢰 문자열 — 이스케이프하면 글꼴 이름의 따옴표가 &#34; 로 깨진다 #}
 *, *::before, *::after { box-sizing: border-box; }
 html { color-scheme: light; scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
