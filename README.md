@@ -1,103 +1,36 @@
-# 업무 일정표 웹앱
+# UNFADE
 
-브라우저에서 바로 **편집·저장·인쇄**되는 월간 업무 일정표입니다. 서버 없이 GitHub Pages 같은 정적 호스팅에 그대로 올릴 수 있습니다.
+The one repository for every tool published at [unfade.is-a.dev](https://unfade.is-a.dev/).
 
-## 주요 기능
-- 📅 **월간 달력** — 기존 A4 가로 양식 그대로(공정 색상·공휴일·진행률·요약)
-- 🖊 **직접 편집** — 날짜 칸 클릭 → 일정 추가·수정·삭제 (카테고리·오전/오후·마일스톤)
-- 💾 **내부 DB(localStorage)** — 입력 즉시 이 브라우저에 자동 저장
-- 🗂 **월별 기록** — 달마다 따로 저장, 상단 월 이름 클릭 시 과거 달 조회/수정
-- 📊 **진행률** — 자동 누적 계산 + 진행률 셀 클릭으로 직접 수정
-- 🖨 **인쇄/PDF** — 상단 "인쇄·PDF" 버튼 (A4 가로 그대로 출력)
-- 🔁 **백업/이관** — JSON 내보내기·가져오기 (다른 PC로 옮기거나 보관)
-- 🇰🇷 **공휴일 자동 채우기** — 설정에서 해당 월 한국 공휴일·대체휴일 자동 입력
-- 🗂 **공정 분류 관리** — 추가 / 이름변경 / 색상·순서 지정 / **이번 달만 표시·숨김(완료 처리)** / 완전 삭제
-  - 설정에서 공정의 **"표시"** 체크를 해제하면 **그 달의** 범례·진행률 표에서만 빠집니다(완료된 공정 정리용). 일정과 과거 달은 그대로 → **기록 보존**
-- 🏖 **휴가·근무형태** — 연차/오전·오후반차/출장/재택/외근 지정 (색상·범례·월 집계)
-- 🌓 **교대근무** — 일자별 Day(D)/Evening(E)/Night(N)/Off(Of) 색상 배지. **🌓 교대** 버튼에서:
-  - **한 줄 입력**: `e d o n`(=Evening/Day/Off/Night) 글자를 **1일부터** 쭉 입력 → 자동 채움. 대소문자·콤마·공백 무시, **한 글자=하루**, 모자라면 거기까지만. 예: `eeeoonnnooeeeooddnnoo...`
-  - 또는 그리드에서 날짜 클릭 → D→E→N→Off 순환
-- 📌 **개인 일정** — 날짜 칸에 "17시 강남 호준" 같은 개인 일정을 추가. 공정(배경 박스)과 구분되게 **글자색만** 입힘(배경 없음), 색상 직접 선택. 날짜 팝업 하단 "개인 일정"에서 입력
-- 📱 **모바일 조회 화면** — `/m/` 주소로 폰에서 **조회 전용**(세로 리스트). PC 동기화 데이터를 읽어 표시 (아래 참고)
-- 🗓 **기간 일괄 추가** — "○일~○일 평일 매일" 한 번에 입력 (공휴일 자동 제외)
-- 📋 **지난 달 복사** — 새 달을 이전 달 일정으로 채워 시작 (월 이동 창)
-- 🔍 **검색** · 📊 **월간 통계**(공정별 투입일수·휴가 현황) · ↩ **실행취소(Ctrl+Z)**
-- 🖼 **PNG 이미지 저장** · 🎨 **공정별 커스텀 색상**(설정에서 색 직접 지정)
-- ☁ **GitHub 동기화(선택)** — 여러 기기에서 같은 데이터 (아래 "GitHub 동기화" 참고)
+## Published tools
 
-## 폴더 구성
-```
-site/
-├── index.html        # 화면 골격
-├── css/style.css     # 디자인 + 인쇄 스타일
-└── js/
-    ├── store.js      # 내부 DB(localStorage) + 내보내기/가져오기 + 실행취소 + 지난달복사
-    ├── holidays.js   # 한국 공휴일 자동 생성 + 대체휴일 규칙
-    ├── compute.js    # 주차/진행률/요약 자동 계산
-    ├── sync.js       # GitHub 동기화(Contents API)
-    ├── stats.js      # 월간 통계 집계
-    ├── calendar.js   # 시트(달력) 렌더링(휴가·커스텀색상 포함)
-    ├── editor.js     # 일정·휴가·설정·검색·통계·월선택 모달
-    ├── print.js      # 화면맞춤 + 인쇄/PDF + PNG 저장
-    └── app.js        # 진입점 + 이벤트 연결 + 단축키
-```
+| Route | Purpose | Managed source |
+| --- | --- | --- |
+| `/house/` | 신혼부부 내집마련 가이드 | `projects/house-guide/` |
+| `/cukoo/` | 쿠쿠 밥솥 모델코드 해독기 | `projects/cuckoo-decoder/` |
+| `/tv/` | 대형 TV 해독기 | `projects/cuckoo-decoder/TV/` |
+| `/lk1800/` | LK1800 매트리스 비교 | `lk1800/` |
+| `/plan/`, `/schedule/`, `/m/` | 업무 일정표와 모바일 조회 | repository root |
 
-## 로컬에서 미리 보기
-- `index.html` **더블클릭**만 해도 동작합니다(서버 불필요). 모든 데이터는 그 브라우저에 저장됩니다.
+## Shared design
 
-## GitHub Pages 배포 (baikhojun.github.io)
-> `site/` 폴더 **안의 내용물**(index.html, css, js)을 저장소에 올립니다. `site` 폴더째로 올리지 않습니다.
+`css/unfade-shell.css` and `js/unfade-shell.js` provide the shared bright site shell:
 
-### 방법 1 — 웹에서 업로드 (가장 쉬움)
-1. GitHub에서 `baikhojun.github.io` 저장소로 이동 (없으면 이 이름으로 새 저장소 생성).
-2. **Add file → Upload files** 클릭.
-3. **둘 중 하나** 선택:
-   - **루트에 올리기** → `index.html`, `css/`, `js/`를 그대로 업로드 → 주소: `https://baikhojun.github.io/`
-   - **하위 폴더에 올리기**(기존 사이트 보존) → `schedule` 폴더를 만들어 그 안에 업로드 → 주소: `https://baikhojun.github.io/schedule/`
-4. **Settings → Pages → Source**를 `Deploy from a branch` / `main` / `/ (root)` 로 저장.
-5. 1~2분 후 위 주소로 접속.
+- Pretendard + Inter typography
+- sticky UNFADE header and project drawer
+- one navigation map for every tool
+- print-safe hiding of site chrome
 
-### 방법 2 — git 사용
+The tool interfaces keep their own interaction and print styles, while the surrounding navigation follows the UNFADE design system.
+
+## Build and deploy
+
+Run this after changing the house, Cuckoo, or TV source:
+
 ```bash
-# 저장소를 받은 뒤, site/ 안의 내용물을 저장소 루트(또는 schedule/)로 복사
-git add .
-git commit -m "월간 업무 일정표 웹앱 추가"
-git push
+python scripts/build_deploy.py
 ```
 
-## 데이터 백업·이관 (중요)
-- 데이터는 **사용하는 브라우저(이 PC)에만** 저장됩니다. 다른 기기에서는 보이지 않습니다.
-- 정기적으로 상단 **내보내기**로 JSON 파일을 받아 보관하세요. (원하면 그 파일을 저장소에 함께 커밋해 기록으로 남길 수 있습니다.)
-- 다른 PC/브라우저에서 이어서 쓰려면 그 파일을 **가져오기** 하세요.
+It rebuilds the current checked-in data only, regenerates the published HTML, and reapplies the shared site shell. Review the diff, commit, and push `main`; GitHub Pages publishes the result to `https://unfade.is-a.dev/`.
 
-## GitHub 동기화 (여러 기기에서 같은 데이터)
-설정(⚙) → "GitHub 동기화"에서 사용합니다.
-1. **GitHub 토큰(PAT) 발급**: GitHub → Settings → Developer settings → Personal access tokens. 이 저장소에 대한 **Contents 읽기/쓰기** 권한을 주세요. (Fine-grained 토큰 권장)
-2. owner/repo/경로/브랜치를 확인하고 토큰을 붙여넣은 뒤 **⬆ GitHub에 저장** / **⬇ GitHub에서 불러오기**.
-3. **자동 동기화**: "입력할 때마다 자동 동기화"를 켜면, 수정 후 약 5초 뒤 변경분만 자동 업로드합니다(상단 ☁ 표시). 변경 없으면 올리지 않습니다.
-   - 토큰은 **Classic 토큰 + `repo` 권한**(가장 확실) 또는 Fine-grained(해당 저장소 **Contents: Read and write**)를 쓰세요. 403이면 권한/저장소 선택을 확인하세요.
-- ⚠ **공개 저장소에 올리면 일정 데이터가 인터넷에 공개됩니다.** 민감한 내용이면 별도 **비공개 저장소**(owner/repo를 그 저장소로 지정)를 쓰세요.
-- 토큰은 **이 브라우저(localStorage)에만** 저장되고, JSON 내보내기 파일에는 **포함되지 않습니다**. 공용 PC에서는 사용 후 설정에서 토큰을 비우세요.
-
-## 📱 모바일 조회 (S26 Ultra 등)
-- 주소: **`https://baikhojun.github.io/m/`** (폰에서 북마크 권장)
-- **조회 전용**(수정 불가). 날짜별 일정·교대·휴가·개인일정을 세로 리스트로 봅니다.
-- 접속하면 **오늘 달**로 열리고 **오늘 날짜가 화면 중앙**에 오도록 자동 스크롤됩니다. (상단 **오늘** 버튼으로 언제든 복귀) — PC도 접속 시 오늘 달로 열리고 오늘 칸을 강조합니다.
-- 데이터는 PC localStorage가 아니라 **PC에서 동기화 업로드한 파일(`data/schedule-data.json`)** 을 읽어옵니다.
-  - 흐름: **PC에서 수정 → 설정 → GitHub 동기화 ⬆ 업로드 → 폰에서 🔄 새로고침**
-  - 동기화 후 GitHub Pages 재빌드(1~2분) 뒤 반영됩니다.
-- ⚠ 동기화 데이터가 **공개 저장소**에 있으면 인터넷에 공개됩니다(개인일정 포함). 비공개가 필요하면 비공개 저장소를 쓰세요.
-
-## 📲 홈 화면에 앱 설치 (PWA)
-- 폰 크롬에서 **`https://baikhojun.github.io/m/`** 접속 → 메뉴(⋮) → **앱 설치 / 홈 화면에 추가**
-- 앱 아이콘으로 설치되어 **전체화면 실행**, 오프라인에서도 마지막 데이터 조회 가능(서비스워커 캐시)
-- 진짜 `.apk`가 필요하면 **PWABuilder.com** 에 `https://baikhojun.github.io/m/` 를 넣어 생성
-
-## 단축키
-- **Ctrl+Z** — 실행취소 (입력창 바깥에서)
-- **Esc** — 열린 팝업 닫기
-
-## 인쇄 / PDF 저장 팁
-상단 **인쇄·PDF** → 인쇄 대화상자에서:
-- 대상: **PDF로 저장**
-- 용지: **A4**, 방향: **가로**, 여백: **없음**, **배경 그래픽** 체크
+See [docs/MIGRATION.md](docs/MIGRATION.md) for the consolidation map and retired repositories.

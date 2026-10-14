@@ -1,0 +1,3222 @@
+[
+ {
+  "model": "CR-0155MG",
+  "name": "전기보온밥솥",
+  "lp": 79000,
+  "sp": 44700,
+  "rc": 2,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "20.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0155MW",
+  "name": "전기보온밥솥",
+  "lp": 79000,
+  "sp": 44700,
+  "rc": 14,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "20.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0215MP",
+  "name": "쿠쿠 미식 컬렉션 보온 밥솥(2인용)",
+  "lp": 109000,
+  "sp": 66900,
+  "rc": 0,
+  "desc": "논스틱 코팅 내솥 ∙ 분리형 커버 ∙ 이유식&건강죽 레시피",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "25.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0215MV",
+  "name": "쿠쿠 미식 컬렉션 보온 밥솥(2인용)",
+  "lp": 109000,
+  "sp": 53600,
+  "rc": 2,
+  "desc": "논스틱 코팅 내솥 ∙ 분리형 커버 ∙ 이유식&건강죽 레시피",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "25.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0215MW",
+  "name": "쿠쿠 미식 컬렉션 보온 밥솥(2인용)",
+  "lp": 109000,
+  "sp": 66900,
+  "rc": 3,
+  "desc": "논스틱 코팅 내솥 ∙ 분리형 커버 ∙ 이유식&건강죽 레시피",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "25.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0365FR",
+  "name": "전기보온밥솥(3인용)",
+  "lp": 93000,
+  "sp": 64100,
+  "rc": 4,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "17.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0375FW",
+  "name": "전기보온밥솥(3인용)/에그밥솥",
+  "lp": 109000,
+  "sp": 71400,
+  "rc": 68,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "20.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0415MW",
+  "name": "쿠쿠 스퀘어 보온밥솥",
+  "lp": 139000,
+  "sp": 89000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CR-0485GW",
+  "name": "전기보온밥솥(4인용)",
+  "lp": 139000,
+  "sp": 79000,
+  "rc": 0,
+  "desc": "논스틱 코팅 내솥 ∙ 다양한 레시피 ∙ 미니멀 심리스 디자인",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0655FR",
+  "name": "전기보온밥솥(6인용)",
+  "lp": 104000,
+  "sp": 70000,
+  "rc": 3,
+  "desc": "쿠폰적용불가 상품입니다.",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "14.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0671V",
+  "name": "전기보온밥솥",
+  "lp": 78000,
+  "sp": 53600,
+  "rc": 2,
+  "desc": "쿠폰적용불가 상품입니다.",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "14.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0675FW",
+  "name": "전기보온밥솥(6인용)/에그밥솥",
+  "lp": 119000,
+  "sp": 73500,
+  "rc": 59,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "19.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0685GW",
+  "name": "전기보온밥솥(6인용)",
+  "lp": 149000,
+  "sp": 149000,
+  "rc": 0,
+  "desc": "논스틱 코팅 내솥 ∙ 다양한 레시피 ∙ 간편 분리형 커버",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "23.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-0685GWM",
+  "name": "쿠쿠 6인용 전기 밥솥",
+  "lp": 149000,
+  "sp": 79000,
+  "rc": 4,
+  "desc": "미니멀 심리스 디자인 ∙ 논스틱 코팅 내솥 ∙ 간편 분리형 커버",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-1055B",
+  "name": "전기보온밥솥",
+  "lp": 79000,
+  "sp": 79000,
+  "rc": 2,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "15.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CR-3515GG",
+  "name": "쿠쿠 대용량 전기 보온 밥솥(35인용)",
+  "lp": 239000,
+  "sp": 169000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "WM"
+  ],
+  "status": "판매중",
+  "reg": "26.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-AHF1020FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 488000,
+  "sp": 488000,
+  "rc": 3,
+  "desc": "분리형커버 ∙ 이중모션패킹 ∙ 타철명장내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-AHF1060FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 458000,
+  "sp": 245000,
+  "rc": 17,
+  "desc": "이지 분리형 커버 ∙ 이중모션패킹 ∙ 타철명장&엑스월 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-AHP1010FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 488000,
+  "sp": 340000,
+  "rc": 0,
+  "desc": "분리형커버 ∙ 이중모션패킹 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-AHXB1060FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 478000,
+  "sp": 252000,
+  "rc": 2,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "14.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-BCHF107FW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 598000,
+  "rc": 0,
+  "desc": "타철명장 ∙ 분리형 커버 ∙ 스마트 알고리즘",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-BDHF065BD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 458000,
+  "sp": 378800,
+  "rc": 0,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 에너지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-BDHF067FW",
+  "name": "쿠쿠 IH전기압력밥솥(6인용)",
+  "lp": 458000,
+  "sp": 458000,
+  "rc": 0,
+  "desc": "타철명장 ∙ 분리형 커버 ∙ 스마트 알고리즘",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-BHF0670FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 408000,
+  "sp": 252000,
+  "rc": 6,
+  "desc": "이지 분리형 커버 ∙ 이중모션패킹 ∙ 타철명장&엑스월 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHAS109FB",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 320000,
+  "rc": 25,
+  "desc": "ALL스테인리스 ∙ 수비드 기능 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "22.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHAS109FW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 320000,
+  "rc": 128,
+  "desc": "ALL스테인리스 ∙ 수비드 기능 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHAS109FWM",
+  "name": "IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 310000,
+  "rc": 39,
+  "desc": "",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHASNL1015FGW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 310000,
+  "rc": 0,
+  "desc": "화이트 디자인 ∙ 스마트 알고리즘 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": true,
+  "new": true
+ },
+ {
+  "model": "CRP-CHB1060FSM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 598000,
+  "sp": 309000,
+  "rc": 18,
+  "desc": "다이아쉴드 내솥 ∙ 패킹워시 분리형커버 ∙ 안과 밖 모두 스테인리스",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "24.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHB1075FD(면세점, 중국어)",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 578000,
+  "sp": 578000,
+  "rc": 0,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 에너지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "면세점",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHP1010FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 608000,
+  "sp": 280000,
+  "rc": 562,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHP1010FW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 638000,
+  "sp": 280000,
+  "rc": 221,
+  "desc": "화이트 디자인 ∙ 패킹워시 분리형 커버 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHP1060FSM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 638000,
+  "sp": 289000,
+  "rc": 47,
+  "desc": "안과 밖 모두 스테인리스 ∙ 패킹워시 분리형 커버 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHPNL1015FGW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 528000,
+  "sp": 260000,
+  "rc": 5,
+  "desc": "화이트 디자인 ∙ 패킹워시 분리형 커버 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-DHAS069FB",
+  "name": "IH전기압력밥솥(6인용, 올스테인리스 내솥)",
+  "lp": 528000,
+  "sp": 290000,
+  "rc": 30,
+  "desc": "ALL스테인리스 ∙ 수비드 기능 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "22.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHAS069FW",
+  "name": "IH전기압력밥솥(6인용, 올스테인리스 내솥)",
+  "lp": 528000,
+  "sp": 330000,
+  "rc": 171,
+  "desc": "ALL스테인리스 ∙ 수비드 기능 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHAS069FWM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 528000,
+  "sp": 330000,
+  "rc": 58,
+  "desc": "ALL스테인리스 내솥 ∙ 수비드 기능 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHASNL0615FGW",
+  "name": "쿠쿠 6인용 IH전기압력밥솥 그레이스 화이트",
+  "lp": 488000,
+  "sp": 285000,
+  "rc": 9,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.06",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-DHB0660FDM",
+  "name": "IH전기압력밥솥(6인용)/다크실버",
+  "lp": 478000,
+  "sp": 270000,
+  "rc": 50,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "품절",
+  "reg": "19.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHB0660FT",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 478000,
+  "sp": 478000,
+  "rc": 19,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 에너지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHP0610FD",
+  "name": "IH전기압력밥솥(6인용)/다크실버",
+  "lp": 468000,
+  "sp": 280000,
+  "rc": 245,
+  "desc": "풀 스테인리스 ∙ 2중모션패킹 ∙패킹워시 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHP0610FW",
+  "name": "IH전기압력밥솥(6인용, 화이트)",
+  "lp": 488000,
+  "sp": 280000,
+  "rc": 233,
+  "desc": "화이트 디자인 ∙ 패킹워시 분리형 커버 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHP0660FSM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 488000,
+  "sp": 269000,
+  "rc": 13,
+  "desc": "안과 밖 모두 스테인리스 ∙ 패킹워시 분리형 커버 ∙ 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHPFF0615FGW",
+  "name": "쿠쿠 6인용 IH전기압력밥솥 그레이스 화이트",
+  "lp": 488000,
+  "sp": 488000,
+  "rc": 0,
+  "desc": "에코 스테인리스 내솥 ∙ 2중 모션 패킹 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.06",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-DHPNL0615FGG",
+  "name": "쿠쿠 6인용 IH전기압력밥솥 어반그레이",
+  "lp": 488000,
+  "sp": 240000,
+  "rc": 8,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.06",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-DHPNL0615FGW",
+  "name": "쿠쿠 6인용 IH전기압력밥솥 그레이스 화이트",
+  "lp": 488000,
+  "sp": 240000,
+  "rc": 33,
+  "desc": "에코 스테인리스 내솥 ∙ 2중 모션 패킹 ∙ 패킹워시 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHR0610FS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 498000,
+  "sp": 498000,
+  "rc": 0,
+  "desc": "풀 스테인리스 ∙ 패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "14.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-DHXB0610FS",
+  "name": "IH전기압력밥솥(6인용)/실버",
+  "lp": 458000,
+  "sp": 247000,
+  "rc": 106,
+  "desc": "패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "16.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-EHS0320FB",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(3인용)",
+  "lp": 418000,
+  "sp": 260000,
+  "rc": 52,
+  "desc": "2기압 ∙ 풀 스테인리스 내솥 ∙ 엑스월 블랙 샤인 코팅",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-EHS0320FGW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(3인용)",
+  "lp": 418000,
+  "sp": 418000,
+  "rc": 0,
+  "desc": "스마트알고리즘 ∙ 논스톱스팀배출 ∙ 현미발아기능",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHB0610EL",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 468000,
+  "sp": 468000,
+  "rc": 1,
+  "desc": "스테인리스 분리형 커버 ∙ 패킹워시 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHB0610FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 458000,
+  "sp": 378000,
+  "rc": 0,
+  "desc": "스테인리스 내솥 ∙ 이중 모션 패킹 ∙ 에어지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "20.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHR0610FS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 528000,
+  "sp": 420000,
+  "rc": 4,
+  "desc": "스테인리스 내솥 ∙ 이중 모션 패킹 ∙ 에어지 아이 ∙ 초고압력 2기압",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHR107FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 658000,
+  "sp": 658000,
+  "rc": 2,
+  "desc": "스테인리스 내솥 ∙ 이중 모션 패킹 ∙ 에어지 아이 ∙ 초고압력 2기압",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "15.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS0610FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 508000,
+  "sp": 270000,
+  "rc": 5,
+  "desc": "에너지아이기능 ∙ 패킹워시 분리형 커버 ∙ 초고압2기압 ∙ 이중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "18.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS0610FG",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 508000,
+  "sp": 270000,
+  "rc": 23,
+  "desc": "에너지아이기능 ∙ 패킹워시 분리형 커버 ∙ 초고압2기압 ∙ 이중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "18.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS0610FMG",
+  "name": "IH전기압력밥솥(6인용, 메탈릭그린)",
+  "lp": 508000,
+  "sp": 299000,
+  "rc": 2,
+  "desc": "에코 스테인리스 내솥 ∙ 패킹워시 분리형 커버 ∙ 에너지아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS1010FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 668000,
+  "sp": 300000,
+  "rc": 25,
+  "desc": "에너지아이기능 ∙ 패킹워시 분리형 커버 ∙ 초고압2기압 ∙ 이중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "18.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS1010FG",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 668000,
+  "sp": 300000,
+  "rc": 28,
+  "desc": "에너지아이기능 ∙ 패킹워시 분리형 커버 ∙ 초고압2기압 ∙ 이중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "18.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHS1010FMG",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 668000,
+  "sp": 334000,
+  "rc": 5,
+  "desc": "에코 스테인리스 내솥 ∙ 패킹워시 분리형 커버 ∙ 에너지아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHTAS0610FW",
+  "name": "트윈프레셔 밥솥(6인용, 올스테인리스 내솥)",
+  "lp": 548000,
+  "sp": 310000,
+  "rc": 89,
+  "desc": "",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "23.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHTAS1010FW",
+  "name": "트윈프레셔 밥솥(10인용, 올스테인리스 내솥)",
+  "lp": 658000,
+  "sp": 340000,
+  "rc": 83,
+  "desc": "",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "23.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHTS0610FB",
+  "name": "IH전기압력밥솥(6인용, 로즈브라운)",
+  "lp": 508000,
+  "sp": 508000,
+  "rc": 6,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥 ∙ 이중모션 패킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHTS1010FB",
+  "name": "트윈프레셔밥솥(10인용, 로즈브라운)",
+  "lp": 618000,
+  "sp": 419500,
+  "rc": 6,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥 ∙ 이중모션 패킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-FHXB0610FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 478000,
+  "sp": 296400,
+  "rc": 2,
+  "desc": "다이아쉴드 내솥 ∙ 이중 모션 패킹 ∙ 에어지 아이 ∙ 초고압력 2기압",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "17.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HQB0310FS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 298000,
+  "sp": 180000,
+  "rc": 41,
+  "desc": "분리형커버 ∙ 다이아쉴드 코딩 내솥 ∙ 자동살균 세척 기능",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HUF105SDB",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 338000,
+  "sp": 220000,
+  "rc": 68,
+  "desc": "스테인리스 분리형 커버 ∙ 타철명장&엑스월 블랙 코팅 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HUF1080BE",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 338000,
+  "sp": 338000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HUF10BS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 338000,
+  "sp": 220000,
+  "rc": 13,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HVB0680BE",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 318000,
+  "sp": 318000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HVB06BS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 318000,
+  "sp": 290000,
+  "rc": 3,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "21.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HWF1060FB",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 398000,
+  "sp": 398000,
+  "rc": 12,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "18.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-HWF1060FS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥",
+  "lp": 398000,
+  "sp": 294000,
+  "rc": 6,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHF0610FLB",
+  "name": "IH전기압력밥솥(6인용, 루미다크실버)",
+  "lp": 528000,
+  "sp": 528000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-JHF1010FLB",
+  "name": "IH전기압력밥솥(10인용, 루미다크실버)",
+  "lp": 638000,
+  "sp": 638000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-JHP0610FC",
+  "name": "IH전기압력밥솥(6인용, 캐비어블루)",
+  "lp": 578000,
+  "sp": 578000,
+  "rc": 1,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP0610FG",
+  "name": "IH전기압력밥솥(6인용, 메탈릭 그린)",
+  "lp": 578000,
+  "sp": 299000,
+  "rc": 26,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP0610FGPS",
+  "name": "쿠쿠 IH 전기압력밥솥(6인용, 그레이스 핑크 실버)",
+  "lp": 578000,
+  "sp": 330000,
+  "rc": 0,
+  "desc": "풀 스테인리스 ∙ 이지 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP0660FSM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 578000,
+  "sp": 299000,
+  "rc": 8,
+  "desc": "폴스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP1010FC",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 2,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP1010FG",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 698000,
+  "sp": 380000,
+  "rc": 11,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP1010FGPS",
+  "name": "쿠쿠 IH 전기압력밥솥(10인용, 그레이스 핑크 실버)",
+  "lp": 698000,
+  "sp": 360000,
+  "rc": 0,
+  "desc": "풀 스테인리스 ∙ 이지 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHP1060FSM",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 698000,
+  "sp": 319000,
+  "rc": 17,
+  "desc": "폴스테인리스 ∙ 원터치 분리형 커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHPFF0610GPS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 578000,
+  "sp": 578000,
+  "rc": 0,
+  "desc": "풀스테인리스 ∙ 에코 스테인리스 내솥 ∙ 홀더 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHPFF1010GPS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 0,
+  "desc": "풀스테인리스 ∙ 에코 스테인리스 내솥 ∙ 홀더 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHPNL0610GPS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(6인용)",
+  "lp": 578000,
+  "sp": 320000,
+  "rc": 1,
+  "desc": "풀스테인리스 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHPNL1010GPS",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 698000,
+  "sp": 360000,
+  "rc": 3,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "25.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHR0610FC",
+  "name": "IH전기압력밥솥(6인용, 캐비어블루)",
+  "lp": 598000,
+  "sp": 260000,
+  "rc": 115,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에너지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHR0660FD",
+  "name": "IH전기압력밥솥(6인용, 다크티탄실버)",
+  "lp": 598000,
+  "sp": 285000,
+  "rc": 787,
+  "desc": "스테인리스 분리형 커버 ∙ 원터치 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHR1010FC",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 718000,
+  "sp": 290000,
+  "rc": 95,
+  "desc": "풀 스테인리스 ∙ 원터치 분리형 커버 ∙ 에너지 아이",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "22.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHR1060FD",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(10인용)",
+  "lp": 718000,
+  "sp": 305000,
+  "rc": 688,
+  "desc": "스테인리스 분리형 커버 ∙ 원터치 분리형 커버 ∙ 2중모션패킹",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "19.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHTR0610FD",
+  "name": "트윈프레셔밥솥(6인용)",
+  "lp": 568000,
+  "sp": 568000,
+  "rc": 12,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 에코스테인리스 커브드 내솥 ∙ 이중모션 패킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "품절",
+  "reg": "18.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHTR1010FD",
+  "name": "쿠쿠 미식 컬렉션 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 22,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 에코스테인리스 커브드 내솥 ∙ 이중모션 패킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "품절",
+  "reg": "18.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHTS0660FB",
+  "name": "쿠쿠 미식 컬렉션 트윈프레셔 전기압력밥솥(6인용)",
+  "lp": 568000,
+  "sp": 568000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 에코 스테인리스 내솥 ∙ 원터치 분리형 커버 ∙ 대기전력 차단 스위치",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHTS0660FS",
+  "name": "트윈프레셔밥솥(6인용)",
+  "lp": 568000,
+  "sp": 325500,
+  "rc": 26,
+  "desc": "트윈프레셔 ∙ 에코 스테인리스 내솥 ∙ 원터치 분리형 커버 ∙ 대기전력 차단 스위치",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-JHTS1060FB",
+  "name": "트윈프레셔밥솥(10인용,로즈브라운)",
+  "lp": 658000,
+  "sp": 579300,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 에코 스테인리스 내솥 ∙ 원터치 분리형 커버 ∙ 대기전력 차단 스위치",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHLR1010FGW",
+  "name": "트윈프레셔 저당밥솥(10인용,그레이스 화이트)",
+  "lp": 678000,
+  "sp": 678000,
+  "rc": 0,
+  "desc": "초고압,무압 취사 ∙ 당질 저감 저당밥솥 ∙ 풀스테인리스 분리형 커버",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "23.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHTAS1010FWM",
+  "name": "트윈프레셔 밥솥(10인용, 올스테인리스 내솥)",
+  "lp": 618000,
+  "sp": 367500,
+  "rc": 19,
+  "desc": "초고압,무압 취사 ∙ 분리형 커버 ∙ ALL스테인리스 내솥",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "23.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHTS1060FD",
+  "name": "쿠쿠 미식 컬렉션 트윈프레셔 밥솥(10인용, 다크실버)",
+  "lp": 598000,
+  "sp": 305000,
+  "rc": 212,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 대기전력 차단 스위치",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHTS1060FG",
+  "name": "쿠쿠 미식 컬렉션 트윈프레셔 밥솥(10인용)",
+  "lp": 598000,
+  "sp": 598000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 원터치 분리형 커버 ∙ 대기전력 차단 스위치",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "21.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHTS1060FLB",
+  "name": "트윈프레셔 밥솥(10인용, 루미블랙)",
+  "lp": 598000,
+  "sp": 418000,
+  "rc": 5,
+  "desc": "초고압과 무압취사 ∙ 분리형커버 ∙ 풀 스테인리스 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-KHTS1060FWM",
+  "name": "트윈프레셔 밥솥(10인용, 그레이스 화이트&실버)",
+  "lp": 598000,
+  "sp": 385000,
+  "rc": 16,
+  "desc": "초고압과 무압취사 ∙ 분리형커버 ∙ 에코 스테인리스 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHLR0610FGWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 저당밥솥(6인용)",
+  "lp": 618000,
+  "sp": 380000,
+  "rc": 58,
+  "desc": "당질저감 기능 ∙ 이중모션밸브 적용 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHLR0610FW",
+  "name": "트윈프레셔 저당밥솥(6인용)",
+  "lp": 618000,
+  "sp": 350000,
+  "rc": 26,
+  "desc": "초고압,무압 취사 ∙ 에코 스테인리스 커브드 내솥 ∙ 저당질밥",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "23.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHLR1010FGWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 저당밥솥(10인용)",
+  "lp": 718000,
+  "sp": 430000,
+  "rc": 48,
+  "desc": "당질저감 기능 ∙ 이중모션밸브 적용 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHLR1010FW",
+  "name": "트윈프레셔 저당밥솥(10인용,화이트)",
+  "lp": 718000,
+  "sp": 400000,
+  "rc": 57,
+  "desc": "초고압,무압 취사 ∙ 당질 저감 저당밥솥 ∙ 폴 스테인리스 분리형 커버",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "20.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHR0610FGW",
+  "name": "마스터셰프 IH전기압력밥솥(6인용)",
+  "lp": 578000,
+  "sp": 399000,
+  "rc": 7,
+  "desc": "2중 모션 패킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHR1010FGW",
+  "name": "마스터셰프 IH전기압력밥솥(10인용)",
+  "lp": 678000,
+  "sp": 459000,
+  "rc": 7,
+  "desc": "패킹워서 분리형 ∙ 2중 모션 패킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTAR0610FGI",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(올 스테인리스 내솥)",
+  "lp": 789000,
+  "sp": 789000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "23.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTAR1010FGI",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(올 스테인리스 내솥)",
+  "lp": 890000,
+  "sp": 890000,
+  "rc": 0,
+  "desc": "신규회원가입 시 15% 추가 할인",
+  "cats": [
+   "AS"
+  ],
+  "status": "판매중",
+  "reg": "23.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FB",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 350000,
+  "rc": 19,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FD",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 350000,
+  "rc": 59,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "20.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGB",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 598000,
+  "rc": 5,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGBM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 359000,
+  "rc": 73,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGI",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 598000,
+  "rc": 0,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGIM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 359000,
+  "rc": 88,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 598000,
+  "rc": 0,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FGWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 359000,
+  "rc": 333,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FS",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 470000,
+  "rc": 9,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "21.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 350000,
+  "rc": 291,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR0610FWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(6인용)",
+  "lp": 598000,
+  "sp": 350000,
+  "rc": 251,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FB",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 21,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FD",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 34,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "20.05",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGB",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 18,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGBM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 63,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGI",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGIM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 60,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 698000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FGWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 419000,
+  "rc": 167,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 69,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-LHTR1010FWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 밥솥(10인용)",
+  "lp": 698000,
+  "sp": 400000,
+  "rc": 148,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 ∙ 에코 스테인리스 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "19.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-MHR0310FW",
+  "name": "쿠쿠 미식 컬렉션 IH전기압력밥솥(3인용)",
+  "lp": 478000,
+  "sp": 260000,
+  "rc": 14,
+  "desc": "슈퍼쾌속 ∙ 에코 스테인리스 커브드 내솥 ∙ 풀 스테인리스 분리형 커버",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "24.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-MHTR0310FG",
+  "name": "트윈프레셔 쁘띠 밥솥(3인용, 어반그레이)",
+  "lp": 478000,
+  "sp": 270000,
+  "rc": 23,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "21.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-MHTR0310FW",
+  "name": "트윈프레셔 쁘띠 밥솥(3인용, 매트화이트)",
+  "lp": 478000,
+  "sp": 270000,
+  "rc": 140,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 커브드 내솥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "21.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHFFLR0610FGW",
+  "name": "쿠쿠 마스터셰프 사일런스 6인용 저당밥솥",
+  "lp": 748000,
+  "sp": 748000,
+  "rc": 0,
+  "desc": "저속노화밥 모드 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHNLLR0610FGW",
+  "name": "쿠쿠 마스터셰프 사일런스 6인용 저당밥솥",
+  "lp": 658000,
+  "sp": 550000,
+  "rc": 7,
+  "desc": "저속노화밥 모드 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "SI",
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "26.01",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-NHTR0610FB",
+  "name": "마스터셰프 사일런스 밥솥(6인용)",
+  "lp": 658000,
+  "sp": 420000,
+  "rc": 24,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "22.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR0610FGW",
+  "name": "마스터셰프 사일런스 밥솥(6인용)",
+  "lp": 638000,
+  "sp": 420000,
+  "rc": 127,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "22.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR0610FP",
+  "name": "마스터셰프 사일런스 밥솥(6인용)",
+  "lp": 658000,
+  "sp": 420000,
+  "rc": 27,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "22.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR0610FT",
+  "name": "마스터셰프 사일런스 밥솥(6인용)",
+  "lp": 658000,
+  "sp": 420000,
+  "rc": 35,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "22.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR0610FW",
+  "name": "마스터셰프 사일런스 밥솥(6인용)",
+  "lp": 638000,
+  "sp": 420000,
+  "rc": 64,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "22.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR1010FB",
+  "name": "마스터셰프 사일런스 밥솥(10인용,그레이스 브라운)",
+  "lp": 758000,
+  "sp": 480000,
+  "rc": 17,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR1010FGW",
+  "name": "마스터셰프 사일런스 밥솥(10인용,그레이스화이트)",
+  "lp": 738000,
+  "sp": 480000,
+  "rc": 57,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR1010FP",
+  "name": "마스터셰프 사일런스 밥솥(10인용,핑크)",
+  "lp": 758000,
+  "sp": 480000,
+  "rc": 11,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR1010FT",
+  "name": "마스터셰프 사일런스 밥솥(10인용,테라코타)",
+  "lp": 758000,
+  "sp": 480000,
+  "rc": 5,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTR1010FW",
+  "name": "마스터셰프 사일런스 밥솥(10인용,화이트)",
+  "lp": 738000,
+  "sp": 480000,
+  "rc": 19,
+  "desc": "미니멀 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTRNL0610TFGW",
+  "name": "쿠쿠 마스터셰프 사일런스 6인용 스마트 IOT 앱연동(그레이스 화이트)",
+  "lp": 648000,
+  "sp": 549000,
+  "rc": 6,
+  "desc": "심리스 디자인 ∙ 스마트한 loT 밥솥 ∙ 트윈프레셔&오토락킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "26.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-NHTRNL1010TFGW",
+  "name": "쿠쿠 마스터셰프 사일런스 10인용 스마트 IOT 앱연동(그레이스 화이트)",
+  "lp": 748000,
+  "sp": 599000,
+  "rc": 2,
+  "desc": "",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "26.03",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-OHFFLR0610FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제 저당밥솥(6인용)",
+  "lp": 638000,
+  "sp": 638000,
+  "rc": 0,
+  "desc": "저속노화밥 모드ㆍ사일런트 압력 시스템ㆍ트윈프레셔&오픈쿠킹",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "25.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHFFLR1010FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제 저당밥솥(10인용)",
+  "lp": 718000,
+  "sp": 718000,
+  "rc": 0,
+  "desc": "저속노화밥 모드ㆍ사일런트 압력 시스템ㆍ트윈프레셔&오픈쿠킹",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHNLLR0610FGW",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 저당밥솥 사일런스 오브제 6인용",
+  "lp": 638000,
+  "sp": 500000,
+  "rc": 28,
+  "desc": "",
+  "cats": [
+   "SI",
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "25.09",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-OHNLLR1010FGW",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 저당밥솥 사일런스 오브제 10인용",
+  "lp": 738000,
+  "sp": 550000,
+  "rc": 24,
+  "desc": "4세대 저당밥솥ㆍ사일런트 압력 시스템ㆍ트윈프레셔&오픈쿠킹",
+  "cats": [
+   "SI",
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "25.11",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-OHTR0610FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(6인용)",
+  "lp": 618000,
+  "sp": 618000,
+  "rc": 4,
+  "desc": "빛을 담은 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "23.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR0610FIM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(6인용)",
+  "lp": 618000,
+  "sp": 440000,
+  "rc": 51,
+  "desc": "빛을 담은 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR0610FP",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(6인용)",
+  "lp": 618000,
+  "sp": 618000,
+  "rc": 0,
+  "desc": "빛을 담은 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR0610FWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(6인용)",
+  "lp": 618000,
+  "sp": 440000,
+  "rc": 125,
+  "desc": "빛을 담은 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR1010FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(10인용)",
+  "lp": 718000,
+  "sp": 718000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR1010FIM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(10인용)",
+  "lp": 718000,
+  "sp": 480000,
+  "rc": 32,
+  "desc": "사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅or무코팅 호환",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR1010FP",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(10인용)",
+  "lp": 718000,
+  "sp": 718000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-OHTR1010FWM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 오브제(10인용)",
+  "lp": 718000,
+  "sp": 480000,
+  "rc": 60,
+  "desc": "사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅or무코팅 호환",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-P0610FT",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥",
+  "lp": 223000,
+  "sp": 208000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "품절",
+  "reg": "20.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-P0620FDM",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥",
+  "lp": 223000,
+  "sp": 223000,
+  "rc": 21,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "품절",
+  "reg": "18.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-P0660FD",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥",
+  "lp": 223000,
+  "sp": 219000,
+  "rc": 22,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "품절",
+  "reg": "19.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-P1015FBB",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(10인용)",
+  "lp": 223000,
+  "sp": 190000,
+  "rc": 2,
+  "desc": "14중 안전장치 ∙ 자동살균 스팀세척 ∙ 엑스월 블랙 코팅 내솥",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-P1055FD",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥",
+  "lp": 233000,
+  "sp": 170000,
+  "rc": 25,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "19.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHFFLR0610FGW",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 저당밥솥 사일런스 프로(6인용)",
+  "lp": 628000,
+  "sp": 628000,
+  "rc": 0,
+  "desc": "저속노화밥 모드ㆍ사일런트 압력 시스템ㆍ트윈프레셔&오픈쿠킹",
+  "cats": [
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHNLLR0610FGW",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 저당밥솥 사일런스 프로(6인용)",
+  "lp": 628000,
+  "sp": 490000,
+  "rc": 15,
+  "desc": "저속노화밥 모드ㆍ사일런트 압력 시스템ㆍ트윈프레셔&오픈쿠킹",
+  "cats": [
+   "SI",
+   "LS"
+  ],
+  "status": "판매중",
+  "reg": "25.11",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-PHNLTR0610FGW",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 밥솥 프로(6인용)",
+  "lp": 608000,
+  "sp": 440000,
+  "rc": 32,
+  "desc": "더 헤리티지 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅/무코팅 호환",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "25.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHTR0610FDM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 밥솥 프로(6인용)",
+  "lp": 608000,
+  "sp": 380000,
+  "rc": 70,
+  "desc": "더 헤리티지 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅/무코팅 호환",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHTR0610FR",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 밥솥 프로(6인용)",
+  "lp": 608000,
+  "sp": 608000,
+  "rc": 1,
+  "desc": "더 헤리티지 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅/무코팅 호환",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHTR0610FSM",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 밥솥 프로(6인용)",
+  "lp": 608000,
+  "sp": 380000,
+  "rc": 56,
+  "desc": "더 헤리티지 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅/무코팅 호환",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "23.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PHTR0610FWS",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 밥솥 프로(6인용)",
+  "lp": 608000,
+  "sp": 608000,
+  "rc": 4,
+  "desc": "더 헤리티지 디자인 ∙ 사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 코팅/무코팅 호환",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PK0610BGI",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(6인용)",
+  "lp": 223000,
+  "sp": 185000,
+  "rc": 20,
+  "desc": "2중 모션 패킹 ∙ 엑스윌 블랙 코팅 내솥 ∙ 이지 분리형 커버",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PK0620BS",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(6인용)",
+  "lp": 223000,
+  "sp": 223000,
+  "rc": 0,
+  "desc": "이지 분리형 커버 ∙ 다양한 메뉴 ∙ X-WALL Black 코팅 내솥",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PK0620BUG",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(6인용)",
+  "lp": 223000,
+  "sp": 223000,
+  "rc": 0,
+  "desc": "2중 모션 패킹 ∙ 엑스윌 블랙 코팅 내솥 ∙ 이지 분리형 커버",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-PW1085FD",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥",
+  "lp": 223000,
+  "sp": 190000,
+  "rc": 6,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "20.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-QHLRNL0610FGW",
+  "name": "쿠쿠 미식컬렉션 마스터셰프 사일런스 큐브",
+  "lp": 688000,
+  "sp": 688000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "TP",
+   "SI"
+  ],
+  "status": "판매중",
+  "reg": "26.08",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-QK1010BGW",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(10인용)",
+  "lp": 243000,
+  "sp": 243000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-QKNL1010BGB",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(10인용)",
+  "lp": 243000,
+  "sp": 195000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-QKNL1010BGW",
+  "name": "쿠쿠 전기압력밥솥 10인용",
+  "lp": 243000,
+  "sp": null,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-QKNL1010BGW(C)",
+  "name": "쿠쿠 전기압력밥솥 10인용",
+  "lp": 243000,
+  "sp": 195000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "PL",
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": true
+ },
+ {
+  "model": "CRP-R0615FBS",
+  "name": "쿠쿠 6인용 전기압력밥솥",
+  "lp": 269000,
+  "sp": 269000,
+  "rc": 0,
+  "desc": "간편 분리 세척 ∙ 풀스테인리스 분리형 커버 ∙ 엑스월 다이아몬드 내솥 코팅",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.09",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R0615FWS",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(6인용)",
+  "lp": 263000,
+  "sp": 263000,
+  "rc": 0,
+  "desc": "풀스테인리스 분리형 커버 ∙ 2중모션패킹 ∙ 스테인리스 재질",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "25.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R0625FBB",
+  "name": "전기압력밥솥(6인용)/블랙&브라운",
+  "lp": 263000,
+  "sp": 263000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R0695FGW",
+  "name": "전기압력밥솥(6인용)/그레이스화이트",
+  "lp": 263000,
+  "sp": 263000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R1015FBB",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(10인용)",
+  "lp": 293000,
+  "sp": 293000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R1025FBS",
+  "name": "쿠쿠 미식 컬렉션 전기압력밥솥(10인용)",
+  "lp": 293000,
+  "sp": 219000,
+  "rc": 4,
+  "desc": "풀스테인리스 분리형 커버 ∙ 2중모션패킹 ∙ 엑스월 다이아몬트 내솥 코팅",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.07",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-R1095FGW",
+  "name": "전기압력밥솥(10인용)/그레이스화이트",
+  "lp": 293000,
+  "sp": 293000,
+  "rc": 1,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.03",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-RK0615FWS",
+  "name": "쿠쿠 전기압력 밥솥(6인용)/화이트 스톤",
+  "lp": 253000,
+  "sp": 190000,
+  "rc": 6,
+  "desc": "",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0615FGSM",
+  "name": "쿠쿠 6인용 트윈프레셔 더 라이트",
+  "lp": 333000,
+  "sp": 228000,
+  "rc": 2,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0615FLSM",
+  "name": "6인용 트윈프레셔 더 라이트",
+  "lp": 333000,
+  "sp": 228000,
+  "rc": 1,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0615FW",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(6인용)",
+  "lp": 333000,
+  "sp": 240000,
+  "rc": 0,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.12",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0615FWGM",
+  "name": "쿠쿠 6인용 트윈프레셔 더 라이트",
+  "lp": 333000,
+  "sp": 210000,
+  "rc": 7,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.04",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0615FWSM",
+  "name": "쿠쿠 6인용 트윈프레셔 더 라이트",
+  "lp": 333000,
+  "sp": 210000,
+  "rc": 1,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0695FGB",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(6인용)",
+  "lp": 333000,
+  "sp": 333000,
+  "rc": 1,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST0695FGW",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(6인용)",
+  "lp": 333000,
+  "sp": 333000,
+  "rc": 0,
+  "desc": "오픈쿠킹 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.08",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1010FG",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(10인용)",
+  "lp": 348000,
+  "sp": 232100,
+  "rc": 11,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "품절",
+  "reg": "21.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1010FGI",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 239000,
+  "rc": 8,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥 기능",
+  "cats": [
+   "TP"
+  ],
+  "status": "품절",
+  "reg": "22.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1015FGSM",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 240000,
+  "rc": 4,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "26.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1015FLSM",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 259000,
+  "rc": 0,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "26.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1015FW",
+  "name": "쿠쿠 미식 컬렉션 더 라이트 트윈프레셔 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 363000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1015FWGM",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 240000,
+  "rc": 6,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1015FWSM",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 240000,
+  "rc": 4,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.11",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1095FGB",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 363000,
+  "rc": 1,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-ST1095FGW",
+  "name": "쿠쿠 트윈프레셔 더 라이트 밥솥(10인용)",
+  "lp": 363000,
+  "sp": 363000,
+  "rc": 0,
+  "desc": "트윈프레셔 ∙ 오픈쿠킹 기능 ∙ 슈퍼쾌속 ∙ 냉동보관밥",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "26.02",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-T0310FGW",
+  "name": "미니 전기압력밥솥(3인용)",
+  "lp": 268000,
+  "sp": 200000,
+  "rc": 2,
+  "desc": "슈퍼 쾌속 ∙ 엑스웰 블랙 내솥 코딩 ∙ 이지 분리형 커버",
+  "cats": [
+   "PL"
+  ],
+  "status": "판매중",
+  "reg": "24.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-TT0310FGW",
+  "name": "트윈프레셔밥솥(3인용, 그레이스 화이트)",
+  "lp": 318000,
+  "sp": 212500,
+  "rc": 24,
+  "desc": "미니멀 디자인 ∙ 히든 디스플레이 ∙ 트윈프레셔 ∙ 슈퍼쾌속",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "22.10",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-TT0310FPP",
+  "name": "트윈프레셔 미니 전기압력밥솥(3인용)",
+  "lp": 318000,
+  "sp": 212500,
+  "rc": 0,
+  "desc": "슈퍼 쾌속 ∙ 엑스웰 블랙 내솥 코딩 ∙ 이지 분리형 커버",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.01",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-UT0610FGG",
+  "name": "쿠쿠 미식 컬렉션 마스터셰프 사일런스 어반(6인용)",
+  "lp": 348000,
+  "sp": 260000,
+  "rc": 8,
+  "desc": "사일런스 압력 시스템 ∙ 이지 오픈 핸들 ∙ 트윈프레셔&오픈쿠킹",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-UT0610FGW",
+  "name": "사일런스 어반 밥솥(6인용, 그레이스 화이트)",
+  "lp": 348000,
+  "sp": 260000,
+  "rc": 23,
+  "desc": "",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "24.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-UT1010FGG",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 사일런스 어반 10인용 (그레이스그레이)",
+  "lp": 378000,
+  "sp": 315000,
+  "rc": 3,
+  "desc": "사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 히든 디스플레이",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-UT1010FGW",
+  "name": "쿠쿠 트윈프레셔 마스터셰프 사일런스 어반 10인용 (그레이스 화이트)",
+  "lp": 378000,
+  "sp": 315000,
+  "rc": 4,
+  "desc": "사일런트 압력 시스템 ∙ 트윈프레셔&오픈쿠킹 ∙ 히든 디스플레이",
+  "cats": [
+   "TP"
+  ],
+  "status": "판매중",
+  "reg": "25.06",
+  "reg_est": false,
+  "new": false
+ },
+ {
+  "model": "CRP-CHPFF1015FGW",
+  "name": "쿠쿠 IH전기압력밥솥(10인용)",
+  "lp": 558000,
+  "sp": 558000,
+  "rc": 0,
+  "desc": "",
+  "cats": [
+   "IH"
+  ],
+  "status": "판매중",
+  "reg": "26.09",
+  "reg_est": true,
+  "new": true
+ }
+]

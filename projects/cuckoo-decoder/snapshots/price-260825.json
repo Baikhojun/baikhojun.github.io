@@ -1,0 +1,1277 @@
+{
+ "date": "260825",
+ "prices": {
+  "CR-0155MG": {
+   "lp": 79000,
+   "sp": 44700,
+   "so": false,
+   "rc": 2
+  },
+  "CR-0155MW": {
+   "lp": 79000,
+   "sp": 44700,
+   "so": false,
+   "rc": 14
+  },
+  "CR-0215MP": {
+   "lp": 109000,
+   "sp": 66900,
+   "so": false,
+   "rc": 0
+  },
+  "CR-0215MV": {
+   "lp": 109000,
+   "sp": 53600,
+   "so": false,
+   "rc": 2
+  },
+  "CR-0215MW": {
+   "lp": 109000,
+   "sp": 66900,
+   "so": false,
+   "rc": 3
+  },
+  "CR-0365FR": {
+   "lp": 93000,
+   "sp": 64100,
+   "so": false,
+   "rc": 4
+  },
+  "CR-0375FW": {
+   "lp": 109000,
+   "sp": 71400,
+   "so": false,
+   "rc": 68
+  },
+  "CR-0415MW": {
+   "lp": 139000,
+   "sp": 89000,
+   "so": false,
+   "rc": 0
+  },
+  "CR-0485GW": {
+   "lp": 139000,
+   "sp": 79000,
+   "so": false,
+   "rc": 0
+  },
+  "CR-0655FR": {
+   "lp": 104000,
+   "sp": 70000,
+   "so": false,
+   "rc": 3
+  },
+  "CR-0671V": {
+   "lp": 78000,
+   "sp": 53600,
+   "so": false,
+   "rc": 2
+  },
+  "CR-0675FW": {
+   "lp": 119000,
+   "sp": 73500,
+   "so": false,
+   "rc": 58
+  },
+  "CR-0685GW": {
+   "lp": 149000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CR-0685GWM": {
+   "lp": 149000,
+   "sp": 79000,
+   "so": false,
+   "rc": 3
+  },
+  "CR-1055B": {
+   "lp": 79000,
+   "sp": null,
+   "so": false,
+   "rc": 2
+  },
+  "CR-3515GG": {
+   "lp": 239000,
+   "sp": 169000,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-AHF1020FD": {
+   "lp": 488000,
+   "sp": null,
+   "so": false,
+   "rc": 3
+  },
+  "CRP-AHF1060FD": {
+   "lp": 458000,
+   "sp": 236700,
+   "so": false,
+   "rc": 17
+  },
+  "CRP-AHP1010FD": {
+   "lp": 488000,
+   "sp": 340000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-AHXB1060FD": {
+   "lp": 478000,
+   "sp": 252000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-BCHF107FW": {
+   "lp": 598000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-BDHF065BD": {
+   "lp": 458000,
+   "sp": 378800,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-BDHF067FW": {
+   "lp": 458000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-BHF0670FD": {
+   "lp": 408000,
+   "sp": 252000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-CHAS109FB": {
+   "lp": 598000,
+   "sp": 310000,
+   "so": false,
+   "rc": 24
+  },
+  "CRP-CHAS109FW": {
+   "lp": 598000,
+   "sp": 310000,
+   "so": false,
+   "rc": 128
+  },
+  "CRP-CHAS109FWM": {
+   "lp": 598000,
+   "sp": 300000,
+   "so": false,
+   "rc": 39
+  },
+  "CRP-CHASNL1015FGW": {
+   "lp": 598000,
+   "sp": null,
+   "so": true,
+   "rc": 0
+  },
+  "CRP-CHB1060FSM": {
+   "lp": 598000,
+   "sp": 309000,
+   "so": false,
+   "rc": 18
+  },
+  "CRP-CHB1075FD(면세점, 중국어)": {
+   "lp": 578000,
+   "sp": null,
+   "so": true,
+   "rc": 0
+  },
+  "CRP-CHP1010FD": {
+   "lp": 608000,
+   "sp": 270000,
+   "so": false,
+   "rc": 561
+  },
+  "CRP-CHP1010FW": {
+   "lp": 638000,
+   "sp": 270000,
+   "so": false,
+   "rc": 216
+  },
+  "CRP-CHP1060FSM": {
+   "lp": 638000,
+   "sp": 289000,
+   "so": false,
+   "rc": 46
+  },
+  "CRP-CHPNL1015FGW": {
+   "lp": 528000,
+   "sp": 260000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-DHAS069FB": {
+   "lp": 528000,
+   "sp": 285000,
+   "so": false,
+   "rc": 29
+  },
+  "CRP-DHAS069FW": {
+   "lp": 528000,
+   "sp": 310000,
+   "so": false,
+   "rc": 169
+  },
+  "CRP-DHAS069FWM": {
+   "lp": 528000,
+   "sp": 310000,
+   "so": false,
+   "rc": 57
+  },
+  "CRP-DHASNL0615FGW": {
+   "lp": 488000,
+   "sp": 280000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-DHB0660FDM": {
+   "lp": 478000,
+   "sp": 259000,
+   "so": true,
+   "rc": 50
+  },
+  "CRP-DHB0660FT": {
+   "lp": 478000,
+   "sp": null,
+   "so": false,
+   "rc": 19
+  },
+  "CRP-DHP0610FD": {
+   "lp": 468000,
+   "sp": 265000,
+   "so": false,
+   "rc": 245
+  },
+  "CRP-DHP0610FW": {
+   "lp": 488000,
+   "sp": 265000,
+   "so": false,
+   "rc": 231
+  },
+  "CRP-DHP0660FSM": {
+   "lp": 488000,
+   "sp": 269000,
+   "so": false,
+   "rc": 13
+  },
+  "CRP-DHPFF0615FGW": {
+   "lp": 488000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-DHPNL0615FGG": {
+   "lp": 488000,
+   "sp": 258000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-DHPNL0615FGW": {
+   "lp": 488000,
+   "sp": 230000,
+   "so": false,
+   "rc": 22
+  },
+  "CRP-DHR0610FS": {
+   "lp": 498000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-DHXB0610FS": {
+   "lp": 458000,
+   "sp": 247000,
+   "so": false,
+   "rc": 106
+  },
+  "CRP-EHS0320FB": {
+   "lp": 418000,
+   "sp": 260000,
+   "so": false,
+   "rc": 51
+  },
+  "CRP-EHS0320FGW": {
+   "lp": 418000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-FHB0610EL": {
+   "lp": 468000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-FHB0610FD": {
+   "lp": 458000,
+   "sp": 378000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-FHR0610FS": {
+   "lp": 528000,
+   "sp": 420000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-FHR107FD": {
+   "lp": 658000,
+   "sp": null,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-FHS0610FD": {
+   "lp": 508000,
+   "sp": 260000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-FHS0610FG": {
+   "lp": 508000,
+   "sp": 260000,
+   "so": false,
+   "rc": 23
+  },
+  "CRP-FHS0610FMG": {
+   "lp": 508000,
+   "sp": 299000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-FHS1010FD": {
+   "lp": 668000,
+   "sp": 300000,
+   "so": false,
+   "rc": 25
+  },
+  "CRP-FHS1010FG": {
+   "lp": 668000,
+   "sp": 300000,
+   "so": false,
+   "rc": 27
+  },
+  "CRP-FHS1010FMG": {
+   "lp": 668000,
+   "sp": 334000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-FHTAS0610FW": {
+   "lp": 548000,
+   "sp": 310000,
+   "so": false,
+   "rc": 88
+  },
+  "CRP-FHTAS1010FW": {
+   "lp": 658000,
+   "sp": 340000,
+   "so": false,
+   "rc": 80
+  },
+  "CRP-FHTS0610FB": {
+   "lp": 508000,
+   "sp": null,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-FHTS1010FB": {
+   "lp": 618000,
+   "sp": 419500,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-FHXB0610FD": {
+   "lp": 478000,
+   "sp": 296400,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-HQB0310FS": {
+   "lp": 298000,
+   "sp": 170000,
+   "so": false,
+   "rc": 41
+  },
+  "CRP-HUF105SDB": {
+   "lp": 338000,
+   "sp": 229000,
+   "so": false,
+   "rc": 68
+  },
+  "CRP-HUF1080BE": {
+   "lp": 338000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-HUF10BS": {
+   "lp": 338000,
+   "sp": 214200,
+   "so": false,
+   "rc": 13
+  },
+  "CRP-HVB0680BE": {
+   "lp": 318000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-HVB06BS": {
+   "lp": 318000,
+   "sp": 290000,
+   "so": false,
+   "rc": 3
+  },
+  "CRP-HWF1060FB": {
+   "lp": 398000,
+   "sp": null,
+   "so": false,
+   "rc": 12
+  },
+  "CRP-HWF1060FS": {
+   "lp": 398000,
+   "sp": 294000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-JHF0610FLB": {
+   "lp": 528000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHF1010FLB": {
+   "lp": 638000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHP0610FC": {
+   "lp": 578000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-JHP0610FG": {
+   "lp": 578000,
+   "sp": 299000,
+   "so": false,
+   "rc": 26
+  },
+  "CRP-JHP0610FGPS": {
+   "lp": 578000,
+   "sp": 330000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHP0660FSM": {
+   "lp": 578000,
+   "sp": 299000,
+   "so": false,
+   "rc": 8
+  },
+  "CRP-JHP1010FC": {
+   "lp": 698000,
+   "sp": null,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-JHP1010FG": {
+   "lp": 698000,
+   "sp": 380000,
+   "so": false,
+   "rc": 11
+  },
+  "CRP-JHP1010FGPS": {
+   "lp": 698000,
+   "sp": 360000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHP1060FSM": {
+   "lp": 698000,
+   "sp": 319000,
+   "so": false,
+   "rc": 17
+  },
+  "CRP-JHPFF0610GPS": {
+   "lp": 578000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHPFF1010GPS": {
+   "lp": 698000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-JHPNL0610GPS": {
+   "lp": 578000,
+   "sp": 320000,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-JHPNL1010GPS": {
+   "lp": 698000,
+   "sp": 360000,
+   "so": false,
+   "rc": 3
+  },
+  "CRP-JHR0610FC": {
+   "lp": 598000,
+   "sp": 260000,
+   "so": false,
+   "rc": 115
+  },
+  "CRP-JHR0660FD": {
+   "lp": 598000,
+   "sp": 285000,
+   "so": false,
+   "rc": 782
+  },
+  "CRP-JHR1010FC": {
+   "lp": 718000,
+   "sp": 290000,
+   "so": false,
+   "rc": 92
+  },
+  "CRP-JHR1060FD": {
+   "lp": 718000,
+   "sp": 305000,
+   "so": false,
+   "rc": 680
+  },
+  "CRP-JHTR0610FD": {
+   "lp": 568000,
+   "sp": null,
+   "so": true,
+   "rc": 12
+  },
+  "CRP-JHTR1010FD": {
+   "lp": 698000,
+   "sp": null,
+   "so": true,
+   "rc": 22
+  },
+  "CRP-JHTS0660FB": {
+   "lp": 568000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-JHTS0660FS": {
+   "lp": 568000,
+   "sp": 325500,
+   "so": false,
+   "rc": 26
+  },
+  "CRP-JHTS1060FB": {
+   "lp": 658000,
+   "sp": 579300,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-KHLR1010FGW": {
+   "lp": 678000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-KHTAS1010FWM": {
+   "lp": 618000,
+   "sp": 367500,
+   "so": false,
+   "rc": 18
+  },
+  "CRP-KHTS1060FD": {
+   "lp": 598000,
+   "sp": 305000,
+   "so": false,
+   "rc": 211
+  },
+  "CRP-KHTS1060FG": {
+   "lp": 598000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-KHTS1060FLB": {
+   "lp": 598000,
+   "sp": 418000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-KHTS1060FWM": {
+   "lp": 598000,
+   "sp": 385000,
+   "so": false,
+   "rc": 16
+  },
+  "CRP-LHLR0610FGWM": {
+   "lp": 618000,
+   "sp": 380000,
+   "so": false,
+   "rc": 55
+  },
+  "CRP-LHLR0610FW": {
+   "lp": 618000,
+   "sp": 389000,
+   "so": false,
+   "rc": 25
+  },
+  "CRP-LHLR1010FGWM": {
+   "lp": 718000,
+   "sp": 430000,
+   "so": false,
+   "rc": 44
+  },
+  "CRP-LHLR1010FW": {
+   "lp": 718000,
+   "sp": 430000,
+   "so": false,
+   "rc": 56
+  },
+  "CRP-LHR0610FGW": {
+   "lp": 578000,
+   "sp": 399000,
+   "so": false,
+   "rc": 7
+  },
+  "CRP-LHR1010FGW": {
+   "lp": 678000,
+   "sp": 459000,
+   "so": false,
+   "rc": 7
+  },
+  "CRP-LHTAR0610FGI": {
+   "lp": 789000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-LHTAR1010FGI": {
+   "lp": 890000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-LHTR0610FB": {
+   "lp": 598000,
+   "sp": 350000,
+   "so": false,
+   "rc": 19
+  },
+  "CRP-LHTR0610FD": {
+   "lp": 598000,
+   "sp": 350000,
+   "so": false,
+   "rc": 59
+  },
+  "CRP-LHTR0610FGB": {
+   "lp": 598000,
+   "sp": null,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-LHTR0610FGBM": {
+   "lp": 598000,
+   "sp": 359000,
+   "so": false,
+   "rc": 70
+  },
+  "CRP-LHTR0610FGI": {
+   "lp": 598000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-LHTR0610FGIM": {
+   "lp": 598000,
+   "sp": 359000,
+   "so": false,
+   "rc": 87
+  },
+  "CRP-LHTR0610FGW": {
+   "lp": 598000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-LHTR0610FGWM": {
+   "lp": 598000,
+   "sp": 359000,
+   "so": false,
+   "rc": 322
+  },
+  "CRP-LHTR0610FS": {
+   "lp": 598000,
+   "sp": 470000,
+   "so": false,
+   "rc": 9
+  },
+  "CRP-LHTR0610FW": {
+   "lp": 598000,
+   "sp": 350000,
+   "so": false,
+   "rc": 291
+  },
+  "CRP-LHTR0610FWM": {
+   "lp": 598000,
+   "sp": 350000,
+   "so": false,
+   "rc": 249
+  },
+  "CRP-LHTR1010FB": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 21
+  },
+  "CRP-LHTR1010FD": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 34
+  },
+  "CRP-LHTR1010FGB": {
+   "lp": 698000,
+   "sp": null,
+   "so": false,
+   "rc": 18
+  },
+  "CRP-LHTR1010FGBM": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 63
+  },
+  "CRP-LHTR1010FGI": {
+   "lp": 698000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-LHTR1010FGIM": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 59
+  },
+  "CRP-LHTR1010FGW": {
+   "lp": 698000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-LHTR1010FGWM": {
+   "lp": 698000,
+   "sp": 419000,
+   "so": false,
+   "rc": 163
+  },
+  "CRP-LHTR1010FW": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 69
+  },
+  "CRP-LHTR1010FWM": {
+   "lp": 698000,
+   "sp": 400000,
+   "so": false,
+   "rc": 148
+  },
+  "CRP-MHR0310FW": {
+   "lp": 478000,
+   "sp": 260000,
+   "so": false,
+   "rc": 14
+  },
+  "CRP-MHTR0310FG": {
+   "lp": 478000,
+   "sp": 270000,
+   "so": false,
+   "rc": 23
+  },
+  "CRP-MHTR0310FW": {
+   "lp": 478000,
+   "sp": 270000,
+   "so": false,
+   "rc": 131
+  },
+  "CRP-NHFFLR0610FGW": {
+   "lp": 748000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-NHNLLR0610FGW": {
+   "lp": 658000,
+   "sp": 550000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-NHTR0610FB": {
+   "lp": 658000,
+   "sp": 420000,
+   "so": false,
+   "rc": 24
+  },
+  "CRP-NHTR0610FGW": {
+   "lp": 638000,
+   "sp": 420000,
+   "so": false,
+   "rc": 122
+  },
+  "CRP-NHTR0610FP": {
+   "lp": 658000,
+   "sp": 420000,
+   "so": false,
+   "rc": 27
+  },
+  "CRP-NHTR0610FT": {
+   "lp": 658000,
+   "sp": 420000,
+   "so": false,
+   "rc": 35
+  },
+  "CRP-NHTR0610FW": {
+   "lp": 638000,
+   "sp": 420000,
+   "so": false,
+   "rc": 64
+  },
+  "CRP-NHTR1010FB": {
+   "lp": 758000,
+   "sp": 480000,
+   "so": false,
+   "rc": 17
+  },
+  "CRP-NHTR1010FGW": {
+   "lp": 738000,
+   "sp": 480000,
+   "so": false,
+   "rc": 55
+  },
+  "CRP-NHTR1010FP": {
+   "lp": 758000,
+   "sp": 480000,
+   "so": false,
+   "rc": 10
+  },
+  "CRP-NHTR1010FT": {
+   "lp": 758000,
+   "sp": 480000,
+   "so": false,
+   "rc": 5
+  },
+  "CRP-NHTR1010FW": {
+   "lp": 738000,
+   "sp": 480000,
+   "so": false,
+   "rc": 19
+  },
+  "CRP-NHTRNL0610TFGW": {
+   "lp": 648000,
+   "sp": 500000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-NHTRNL1010TFGW": {
+   "lp": 748000,
+   "sp": 550000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-OHFFLR0610FGW": {
+   "lp": 638000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-OHFFLR1010FGW": {
+   "lp": 718000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-OHNLLR0610FGW": {
+   "lp": 638000,
+   "sp": 500000,
+   "so": false,
+   "rc": 26
+  },
+  "CRP-OHNLLR1010FGW": {
+   "lp": 738000,
+   "sp": 550000,
+   "so": false,
+   "rc": 22
+  },
+  "CRP-OHTR0610FGW": {
+   "lp": 618000,
+   "sp": null,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-OHTR0610FIM": {
+   "lp": 618000,
+   "sp": 440000,
+   "so": false,
+   "rc": 51
+  },
+  "CRP-OHTR0610FP": {
+   "lp": 618000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-OHTR0610FWM": {
+   "lp": 618000,
+   "sp": 440000,
+   "so": false,
+   "rc": 118
+  },
+  "CRP-OHTR1010FGW": {
+   "lp": 718000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-OHTR1010FIM": {
+   "lp": 718000,
+   "sp": 480000,
+   "so": false,
+   "rc": 29
+  },
+  "CRP-OHTR1010FP": {
+   "lp": 718000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-OHTR1010FWM": {
+   "lp": 718000,
+   "sp": 480000,
+   "so": false,
+   "rc": 57
+  },
+  "CRP-P0610FT": {
+   "lp": 223000,
+   "sp": 208000,
+   "so": true,
+   "rc": 0
+  },
+  "CRP-P0620FDM": {
+   "lp": 223000,
+   "sp": null,
+   "so": false,
+   "rc": 21
+  },
+  "CRP-P0660FD": {
+   "lp": 223000,
+   "sp": 219000,
+   "so": true,
+   "rc": 22
+  },
+  "CRP-P1015FBB": {
+   "lp": 223000,
+   "sp": 178000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-P1055FD": {
+   "lp": 233000,
+   "sp": 170000,
+   "so": false,
+   "rc": 24
+  },
+  "CRP-PHFFLR0610FGW": {
+   "lp": 628000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-PHNLLR0610FGW": {
+   "lp": 628000,
+   "sp": 490000,
+   "so": false,
+   "rc": 15
+  },
+  "CRP-PHNLTR0610FGW": {
+   "lp": 608000,
+   "sp": 440000,
+   "so": false,
+   "rc": 31
+  },
+  "CRP-PHTR0610FDM": {
+   "lp": 608000,
+   "sp": 380000,
+   "so": false,
+   "rc": 69
+  },
+  "CRP-PHTR0610FR": {
+   "lp": 608000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-PHTR0610FSM": {
+   "lp": 608000,
+   "sp": 380000,
+   "so": false,
+   "rc": 54
+  },
+  "CRP-PHTR0610FWS": {
+   "lp": 608000,
+   "sp": null,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-PK0610BGI": {
+   "lp": 223000,
+   "sp": 155000,
+   "so": false,
+   "rc": 19
+  },
+  "CRP-PK0620BS": {
+   "lp": 223000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-PK0620BUG": {
+   "lp": 223000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-PW1085FD": {
+   "lp": 223000,
+   "sp": 170000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-QHLRNL0610FGW": {
+   "lp": 688000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-QK1010BGW": {
+   "lp": 243000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-QKNL1010BGB": {
+   "lp": 243000,
+   "sp": 165000,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-QKNL1010BGW": {
+   "lp": 243000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-QKNL1010BGW(C)": {
+   "lp": 243000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-R0615FBS": {
+   "lp": 269000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-R0615FWS": {
+   "lp": 263000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-R0625FBB": {
+   "lp": 263000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-R0695FGW": {
+   "lp": 263000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-R1015FBB": {
+   "lp": 293000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-R1025FBS": {
+   "lp": 293000,
+   "sp": 219000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-R1095FGW": {
+   "lp": 293000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-RK0615FWS": {
+   "lp": 253000,
+   "sp": 160000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-ST0615FGSM": {
+   "lp": 333000,
+   "sp": 228000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-ST0615FLSM": {
+   "lp": 333000,
+   "sp": 228000,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-ST0615FW": {
+   "lp": 333000,
+   "sp": 240000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-ST0615FWGM": {
+   "lp": 333000,
+   "sp": 200000,
+   "so": false,
+   "rc": 7
+  },
+  "CRP-ST0615FWSM": {
+   "lp": 333000,
+   "sp": 200000,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-ST0695FGB": {
+   "lp": 333000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-ST0695FGW": {
+   "lp": 333000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-ST1010FG": {
+   "lp": 348000,
+   "sp": 232100,
+   "so": true,
+   "rc": 11
+  },
+  "CRP-ST1010FGI": {
+   "lp": 363000,
+   "sp": 239000,
+   "so": true,
+   "rc": 8
+  },
+  "CRP-ST1015FGSM": {
+   "lp": 363000,
+   "sp": 240000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-ST1015FLSM": {
+   "lp": 363000,
+   "sp": 259000,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-ST1015FW": {
+   "lp": 363000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-ST1015FWGM": {
+   "lp": 363000,
+   "sp": 240000,
+   "so": false,
+   "rc": 6
+  },
+  "CRP-ST1015FWSM": {
+   "lp": 363000,
+   "sp": 240000,
+   "so": false,
+   "rc": 4
+  },
+  "CRP-ST1095FGB": {
+   "lp": 363000,
+   "sp": null,
+   "so": false,
+   "rc": 1
+  },
+  "CRP-ST1095FGW": {
+   "lp": 363000,
+   "sp": null,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-T0310FGW": {
+   "lp": 268000,
+   "sp": 200000,
+   "so": false,
+   "rc": 2
+  },
+  "CRP-TT0310FGW": {
+   "lp": 318000,
+   "sp": 212500,
+   "so": false,
+   "rc": 24
+  },
+  "CRP-TT0310FPP": {
+   "lp": 318000,
+   "sp": 212500,
+   "so": false,
+   "rc": 0
+  },
+  "CRP-UT0610FGG": {
+   "lp": 348000,
+   "sp": 289000,
+   "so": false,
+   "rc": 8
+  },
+  "CRP-UT0610FGW": {
+   "lp": 348000,
+   "sp": 255000,
+   "so": false,
+   "rc": 22
+  },
+  "CRP-UT1010FGG": {
+   "lp": 378000,
+   "sp": 315000,
+   "so": false,
+   "rc": 3
+  },
+  "CRP-UT1010FGW": {
+   "lp": 378000,
+   "sp": 315000,
+   "so": false,
+   "rc": 4
+  }
+ }
+}

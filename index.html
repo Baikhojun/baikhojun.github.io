@@ -1,118 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>unfade — front-end projects</title>
-  <meta name="description" content="unfade — small, dependency-free web tools built with vanilla HTML, CSS and JavaScript.">
-  <style>
-    :root {
-      --bg: #fafaf8; --fg: #1c1e21; --muted: #6b7280; --card: #ffffff;
-      --line: #e5e7eb; --accent: #0d7a5f; --accent-soft: #e6f4f0; --code-bg: #f3f4f6;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #101214; --fg: #e6e8ea; --muted: #9aa2ab; --card: #17191c;
-        --line: #2a2e33; --accent: #3ecfa5; --accent-soft: #12332b; --code-bg: #1e2226;
-      }
-    }
-    * { box-sizing: border-box; margin: 0; }
-    body {
-      background: var(--bg); color: var(--fg);
-      font: 16px/1.65 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      display: flex; flex-direction: column; min-height: 100vh;
-    }
-    main { width: min(720px, 92vw); margin: 0 auto; flex: 1; }
-    header { padding: 4.5rem 0 2.5rem; }
-    .handle { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-    .handle::before { content: "~/"; color: var(--accent); font-weight: 400; }
-    .tagline { color: var(--muted); margin-top: .6rem; max-width: 34rem; }
-    .tagline code {
-      background: var(--code-bg); border-radius: 4px; padding: .1em .4em;
-      font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .9em;
-    }
-    h2 {
-      font-size: .85rem; text-transform: uppercase; letter-spacing: .12em;
-      color: var(--muted); margin: 2.2rem 0 1rem; font-weight: 600;
-    }
-    .card {
-      display: block; background: var(--card); border: 1px solid var(--line);
-      border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: .9rem;
-      text-decoration: none; color: inherit; transition: border-color .15s, transform .15s;
-    }
-    .card h3 { font-size: 1.05rem; margin-bottom: .25rem; }
-    .card p { color: var(--muted); font-size: .92rem; }
-    .tags { margin-top: .6rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-    .tag {
-      font-size: .72rem; font-family: ui-monospace, Consolas, monospace;
-      background: var(--accent-soft); color: var(--accent);
-      border-radius: 999px; padding: .15em .7em;
-    }
-    .principles { list-style: none; display: grid; gap: .55rem; }
-    .principles li { color: var(--muted); font-size: .95rem; padding-left: 1.2rem; position: relative; }
-    .principles li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-    footer {
-      border-top: 1px solid var(--line); margin-top: 3.5rem; padding: 1.4rem 0 2rem;
-      color: var(--muted); font-size: .85rem; text-align: center;
-    }
-  </style>
+  <title>unfade — 실용적인 데이터 도구</title>
+  <meta name="description" content="비교하고, 판단하고, 기록하는 작고 선명한 UNFADE 도구 모음.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="css/unfade-shell.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script defer src="js/unfade-shell.js" data-unfade-root=""></script>
 </head>
 <body>
-  <main>
-    <header>
-      <div class="handle">unfade</div>
-      <p class="tagline">
-        I build small, dependency-free web tools — plain <code>HTML</code>, <code>CSS</code> and
-        <code>JavaScript</code>, no frameworks, no build step. Everything here runs entirely in the
-        browser and is hosted on GitHub Pages.
-      </p>
+  <div id="unfade-site-chrome">
+    <header class="site-header">
+      <div class="sitebar">
+        <button class="menu-toggle" type="button" aria-label="프로젝트 메뉴 열기" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span><span>MENU</span></button>
+        <a class="wordmark" href="/">unfade</a>
+        <div class="header-meta">TOOLS <strong>LIGHT MODE</strong></div>
+      </div>
     </header>
+    <div class="menu-scrim" aria-hidden="true"></div>
+    <aside class="side-menu" aria-label="프로젝트 메뉴">
+      <div class="side-menu__top"><a class="wordmark" href="/">unfade</a><button class="side-menu__close" type="button" aria-label="메뉴 닫기">×</button></div>
+      <nav>
+        <a href="/">홈</a><a href="/house/">신혼 내집 가이드</a><a href="/cukoo/">쿠쿠 해독기</a><a href="/tv/">TV 해독기</a><a href="/schedule/">일정표</a><a href="/lk1800/">매트리스 비교</a>
+      </nav>
+    </aside>
+  </div>
 
-    <h2>Projects</h2>
-
-    <article class="card">
-      <h3>Schedule Board</h3>
-      <p>A client-side team scheduling calendar: month grid, category editor, workload statistics,
-         print layout, and optional data sync through the GitHub Contents API — all in vanilla JS
-         with zero dependencies.</p>
-      <div class="tags">
-        <span class="tag">vanilla js</span><span class="tag">github rest api</span>
-        <span class="tag">localstorage</span><span class="tag">print css</span>
+  <main class="page-shell">
+    <section class="cover-hero" aria-labelledby="home-title">
+      <div class="cover-copy">
+        <div class="eyebrow">UNFADE / PRACTICAL TOOLS</div>
+        <h1 class="cover-title" id="home-title">판단을 선명하게 만드는<br>작은 도구들.</h1>
+        <p class="cover-summary">주거, 생활가전, 업무 기록처럼 결정 전에 비교와 근거가 필요한 순간을 위한 브라우저 도구입니다. 데이터와 판단 기준을 한 화면에 남깁니다.</p>
+        <div class="cover-meta"><span class="cover-meta__tag">NO LOGIN · NO BACKEND</span><a class="cover-meta__link" href="#projects">EXPLORE PROJECTS</a></div>
       </div>
-    </article>
+      <div class="cover-art" aria-hidden="true"><div class="cover-art__disc"></div><div class="cover-art__ring"></div><div class="cover-art__type">UN<br>FADE</div></div>
+    </section>
 
-    <article class="card">
-      <h3>Schedule Board — Mobile PWA</h3>
-      <p>Installable mobile companion for the schedule board: web app manifest, service-worker
-         caching for offline use, and a touch-first read-only view of the same data file.</p>
-      <div class="tags">
-        <span class="tag">pwa</span><span class="tag">service worker</span>
-        <span class="tag">offline-first</span>
+    <section aria-labelledby="projects" id="projects">
+      <div class="section-intro"><div class="eyebrow">PROJECT INDEX</div><h2>도구를 고르고 바로 시작하세요.</h2></div>
+      <div class="explainer-grid">
+        <a class="explainer-card" href="house/"><div class="explainer-card__body"><span class="explainer-card__index">01 / HOME</span><h2>신혼부부 내집마련의 정석</h2><p>서울·경기 기준의 내집 마련 선택지를 조건과 순서로 정리한 가이드입니다.</p><small>OPEN GUIDE ↗</small></div></a>
+        <a class="explainer-card" href="cukoo/"><div class="explainer-card__body"><span class="explainer-card__index">02 / RICE COOKER</span><h2>쿠쿠 모델코드 해독기</h2><p>모델명과 제시가를 기준으로 스펙, 기준 가격, 대안을 함께 비교합니다.</p><small>OPEN DECODER ↗</small></div></a>
+        <a class="explainer-card" href="tv/"><div class="explainer-card__body"><span class="explainer-card__index">03 / TV</span><h2>UNFADE 대형 TV 해독기</h2><p>대형 TV의 모델코드와 가격 조건을 비교해 선택 근거를 빠르게 확인합니다.</p><small>OPEN DECODER ↗</small></div></a>
+        <a class="explainer-card" href="lk1800/"><div class="explainer-card__body"><span class="explainer-card__index">04 / SLEEP</span><h2>LK1800 매트리스 비교</h2><p>브랜드리스와 베스트슬립 제품의 사양과 가격 조건을 한 화면에서 봅니다.</p><small>OPEN COMPARISON ↗</small></div></a>
+        <a class="explainer-card" href="schedule/"><div class="explainer-card__body"><span class="explainer-card__index">05 / WORK</span><h2>업무 일정표</h2><p>편집, 저장, 통계, 인쇄까지 지원하는 월간 일정 관리 도구입니다.</p><small>OPEN SCHEDULE ↗</small></div></a>
+        <a class="explainer-card" href="plan/"><div class="explainer-card__body"><span class="explainer-card__index">06 / PLAN</span><h2>일정표 대시보드</h2><p>기존 일정 데이터를 바탕으로 월간 작업 흐름을 정리하고 확인합니다.</p><small>OPEN DASHBOARD ↗</small></div></a>
+        <a class="explainer-card" href="m/"><div class="explainer-card__body"><span class="explainer-card__index">07 / MOBILE</span><h2>모바일 일정 조회</h2><p>폰에서 오늘의 업무와 일정 흐름을 빠르게 확인하는 읽기 전용 화면입니다.</p><small>OPEN MOBILE VIEW ↗</small></div></a>
       </div>
-    </article>
+    </section>
 
-    <article class="card">
-      <h3>Offline Decoder</h3>
-      <p>A single-file HTML tool that parses product model codes in the browser: rule tables,
-         scoring, and a mobile layout — no backend, no build step, data baked into the page.</p>
-      <div class="tags">
-        <span class="tag">vanilla js</span><span class="tag">single-file</span>
-        <span class="tag">offline</span>
-      </div>
-    </article>
-
-    <h2>How I build</h2>
-    <ul class="principles">
-      <li>Zero dependencies — if the platform can do it, use the platform.</li>
-      <li>Single-purpose tools that load instantly and work offline.</li>
-      <li>Data stays in plain JSON, synced with the GitHub API instead of a backend.</li>
-      <li>Progressive enhancement: the page is useful before any script runs.</li>
-    </ul>
+    <section class="start-band" aria-labelledby="start-title">
+      <div class="start-band__title"><div class="eyebrow">START HERE</div><h2 id="start-title">직접 비교하고,<br>근거를 남기세요.</h2></div>
+      <div class="start-list"><a href="house/"><small>GUIDE</small><b>내집 마련의 시작점 찾기</b><span>↗</span></a><a href="cukoo/"><small>DECODER</small><b>쿠쿠 밥솥 모델코드 읽기</b><span>↗</span></a><a href="tv/"><small>DECODER</small><b>대형 TV 조건 비교하기</b><span>↗</span></a></div>
+    </section>
   </main>
-
-  <footer>unfade · hand-written HTML/CSS/JS · hosted on GitHub Pages</footer>
+  <footer class="site-footer">unfade · data-informed tools for everyday decisions · hosted on GitHub Pages</footer>
 </body>
 </html>
