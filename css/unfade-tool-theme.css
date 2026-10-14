@@ -1,0 +1,121 @@
+/* Shared visual layer for the four public UNFADE decision tools.
+   It changes presentation only; each tool keeps its existing markup and logic. */
+body.unfade-tool-theme {
+  color-scheme: light;
+  background: var(--unfade-wash);
+  color: var(--unfade-ink);
+  font-family: var(--unfade-font-kr);
+
+  /* Decoder and TV token families */
+  --bg: var(--unfade-wash);
+  --bg-hi: #ffffff;
+  --bg-lo: #e9ecef;
+  --card: #ffffff;
+  --card-2: #f8f9fa;
+  --steel: #f3f4f6;
+  --steel-2: #e4e7eb;
+  --paper: #ffffff;
+  --line: #dfe2e7;
+  --line-2: #b9c0c8;
+  --ink: var(--unfade-ink);
+  --ink-2: #34383e;
+  --muted: var(--unfade-muted);
+  --seal: var(--unfade-coral);
+  --ok: #267359;
+  --epic: #17334b;
+  --warm: #a95a30;
+  --ok-bg: #e9f8df;
+  --epic-bg: #e7eef5;
+  --fair-bg: #fff3dc;
+  --warm-bg: #ffe9df;
+  --seal-bg: var(--unfade-coral-wash);
+  --info-bg: #e7eef5;
+  --glass: rgb(255 255 255 / 92%);
+  --go-bg: var(--unfade-navy);
+  --go-fg: #ffffff;
+  --sh-1: 0 1px 2px rgb(17 18 20 / 5%);
+  --sh-2: 0 12px 28px -22px rgb(17 18 20 / 28%);
+
+  /* Housing-guide and mattress token families */
+  --white: #ffffff;
+  --text: var(--unfade-ink);
+  --faint: #7b828b;
+  --forest: var(--unfade-navy);
+  --green: #267359;
+  --soft: #e9f8df;
+  --soft-2: #f8f9fa;
+  --gold: var(--unfade-coral);
+  --gold-deep: #a95a30;
+  --gold-soft: var(--unfade-coral-wash);
+  --shadow: 0 12px 28px -24px rgb(17 18 20 / 35%);
+  --bl: var(--unfade-navy);
+  --bs: #a95a30;
+  --hd: var(--unfade-navy);
+}
+
+body.unfade-tool-theme .card,
+body.unfade-tool-theme .panel,
+body.unfade-tool-theme .console,
+body.unfade-tool-theme .category-section {
+  border-color: var(--unfade-line);
+  box-shadow: 0 1px 2px rgb(17 18 20 / 4%);
+}
+
+body.unfade-tool-theme .card { border-radius: 14px; }
+body.unfade-tool-theme .btn,
+body.unfade-tool-theme .chip,
+body.unfade-tool-theme .tabs button {
+  border-color: var(--unfade-line);
+  font-family: var(--unfade-font-kr);
+}
+
+body.unfade-tool-theme input,
+body.unfade-tool-theme select,
+body.unfade-tool-theme textarea {
+  border-color: var(--unfade-line);
+  font-family: var(--unfade-font-kr);
+}
+
+body.unfade-tool-theme input:focus,
+body.unfade-tool-theme select:focus,
+body.unfade-tool-theme textarea:focus {
+  outline-color: var(--unfade-coral);
+  border-color: var(--unfade-coral);
+}
+
+body.unfade-tool-theme .mast {
+  border-color: var(--unfade-line);
+}
+
+body.unfade-tool-theme[data-unfade-tool="cukoo"] .mast {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--unfade-navy);
+}
+
+body.unfade-tool-theme[data-unfade-tool="tv"] .mast {
+  top: var(--unfade-sitebar-height);
+  background: rgb(255 255 255 / 94%);
+}
+
+body.unfade-tool-theme[data-unfade-tool="tv"] .console {
+  border-top: 4px solid var(--unfade-coral);
+}
+
+body.unfade-tool-theme[data-unfade-tool="lk1800"] .hd {
+  background: var(--unfade-navy);
+  border-bottom: 4px solid var(--unfade-coral);
+}
+
+@media (min-width: 1001px) {
+  body.unfade-tool-theme[data-unfade-tool="house"] .top-shell {
+    top: var(--unfade-sitebar-height);
+  }
+  body.unfade-tool-theme[data-unfade-tool="house"] .sidebar {
+    top: calc(var(--unfade-sitebar-height) + var(--credit-h));
+  }
+}
+
+@media print {
+  body.unfade-tool-theme { background: #ffffff !important; }
+}

@@ -16,17 +16,26 @@ PAGES = (
     Path("lk1800/index.html"), Path("plan/index.html"), Path("plan/m/index.html"),
     Path("schedule/index.html"), Path("m/index.html"),
 )
+THEMED_PAGES = {
+    Path("house/index.html"), Path("house/m/index.html"),
+    Path("cukoo/index.html"), Path("cukoo/m/index.html"),
+    Path("tv/index.html"), Path("tv/m/index.html"), Path("lk1800/index.html"),
+}
 START = "<!-- UNFADE-SHELL:START -->"
 END = "<!-- UNFADE-SHELL:END -->"
 
 
 def shell_block(page: Path) -> str:
     relative_root = "../" * len(page.parent.parts)
+    tool_theme = (
+        f'<link rel="stylesheet" href="{relative_root}css/unfade-tool-theme.css">\n'
+        if page in THEMED_PAGES else ""
+    )
     return f'''{START}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="{relative_root}css/unfade-shell.css">
-<script defer src="{relative_root}js/unfade-shell.js" data-unfade-root="{relative_root}"></script>
+{tool_theme}<script defer src="{relative_root}js/unfade-shell.js" data-unfade-root="{relative_root}"></script>
 {END}'''
 
 
