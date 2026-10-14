@@ -31,6 +31,8 @@ def shell_block(page: Path) -> str:
         f'<link rel="stylesheet" href="{relative_root}css/unfade-tool-theme.css">\n'
         if page in THEMED_PAGES else ""
     )
+    if page.parts[0] in {"cukoo", "tv", "lk1800"}:
+        tool_theme += f'<link rel="stylesheet" href="{relative_root}css/unfade-premium.css">\n'
     return f'''{START}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
@@ -42,6 +44,13 @@ def shell_block(page: Path) -> str:
 def inject(page: Path) -> None:
     destination = ROOT / page
     html = destination.read_text(encoding="utf-8")
+    if page.parts[0] in {"cukoo", "tv", "lk1800"}:
+        # Apply the palette before the first paint, including stored dark preferences.
+        html = html.replace(
+            "<body>",
+            f'<body class="unfade-tool-theme unfade-premium" data-unfade-tool="{page.parts[0]}">',
+            1,
+        )
     html = re.sub(r"\n?<!-- UNFADE-SHELL:START -->.*?<!-- UNFADE-SHELL:END -->", "", html, flags=re.DOTALL)
     if "</head>" not in html:
         raise ValueError(f"Missing </head>: {destination}")

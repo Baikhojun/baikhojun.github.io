@@ -20,6 +20,9 @@
     document.body.classList.add('unfade-tool-theme');
     document.body.dataset.unfadeTool = tool;
   }
+  if (['cukoo', 'tv', 'lk1800'].includes(tool)) {
+    document.body.classList.add('unfade-premium');
+  }
   const open = () => { document.body.classList.add('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'true'); };
   const close = () => { document.body.classList.remove('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false'); };
   chrome.querySelector('.menu-toggle')?.addEventListener('click', open);
