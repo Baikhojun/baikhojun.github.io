@@ -1139,7 +1139,7 @@ API 가격(USD/100만 토큰, 확인일 2026-10-14):
 
 **Unfade 게시**
 
-- [x] 표지·머리말·PDF·PPTX의 발행처가 "Unfade"만으로 표기되고, 부서명·회사 로고가 없는가? — **통과** · 표지·머리말·바닥글·PDF 속성·PPTX 속성 모두 Unfade. 회사명·부서명 문자열 검사 0건
+- [x] 표지·머리말·PDF·PPTX의 발행처가 "Unfade"만으로 표기되고, 부서명·회사 로고가 없는가? — **통과** · 표지·머리말·바닥글·PDF 속성·PPTX 속성 모두 Unfade. 회사명·부서명 문자열 검사 0건 / _r2 게시 확인(2026-10-14, 커밋 aae1547): latest → _r2, _r2 본문·PDF·PPTX 200, 이전 호 superseded 로 보존(200), 아카이브 '제1호 정정본/정정 전' 표시.
 - [x] 모든 페이지에 noindex, nofollow가 있고, robots.txt에 Disallow: /ai-trend가 있는가? — **통과** · noindex는 발행본·아카이브 첫 화면·latest 3곳 모두 확인. robots.txt 끝에 Disallow: /ai-trend 한 줄 추가(기존 줄 유지)
 - [x] 사이트 첫 화면과 다른 프로젝트에 ai-trend 링크를 추가하지 않았는가? — **통과** · 사이트 첫 화면(index.html)·공용 셸 메뉴·다른 도구 파일은 수정하지 않음. ai-trend 쪽에서 공용 셸 파일을 참조만 함
 - [x] 커밋에 ai-trend/와 robots.txt 한 줄 외의 변경이 없는가? — **통과** · 발행 커밋은 ai-trend/와 robots.txt 한 줄만. 사용자 요청에 따른 저장소 루트 README.md 개편은 별도 커밋으로 분리(지시서 부록 D v1.2에 1회 예외로 기록)
