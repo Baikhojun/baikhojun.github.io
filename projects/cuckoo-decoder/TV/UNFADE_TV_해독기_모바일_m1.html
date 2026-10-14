@@ -511,7 +511,7 @@ body::before{content:"";position:fixed;left:50%;top:-40vh;width:140vw;height:80v
   </div>
   <div id="result"></div>
   <div class="card" id="homebest"><div class="cap"><span class="eyebrow">TODAY'S PICKS</span><h2>지금 가장 값어치 있는 3대</h2><p>실측 기반(추정 모델 제외) · 품절 제외 · 누르면 바로 판정</p></div><div class="picks" id="picks"></div></div>
-  <div class="statstrip"><div><b>178</b><small>모델 전수</small></div><div><b>51</b><small>실측 도너</small></div><div><b>12</b><small>평가 지표</small></div><div><b>8차</b><small>검토 PASS</small></div></div>
+  <div class="statstrip"><div><b>178</b><small>모델 전수</small></div><div><b>51</b><small>실측 도너</small></div><div><b>12</b><small>평가 지표</small></div><div><b>8회</b><small>자체 검토</small></div></div>
 </section>
 
 <!-- ═══ 추천 ═══ -->
@@ -892,7 +892,7 @@ function rcard(cls,title,m,reason,risk,w,use){if(!m)return`<div class="rcard ${c
   return`<div class="rcard ${cls}"><div class="rt">${title}</div><div class="rn"><span class="dot" style="background:${BC[m.brand]};color:${BC[m.brand]}"></span>${esc(m.name)}</div><div class="rp">${W(livePrice(m))}<small>${isMine(m)?'내 입력가':'기준 시세'} · ${s.toFixed(1)}점 · ${LV[m.level]}</small></div>
     ${weak?`<div style="margin-top:6px"><span class="badge weak">이 용도엔 아쉬움 (${ENOUGH[use]}점 미만)</span></div>`:''}
     <ul><li>${reason}</li><li>강점: ${top.map(([k,v])=>LABEL[k][0]+' '+v.toFixed(0)+'점').join(' · ')}</li><li>${m.oled?'자발광 — 어두운 방 명암 만점':`${m.hz}Hz · HDMI 2.1 ${m.hdmi21}포트 · ${W(m.zones)}존 · HDR ${Math.round(m.hdr)}nit`}</li></ul>
-    <div class="why">왜 지금: ${whyNow(m)} · 성능 대비 ${sgn((m.fair_neutral/livePrice(m)-1)*100)}${chinese(m)&&risk?` · AS 리스크 ${risk}% 얹으면 ${MW(effPrice(m,risk))} 값어치`:''}</div>
+    <div class="why">왜 지금: ${whyNow(m)} · 시장값 대비 ${sgn((m.fair_neutral/livePrice(m)-1)*100)}${chinese(m)&&risk?` · AS 리스크 ${risk}% 얹으면 ${MW(effPrice(m,risk))} 값어치`:''}</div>
     <div class="act"><button class="btn small primary" data-go="${m.code}">지금 사도 돼?</button><button class="btn small danger" data-act="reco-sold" data-id="${m.id}">품절이에요</button></div></div>`}
 function recoFilter(bud,ex){return m=>m.cls===RS.cls&&!m.variant_of&&!isSold(m)&&livePrice(m)<=bud&&!ex.has(m.brand)&&($('roled').checked||!m.oled)&&(!$('rl3').checked||m.level<=2)&&(!$('r120').checked||m.game_capable)}
 function drawReco(){
@@ -989,7 +989,7 @@ function drawPicks(){const el=$('picks');if(!el)return;const ok=DB.filter(m=>!m.
   const best=(arr,key)=>arr.slice().sort((a,b)=>key(b)-key(a)||livePrice(a)-livePrice(b))[0];
   const v=m=>scoreOf(m)>=55?valueAt(m,livePrice(m)):-1;
   const P=[['70인치대 가성비 1위',best(ok.filter(m=>m.cls==='70'),v),'p1'],['80인치대 가성비 1위',best(ok.filter(m=>m.cls==='80'),v),'p2'],['OLED 가장 싼 진입',best(ok.filter(m=>m.oled),m=>-livePrice(m)),'p3']].filter(x=>x[1]);
-  el.innerHTML=P.map(([t,m,c])=>{const s=scoreOf(m),lp=livePrice(m);return`<div class="pick ${c}" data-go="${m.code}"><span class="t">${t}</span><div class="n">${esc(m.name)}<small>${esc(tierOf(m))} · ${LV[m.level]}</small></div>${ring(s,RNG(m,s)?m.p05.toFixed(0):null)}<div class="p">${W(lp)}원<small>${isMine(m)?'내 입력가':'기준 시세'} · ${valueAt(m,lp).toFixed(1)}점/100만 · 성능 대비 ${sgn((m.fair_neutral/lp-1)*100)}</small></div></div>`}).join('');
+  el.innerHTML=P.map(([t,m,c])=>{const s=scoreOf(m),lp=livePrice(m);return`<div class="pick ${c}" data-go="${m.code}"><span class="t">${t}</span><div class="n">${esc(m.name)}<small>${esc(tierOf(m))} · ${LV[m.level]}</small></div>${ring(s,RNG(m,s)?m.p05.toFixed(0):null)}<div class="p">${W(lp)}원<small>${isMine(m)?'내 입력가':'기준 시세'} · ${valueAt(m,lp).toFixed(1)}점/100만 · 시장값 대비 ${sgn((m.fair_neutral/lp-1)*100)}</small></div></div>`}).join('');
   requestAnimationFrame(()=>el.querySelectorAll('.ring .fg').forEach(f=>{f.style.strokeDashoffset=f.dataset.off}))}
 function refreshAll(){drawBoard();drawReco();drawFinder();drawAll();drawCmp();drawPicks()}
 function toast(t){const el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2600)}

@@ -50,7 +50,7 @@
       meta.innerHTML = onMobile ? `<a href="${root}${tool}/?pc">PC 버전</a>` : `<a href="${root}${tool}/m/">모바일 버전</a>`;
       meta.classList.add('has-switch');
     } else {
-      meta.textContent = '';
+      meta.textContent = 'TOOLS';
     }
   }
   // '맨 위로' 버튼이 없는 긴 화면에 하나 넣는다
@@ -71,5 +71,15 @@
   chrome.querySelector('.menu-toggle')?.addEventListener('click', open);
   chrome.querySelector('.side-menu__close')?.addEventListener('click', close);
   chrome.querySelector('.menu-scrim')?.addEventListener('click', close);
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') close();
+    // 서랍이 열려 있으면 Tab 이 서랍 안에서만 돈다
+    if (event.key === 'Tab' && document.body.classList.contains('unfade-menu-open')) {
+      const items = [...chrome.querySelectorAll('.side-menu a, .side-menu button')];
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      else if (!items.includes(document.activeElement)) { event.preventDefault(); first.focus(); }
+    }
+  });
 })();

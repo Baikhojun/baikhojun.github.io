@@ -193,7 +193,8 @@ body.unfade-menu-open #unfade-site-chrome :is(.side-menu, .menu-scrim) { visibil
 
 /* 오른쪽 머리 정보: 장식 배지 대신 PC↔모바일 전환 링크(있는 도구만) */
 #unfade-site-chrome .header-meta strong { background: none; padding: 0; margin: 0; color: var(--unfade-muted); }
-#unfade-site-chrome .header-meta a { color: var(--unfade-ink); text-decoration: underline; text-underline-offset: 3px; font: 600 13px/1 var(--unfade-font-kr); }
+#unfade-site-chrome .header-meta a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: var(--unfade-ink); text-decoration: underline; text-underline-offset: 3px; font: 600 13px/1 var(--unfade-font-kr); }
+#unfade-site-chrome .header-meta:not(.has-switch) { color: var(--unfade-muted); font: 600 12px/1 var(--unfade-font-en); letter-spacing: .06em; }
 @media (max-width: 800px) {
   #unfade-site-chrome .header-meta.has-switch { display: block; }
   #unfade-site-chrome .header-meta a { font-size: 12px; }
@@ -207,10 +208,10 @@ body.unfade-site-page :is(a, button, input, select, textarea, summary, [tabindex
 /* '맨 위로' 버튼 — 없던 화면에는 셸이 넣고, 있던 화면은 모양만 맞춘다 */
 .unfade-to-top,
 body.unfade-site-page :is(#back-top, #totop, .totop) {
-  width: 44px; height: 44px; border-radius: 12px; border: 1px solid #dfe2e7;
+  width: 46px; height: 46px; border-radius: 0; border: 1px solid #dfe2e7;
   background: #ffffff; color: #111214; box-shadow: 0 6px 18px rgb(17 18 20 / 8%);
   display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
 }
-.unfade-to-top { position: fixed; right: 20px; bottom: 20px; z-index: 900; opacity: 0; pointer-events: none; transition: opacity .2s; font: 600 18px/1 var(--unfade-font-en); }
-.unfade-to-top.is-on { opacity: 1; pointer-events: auto; }
+.unfade-to-top { position: fixed; right: 20px; bottom: 20px; z-index: 900; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s, visibility 0s linear .2s; font: 600 18px/1 var(--unfade-font-en); }
+.unfade-to-top.is-on { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
 @media print { .unfade-to-top { display: none !important; } }

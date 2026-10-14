@@ -208,7 +208,7 @@ body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .lu .pr b { fon
 /* ── 사이트 전체 통일 (2026-10-14 UI 검토) ─────────────────────────────── */
 body.unfade-premium { --unfade-focus: #806244; }
 /* 선택 상태는 세 도구 모두 같은 갈색 */
-body.unfade-premium :is(.filters button.on, .chip.on, .chip[aria-pressed="true"], .seg-ctl button[aria-pressed="true"]) {
+body.unfade-premium :is(.filters button.on, .bops button.on, .chip.on, .chip[aria-pressed="true"], .seg-ctl button[aria-pressed="true"]) {
   background: #665140; background-image: none; color: #fffefa; border-color: #665140; box-shadow: none;
 }
 /* 하단 탭 바 아이콘: 선택된 탭만 색, 나머지는 차분하게 */
@@ -221,6 +221,16 @@ body.unfade-premium { font-variant-numeric: tabular-nums; }
 body.unfade-premium[data-unfade-tool="tv"] .appbar h1 { font-size: clamp(14px, 4vw, 16.5px); }
 body.unfade-premium[data-unfade-tool="tv"] .secnav { position: sticky; top: var(--unfade-shell-offset); z-index: 20; background: #f7f4ef; padding: 10px 0; border-bottom: 1px solid #e6ded3; }
 body.unfade-premium[data-unfade-tool="tv"] #prog { top: var(--unfade-shell-offset); }
+@media (max-width: 1100px) {
+  body.unfade-premium[data-unfade-tool="tv"] .secnav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-inline: 16px; }
+  body.unfade-premium[data-unfade-tool="tv"] .secnav a { flex: none; }
+}
+/* 남은 작은 글자·흐린 글자·옛 그림자 */
+body.unfade-premium :is(.badge, .dtag, .conf, .lb, .vbadge, .wsub) { font-size: 11px; }
+body.unfade-premium[data-unfade-tool="tv"] :is(small, .t) { font-size: 11px; }
+body.unfade-premium[data-unfade-tool="tv"] .t { color: #806244; }
+body.unfade-premium[data-unfade-tool="lk1800"] .hd .meta b { color: #806244 !important; }
+body.unfade-premium .toast { box-shadow: 0 18px 48px -20px rgb(89 65 38 / 24%); }
 /* 'NEW' 배지는 두 도구 모두 녹색 */
 body.unfade-premium .badge.new { background: #eff2e9; color: #3f5a43; border-color: transparent; }
 
