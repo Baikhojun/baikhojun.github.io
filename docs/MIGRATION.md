@@ -9,7 +9,6 @@
 | `/house/` | `projects/house-guide/` | `python scripts/build_deploy.py` |
 | `/cukoo/` | `projects/cuckoo-decoder/` | `python scripts/build_deploy.py` |
 | `/tv/` | `projects/cuckoo-decoder/TV/` | `python scripts/build_deploy.py` |
-| `/plan/`, `/schedule/`, `/m/` | repository root `css/` and `js/` | edit directly |
 | `/lk1800/` | `lk1800/` | edit directly |
 
 The dated Cuckoo archive folders (`260825/`, `260916/`) are intentionally not imported: the root source tree already contains the current build pipeline, current data, snapshots, and TV source.

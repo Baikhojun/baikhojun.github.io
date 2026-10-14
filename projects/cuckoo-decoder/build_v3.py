@@ -268,6 +268,10 @@ def build():
             "categories": s["cats"], "status": s["status"],
             "reg": s["reg"], "reg_est": s.get("reg_est", False), "is_new": s.get("new", False),
         })
+        # 공식 상품명 괄호 안에 색상명이 있으면 코드 사전보다 우선한다(예: FB = 로즈브라운, FG = 메탈릭 그린).
+        mc = re.search(r"[,(]\s*([^,()]*?(?:브라운|그린|블루|레드|골드|베이지|네이비|민트|퍼플))\s*\)", s["name"])
+        if mc and mc.group(1).strip() != d.get("color"):
+            d["color"] = mc.group(1).strip()
         d["discount_rate"] = round((1 - s["sp"] / s["lp"]) * 100) if (s["lp"] and s["sp"]) else None
         d["age_months"] = ym_to_months(s["reg"])
         # 색상형제 스템: 문자+숫자 블록까지 (표시창/색상/서픽스 제외)

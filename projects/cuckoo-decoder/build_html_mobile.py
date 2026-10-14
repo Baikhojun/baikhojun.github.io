@@ -524,6 +524,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
     <input id="price" placeholder="제시된 가격 (원 · 비워도 됨)" inputmode="numeric" autocomplete="off" enterkeyhint="go">
     <button class="btn" id="go">판정하기</button>
     <div class="chips" id="recent"></div>
+    <div id="stale" style="margin-top:10px;font-size:12px;line-height:1.6;color:var(--muted)"></div>
     <div class="chips">
       <span class="tl">예시로 눌러보기</span>
       <button class="chip-btn" data-ex="CRP-DHP0610FD" data-exp="199000">DHP0610FD<small>@19.9만</small></button>
@@ -592,7 +593,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
 <main id="view-build" class="view">
   <div class="card" style="margin-top:0">
     <h3>조건으로 찾기 — 이 조합, 실제로 있나?</h3>
-    <div class="cap">원하는 조건을 고르면 공식몰 212개에서 실존 모델을 찾고, 아래 "항목별 가중치"로 그 조합의 예상가도 계산합니다. 모델을 누르면 판정으로 이동합니다.</div>
+    <div class="cap">원하는 조건을 고르면 공식몰 213개에서 실존 모델을 찾고, 아래 "항목별 가중치"로 그 조합의 예상가도 계산합니다. 모델을 누르면 판정으로 이동합니다.</div>
     <div id="bld"></div>
     <div id="bres"></div>
   </div>
@@ -621,7 +622,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
 
   <div class="card">
     <h2>이 도구는 무엇인가</h2>
-    <p>쿠쿠 공식몰 <b>212개 전 모델</b>의 모델명 규칙을 역공학해서, 홈쇼핑·오픈마켓의
+    <p>쿠쿠 공식몰 <b>213개 전 모델</b>의 모델명 규칙을 역공학해서, 홈쇼핑·오픈마켓의
     "특가"가 <b>진짜 특가인지</b>를 스펙 기준으로 판정합니다. 인터넷 연결 없이 동작하는
     오프라인 도구이며, 데이터는 __ASOF__ 수집본입니다.</p>
     <p>판정 탭에서 모델명을 넣으면 코드를 해부해 스펙을 보여주고, 가격까지 넣으면
@@ -655,11 +656,11 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
     <p>모델마다 같은 스펙 최저가 · 색상 형제 최저가 · 상위스펙 대체재 가격 · 연식 감가를
     조합해 <b>절대상한</b>("이 이상 주면 손해")을 만들고, 그 아래를 4단계로 자릅니다.</p>
     <table class="gt"><thead><tr><th>판정</th><th>기준</th><th>행동</th></tr></thead><tbody>
-      <tr><td class="k"><i class="tierdot" style="background:var(--epic)"></i>역대급</td><td>상한의 68% 이하</td><td>고민 말고 구매</td></tr>
+      <tr><td class="k"><i class="tierdot" style="background:var(--epic)"></i>목표가</td><td>상한의 68% 이하</td><td>사도 좋음</td></tr>
       <tr><td class="k"><i class="tierdot" style="background:var(--ok)"></i>특가</td><td>상한의 80% 이하</td><td>필요한 스펙이면 좋은 딜</td></tr>
       <tr><td class="k"><i class="tierdot" style="background:var(--brass)"></i>적정</td><td>상한의 90% 이하</td><td>급하면 구매, 아니면 대기</td></tr>
       <tr><td class="k"><i class="tierdot" style="background:var(--warm)"></i>보류</td><td>상한 이내</td><td>흔한 가격. "특가" 문구에 속지 말 것</td></tr>
-      <tr><td class="k"><i class="tierdot" style="background:var(--seal)"></i>금지</td><td>상한 초과</td><td>사지 마세요</td></tr>
+      <tr><td class="k"><i class="tierdot" style="background:var(--seal)"></i>비쌈</td><td>상한 초과</td><td>기다리기</td></tr>
     </tbody></table>
     <p style="color:var(--muted);font-size:12px">공식몰 미등록 신모델도 동급 스펙 기준으로 추정 판정합니다(추정치 표기).</p>
   </div>
@@ -680,7 +681,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
   <div class="card">
     <h2>흔한 함정</h2>
     <p>· <b>정가 대비 할인율</b>은 의미가 없습니다. 쿠쿠 정가는 애초에 높게 잡혀 있어
-    "50% 할인"도 절대상한을 넘는 경우가 있습니다. 이 도구의 기준선만 믿으세요.</p>
+    "50% 할인"도 절대상한을 넘는 경우가 있습니다. 할인율보다 이 도구의 기준선과 비교해 보세요.</p>
     <p>· <b>구형 명명</b>(H가 앞에 오는 HV·HW 등, AH/BH 라인)은 단종 수순입니다.
     신형 동급보다 확실히 싸지 않으면 살 이유가 없습니다.</p>
     <p>· <b>출시 6년 이상</b> 지난 모델에 신품 프리미엄을 주지 마세요. 기준선에 연식
@@ -690,7 +691,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
   </div>
 
   <footer>
-    데이터: 쿠쿠 공식몰(cuckoo.co.kr) __ASOF__ 수집(대용량밥솥 제외) · 출시(등록월)는 다나와 등록월 기준.<br>
+    데이터: 쿠쿠 공식몰(cuckoo.co.kr) __ASOF__ 수집(대용량밥솥 분류는 제외, 다른 분류에 함께 오른 모델은 포함) · 출시(등록월)는 다나와 등록월 기준.<br>
     절대가격 기준선은 이 도구의 자체 산출값입니다. 구매 손실을 보장하지 않으며, 최종 판단 전 현재 가격을 직접 확인하세요.<span id="pclink"></span>
     <span id="hitbox" style="display:block;margin-top:8px;min-height:14px;color:transparent;user-select:all;-webkit-user-select:all;font-family:var(--mono);font-size:10px" aria-hidden="true"></span>
   </footer>
@@ -848,11 +849,11 @@ function calcTiers(d){
 
 function verdictOf(price,px){
   const [epic,spc,fair,ceil]=px;
-  if(price<=epic)return{cls:"v-epic",t:"역대급 가격",d:"이 스펙 역사상 손꼽히는 가격대입니다. 고민할 이유가 없습니다. 미개봉 정품·국내 정발인지만 확인하고 사세요."};
+  if(price<=epic)return{cls:"v-epic",t:"목표가 이하",d:"이 도구가 정한 가장 낮은 기준선(상한의 68%) 이하입니다. 보기 드문 가격이니 미개봉 정품·국내 정발인지 확인하고 사도 좋습니다."};
   if(price<=spc)return{cls:"v-deal",t:"진짜 특가",d:"절대상한 대비 20% 이상 저렴합니다. 필요하던 스펙이 맞다면 좋은 딜입니다."};
   if(price<=fair)return{cls:"v-fair",t:"적정가",d:"손해는 아니지만 특가도 아닙니다. 급하면 사도 되고, 급하지 않으면 특가 시즌(설·추석·블프)을 기다릴 만합니다."};
-  if(price<=ceil)return{cls:"v-warm",t:"미지근 — 보류 권장",d:"절대상한 이내지만 흔히 볼 수 있는 가격입니다. '특가'라는 문구에 속지 마세요."};
-  return{cls:"v-no",t:"특가 아님 — 사지 마세요",d:"이 모델의 절대상한("+W(ceil)+")을 넘습니다. 같은 돈이면 더 나은 스펙을 살 수 있거나, 잠깐 기다리면 이 가격 아래로 반드시 나옵니다."};
+  if(price<=ceil)return{cls:"v-warm",t:"보류 — 흔한 가격",d:"절대상한 이내지만 흔히 볼 수 있는 가격입니다. '특가'라는 문구에 속지 마세요."};
+  return{cls:"v-no",t:"비싼 편 — 기다리기 권장",d:"이 모델의 절대상한("+W(ceil)+")을 넘습니다. 같은 돈이면 더 나은 스펙을 살 수 있거나, 기다리면 이 가격 아래로 내려오는 경우가 많습니다."};
 }
 
 /* ═══ 탭 전환 ═══ */
@@ -886,14 +887,14 @@ function drawRecent(){
 }
 
 /* ═══ 결과 렌더 ═══ */
-function render(raw,priceRaw){
+function render(raw,priceRaw,quiet){
   const box=document.getElementById("result");
   const d=decode(raw);
   const price=priceRaw?parseInt(String(priceRaw).replace(/[^0-9]/g,"")):null;
   if(!d.ok){
     box.innerHTML=`<div class="card"><div class="empty"><b>해독할 수 없습니다</b>${esc(d.err)}<br><br>
       모델명은 밥솥 앞면 또는 바닥 라벨에 있습니다. 예: CRP-DHP0610FD</div></div>`;
-    box.scrollIntoView({behavior:"smooth",block:"start"});return;
+    if(!quiet)box.scrollIntoView({behavior:"smooth",block:"start"});return;
   }
   saveRecent(d.model,price?String(price):"");
   const hit=DB.find(r=>r.m===d.model);
@@ -943,7 +944,7 @@ function render(raw,priceRaw){
     <div class="meta">
       <div><span>용량</span><b>${d.capacity?d.capacity+"인용":"미상"}</b></div>
       <div><span>라인</span><b>${esc(d.designNote)}</b></div>
-      <div><span>출시(등록)</span><b>${hit&&hit.rg?"20"+esc(hit.rg)+(hit.am>=12?" ("+Math.floor(hit.am/12)+"년차)":""):"미상"}</b></div>
+      <div><span>출시(등록)</span><b>${hit&&hit.rg?"20"+esc(hit.rg)+(hit.am>=12?" ("+Math.floor(hit.am/12)+"년 경과)":""):"미상"}</b></div>
       <div><span>상태</span><b>${hit?esc(hit.st)+(hit.nw?" · 신상":""):"미등록"}</b></div>
       ${hit&&hit.rc?`<div><span>인기 (월평균 리뷰)</span><b>${rvFmt(hit)} · 총 ${hit.rc.toLocaleString("ko-KR")}</b></div>`:""}
       ${hit&&hit.aw?`<div><span>최대 압력 (실측)</span><b>${hit.aw}기압${hit.tp?" · 무압 선택":""}</b></div>`:""}
@@ -965,13 +966,13 @@ function render(raw,priceRaw){
   /* 후속작 리스크 — 라인 리프레시 주기 (다나와 등록월 기반 자체 추정) */
   if(hit&&d.dcx&&WX.lines&&WX.lines[d.dcx]){
     const L=WX.lines[d.dcx];
-    if(L.med&&L.waves>=3){
+    if(L.med&&L.waves>=4){   /* 간격 3개 이상일 때만 주기를 추정한다 */
       const toN=s=>{const p=s.split(".").map(Number);return (2000+p[0])*12+p[1];};
-      const fut=toN(L.next)>(2026*12+8);
+      const now=new Date(),nowN=now.getFullYear()*12+now.getMonth()+1,fut=toN(L.next)>nowN,stale=nowN-toN(L.next)>12;
       H.push(`<div class="alert info"><b>후속작 리스크 — 이 라인의 신모델 주기</b>
         ${esc(d.designNote)} 라인의 신모델 웨이브 ${L.waves}회, 간격 중앙값 <b>${L.med}개월</b>(IQR ${L.q1}~${L.q3}개월).
         마지막 웨이브 20${L.last} → 다음 웨이브 추정 <b>20${L.next}</b> (20${L.next_lo}~20${L.next_hi}).
-        ${fut?"아직 주기 안입니다 — 당분간 구형화 위험은 낮은 편.":"주기상 후속 시점이 이미 지났습니다 — <b>리프레시 임박 또는 라인 정리 신호</b>. 제값 주고 사기엔 타이밍 위험이 있으니, 신형 발표 직후의 구형 할인을 노리는 편이 유리합니다."}
+        ${fut?"아직 주기 안입니다 — 당분간 구형화 위험은 낮은 편.":stale?"추정 시점이 1년 넘게 지났습니다 — 라인이 정리됐거나 주기가 바뀐 것으로 보여 이 추정은 참고하지 마세요.":"주기상 후속 시점이 이미 지났습니다 — <b>리프레시 임박 또는 라인 정리 신호</b>. 제값 주고 사기엔 타이밍 위험이 있으니, 신형 발표 직후의 구형 할인을 노리는 편이 유리합니다."}
         <span style="display:block;font-size:11px;color:var(--muted);margin-top:4px">다나와 등록월(색상 추가 제외, 스템 최초 등장 기준) 자체 추정 — 제조사 공식 로드맵이 아닙니다.</span></div>`);
     }
   }
@@ -1006,23 +1007,23 @@ function render(raw,priceRaw){
       </div>
       <div class="ladlab"><span>0원</span><span>${W(Math.round(hi))}</span></div>
       <div class="ladkey">
-        <span><i style="background:var(--epic)"></i>역대급</span>
+        <span><i style="background:var(--epic)"></i>목표가</span>
         <span><i style="background:var(--ok)"></i>특가</span>
         <span><i style="background:var(--brass)"></i>적정</span>
         <span><i style="background:var(--warm)"></i>보류</span>
-        <span><i style="background:var(--seal)"></i>절대 금지</span>
+        <span><i style="background:var(--seal)"></i>비쌈</span>
       </div>
       <div class="prices">
         ${hit&&hit.lp?`<div><span>쿠쿠 정가</span><b class="strike">${W(hit.lp)}</b></div>`:""}
         ${off?`<div><span>쿠쿠몰 판매가${hit.dr?" ("+hit.dr+"%↓)":""}</span><b class="${off>ceil?"bad":""}">${W(off)}${off>ceil?" ⚠":""}</b></div>`:""}
-        <div><span>역대급 (묻지마 구매)</span><b class="epic">${W(epic)} 이하</b></div>
+        <div><span>목표가</span><b class="epic">${W(epic)} 이하</b></div>
         <div><span>특가 인정선</span><b class="good">${W(spc)} 이하</b></div>
-        <div><span>절대상한 (이 이상 금지)</span><b class="bad">${W(ceil)}</b></div>
+        <div><span>절대상한 (넘으면 비쌈)</span><b class="bad">${W(ceil)}</b></div>
         ${hit&&mvOf(hit)?`<div><span>이 스펙이면 보통 이 가격 (시세 추정)</span><b>${W(mvOf(hit))}</b></div>
         <div><span>지금 쿠쿠몰가는</span><b class="${vfmText(hit).cls}">${vfmText(hit).t}</b></div>`:""}
       </div>
       ${off&&off>ceil?`<div class="alert"><b>공식몰 가격부터가 절대상한 초과입니다</b>
-        지금 쿠쿠몰 가격(${W(off)})으로도 사면 안 되는 모델입니다. ${W(ceil)} 이하로 떨어질 때까지 기다리거나 동급 대안을 보세요.</div>`:""}
+        지금 쿠쿠몰 가격(${W(off)})은 이 도구의 상한보다 높습니다. 공식몰 정가는 대부분 상한을 넘으니, 행사가가 ${W(ceil)} 이하로 내려올 때를 기다리거나 동급 대안을 보세요.</div>`:""}
     </div>`);
   }
 
@@ -1075,7 +1076,7 @@ function render(raw,priceRaw){
   H.push(`<div class="alert warn"><b>확인하고 넘어갈 것</b><ul>${al.map(a=>`<li>${a}</li>`).join("")}</ul></div>`);
 
   box.innerHTML=H.join("");
-  box.scrollIntoView({behavior:"smooth",block:"start"});
+  if(!quiet)box.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 /* ═══ 자동완성 ═══ */
@@ -1170,7 +1171,7 @@ function drawBrowse(){
       <div class="pc-mid">${esc(r.dz).replace(/\(.*\)/,"")} · ${r.cp}인 · ${heatShort(r.ht)}${r.tp?"·트윈":""}${r.ls?"·저당":""}${r.si?"·사일런스":""}${r.io?"·IoT":""} · 내솥 ${esc(r.pc)} · ${r.rg?"20"+r.rg:"출시미상"}${rvOf(r)?` · 리뷰 ${rvFmt(r)}`:""}</div>
       <div class="pc-row">
         <span class="pc-price">${r.lp&&r.sp?`<s>${Wk(r.lp)}</s>`:""}${eff(r)?Wk(eff(r)):"—"}${r.sp?"":" <span style='font-size:11px;color:var(--muted)'>(정가)</span>"}${r.dr?`<span class="d">${r.dr}%↓</span>`:""}</span>
-        <span class="pc-px">특가 <b class="g">${r.px[1]?Wk(r.px[1]):"—"}</b> · 상한 <b class="r">${r.px[3]?Wk(r.px[3]):"—"}</b>${vfmPct(r)!=null?` · <b class="${vfmPct(r)>=5?"g":vfmPct(r)<=-5?"r":""}">${vfmPct(r)>=5?vfmPct(r)+"% 저렴":vfmPct(r)<=-5?(-vfmPct(r))+"% 비쌈":"시세수준"}</b>`:""}</span>
+        <span class="pc-px">특가 <b class="g">${r.px[1]?Wk(r.px[1]):"—"}</b> · 상한 <b class="r">${r.px[3]?Wk(r.px[3]):"—"}</b>${vfmPct(r)!=null?` · <b class="${vfmPct(r)>=VFM_T?"g":vfmPct(r)<=-VFM_T?"r":""}">${vfmPct(r)>=VFM_T?vfmPct(r)+"% 저렴":vfmPct(r)<=-VFM_T?(-vfmPct(r))+"% 비쌈":"시세수준"}</b>`:""}</span>
       </div></div>`;
   }).join("")||`<div class="empty"><b>결과 없음</b>필터나 검색어를 바꿔보세요.</div>`;
   const more=document.getElementById("more");
@@ -1209,8 +1210,8 @@ const FEATW=[
  ["flag","플래그십 라인 (마스터셰프·타철명장)","일반 라인 대비","LH·BDH·BCH 브랜드 프리미엄 — 기능 가치와 분리해 측정"],
  ["pot34","투톤·에코스텐 내솥","기본 코팅 대비","실판매가엔 웃돈이 없음 — 라인 구성 차이"],
  ["pot2","스텐외피 코팅 내솥","기본 코팅 대비",""],
- ["pot5","올스테인리스 내솥","기본 코팅 대비","웃돈은커녕 더 낮음 — 상위호환이 아니라 취향 선택이라는 증거"],
- ["iot","IoT (WiFi)","없음 대비","표본 2개뿐 — 유의미한 웃돈 확인 안 됨. IoT에 웃돈 금지"],
+ ["pot5","올스테인리스 내솥","기본 코팅 대비","추정값은 마이너스지만 통계적으로 확실하지 않음 — 웃돈이 확인되지 않음(상위호환이 아니라 취향 선택으로 봄)"],
+ ["iot","IoT (WiFi)","없음 대비","표본 2개(같은 계열)뿐 — 웃돈을 추정할 수 없음. IoT에 웃돈을 크게 주지 마세요"],
  ["old","구형 명명·라인","신형 대비","구형은 이만큼 싸야 정상"],
  ["age","연차 1년당","등록 직후 대비","1년 지날 때마다 이만큼 감가"]];
 function drawWeights(){
@@ -1221,10 +1222,10 @@ function drawWeights(){
     <span class="conf hi">믿을 만함</span> = 데이터가 일관되게 보여주는 웃돈 ·
     <span class="conf lo">불확실</span> = 표본이 적거나 흔들려서 참고만 할 것.</div>`;
   h+=FEATW.map(f=>{const v=WX.w[f[0]],n=WX.cnt[f[0]],ci=WX.ci&&WX.ci[f[0]],pp=WX.wp?WX.wp[f[0]]:null;
-    const unc=ci&&ci[0]<=0&&ci[1]>=0;
+    const na=WX.ci&&f[0] in WX.ci&&!ci, unc=na||(ci&&ci[0]<=0&&ci[1]>=0);
     return `<div class="wrow"><div class="wl"><b>${f[1]}</b><span>${f[2]}${n?` · 표본 ${n}개`:""}</span>${f[3]?`<em>${f[3]}</em>`:""}</div>
       <div class="wb"><i class="${v>=0?"pos":"neg"}" style="width:${Math.max(3,Math.abs(v)/mx*100)}%"></i></div>
-      <div class="wv ${v>=0?"pos":"neg"}">${sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${unc?"불확실":"믿을 만함"}</span>${pp!=null?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
+      <div class="wv ${v>=0?"pos":"neg"}">${sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${na?"추정 불가":unc?"불확실":"믿을 만함"}</span>${pp!=null?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
   h+=`<div class="wcap"><b>용량별 실측 중앙값 (IH 압력만)</b> — ${Object.entries(WX.cap).map(([c,v])=>`${c}인 ${Wk(v.med)} (${v.n}개)`).join(" · ")}</div>`;
   const cps=Object.entries(WX.colorp).filter(([c,v])=>v.n>=2&&v.avg>0).slice(0,8);
   if(cps.length)h+=`<div class="wcap"><b>색상 프리미엄</b> — 같은 제품의 색상형제 중 최저가 색 대비 평균 웃돈.
@@ -1233,14 +1234,14 @@ function drawWeights(){
   if(WX.dep){
     const db=WX.dep.bins,pc=x=>Math.round(x*100)+"%";
     h+=`<div class="wcap"><b>오래된 모델엔 얼마까지? — 연식 잔존율</b><br>
-    같은 스펙이라도 출시 후 시간이 지난 모델은 그만큼 싸게 사야 정상입니다. 실판매가에서 추정한 비율:<br>
+    같은 스펙이라도 출시 후 시간이 지난 모델은 그만큼 싸게 사야 정상입니다. 실판매가 회귀로 추정하되, 표본이 적은 6년 이상 구간은 보수적으로 정한 가정값입니다:<br>
     <span class="depline">출시 2년 이내 <b>${pc(db[0].f)}</b> → 2~4년 <b>${pc(db[1].f)}</b> → 4~6년 <b>${pc(db[2].f)}</b> → 6~8년 <b>${pc(db[3].f)}</b> → 8년 이상 <b>${pc(db[4].f)}</b></span>
     구형 명명 라인(H앞·AH·BH)은 여기에 추가로 <b>×${pc(WX.dep.old)}</b>.<br>
     예: 기준가 30만원짜리가 5년차면 <b>27만원이 상한</b>이라는 뜻. 이 계산은 각 모델의 <b>절대가격 기준선에 이미 자동 반영</b>되어
     있으므로 직접 계산할 필요는 없습니다. (신품 구매 상한 기준 — 중고 시세가 아님)</div>`;
   }
-  h+=`<div class="wnote">방법: 헤도닉 회귀 v2 — 선형(원)+로그(%) 병행, 플래그십 분리, 부트스트랩 500회 95% 신뢰구간으로 믿을 만함/불확실 판정,
-    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형)·${WX.r2log}(로그). 상세: cuckoo-master.md §7.7·§7.10</div>`;
+  h+=`<div class="wnote">방법: 헤도닉 회귀 v2 — 선형(원)+로그(%) 병행, 플래그십 분리, 부트스트랩 500회(색상만 다른 형제 모델은 한 묶음으로 재표본) 95% 신뢰구간으로 믿을 만함/불확실 판정, 표본이 너무 적은 항목은 추정 불가,
+    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형, 변수 수 보정 ${WX.r2adj}, 5겹 교차검증 ${WX.r2cv})·${WX.r2log}(로그), 표본 ${WX.n}개·${WX.n_stems}계열. 상세: cuckoo-master.md §7.7·§7.10</div>`;
   box.innerHTML=h;
 }
 
@@ -1448,11 +1449,13 @@ const rvOf=r=>r.rc?(r.am&&r.am>=1?r.rc/r.am:r.rc):0;   // 월평균 리뷰 = 스
 const rvFmt=r=>{const v=rvOf(r);return v?(v>=1?Math.round(v):v.toFixed(1))+"/월":"—";};
 const vfmOf=r=>{const m=mvOf(r);return m&&eff(r)?m/eff(r):null;};
 const vfmPct=r=>{const v=vfmOf(r);return v?Math.round((v-1)*100):null;};
+/* 시세 추정의 보통 오차가 약 20%라 그보다 작은 차이는 '시세 수준'으로 본다 */
+const VFM_T=20;
 function vfmText(r){const p=vfmPct(r);if(p==null)return null;
-  if(p>=5)return{t:"시세 대비 "+p+"% 저렴",cls:"good"};
-  if(p<=-5)return{t:"시세 대비 "+(-p)+"% 비쌈",cls:"bad"};
-  return{t:"시세 수준 (적정)",cls:""};}
-const VSHORT={"v-epic":"역대급","v-deal":"특가","v-fair":"적정","v-warm":"미지근","v-no":"비쌈"};
+  if(p>=VFM_T)return{t:"시세 대비 "+p+"% 저렴",cls:"good"};
+  if(p<=-VFM_T)return{t:"시세 대비 "+(-p)+"% 비쌈",cls:"bad"};
+  return{t:"시세 수준 (추정 오차 안)",cls:""};}
+const VSHORT={"v-epic":"목표가","v-deal":"특가","v-fair":"적정","v-warm":"보류","v-no":"비쌈"};
 
 /* ── 상황별 추천 ── */
 const PERS=[
@@ -1519,7 +1522,7 @@ function pick(filter,exclude,mode){
 function nowReason(r){
   const v=verdictOf(eff(r),r.px);
   const pct=Math.round(eff(r)/r.px[3]*100);
-  const map={"v-epic":"역대급 구간 — 고민할 이유가 없는 시점","v-deal":"특가 구간 — 지금 사도 되는 시점",
+  const map={"v-epic":"목표가 이하 — 사도 좋은 시점","v-deal":"특가 구간 — 지금 사도 되는 시점",
     "v-fair":"적정가 구간 — 손해는 아닌 시점","v-warm":"평소 가격 — 급하지 않으면 특가 시즌을 기다릴 만함",
     "v-no":"기준선 초과 — 후보 중 최선일 뿐, 지금 가격엔 사지 말 것"};
   return `지금 쿠쿠몰가 ${W(eff(r))}${r.dr?` (정가 대비 ${r.dr}%↓)`:""}는 이 모델 절대상한의 ${pct}% — ${map[v.cls]}`;
@@ -1591,16 +1594,16 @@ function drawFaq(){
     <p>실판매가 데이터 기준으로: ① <b>IoT(WiFi)</b> — 시장 웃돈이 확인되지 않고(${sgn(WX.w.iot)}), 앱 지원이 끊기면
     일반 밥솥이 됩니다. ② <b>인기 색상 웃돈</b> — 성능이 동일한데 색만으로 수만~수십만원 차이. ③ <b>구형 재고 프리미엄</b> —
     단종 임박 모델이 오히려 비싸지는 현상. ④ <b>"정가 대비 50% 할인"</b> — 정가 자체가 높게 잡혀 있어 할인율은
-    판단 근거가 못 됩니다. 이 도구의 절대가격 기준선만 믿으세요.</p></div></details>
+    판단 근거가 못 됩니다. 할인율보다 이 도구의 절대가격 기준선과 비교해 보세요.</p></div></details>
   <details class="faq"><summary>"시세 대비 n% 저렴"은 뭘 뜻하나요?</summary><div class="fa">
-    <p>이 도구가 212개 실판매가로 계산한 <b>"이 스펙이면 보통 이 가격"(시세 추정)</b>과, 실제 쿠쿠몰가를 비교한 표시입니다.</p>
+    <p>이 도구가 공식몰 실판매가로 계산한 <b>"이 스펙이면 보통 이 가격"(시세 추정)</b>과, 실제 쿠쿠몰가를 비교한 표시입니다.</p>
     <table class="mtx"><tr><th>표시</th><th>뜻</th></tr>
     <tr><td style="color:var(--ok);font-weight:700">시세 대비 20% 저렴</td><td>같은 스펙의 시세보다 20% 싸게 파는 중 — <b>좋음</b></td></tr>
-    <tr><td>시세 수준</td><td>딱 스펙값만큼 받는 중 — 손해도 이득도 아님</td></tr>
+    <tr><td>시세 수준</td><td>차이가 20% 안 — 시세 추정의 보통 오차(약 20%) 안이라 손해도 이득도 단정하기 어려움</td></tr>
     <tr><td style="color:var(--seal);font-weight:700">시세 대비 20% 비쌈</td><td>스펙값보다 20% 비싸게 파는 중 — <b>주의</b></td></tr></table>
     <p>판정 화면·리스트·추천에 <span style="color:var(--ok);font-weight:700">초록(저렴)</span> /
     <span style="color:var(--seal);font-weight:700">빨강(비쌈)</span> 색으로 표시됩니다.
-    다만 최종 구매 판단은 이 표시가 아니라 모델별 <b>절대가격 기준선</b>(역대급/특가/적정/상한)이 우선입니다.</p></div></details>`;
+    다만 최종 구매 판단은 이 표시가 아니라 모델별 <b>절대가격 기준선</b>(목표가/특가/적정/상한)이 우선입니다.</p></div></details>`;
 }
 
 /* ═══ v3.3: 지배 분석 · 1:1 비교 · 효율 필터 ═══ */
@@ -1735,7 +1738,9 @@ drawDict();
 drawBuilder();
 drawReco();
 drawFaq();
-render("CRP-DHP0610FD","");
+(function(){const el=document.getElementById("stale");if(!el)return;const d0=new Date("__ASOF__T00:00:00"),n=new Date(),t0=new Date(n.getFullYear(),n.getMonth(),n.getDate()),days=Math.max(0,Math.round((t0-d0)/864e5));
+  el.innerHTML=`가격 기준일 <b>__ASOF__</b>${days?` · <b>${days}일 지났습니다</b> — 쿠쿠몰 가격이 바뀌었을 수 있으니 오늘 본 가격을 함께 넣어 판정하세요`:""}`;})();
+render("CRP-DHP0610FD","",true);
 </script>
 </body>
 </html>"""

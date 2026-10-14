@@ -65,19 +65,38 @@ coef  = ols(X, Y)
 coefl = ols(X, Yl)
 r2, r2l = r2of(X, Y, coef), r2of(X, Yl, coefl)
 
+# 표본·변수 수를 감안한 수정 R², 5겹 교차검증 R²(선형) — 화면에 함께 적는다
+n_obs = len(X)
+r2_adj = 1 - (1 - r2) * (n_obs - 1) / (n_obs - k)
+random.seed(20261014)
+_fold = list(range(n_obs)); random.shuffle(_fold)
+_ybar = sum(Y) / n_obs; _ssr = 0.0
+for f in range(5):
+    te = set(_fold[f::5]); tr = [i for i in range(n_obs) if i not in te]
+    cf = ols([X[i] for i in tr], [Y[i] for i in tr])
+    _ssr += sum((Y[i] - sum(c*x for c, x in zip(cf, X[i])))**2 for i in te)
+r2_cv = 1 - _ssr / sum((y - _ybar)**2 for y in Y)
+
 # ── 부트스트랩 95% CI (선형, 원 단위) ──
+# 색상만 다른 형제 모델은 독립 표본이 아니므로 스템(모델 계열) 단위로 다시 뽑는다.
+# 다시 뽑은 표본에 그 특성을 가진 모델이 하나도 없으면 그 회차는 그 계수에 쓰지 않는다(0으로 넣으면 구간이 왜곡됨).
 random.seed(20260825)
 B = 500
 boots = {n: [] for n in NAMES}
-idx = list(range(len(X)))
+by_stem = {}
+for i, r in enumerate(rows): by_stem.setdefault(r["stem"], []).append(i)
+stems = list(by_stem)
 for _ in range(B):
-    s = [random.choice(idx) for _ in idx]
-    cb = ols([X[i] for i in s], [Y[i] for i in s])
-    for j, n in enumerate(NAMES): boots[n].append(cb[j])
+    s = [i for st in (random.choice(stems) for _ in stems) for i in by_stem[st]]
+    Xs = [X[i] for i in s]
+    cb = ols(Xs, [Y[i] for i in s])
+    for j, n in enumerate(NAMES):
+        if j == 0 or any(x[j] for x in Xs): boots[n].append(cb[j])
 def pctile(v, p):
     v = sorted(v); i = (len(v)-1)*p
     lo = int(i); return v[lo] + (v[min(lo+1, len(v)-1)]-v[lo])*(i-lo)
-CI = {n: [round(pctile(boots[n], .025)/1000)*1000, round(pctile(boots[n], .975)/1000)*1000] for n in NAMES}
+# 유효 회차가 90% 미만이면(표본이 너무 적어) 구간을 내지 않는다 → 화면에 '추정 불가'
+CI = {n: ([round(pctile(boots[n], .025)/1000)*1000, round(pctile(boots[n], .975)/1000)*1000] if len(boots[n]) >= 0.9 * B else None) for n in NAMES}
 
 W  = {NAMES[i]: round(coef[i]/1000)*1000 for i in range(k)}
 W["age"] = round(coef[NAMES.index("age")]/100)*100
@@ -138,7 +157,7 @@ def pav_dec(v):
 random.seed(20260826)
 bootd = {lb: [] for _, lb in AGE_BINS[1:]}
 for _ in range(300):
-    s = [random.choice(idx) for _ in idx]
+    s = [i for st in (random.choice(stems) for _ in stems) for i in by_stem[st]]   # 스템 단위 재표본
     cb = ols_g([Xd[i] for i in s], [Yl[i] for i in s], kd)
     for j, lb in enumerate([lb for _, lb in AGE_BINS[1:]]):
         bootd[lb].append(cb[len(NAMES)-1+j])
@@ -215,17 +234,18 @@ COLORP = {c: {"n": len(v), "avg": round(sum(v)/len(v)/100)*100}
           for c, v in cprem.items() if len(v) >= 2}
 COLORP = dict(sorted(COLORP.items(), key=lambda x: -x[1]["avg"]))
 
-OUT = {"n": len(rows), "r2": round(r2, 3), "r2log": round(r2l, 3),
+OUT = {"n": len(rows), "r2": round(r2, 3), "r2log": round(r2l, 3), "r2adj": round(r2_adj, 3), "r2cv": round(r2_cv, 3), "n_stems": len(stems),
        "w": W, "wp": WP, "ci": CI, "cnt": CNT, "cap": CAPS, "colorp": COLORP,
        "dep": DEP, "lines": LINES,
        "note": "2026-08-25 쿠쿠몰 실판매가 헤도닉 회귀 v2(비압력 제외, 플래그십 분리, 부트스트랩 500회). "
                "base=열판·4~6인·기본코팅·일반 라인·부가기능 없음·신형·연차0"}
 json.dump(OUT, open('cuckoo-weights.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
-print("표본", len(rows), "R²(선형)", round(r2, 3), "R²(로그)", round(r2l, 3))
+print("표본", len(rows), "스템", len(stems), "R²(선형)", round(r2, 3), "수정", round(r2_adj, 3), "교차검증", round(r2_cv, 3), "R²(로그)", round(r2l, 3))
 for n in NAMES:
     ci = CI[n]
-    print(f"  {n:8s} {W[n]:>10,}  CI[{ci[0]:>9,} ~ {ci[1]:>9,}]  로그 {WP.get(n,0):>4}%")
+    cis = f"CI[{ci[0]:>9,} ~ {ci[1]:>9,}]" if ci else "CI[ 추정 불가 ]"
+    print(f"  {n:8s} {W[n]:>10,}  {cis}  로그 {WP.get(n,0):>4}%")
 print("용량 중앙값:", {c: v['med'] for c, v in CAPS.items()})
 print("감가 곡선:", [(e["label"], e["f"], e.get("ci")) for e in DEP["bins"]],
       "old", DEP["old"], "지수/년", DEP["exp_year"])

@@ -46,7 +46,6 @@ body.unfade-tool-theme.unfade-premium {
 
 body.unfade-premium ::selection { background: #e8ddca; color: #342e29; }
 body.unfade-premium #unfade-site-chrome .site-header { background: #fffefa; }
-body.unfade-premium #unfade-site-chrome .wordmark { font-family: Georgia, serif; font-weight: 500; letter-spacing: -.055em; }
 body.unfade-premium #unfade-site-chrome .header-meta strong { background: #eee5d7; color: #665140; }
 body.unfade-premium #unfade-site-chrome .side-menu { background: #fffefa; }
 
