@@ -540,7 +540,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   <div class="card" id="cmpcard" style="margin-top:34px">
     <h3>1:1 비교 — A냐 B냐</h3>
     <div class="cap">최종 후보 둘을 넣으면 스펙 차이를 짚고, <b>가격차가 스펙 가치로 정당한지</b>를 항목별 가중치로 해부합니다.
-      지배 관계(한쪽을 살 이유가 없는 경우)도 자동 판정합니다.</div>
+      지배 관계(한쪽이 스펙·가격 모두 앞서는 경우)도 자동 판정합니다.</div>
     <div class="cmpin">
       <input id="cmpa" list="mlist" placeholder="모델 A — 입력하면 자동완성 (예: CRP-DHP0610FD)" autocomplete="off">
       <input id="cmpb" list="mlist" placeholder="모델 B (예: CRP-ST0615FW)" autocomplete="off">
@@ -811,12 +811,12 @@ function render(raw,priceRaw,quiet){
 
   const rows=[["CRP/CR",d.pressure,""],
     [d.design,`<strong>${esc(d.designNote)}</strong>`,""],
-    ["가열",`<strong>${esc(d.heating)}</strong>`, d.heating==="IH"?"내솥 전체를 유도가열. 2기압 이상 가능":d.heating==="열판"?"바닥만 가열. 1.7~1.8기압":"압력 없음. 취사가 느림"],
+    ["가열",`<strong>${esc(d.heating)}</strong>`, d.heating==="IH"?"내솥 전체를 유도가열. 2기압 이상 가능":d.heating==="열판"?"바닥만 가열. IH보다 압력이 낮은 편(모델별 표기 확인)":"압력 없음. 취사가 느림"],
     ["압력선택",d.twin?"<strong>트윈프레셔 있음</strong>":"없음",d.twin?"고압/무압 선택. 볶음밥·냉동밥에 유리":"압력 고정"],
     ["저당",d.low?"<strong>저당취사 있음</strong>":"없음",d.low?"트레이로 밥물 배출. 찰기는 줄어듦":""],
     [d.potCode,`<strong>${esc(d.pot)}</strong>`,d.potGrade?`내솥 등급 ${d.potGrade}/5`:""],
     ["용량",d.capacity?`<strong>${d.capacity}인용</strong>`:"미상",""],
-    ["표시창",esc(d.disp),""],["색상",esc(d.color),"성능과 무관"]];
+    ["표시창",esc(d.disp),""],["색상",esc(hit&&hit.cl&&hit.cl!==d.color?hit.cl:d.color),"성능과 무관"]];
   if(d.iot) rows.splice(7,0,["T","<strong>IoT 모듈 (WiFi 앱연동)</strong>","표시창 코드 앞의 T"]);
   if(d.variant) rows.splice(5,0,[d.variant,`<strong>${VAR[d.variant]}</strong>`,"성능 차이 확인 안 됨 — 싼 쪽을 사면 됨"]);
   if(d.suffix) rows.push(["M","서픽스","가격·스펙 동일 확인. 외관 변형 추정"]);
@@ -844,7 +844,7 @@ function render(raw,priceRaw,quiet){
   if(hit&&hit.st==="판매중"){
     const doms=domCalc().get(hit.m);
     if(doms&&doms.length){
-      H.push(`<div class="alert"><b>더 싸고 같거나 나은 모델이 있습니다 — 이 모델을 살 이유가 없습니다</b>
+      H.push(`<div class="alert"><b>더 싸고 같거나 나은 모델이 있습니다 — 특별한 이유가 없다면 대안부터 보세요</b>
         가열·트윈·저당·사일런스·내솥·용량이 같거나 우위인데 가격은 같거나 쌉니다(색상형제 제외). 누르면 판정으로 이동.
         ${doms.slice(0,3).map(x=>`<div class="mrow" data-go="${x.m}"><div class="l"><div class="mm">${x.m}</div>
         <div class="ms">${esc(x.dz).replace(/\(.*\)/,"")} · ${heatShort(x.ht)}${x.tp?"·트윈":""}${x.si?"·사일런스":""} · 내솥 ${esc(x.pc)} · ${x.rg?"20"+x.rg:"—"}</div></div>
@@ -940,7 +940,7 @@ function render(raw,priceRaw,quiet){
     if(peers.length){
       const sorted=peers.sort((a,b)=>eff(a)-eff(b)).slice(0,8);
       H.push(`<div class="card"><h3>같은 스펙 다른 모델</h3>
-        <div class="cap">가열방식·압력선택·저당·내솥등급·용량이 같습니다. 더 싼 게 있으면 굳이 비싼 걸 살 이유가 없습니다.</div>
+        <div class="cap">가열방식·압력선택·저당·내솥등급·용량이 같습니다. 더 싼 게 있으면 그쪽을 먼저 보세요.</div>
         <div class="twrap"><table><thead><tr><th class="mono">모델</th><th>라인</th><th>출시</th><th>색상</th><th style="text-align:right">쿠쿠몰가</th></tr></thead><tbody>
         ${sorted.map(r=>`<tr class="${eff(r)===eff(sorted[0])?"cheap":""}">
           <td class="mono"><span class="lnk" data-go="${r.m}">${r.m}</span></td>
@@ -953,7 +953,7 @@ function render(raw,priceRaw,quiet){
   /* 경고 */
   const al=[];
   if(hit&&hit.am!=null&&hit.am>=72) al.push(`출시(등록) <b style='display:inline'>${Math.floor(hit.am/12)}년이 지난 모델</b>입니다. 신품 프리미엄을 줄 이유가 없습니다 — 기준선에 연식 감가가 이미 반영되어 있습니다.`);
-  if(d.oldGen) al.push("<b style='display:inline'>구형 라인</b>입니다. 부품 수급·에너지효율에서 불리하고, 신형 동급 대비 확실히 싸지 않으면 살 이유가 없습니다.");
+  if(d.oldGen) al.push("<b style='display:inline'>구형 라인</b>입니다. 부품 수급·에너지효율에서 불리하고, 신형 동급보다 확실히 싸지 않다면 신형을 먼저 보세요.");
   if(d.variant==="NL") al.push("NL 변형입니다. FF 짝과 성능 차이가 확인되지 않았고 NL 쪽에 할인이 잘 붙습니다. <b style='display:inline'>같은 스펙이면 무조건 싼 쪽</b>을 사세요.");
   if(d.variant==="FF") al.push("FF 변형(2026 후행 리비전)입니다. 출시 초기라 할인이 거의 없습니다. NL 짝의 실구매가를 반드시 비교하세요.");
   if(d.heating==="열판"&&d.twin) al.push("트윈프레셔가 있지만 <b style='display:inline'>IH가 아닌 열판식</b>입니다. 이름과 기능만 보고 상급으로 오해하기 쉬운 지점입니다.");
@@ -1134,10 +1134,10 @@ function drawWeights(){
   h+=FEATW.map(f=>{const v=WX.w[f[0]],n=WX.cnt[f[0]],ci=WX.ci&&WX.ci[f[0]],pp=WX.wp?WX.wp[f[0]]:null;
     const na=WX.ci&&f[0] in WX.ci&&!ci, unc=na||(ci&&ci[0]<=0&&ci[1]>=0);
     return `<div class="wrow"><div class="wl"><b>${f[1]}</b><span>${f[2]}${n?` · 표본 ${n}개`:""}</span>${f[3]?`<em>${f[3]}</em>`:""}</div>
-      <div class="wb"><i class="${v>=0?"pos":"neg"}" style="width:${Math.max(3,Math.abs(v)/mx*100)}%"></i></div>
-      <div class="wv ${v>=0?"pos":"neg"}">${sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${na?"추정 불가":unc?"불확실":"믿을 만함"}</span>${pp!=null?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
+      <div class="wb">${na?"":`<i class="${v>=0?"pos":"neg"}" style="width:${Math.max(3,Math.abs(v)/mx*100)}%"></i>`}</div>
+      <div class="wv ${na?"":v>=0?"pos":"neg"}">${na?"—":sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${na?"추정 불가":unc?"불확실":"믿을 만함"}</span>${pp!=null&&!na?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
   h+=`<div class="wcap"><b>용량별 실측 중앙값 (IH 압력만)</b> — ${Object.entries(WX.cap).map(([c,v])=>`${c}인 ${Wk(v.med)} (${v.n}개)`).join(" · ")}</div>`;
-  const cps=Object.entries(WX.colorp).filter(([c,v])=>v.n>=2&&v.avg>0).slice(0,8);
+  const cps=Object.entries(WX.colorp).filter(([c,v])=>v.n>=3&&v.avg>0&&!/미확정|미등록|^-$/.test(c)).slice(0,8);
   if(cps.length)h+=`<div class="wcap"><b>색상 프리미엄</b> — 같은 제품의 색상형제 중 최저가 색 대비 평균 웃돈.
     성능 차이는 전혀 없으니, 색만 양보하면 이만큼 아낍니다.<br>
     ${cps.map(([c,v])=>`${c} +${Wk(v.avg)}(${v.n})`).join(" · ")}</div>`;
@@ -1151,7 +1151,7 @@ function drawWeights(){
     있으므로 직접 계산할 필요는 없습니다. (신품 구매 상한 기준 — 중고 시세가 아님)</div>`;
   }
   h+=`<div class="wnote">방법: 헤도닉 회귀 v2 — 선형(원)+로그(%) 병행, 플래그십 분리, 부트스트랩 500회(색상만 다른 형제 모델은 한 묶음으로 재표본) 95% 신뢰구간으로 믿을 만함/불확실 판정, 표본이 너무 적은 항목은 추정 불가,
-    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형, 변수 수 보정 ${WX.r2adj}, 5겹 교차검증 ${WX.r2cv})·${WX.r2log}(로그), 표본 ${WX.n}개·${WX.n_stems}계열. 상세: cuckoo-master.md §7.7·§7.10</div>`;
+    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형, 변수 수 보정 ${WX.r2adj}, 계열 단위 5겹 교차검증 약 ${WX.r2cv}(${WX.r2cv_rng[0]}~${WX.r2cv_rng[1]}))·${WX.r2log}(로그), 표본 ${WX.n}개·${WX.n_stems}계열. 상세: cuckoo-master.md §7.7·§7.10</div>`;
   box.innerHTML=h;
 }
 
@@ -1172,7 +1172,7 @@ function buildDict(){
    KH:"트윈프레셔 중상급.",LH:"마스터셰프 — 플래그십. 저당(LHTR) 조합 다수, 가격대 최상단.",MH:"쁘띠 — 1~3인 소용량 라인.",
    NH:"사일런스 기본형. 증기 배출음 저감.",OH:"사일런스 오브제 — 디자인 파생.",PH:"사일런스 프로 — 상급.",QH:"사일런스 큐브 — 최신 파생.",
    BDH:"타철명장 — 무쇠(타철) 내솥 프리미엄.",BCH:"타철명장 파생.",
-   AH:"구형 라인 — 단종 수순. 신품 프리미엄 금지.",BH:"구형 라인 — 단종 수순. 신품 프리미엄 금지."};
+   AH:"구형 라인 — 단종 수순. 신품이라고 웃돈을 주지 마세요.",BH:"구형 라인 — 단종 수순. 신품이라고 웃돈을 주지 마세요."};
   for(const k in DESIGN){
     const old=!!OLDG[k],sil=!!SIL[k];
     P("디자인 라인 — IH 압력",k,DESIGN[k][1],
@@ -1188,11 +1188,11 @@ function buildDict(){
    TT:"트윈프레셔 미니 — 열판 소형.",RT:"열판 트윈프레셔.",QK:"Q형 열판압력 보급형.",PK:"P형 열판압력 보급형.",
    RK:"R형 열판압력 보급형.",PW:"P형 열판압력 변형.",P:"P형 열판압력 — 한 글자 코드.",R:"R형 열판압력 — 한 글자 코드.",T:"미니 열판압력 — 한 글자 코드."};
   for(const k in PLATE)
-    P("디자인 라인 — 열판 압력",k,PLATE[k][1],(PLATED[k]||"")+" 바닥만 가열, 1.7~1.8기압 — IH보다 싼 대신 밥맛에서 불리.",
+    P("디자인 라인 — 열판 압력",k,PLATE[k][1],(PLATED[k]||"")+" 바닥만 가열, IH보다 압력이 낮은 편 — IH보다 싼 대신 밥맛에서 불리.",
       PLATE[k][0]?"mid":"neutral",PLATE[k][0]?"열판·트윈":"열판",r=>r.dcx===k);
   P("기능 코드","T","트윈프레셔 (라인 바로 뒤)",`고압↔무압 전환 선택. 볶음밥·냉동밥·쾌속취사에 유리. 실판매가 웃돈 ${sgn(WX.w.twin)}.`,"good",sgn(WX.w.twin),r=>r.tp);
   P("기능 코드","L","저당취사 (라인 바로 뒤)",`저당 트레이로 밥물 배출 — 당질 30~40% 저감, 대신 찰기·단맛도 감소. 트윈프레셔 포함. 트윈 대비 추가 웃돈 ${sgn(WX.w.low)}.`,"good",sgn(WX.w.low),r=>r.ls);
-  P("기능 코드","T","IoT·WiFi (표시창 코드 앞)",`앱 연동(원격취사·예약). 표본 2개 — 실판매가에서 유의미한 웃돈이 확인되지 않습니다(${sgn(WX.w.iot)}). 앱 지원이 끊기면 일반 밥솥 — 웃돈 금지.`,"warn","웃돈 없음",r=>r.io);
+  P("기능 코드","T","IoT·WiFi (표시창 코드 앞)",`앱 연동(원격취사·예약). 표본 2개(같은 계열)뿐이라 실판매가로 웃돈을 추정할 수 없습니다. 앱 지원이 끊기면 일반 밥솥 — 웃돈을 주지 마세요.`,"warn","웃돈 없음",r=>r.io);
   P("기능 코드","M","서픽스 (맨 끝)","가격·스펙 동일 확인. 외관 변형 추정 — 무시해도 됩니다.","neutral","",r=>!!r.sf);
   P("병행 변형","NL","선행 리비전","FF와 병행 판매되는 변형 코드(세대 아님 — 등록월 거의 동시). 할인 유통 중심이라 실구매가가 싼 경우가 많습니다. 같은 스펙이면 싼 쪽.","mid","싼 쪽 구매",r=>r.vr==="NL");
   P("병행 변형","FF","후행 리비전 (2026)","NL 짝과 성능 차이 확인 안 됨. 출시 초기라 할인이 거의 없습니다 — NL 실구매가와 반드시 비교.","mid","비교 필수",r=>r.vr==="FF");
@@ -1202,7 +1202,7 @@ function buildDict(){
    B:"다이아쉴드/블랙 일반 코팅.",F:"타철명장/플랫 (구형)."};
   for(const [c,nm,g] of POT){
     let d=(POTD[c]||"")+` 내솥 등급 ${g}/5.`;
-    if(g===5)d+=` 실판매가는 코팅보다 오히려 낮음(${sgn(WX.w.pot5)}) — 상위호환이 아니라 취향 선택.`;
+    if(g===5)d+=` 실판매가는 코팅보다 높지 않음(추정 ${sgn(WX.w.pot5)}, 불확실) — 상위호환이 아니라 취향 선택.`;
     P("내솥 코드",c,nm,d,g===5?"mid":(g>=3?"good":"neutral"),`등급 ${g}/5`,r=>r.pc===c);
   }
   for(const cc in CAP){
@@ -1468,7 +1468,7 @@ function drawFaq(){
   const cell=f=>{const rs=DB.filter(r=>r.st==="판매중"&&eff(r)&&f(r));if(!rs.length)return "0개";const ps=rs.map(eff);return `${rs.length}개 · ${Wk(Math.min(...ps))}~${Wk(Math.max(...ps))}`;};
   box.innerHTML=`
   <details class="faq" open><summary>IH가 뭔가요? 트윈프레셔에만 있는 건가요?</summary><div class="fa">
-    <p><b>완전히 별개인 두 기능입니다.</b> IH는 <b>가열 방식</b> — 코일로 내솥 전체를 통째로 가열합니다(열판은 바닥만 가열, 1.7~1.8기압).
+    <p><b>완전히 별개인 두 기능입니다.</b> IH는 <b>가열 방식</b> — 코일로 내솥 전체를 통째로 가열합니다(열판은 바닥만 가열, 압력도 IH보다 낮은 편).
     트윈프레셔는 <b>압력 방식</b> — 고압(약 2기압)과 무압을 스위치로 고릅니다. 그래서 네 조합이 모두 실제로 존재합니다:</p>
     <table class="mtx"><tr><th></th><th>트윈프레셔 있음</th><th>트윈프레셔 없음</th></tr>
     <tr><th>IH</th><td>${cell(r=>heatShort(r.ht)==="IH"&&r.tp)}</td><td>${cell(r=>heatShort(r.ht)==="IH"&&!r.tp)}</td></tr>
@@ -1488,7 +1488,7 @@ function drawFaq(){
     <p>② 설거지 편한 게 최고다 → <b>코팅 내솥</b>(XB/B 기본, S 에코스텐, P 스텐외피, R 투톤). 등급이 높을수록
     구성이 좋지만 결국 소모품 — 수년 뒤 내솥만 사서 교체하면 됩니다. 투톤·에코스텐·스텐외피는 코팅 계열 안의 변형일 뿐,
     사용감 차이는 크지 않습니다.</p>
-    <p>실측 근거: 올스텐이라고 비싸지 않고 오히려 <b>${sgn(WX.w.pot5)}</b> — 시장도 상위호환이 아니라 '취향 옵션'으로 봅니다.</p></div></details>
+    <p>실판매가 근거: 올스텐이라고 더 비싸게 팔리지 않습니다(추정 <b>${sgn(WX.w.pot5)}</b>, 통계적으로는 불확실) — 상위호환이 아니라 '취향 옵션'으로 보는 편이 맞습니다.</p></div></details>
   <details class="faq"><summary>밥맛을 점수로 매길 수 있나요?</summary><div class="fa">
     <p><b>솔직한 답: 공인된 밥맛 점수는 없습니다.</b> 블라인드 테스트도 쌀·물·보온 시간에 따라 결과가 흔들려
     재현성이 낮습니다. 물리적으로 밥맛을 좌우하는 변수는 스펙에서 세 가지가 잡힙니다 — ① 가열 균일도(IH &gt; 열판)
@@ -1501,7 +1501,7 @@ function drawFaq(){
     고압&무압찜, 그리고 <b>오픈쿠킹</b>(취사 중 뚜껑을 열어 재료 추가 — 나물밥에 유용)까지 지원합니다.
     "요리 전용"이 아니라 <b>"요리까지 잘하는 밥솥"</b>입니다. 상황별 추천의 '요리·이유식'에서 현시점 추천을 볼 수 있습니다.</p></div></details>
   <details class="faq"><summary>돈값 못하는 기능은 뭔가요?</summary><div class="fa">
-    <p>실판매가 데이터 기준으로: ① <b>IoT(WiFi)</b> — 시장 웃돈이 확인되지 않고(${sgn(WX.w.iot)}), 앱 지원이 끊기면
+    <p>실판매가 데이터 기준으로: ① <b>IoT(WiFi)</b> — 표본이 2개뿐이라 시장 웃돈을 추정할 수 없고, 앱 지원이 끊기면
     일반 밥솥이 됩니다. ② <b>인기 색상 웃돈</b> — 성능이 동일한데 색만으로 수만~수십만원 차이. ③ <b>구형 재고 프리미엄</b> —
     단종 임박 모델이 오히려 비싸지는 현상. ④ <b>"정가 대비 50% 할인"</b> — 정가 자체가 높게 잡혀 있어 할인율은
     판단 근거가 못 됩니다. 할인율보다 이 도구의 절대가격 기준선과 비교해 보세요.</p></div></details>
@@ -1583,8 +1583,8 @@ function drawCmp(){
     concl=effA===effB?"색상만 다른 같은 제품이고 가격도 같습니다 — 마음에 드는 색을 고르면 됩니다."
       :`색상만 다른 <b>같은 제품</b>입니다. 색상 취향이 아주 강하지 않다면 <b>싼 쪽(${effA<effB?a.m:b.m})</b>이 정답 —
         차액 ${W(Math.abs(effA-effB))}은 순수하게 색값입니다.`;
-  }else if(dominates(a,b))concl=`<b>${a.m}가 ${b.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. ${b.m}를 살 이유가 없습니다.`;
-  else if(dominates(b,a))concl=`<b>${b.m}가 ${a.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. ${a.m}를 살 이유가 없습니다.`;
+  }else if(dominates(a,b))concl=`<b>${a.m}가 ${b.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. 특별한 이유가 없다면 ${a.m} 쪽이 낫습니다.`;
+  else if(dominates(b,a))concl=`<b>${b.m}가 ${a.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. 특별한 이유가 없다면 ${b.m} 쪽이 낫습니다.`;
   else if(effA&&effB&&mvOf(a)&&mvOf(b)){
     const hiM=effA>=effB?a:b, loM=effA>=effB?b:a;
     const gap=eff(hiM)-eff(loM), just=mvOf(hiM)-mvOf(loM), bub=gap-just;

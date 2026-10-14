@@ -68,14 +68,19 @@ r2, r2l = r2of(X, Y, coef), r2of(X, Yl, coefl)
 # 표본·변수 수를 감안한 수정 R², 5겹 교차검증 R²(선형) — 화면에 함께 적는다
 n_obs = len(X)
 r2_adj = 1 - (1 - r2) * (n_obs - 1) / (n_obs - k)
+# 교차검증은 색상 형제가 학습·시험에 갈라 들어가지 않게 계열(스템) 단위로 5겹을 나누고 20번 반복해 평균·범위를 낸다
+_by_stem_cv = {}
+for i, r in enumerate(rows): _by_stem_cv.setdefault(r["stem"], []).append(i)
+_ybar = sum(Y) / n_obs; _sst = sum((y - _ybar)**2 for y in Y); _cvs = []
 random.seed(20261014)
-_fold = list(range(n_obs)); random.shuffle(_fold)
-_ybar = sum(Y) / n_obs; _ssr = 0.0
-for f in range(5):
-    te = set(_fold[f::5]); tr = [i for i in range(n_obs) if i not in te]
-    cf = ols([X[i] for i in tr], [Y[i] for i in tr])
-    _ssr += sum((Y[i] - sum(c*x for c, x in zip(cf, X[i])))**2 for i in te)
-r2_cv = 1 - _ssr / sum((y - _ybar)**2 for y in Y)
+for _rep in range(20):
+    _st = list(_by_stem_cv); random.shuffle(_st); _ssr = 0.0
+    for f in range(5):
+        te = {i for st in _st[f::5] for i in _by_stem_cv[st]}; tr = [i for i in range(n_obs) if i not in te]
+        cf = ols([X[i] for i in tr], [Y[i] for i in tr])
+        _ssr += sum((Y[i] - sum(c*x for c, x in zip(cf, X[i])))**2 for i in te)
+    _cvs.append(1 - _ssr / _sst)
+r2_cv, r2_cv_lo, r2_cv_hi = sum(_cvs) / len(_cvs), min(_cvs), max(_cvs)
 
 # ── 부트스트랩 95% CI (선형, 원 단위) ──
 # 색상만 다른 형제 모델은 독립 표본이 아니므로 스템(모델 계열) 단위로 다시 뽑는다.
@@ -234,14 +239,18 @@ COLORP = {c: {"n": len(v), "avg": round(sum(v)/len(v)/100)*100}
           for c, v in cprem.items() if len(v) >= 2}
 COLORP = dict(sorted(COLORP.items(), key=lambda x: -x[1]["avg"]))
 
-OUT = {"n": len(rows), "r2": round(r2, 3), "r2log": round(r2l, 3), "r2adj": round(r2_adj, 3), "r2cv": round(r2_cv, 3), "n_stems": len(stems),
+# 구간을 낼 수 없는(표본이 너무 적은) 항목은 웃돈 0으로 둔다 — 시세 추정·조건 빌더·화면이 같은 값을 쓰도록
+for n in NAMES:
+    if CI.get(n) is None and n != "base":
+        W[n] = 0; WP[n] = 0
+OUT = {"n": len(rows), "r2": round(r2, 3), "r2log": round(r2l, 3), "r2adj": round(r2_adj, 3), "r2cv": round(r2_cv, 3), "r2cv_rng": [round(r2_cv_lo, 2), round(r2_cv_hi, 2)], "n_stems": len(by_stem),
        "w": W, "wp": WP, "ci": CI, "cnt": CNT, "cap": CAPS, "colorp": COLORP,
        "dep": DEP, "lines": LINES,
        "note": "2026-08-25 쿠쿠몰 실판매가 헤도닉 회귀 v2(비압력 제외, 플래그십 분리, 부트스트랩 500회). "
                "base=열판·4~6인·기본코팅·일반 라인·부가기능 없음·신형·연차0"}
 json.dump(OUT, open('cuckoo-weights.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
-print("표본", len(rows), "스템", len(stems), "R²(선형)", round(r2, 3), "수정", round(r2_adj, 3), "교차검증", round(r2_cv, 3), "R²(로그)", round(r2l, 3))
+print("표본", len(rows), "스템", len(by_stem), "R²(선형)", round(r2, 3), "수정", round(r2_adj, 3), "교차검증", round(r2_cv, 3), "R²(로그)", round(r2l, 3))
 for n in NAMES:
     ci = CI[n]
     cis = f"CI[{ci[0]:>9,} ~ {ci[1]:>9,}]" if ci else "CI[ 추정 불가 ]"

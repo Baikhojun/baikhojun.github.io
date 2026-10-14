@@ -115,7 +115,7 @@
 {% macro stats(c, arg) %}
 {% set st = c.status_counts %}
 <div class="p-stats">
-  <div class="stat"><div class="v">{{ st.new }}</div><div class="l">{{ tag('신규') }} 건</div></div>
+  <div class="stat"><div class="v">{{ st.new }}</div><div class="l">{{ tag('신규') }} 건{% if st.corrected %} · 정정 {{ st.corrected }}건 별도{% endif %}</div></div>
   <div class="stat"><div class="v">{{ st.changed }}</div><div class="l">{{ tag('개선') }} 가격·정책 포함 변경</div></div>
   <div class="stat"><div class="v">{{ st.ended }}</div><div class="l">{{ tag('종료') }} 건</div></div>
   <div class="stat"><div class="v">{{ st.watch }}</div><div class="l">{{ tag('관찰') }} 추적 항목</div></div>

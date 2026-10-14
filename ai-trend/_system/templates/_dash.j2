@@ -52,7 +52,7 @@
   <div class="explainer-card" role="listitem">
     <div class="explainer-card__index">{{ "%02d"|format(loop.index) }} {{ tag(tg) }}</div>
     <h3>{{ c.status_counts.get(key, 0) }}<small>건</small></h3>
-    <p>{{ label }}</p>
+    <p>{{ label }}{% if key == 'new' and c.status_counts.get('corrected', 0) %} · 이 밖에 {{ tag('정정') }} {{ c.status_counts.corrected }}건{% endif %}</p>
   </div>
   {% endfor %}
 </div>

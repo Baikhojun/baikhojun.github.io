@@ -668,6 +668,8 @@ body.og-mode .og-card { display: grid; grid-template-columns: minmax(0, 1.08fr) 
 /* ───────── 실제 인쇄 ───────── */
 @page { size: A4 landscape; margin: 0; }
 @media print {
+  /* PDF: 고정폭 숫자(tnum) 대체 글리프는 Chrome PDF에서 사용자 영역 코드로 들어가 복사·검색이 안 된다 → 인쇄에서는 끈다 */
+  body, body * { font-variant-numeric: normal !important; }
   html, body { background: #fff !important; }
   body { font-size: 10pt; }
   .meta-strip, .toolbar, .dashboard, .site-foot, .to-top, .toast, .pv-note, #unfade-site-chrome { display: none !important; }

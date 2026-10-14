@@ -519,7 +519,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
   <div class="card">
     <h3>1:1 비교 — A냐 B냐</h3>
     <div class="cap">최종 후보 둘을 넣으면 스펙 차이를 짚고, <b>가격차가 스펙 가치로 정당한지</b>를 항목별 가중치로 해부합니다.
-      지배 관계(한쪽을 살 이유가 없는 경우)도 자동 판정합니다.</div>
+      지배 관계(한쪽이 스펙·가격 모두 앞서는 경우)도 자동 판정합니다.</div>
     <input id="cmpa" list="mlist" placeholder="모델 A — 입력하면 자동완성 (예: CRP-DHP0610FD)" autocomplete="off" autocapitalize="characters" autocorrect="off">
     <input id="cmpb" list="mlist" placeholder="모델 B (예: CRP-ST0615FW)" autocomplete="off" autocapitalize="characters" autocorrect="off" style="margin-top:8px">
     <button class="btn" id="cmpgo">비교하기</button>
@@ -649,7 +649,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
   <div class="card">
     <h2>스펙 우선순위 (돈 값 하는 순서)</h2>
     <table class="gt"><tbody>
-      <tr><td class="k">1. 가열</td><td><b>IH</b>(전체 유도가열, 2기압↑) &gt; 열판(바닥만, 1.7~1.8기압) &gt; 비압력</td></tr>
+      <tr><td class="k">1. 가열</td><td><b>IH</b>(전체 유도가열, 2기압↑) &gt; 열판(바닥만, IH보다 저압) &gt; 비압력</td></tr>
       <tr><td class="k">2. 트윈프레셔</td><td>고압/무압 선택. 볶음밥·냉동밥에 유리</td></tr>
       <tr><td class="k">3. 내솥</td><td>올스테인리스(무코팅)는 코팅 걱정이 없는 대신 눌어붙어 세척 번거로움 — 취향 문제</td></tr>
       <tr><td class="k">4. 사일런스</td><td>NH/OH/PH/QH 라인. 단, "사일런스 어반(UT)"은 이름만 사일런스인 열판식 — 주의</td></tr>
@@ -664,7 +664,7 @@ footer{margin:28px 6px 8px;font-size:11px;color:var(--muted);line-height:1.7}
     <p>· <b>정가 대비 할인율</b>은 의미가 없습니다. 쿠쿠 정가는 애초에 높게 잡혀 있어
     "50% 할인"도 절대상한을 넘는 경우가 있습니다. 할인율보다 이 도구의 기준선과 비교해 보세요.</p>
     <p>· <b>구형 명명</b>(H가 앞에 오는 HV·HW 등, AH/BH 라인)은 단종 수순입니다.
-    신형 동급보다 확실히 싸지 않으면 살 이유가 없습니다.</p>
+    신형 동급보다 확실히 싸지 않다면 신형을 먼저 보세요.</p>
     <p>· <b>출시 6년 이상</b> 지난 모델에 신품 프리미엄을 주지 마세요. 기준선에 연식
     감가가 이미 반영되어 있습니다.</p>
     <p>· <b>모델명으로 알 수 없는 것</b>: 최대기압 · 에너지효율등급 · 소비전력. 다만 이 도구는
@@ -903,12 +903,12 @@ function render(raw,priceRaw,quiet){
 
   const rows=[["CRP/CR",d.pressure,""],
     [d.design,`<strong>${esc(d.designNote)}</strong>`,""],
-    ["가열",`<strong>${esc(d.heating)}</strong>`, d.heating==="IH"?"내솥 전체를 유도가열. 2기압 이상 가능":d.heating==="열판"?"바닥만 가열. 1.7~1.8기압":"압력 없음. 취사가 느림"],
+    ["가열",`<strong>${esc(d.heating)}</strong>`, d.heating==="IH"?"내솥 전체를 유도가열. 2기압 이상 가능":d.heating==="열판"?"바닥만 가열. IH보다 압력이 낮은 편(모델별 표기 확인)":"압력 없음. 취사가 느림"],
     ["압력선택",d.twin?"<strong>트윈프레셔 있음</strong>":"없음",d.twin?"고압/무압 선택. 볶음밥·냉동밥에 유리":"압력 고정"],
     ["저당",d.low?"<strong>저당취사 있음</strong>":"없음",d.low?"트레이로 밥물 배출. 찰기는 줄어듦":""],
     [d.potCode,`<strong>${esc(d.pot)}</strong>`,d.potGrade?`내솥 등급 ${d.potGrade}/5`:""],
     ["용량",d.capacity?`<strong>${d.capacity}인용</strong>`:"미상",""],
-    ["표시창",esc(d.disp),""],["색상",esc(d.color),"성능과 무관"]];
+    ["표시창",esc(d.disp),""],["색상",esc(hit&&hit.cl&&hit.cl!==d.color?hit.cl:d.color),"성능과 무관"]];
   if(d.iot) rows.splice(7,0,["T","<strong>IoT 모듈 (WiFi 앱연동)</strong>","표시창 코드 앞의 T"]);
   if(d.variant) rows.splice(5,0,[d.variant,`<strong>${VAR[d.variant]}</strong>`,"성능 차이 확인 안 됨 — 싼 쪽을 사면 됨"]);
   if(d.suffix) rows.push(["M","서픽스","가격·스펙 동일 확인. 외관 변형 추정"]);
@@ -936,7 +936,7 @@ function render(raw,priceRaw,quiet){
   if(hit&&hit.st==="판매중"){
     const doms=domCalc().get(hit.m);
     if(doms&&doms.length){
-      H.push(`<div class="alert"><b>더 싸고 같거나 나은 모델이 있습니다 — 이 모델을 살 이유가 없습니다</b>
+      H.push(`<div class="alert"><b>더 싸고 같거나 나은 모델이 있습니다 — 특별한 이유가 없다면 대안부터 보세요</b>
         가열·트윈·저당·사일런스·내솥·용량이 같거나 우위인데 가격은 같거나 쌉니다(색상형제 제외). 누르면 판정으로 이동.
         ${doms.slice(0,3).map(x=>`<div class="mrow" data-go="${x.m}"><div class="l"><div class="mm">${x.m}</div>
         <div class="ms">${esc(x.dz).replace(/\(.*\)/,"")} · ${heatShort(x.ht)}${x.tp?"·트윈":""}${x.si?"·사일런스":""} · 내솥 ${esc(x.pc)} · ${x.rg?"20"+x.rg:"—"}</div></div>
@@ -1031,7 +1031,7 @@ function render(raw,priceRaw,quiet){
     if(peers.length){
       const sorted=peers.sort((a,b)=>eff(a)-eff(b)).slice(0,8);
       H.push(`<div class="card"><h3>같은 스펙 다른 모델</h3>
-        <div class="cap">가열방식·압력선택·저당·내솥등급·용량이 같습니다. 더 싼 게 있으면 굳이 비싼 걸 살 이유가 없습니다. 눌러서 판정으로 이동.</div>
+        <div class="cap">가열방식·압력선택·저당·내솥등급·용량이 같습니다. 더 싼 게 있으면 그쪽을 먼저 보세요. 눌러서 판정으로 이동.</div>
         ${sorted.map(r=>`<div class="mrow ${eff(r)===eff(sorted[0])?"cheap":""}" data-go="${r.m}">
           <div class="l"><div class="mm">${r.m}</div><div class="ms">${esc(r.dz).replace(/\(.*\)/,"")} · ${esc(r.cl)} · ${r.rg?"20"+r.rg:"출시미상"}</div></div>
           <div class="mp">${W(eff(r))}</div></div>`).join("")}
@@ -1042,7 +1042,7 @@ function render(raw,priceRaw,quiet){
   /* 경고 */
   const al=[];
   if(hit&&hit.am!=null&&hit.am>=72) al.push(`출시(등록) <b style='display:inline'>${Math.floor(hit.am/12)}년이 지난 모델</b>입니다. 신품 프리미엄을 줄 이유가 없습니다 — 기준선에 연식 감가가 이미 반영되어 있습니다.`);
-  if(d.oldGen) al.push("<b style='display:inline'>구형 라인</b>입니다. 부품 수급·에너지효율에서 불리하고, 신형 동급 대비 확실히 싸지 않으면 살 이유가 없습니다.");
+  if(d.oldGen) al.push("<b style='display:inline'>구형 라인</b>입니다. 부품 수급·에너지효율에서 불리하고, 신형 동급보다 확실히 싸지 않다면 신형을 먼저 보세요.");
   if(d.variant==="NL") al.push("NL 변형입니다. FF 짝과 성능 차이가 확인되지 않았고 NL 쪽에 할인이 잘 붙습니다. <b style='display:inline'>같은 스펙이면 무조건 싼 쪽</b>을 사세요.");
   if(d.variant==="FF") al.push("FF 변형(2026 후행 리비전)입니다. 출시 초기라 할인이 거의 없습니다. NL 짝의 실구매가를 반드시 비교하세요.");
   if(d.heating==="열판"&&d.twin) al.push("트윈프레셔가 있지만 <b style='display:inline'>IH가 아닌 열판식</b>입니다. 이름과 기능만 보고 상급으로 오해하기 쉬운 지점입니다.");
@@ -1177,7 +1177,7 @@ window.addEventListener("scroll",()=>{totop.classList.toggle("show",window.scrol
 totop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
 /* ═══ v3.1 확장: 항목별 가중치 · 코드 사전 · 조건 빌더 ═══ */
-const WX={"n":197,"r2":0.514,"r2log":0.605,"r2adj":0.479,"r2cv":0.408,"n_stems":129,"w":{"base":215000,"ih":221000,"twin":65000,"low":47000,"silence":76000,"iot":38000,"pot5":-70000,"pot34":-59000,"pot2":-56000,"capS":-62000,"capL":42000,"flag":44000,"old":-115000,"age":-7400},"wp":{"ih":88,"twin":20,"low":7,"silence":16,"iot":7,"pot5":-19,"pot34":-12,"pot2":-14,"capS":-20,"capL":10,"flag":9,"old":-26,"age":-2},"ci":{"base":[174000,257000],"ih":[135000,284000],"twin":[27000,115000],"low":[-38000,168000],"silence":[-4000,156000],"iot":null,"pot5":[-188000,71000],"pot34":[-122000,15000],"pot2":[-130000,20000],"capS":[-133000,-3000],"capL":[5000,78000],"flag":[-36000,130000],"old":[-191000,-42000],"age":[-18000,2000]},"cnt":{"ih":153,"twin":100,"low":14,"silence":34,"iot":2,"pot5":13,"pot34":91,"pot2":24,"capS":9,"capL":91,"flag":32,"old":13,"age":197},"cap":{"3":{"n":6,"med":265000},"6":{"n":77,"med":380000},"10":{"n":70,"med":400000}},"colorp":{"캐비어블루":{"n":2,"avg":308500},"그레이스아이보리":{"n":5,"avg":112400},"그레이스블랙":{"n":7,"avg":79300},"핑크":{"n":6,"avg":71600},"테라코타":{"n":3,"avg":69300},"그레이스화이트":{"n":19,"avg":66100},"화이트스톤":{"n":4,"avg":57000},"미확정":{"n":2,"avg":45000},"그레이":{"n":7,"avg":44700},"블랙":{"n":8,"avg":44600},"메탈릭그린":{"n":2,"avg":31500},"실버":{"n":5,"avg":24000},"루미실버":{"n":2,"avg":18500},"화이트":{"n":23,"avg":17700},"그레이스핑크실버":{"n":2,"avg":15500},"그레이실버":{"n":2,"avg":9000},"다크실버/다크그레이":{"n":10,"avg":0},"어반그레이":{"n":3,"avg":0},"아이보리":{"n":2,"avg":0},"화이트그레이":{"n":2,"avg":0}},"dep":{"bins":[{"ub":24,"label":"0-2y","f":1.0,"emp":1.0,"raw":1.0,"prior":1.0},{"ub":48,"label":"2-4y","f":0.918,"emp":0.918,"raw":0.866,"prior":0.97,"ci":[0.79,0.96]},{"ub":72,"label":"4-6y","f":0.918,"emp":0.918,"raw":0.97,"prior":0.92,"ci":[0.85,1.1]},{"ub":96,"label":"6-8y","f":0.85,"emp":0.891,"raw":0.746,"prior":0.85,"ci":[0.66,0.86]},{"ub":null,"label":"8y+","f":0.7,"emp":0.891,"raw":1.035,"prior":0.7,"ci":[0.8,1.36]}],"old":0.742,"old_emp":0.742,"exp_year":0.9782,"note":"연령구간 헤도닉(로그)→PAV 단조화→min(경험,보수가정) 재단조. old=구형 라인 추가 잔존율(경험·가정 중 낮은 쪽), exp_year=지수모델 연간 잔존율"},"lines":{"AH":{"waves":4,"last":"22.06","med":26,"q1":9,"q3":65,"next":"24.08","next_lo":"23.03","next_hi":"27.11"},"BCH":{"waves":1,"last":"24.08"},"BDH":{"waves":2,"last":"24.08"},"BH":{"waves":1,"last":"23.12"},"CH":{"waves":6,"last":"26.09","med":17,"q1":2,"q3":30,"next":"28.02","next_lo":"26.11","next_hi":"29.03"},"DH":{"waves":7,"last":"26.06","med":26,"q1":17,"q3":28,"next":"28.08","next_lo":"27.11","next_hi":"28.10"},"EH":{"waves":1,"last":"21.01"},"FH":{"waves":8,"last":"23.06","med":14,"q1":6,"q3":22,"next":"24.08","next_lo":"23.12","next_hi":"25.04"},"HQ":{"waves":1,"last":"19.03"},"HU":{"waves":3,"last":"21.11","med":14,"q1":6,"q3":21,"next":"22.12","next_lo":"22.05","next_hi":"23.08"},"HV":{"waves":2,"last":"21.11"},"HW":{"waves":1,"last":"18.08"},"JH":{"waves":11,"last":"26.08","med":8,"q1":3,"q3":16,"next":"27.04","next_lo":"26.11","next_hi":"27.12"},"KH":{"waves":3,"last":"23.06","med":22,"q1":2,"q3":42,"next":"25.04","next_lo":"23.08","next_hi":"26.12"},"LH":{"waves":7,"last":"23.09","med":3,"q1":2,"q3":8,"next":"23.12","next_lo":"23.11","next_hi":"24.05"},"MH":{"waves":2,"last":"24.11"},"NH":{"waves":5,"last":"26.03","med":4,"q1":1,"q3":35,"next":"26.06","next_lo":"26.04","next_hi":"29.02"},"OH":{"waves":5,"last":"26.02","med":6,"q1":3,"q3":15,"next":"26.08","next_lo":"26.05","next_hi":"27.05"},"P":{"waves":5,"last":"24.07","med":13,"q1":12,"q3":44,"next":"25.08","next_lo":"25.07","next_hi":"28.03"},"PH":{"waves":4,"last":"26.02","med":7,"q1":3,"q3":17,"next":"26.09","next_lo":"26.05","next_hi":"27.07"},"PK":{"waves":1,"last":"24.01"},"PW":{"waves":1,"last":"20.06"},"QH":{"waves":1,"last":"26.08"},"QK":{"waves":1,"last":"25.10"},"R":{"waves":4,"last":"24.09","med":1,"q1":1,"q3":4,"next":"24.10","next_lo":"24.10","next_hi":"25.01"},"RK":{"waves":1,"last":"26.02"},"ST":{"waves":5,"last":"26.02","med":6,"q1":4,"q3":47,"next":"26.08","next_lo":"26.06","next_hi":"30.01"},"T":{"waves":1,"last":"24.01"},"TT":{"waves":1,"last":"22.10"},"UT":{"waves":2,"last":"25.06"}},"note":"2026-08-25 쿠쿠몰 실판매가 헤도닉 회귀 v2(비압력 제외, 플래그십 분리, 부트스트랩 500회). base=열판·4~6인·기본코팅·일반 라인·부가기능 없음·신형·연차0"};
+const WX={"n":197,"r2":0.514,"r2log":0.605,"r2adj":0.479,"r2cv":0.401,"r2cv_rng":[0.33,0.46],"n_stems":117,"w":{"base":215000,"ih":221000,"twin":65000,"low":47000,"silence":76000,"iot":0,"pot5":-70000,"pot34":-59000,"pot2":-56000,"capS":-62000,"capL":42000,"flag":44000,"old":-115000,"age":-7400},"wp":{"ih":88,"twin":20,"low":7,"silence":16,"iot":0,"pot5":-19,"pot34":-12,"pot2":-14,"capS":-20,"capL":10,"flag":9,"old":-26,"age":-2},"ci":{"base":[174000,257000],"ih":[135000,284000],"twin":[27000,115000],"low":[-38000,168000],"silence":[-4000,156000],"iot":null,"pot5":[-188000,71000],"pot34":[-122000,15000],"pot2":[-130000,20000],"capS":[-133000,-3000],"capL":[5000,78000],"flag":[-36000,130000],"old":[-191000,-42000],"age":[-18000,2000]},"cnt":{"ih":153,"twin":100,"low":14,"silence":34,"iot":2,"pot5":13,"pot34":91,"pot2":24,"capS":9,"capL":91,"flag":32,"old":13,"age":197},"cap":{"3":{"n":6,"med":265000},"6":{"n":77,"med":380000},"10":{"n":70,"med":400000}},"colorp":{"캐비어블루":{"n":2,"avg":308500},"그레이스아이보리":{"n":5,"avg":112400},"그레이스블랙":{"n":7,"avg":79300},"핑크":{"n":6,"avg":71600},"테라코타":{"n":3,"avg":69300},"그레이스화이트":{"n":19,"avg":66100},"화이트스톤":{"n":4,"avg":57000},"미확정":{"n":2,"avg":45000},"그레이":{"n":7,"avg":44700},"블랙":{"n":8,"avg":44600},"메탈릭그린":{"n":2,"avg":31500},"실버":{"n":5,"avg":24000},"루미실버":{"n":2,"avg":18500},"화이트":{"n":23,"avg":17700},"그레이스핑크실버":{"n":2,"avg":15500},"그레이실버":{"n":2,"avg":9000},"다크실버/다크그레이":{"n":10,"avg":0},"어반그레이":{"n":3,"avg":0},"아이보리":{"n":2,"avg":0},"화이트그레이":{"n":2,"avg":0}},"dep":{"bins":[{"ub":24,"label":"0-2y","f":1.0,"emp":1.0,"raw":1.0,"prior":1.0},{"ub":48,"label":"2-4y","f":0.918,"emp":0.918,"raw":0.866,"prior":0.97,"ci":[0.79,0.96]},{"ub":72,"label":"4-6y","f":0.918,"emp":0.918,"raw":0.97,"prior":0.92,"ci":[0.85,1.1]},{"ub":96,"label":"6-8y","f":0.85,"emp":0.891,"raw":0.746,"prior":0.85,"ci":[0.66,0.86]},{"ub":null,"label":"8y+","f":0.7,"emp":0.891,"raw":1.035,"prior":0.7,"ci":[0.8,1.36]}],"old":0.742,"old_emp":0.742,"exp_year":0.9782,"note":"연령구간 헤도닉(로그)→PAV 단조화→min(경험,보수가정) 재단조. old=구형 라인 추가 잔존율(경험·가정 중 낮은 쪽), exp_year=지수모델 연간 잔존율"},"lines":{"AH":{"waves":4,"last":"22.06","med":26,"q1":9,"q3":65,"next":"24.08","next_lo":"23.03","next_hi":"27.11"},"BCH":{"waves":1,"last":"24.08"},"BDH":{"waves":2,"last":"24.08"},"BH":{"waves":1,"last":"23.12"},"CH":{"waves":6,"last":"26.09","med":17,"q1":2,"q3":30,"next":"28.02","next_lo":"26.11","next_hi":"29.03"},"DH":{"waves":7,"last":"26.06","med":26,"q1":17,"q3":28,"next":"28.08","next_lo":"27.11","next_hi":"28.10"},"EH":{"waves":1,"last":"21.01"},"FH":{"waves":8,"last":"23.06","med":14,"q1":6,"q3":22,"next":"24.08","next_lo":"23.12","next_hi":"25.04"},"HQ":{"waves":1,"last":"19.03"},"HU":{"waves":3,"last":"21.11","med":14,"q1":6,"q3":21,"next":"22.12","next_lo":"22.05","next_hi":"23.08"},"HV":{"waves":2,"last":"21.11"},"HW":{"waves":1,"last":"18.08"},"JH":{"waves":11,"last":"26.08","med":8,"q1":3,"q3":16,"next":"27.04","next_lo":"26.11","next_hi":"27.12"},"KH":{"waves":3,"last":"23.06","med":22,"q1":2,"q3":42,"next":"25.04","next_lo":"23.08","next_hi":"26.12"},"LH":{"waves":7,"last":"23.09","med":3,"q1":2,"q3":8,"next":"23.12","next_lo":"23.11","next_hi":"24.05"},"MH":{"waves":2,"last":"24.11"},"NH":{"waves":5,"last":"26.03","med":4,"q1":1,"q3":35,"next":"26.06","next_lo":"26.04","next_hi":"29.02"},"OH":{"waves":5,"last":"26.02","med":6,"q1":3,"q3":15,"next":"26.08","next_lo":"26.05","next_hi":"27.05"},"P":{"waves":5,"last":"24.07","med":13,"q1":12,"q3":44,"next":"25.08","next_lo":"25.07","next_hi":"28.03"},"PH":{"waves":4,"last":"26.02","med":7,"q1":3,"q3":17,"next":"26.09","next_lo":"26.05","next_hi":"27.07"},"PK":{"waves":1,"last":"24.01"},"PW":{"waves":1,"last":"20.06"},"QH":{"waves":1,"last":"26.08"},"QK":{"waves":1,"last":"25.10"},"R":{"waves":4,"last":"24.09","med":1,"q1":1,"q3":4,"next":"24.10","next_lo":"24.10","next_hi":"25.01"},"RK":{"waves":1,"last":"26.02"},"ST":{"waves":5,"last":"26.02","med":6,"q1":4,"q3":47,"next":"26.08","next_lo":"26.06","next_hi":"30.01"},"T":{"waves":1,"last":"24.01"},"TT":{"waves":1,"last":"22.10"},"UT":{"waves":2,"last":"25.06"}},"note":"2026-08-25 쿠쿠몰 실판매가 헤도닉 회귀 v2(비압력 제외, 플래그십 분리, 부트스트랩 500회). base=열판·4~6인·기본코팅·일반 라인·부가기능 없음·신형·연차0"};
 const sgn=n=>(n<0?"−":"+")+Math.abs(n).toLocaleString("ko-KR")+"원";
 
 /* ── 가중치 ── */
@@ -1205,10 +1205,10 @@ function drawWeights(){
   h+=FEATW.map(f=>{const v=WX.w[f[0]],n=WX.cnt[f[0]],ci=WX.ci&&WX.ci[f[0]],pp=WX.wp?WX.wp[f[0]]:null;
     const na=WX.ci&&f[0] in WX.ci&&!ci, unc=na||(ci&&ci[0]<=0&&ci[1]>=0);
     return `<div class="wrow"><div class="wl"><b>${f[1]}</b><span>${f[2]}${n?` · 표본 ${n}개`:""}</span>${f[3]?`<em>${f[3]}</em>`:""}</div>
-      <div class="wb"><i class="${v>=0?"pos":"neg"}" style="width:${Math.max(3,Math.abs(v)/mx*100)}%"></i></div>
-      <div class="wv ${v>=0?"pos":"neg"}">${sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${na?"추정 불가":unc?"불확실":"믿을 만함"}</span>${pp!=null?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
+      <div class="wb">${na?"":`<i class="${v>=0?"pos":"neg"}" style="width:${Math.max(3,Math.abs(v)/mx*100)}%"></i>`}</div>
+      <div class="wv ${na?"":v>=0?"pos":"neg"}">${na?"—":sgn(v)}<span class="wsub"><span class="conf ${unc?"lo":"hi"}">${na?"추정 불가":unc?"불확실":"믿을 만함"}</span>${pp!=null&&!na?` ${(pp>=0?"+":"−")+Math.abs(pp)}%`:""}</span></div></div>`;}).join("");
   h+=`<div class="wcap"><b>용량별 실측 중앙값 (IH 압력만)</b> — ${Object.entries(WX.cap).map(([c,v])=>`${c}인 ${Wk(v.med)} (${v.n}개)`).join(" · ")}</div>`;
-  const cps=Object.entries(WX.colorp).filter(([c,v])=>v.n>=2&&v.avg>0).slice(0,8);
+  const cps=Object.entries(WX.colorp).filter(([c,v])=>v.n>=3&&v.avg>0&&!/미확정|미등록|^-$/.test(c)).slice(0,8);
   if(cps.length)h+=`<div class="wcap"><b>색상 프리미엄</b> — 같은 제품의 색상형제 중 최저가 색 대비 평균 웃돈.
     성능 차이는 전혀 없으니, 색만 양보하면 이만큼 아낍니다.<br>
     ${cps.map(([c,v])=>`${c} +${Wk(v.avg)}(${v.n})`).join(" · ")}</div>`;
@@ -1222,7 +1222,7 @@ function drawWeights(){
     있으므로 직접 계산할 필요는 없습니다. (신품 구매 상한 기준 — 중고 시세가 아님)</div>`;
   }
   h+=`<div class="wnote">방법: 헤도닉 회귀 v2 — 선형(원)+로그(%) 병행, 플래그십 분리, 부트스트랩 500회(색상만 다른 형제 모델은 한 묶음으로 재표본) 95% 신뢰구간으로 믿을 만함/불확실 판정, 표본이 너무 적은 항목은 추정 불가,
-    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형, 변수 수 보정 ${WX.r2adj}, 5겹 교차검증 ${WX.r2cv})·${WX.r2log}(로그), 표본 ${WX.n}개·${WX.n_stems}계열. 상세: cuckoo-master.md §7.7·§7.10</div>`;
+    감가는 연령구간 회귀+단조화+보수가정 결합. 설명력 R² ${WX.r2}(선형, 변수 수 보정 ${WX.r2adj}, 계열 단위 5겹 교차검증 약 ${WX.r2cv}(${WX.r2cv_rng[0]}~${WX.r2cv_rng[1]}))·${WX.r2log}(로그), 표본 ${WX.n}개·${WX.n_stems}계열. 상세: cuckoo-master.md §7.7·§7.10</div>`;
   box.innerHTML=h;
 }
 
@@ -1243,7 +1243,7 @@ function buildDict(){
    KH:"트윈프레셔 중상급.",LH:"마스터셰프 — 플래그십. 저당(LHTR) 조합 다수, 가격대 최상단.",MH:"쁘띠 — 1~3인 소용량 라인.",
    NH:"사일런스 기본형. 증기 배출음 저감.",OH:"사일런스 오브제 — 디자인 파생.",PH:"사일런스 프로 — 상급.",QH:"사일런스 큐브 — 최신 파생.",
    BDH:"타철명장 — 무쇠(타철) 내솥 프리미엄.",BCH:"타철명장 파생.",
-   AH:"구형 라인 — 단종 수순. 신품 프리미엄 금지.",BH:"구형 라인 — 단종 수순. 신품 프리미엄 금지."};
+   AH:"구형 라인 — 단종 수순. 신품이라고 웃돈을 주지 마세요.",BH:"구형 라인 — 단종 수순. 신품이라고 웃돈을 주지 마세요."};
   for(const k in DESIGN){
     const old=!!OLDG[k],sil=!!SIL[k];
     P("디자인 라인 — IH 압력",k,DESIGN[k][1],
@@ -1259,11 +1259,11 @@ function buildDict(){
    TT:"트윈프레셔 미니 — 열판 소형.",RT:"열판 트윈프레셔.",QK:"Q형 열판압력 보급형.",PK:"P형 열판압력 보급형.",
    RK:"R형 열판압력 보급형.",PW:"P형 열판압력 변형.",P:"P형 열판압력 — 한 글자 코드.",R:"R형 열판압력 — 한 글자 코드.",T:"미니 열판압력 — 한 글자 코드."};
   for(const k in PLATE)
-    P("디자인 라인 — 열판 압력",k,PLATE[k][1],(PLATED[k]||"")+" 바닥만 가열, 1.7~1.8기압 — IH보다 싼 대신 밥맛에서 불리.",
+    P("디자인 라인 — 열판 압력",k,PLATE[k][1],(PLATED[k]||"")+" 바닥만 가열, IH보다 압력이 낮은 편 — IH보다 싼 대신 밥맛에서 불리.",
       PLATE[k][0]?"mid":"neutral",PLATE[k][0]?"열판·트윈":"열판",r=>r.dcx===k);
   P("기능 코드","T","트윈프레셔 (라인 바로 뒤)",`고압↔무압 전환 선택. 볶음밥·냉동밥·쾌속취사에 유리. 실판매가 웃돈 ${sgn(WX.w.twin)}.`,"good",sgn(WX.w.twin),r=>r.tp);
   P("기능 코드","L","저당취사 (라인 바로 뒤)",`저당 트레이로 밥물 배출 — 당질 30~40% 저감, 대신 찰기·단맛도 감소. 트윈프레셔 포함. 트윈 대비 추가 웃돈 ${sgn(WX.w.low)}.`,"good",sgn(WX.w.low),r=>r.ls);
-  P("기능 코드","T","IoT·WiFi (표시창 코드 앞)",`앱 연동(원격취사·예약). 표본 2개 — 실판매가에서 유의미한 웃돈이 확인되지 않습니다(${sgn(WX.w.iot)}). 앱 지원이 끊기면 일반 밥솥 — 웃돈 금지.`,"warn","웃돈 없음",r=>r.io);
+  P("기능 코드","T","IoT·WiFi (표시창 코드 앞)",`앱 연동(원격취사·예약). 표본 2개(같은 계열)뿐이라 실판매가로 웃돈을 추정할 수 없습니다. 앱 지원이 끊기면 일반 밥솥 — 웃돈을 주지 마세요.`,"warn","웃돈 없음",r=>r.io);
   P("기능 코드","M","서픽스 (맨 끝)","가격·스펙 동일 확인. 외관 변형 추정 — 무시해도 됩니다.","neutral","",r=>!!r.sf);
   P("병행 변형","NL","선행 리비전","FF와 병행 판매되는 변형 코드(세대 아님 — 등록월 거의 동시). 할인 유통 중심이라 실구매가가 싼 경우가 많습니다. 같은 스펙이면 싼 쪽.","mid","싼 쪽 구매",r=>r.vr==="NL");
   P("병행 변형","FF","후행 리비전 (2026)","NL 짝과 성능 차이 확인 안 됨. 출시 초기라 할인이 거의 없습니다 — NL 실구매가와 반드시 비교.","mid","비교 필수",r=>r.vr==="FF");
@@ -1273,7 +1273,7 @@ function buildDict(){
    B:"다이아쉴드/블랙 일반 코팅.",F:"타철명장/플랫 (구형)."};
   for(const [c,nm,g] of POT){
     let d=(POTD[c]||"")+` 내솥 등급 ${g}/5.`;
-    if(g===5)d+=` 실판매가는 코팅보다 오히려 낮음(${sgn(WX.w.pot5)}) — 상위호환이 아니라 취향 선택.`;
+    if(g===5)d+=` 실판매가는 코팅보다 높지 않음(추정 ${sgn(WX.w.pot5)}, 불확실) — 상위호환이 아니라 취향 선택.`;
     P("내솥 코드",c,nm,d,g===5?"mid":(g>=3?"good":"neutral"),`등급 ${g}/5`,r=>r.pc===c);
   }
   for(const cc in CAP){
@@ -1539,7 +1539,7 @@ function drawFaq(){
   const cell=f=>{const rs=DB.filter(r=>r.st==="판매중"&&eff(r)&&f(r));if(!rs.length)return "0개";const ps=rs.map(eff);return `${rs.length}개 · ${Wk(Math.min(...ps))}~${Wk(Math.max(...ps))}`;};
   box.innerHTML=`
   <details class="faq" open><summary>IH가 뭔가요? 트윈프레셔에만 있는 건가요?</summary><div class="fa">
-    <p><b>완전히 별개인 두 기능입니다.</b> IH는 <b>가열 방식</b> — 코일로 내솥 전체를 통째로 가열합니다(열판은 바닥만 가열, 1.7~1.8기압).
+    <p><b>완전히 별개인 두 기능입니다.</b> IH는 <b>가열 방식</b> — 코일로 내솥 전체를 통째로 가열합니다(열판은 바닥만 가열, 압력도 IH보다 낮은 편).
     트윈프레셔는 <b>압력 방식</b> — 고압(약 2기압)과 무압을 스위치로 고릅니다. 그래서 네 조합이 모두 실제로 존재합니다:</p>
     <table class="mtx"><tr><th></th><th>트윈프레셔 있음</th><th>트윈프레셔 없음</th></tr>
     <tr><th>IH</th><td>${cell(r=>heatShort(r.ht)==="IH"&&r.tp)}</td><td>${cell(r=>heatShort(r.ht)==="IH"&&!r.tp)}</td></tr>
@@ -1559,7 +1559,7 @@ function drawFaq(){
     <p>② 설거지 편한 게 최고다 → <b>코팅 내솥</b>(XB/B 기본, S 에코스텐, P 스텐외피, R 투톤). 등급이 높을수록
     구성이 좋지만 결국 소모품 — 수년 뒤 내솥만 사서 교체하면 됩니다. 투톤·에코스텐·스텐외피는 코팅 계열 안의 변형일 뿐,
     사용감 차이는 크지 않습니다.</p>
-    <p>실측 근거: 올스텐이라고 비싸지 않고 오히려 <b>${sgn(WX.w.pot5)}</b> — 시장도 상위호환이 아니라 '취향 옵션'으로 봅니다.</p></div></details>
+    <p>실판매가 근거: 올스텐이라고 더 비싸게 팔리지 않습니다(추정 <b>${sgn(WX.w.pot5)}</b>, 통계적으로는 불확실) — 상위호환이 아니라 '취향 옵션'으로 보는 편이 맞습니다.</p></div></details>
   <details class="faq"><summary>밥맛을 점수로 매길 수 있나요?</summary><div class="fa">
     <p><b>솔직한 답: 공인된 밥맛 점수는 없습니다.</b> 블라인드 테스트도 쌀·물·보온 시간에 따라 결과가 흔들려
     재현성이 낮습니다. 물리적으로 밥맛을 좌우하는 변수는 스펙에서 세 가지가 잡힙니다 — ① 가열 균일도(IH &gt; 열판)
@@ -1572,7 +1572,7 @@ function drawFaq(){
     고압&무압찜, 그리고 <b>오픈쿠킹</b>(취사 중 뚜껑을 열어 재료 추가 — 나물밥에 유용)까지 지원합니다.
     "요리 전용"이 아니라 <b>"요리까지 잘하는 밥솥"</b>입니다. 추천 탭의 '요리·이유식'에서 현시점 추천을 볼 수 있습니다.</p></div></details>
   <details class="faq"><summary>돈값 못하는 기능은 뭔가요?</summary><div class="fa">
-    <p>실판매가 데이터 기준으로: ① <b>IoT(WiFi)</b> — 시장 웃돈이 확인되지 않고(${sgn(WX.w.iot)}), 앱 지원이 끊기면
+    <p>실판매가 데이터 기준으로: ① <b>IoT(WiFi)</b> — 표본이 2개뿐이라 시장 웃돈을 추정할 수 없고, 앱 지원이 끊기면
     일반 밥솥이 됩니다. ② <b>인기 색상 웃돈</b> — 성능이 동일한데 색만으로 수만~수십만원 차이. ③ <b>구형 재고 프리미엄</b> —
     단종 임박 모델이 오히려 비싸지는 현상. ④ <b>"정가 대비 50% 할인"</b> — 정가 자체가 높게 잡혀 있어 할인율은
     판단 근거가 못 됩니다. 할인율보다 이 도구의 절대가격 기준선과 비교해 보세요.</p></div></details>
@@ -1655,8 +1655,8 @@ function drawCmp(){
     concl=effA===effB?"색상만 다른 같은 제품이고 가격도 같습니다 — 마음에 드는 색을 고르면 됩니다."
       :`색상만 다른 <b>같은 제품</b>입니다. 색상 취향이 아주 강하지 않다면 <b>싼 쪽(${effA<effB?a.m:b.m})</b>이 정답 —
         차액 ${W(Math.abs(effA-effB))}은 순수하게 색값입니다.`;
-  }else if(dominates(a,b))concl=`<b>${a.m}가 ${b.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. ${b.m}를 살 이유가 없습니다.`;
-  else if(dominates(b,a))concl=`<b>${b.m}가 ${a.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. ${a.m}를 살 이유가 없습니다.`;
+  }else if(dominates(a,b))concl=`<b>${a.m}가 ${b.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. 특별한 이유가 없다면 ${a.m} 쪽이 낫습니다.`;
+  else if(dominates(b,a))concl=`<b>${b.m}가 ${a.m}를 지배합니다</b> — 스펙이 같거나 우위인데 가격도 같거나 쌉니다. 특별한 이유가 없다면 ${b.m} 쪽이 낫습니다.`;
   else if(effA&&effB&&mvOf(a)&&mvOf(b)){
     const hiM=effA>=effB?a:b, loM=effA>=effB?b:a;
     const gap=eff(hiM)-eff(loM), just=mvOf(hiM)-mvOf(loM), bub=gap-just;

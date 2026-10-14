@@ -152,7 +152,7 @@ a { color: inherit; }
     <div class="start-list">
       {% for r in reports %}
       <a href="{{ r.report_url }}">
-        <small>제{{ r.issue_no }}호</small>
+        <small>제{{ r.issue_no }}호{{ ' 정정 전' if r.status == 'superseded' else (' 정정본' if '_r' in r.issue_id else '') }}</small>
         <span><b>{{ r.week_label }}</b><span class="sum">{{ r.published_at_kst }} 기준 · {{ r.summary[0] if r.summary else '' }}</span></span>
         <span class="state">{{ 'SUPERSEDED' if r.status == 'superseded' else ('LATEST' if loop.first else 'OPEN') }} ↗</span>
       </a>
