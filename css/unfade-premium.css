@@ -140,7 +140,7 @@ body.unfade-tool-theme.unfade-premium .appbar {
 }
 body.unfade-tool-theme.unfade-premium .appbar::after { display: none; }
 body.unfade-tool-theme.unfade-premium .appbar h1 { text-shadow: none; font-family: var(--serif); font-weight: 600; }
-body.unfade-tool-theme.unfade-premium .appbar h1 em { color: #967454; }
+body.unfade-tool-theme.unfade-premium .appbar h1 em { color: #806244; }
 body.unfade-tool-theme.unfade-premium #themetog,
 body.unfade-tool-theme.unfade-premium .iconbtn { background: #f2ece3; color: #665140; border: 1px solid #d7c9b8; box-shadow: none; }
 body.unfade-tool-theme.unfade-premium #themetog { display: none; }
@@ -237,7 +237,6 @@ body.unfade-premium .badge.weak { color: #7a5636; }
 body.unfade-premium :is(.badge.alt, .vbadge.v-warm) { color: #7a5636; }
 body.unfade-premium .ld-fair { background: #806244; }
 body.unfade-premium .ld-warm { background: #8a5226; }
-body.unfade-premium .appbar h1 em { color: #806244; }
 body.unfade-premium th { color: #6b5f54; }
 body.unfade-premium .rt-lv { background: #557058; }
 body.unfade-premium { --warm: #7a5636; --warm-tx: #7a5636; --warn: #7a5636; }
