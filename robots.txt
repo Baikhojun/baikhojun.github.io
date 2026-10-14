@@ -9,3 +9,4 @@ Disallow: /lk1800
 Disallow: /data
 Disallow: /tv
 Disallow: /house
+Disallow: /ai-trend

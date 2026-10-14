@@ -1,0 +1,119 @@
+{%- import '_dash.j2' as dash -%}
+{%- set dd = c.d -%}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI 트렌드 브리핑 | {{ dd.week_label }} — Unfade</title>
+<meta name="description" content="{{ c.og_description }}">
+<meta name="author" content="Unfade">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="{{ dd.canonical_url }}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Unfade">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="AI 트렌드 브리핑 | {{ dd.week_label }}">
+<meta property="og:description" content="{{ c.og_description }}">
+<meta property="og:image" content="{{ dd.canonical_url }}og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="{{ dd.canonical_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="report.css">
+{#- 사이트 공용 셸(UNFADE 헤더·프로젝트 메뉴)과 웹 글꼴. 사이트 루트의 파일을 상대 경로로 참조만 한다(수정하지 않음).
+    셸 파일이 없는 환경(PC에서 직접 열기·로컬 검수)에서는 셸 없이 그대로 동작한다. #}
+<!-- UNFADE-SHELL:START -->
+{% for href in TOKENS.font.get('web_css', []) %}<link rel="stylesheet" href="{{ href }}">
+{% endfor %}<link rel="stylesheet" href="../../../css/unfade-shell.css">
+<script defer src="../../../js/unfade-shell.js" data-unfade-root="../../../"></script>
+<!-- UNFADE-SHELL:END -->
+</head>
+<body>
+<a class="sr-only" href="#main">본문 바로가기</a>
+
+<div class="meta-strip">
+  <div class="ms-row">
+    <b>AI 트렌드 브리핑</b><span class="ms-dot" aria-hidden="true"></span>
+    <span>{{ dd.week_label }}</span><span class="ms-dot" aria-hidden="true"></span>
+    <span><span class="nw">{{ dd.report_date_kst }} ({{ dd.get('weekday_ko', '') }})</span> 기준</span>
+    <span class="chip-base{{ '' if dd.is_baseline else ' cmp' }}">{{ '신규 기준선' if dd.is_baseline else '직전 발행일 ' ~ dd.previous_report.report_date_kst ~ ' 대비' }}</span>
+    <span class="ms-spacer"></span>
+    <div class="seg" role="group" aria-label="보기 전환">
+      <button type="button" data-view="dashboard" aria-pressed="true">대시보드</button>
+      <button type="button" data-view="print" aria-pressed="false">인쇄 미리보기</button>
+    </div>
+  </div>
+</div>
+
+<header class="toolbar">
+  <div class="tb-row">
+    <nav class="tabs" role="tablist" aria-label="보고서 탭">
+      {% for k, v in TABS.items() %}
+      <button class="tab{{ ' tab-civil' if k == 'civil' }}" role="tab" type="button" data-tab="{{ k }}" aria-controls="panel-{{ k }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{% if k == 'civil' %}{{ icon('bridge') }}{% endif %}{{ v }}{% if k == 'civil' %}<span class="badge-sp">특집</span>{% endif %}</button>
+      {% endfor %}
+    </nav>
+    <div class="tb-actions">
+      <button class="btn" id="btn-copy" type="button" aria-label="링크 복사" title="링크 복사">{{ icon('link') }}<span class="bl">링크 복사</span></button>
+      <button class="btn" id="btn-print" type="button" aria-label="인쇄하기" title="인쇄하기">{{ icon('print') }}<span class="bl">인쇄하기</span></button>
+      <a class="btn btn-primary" id="btn-pdf" href="report.pdf" download="{{ dd.download_prefix }}.pdf" aria-label="PDF로 저장하기" title="PDF로 저장하기">{{ icon('download') }}<span class="bl">PDF로 저장하기</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="dashboard">
+    <div class="wrap">
+      <section class="panel active" id="panel-changes" role="tabpanel" aria-label="핵심 변화">{{ dash.panel_changes(c) }}</section>
+      <section class="panel" id="panel-services" role="tabpanel" aria-label="AI 서비스">{{ dash.panel_services(c) }}</section>
+      <section class="panel" id="panel-capabilities" role="tabpanel" aria-label="가능해진 일">{{ dash.panel_capabilities(c) }}</section>
+      <section class="panel" id="panel-civil" role="tabpanel" aria-label="토목설계 AI 특집">{{ dash.panel_civil(c) }}</section>
+      <section class="panel" id="panel-global" role="tabpanel" aria-label="글로벌 사례">{{ dash.panel_global(c) }}</section>
+      <section class="panel" id="panel-archive" role="tabpanel" aria-label="아카이브">{{ dash.panel_archive(c, archive) }}</section>
+      <section class="panel" id="panel-sources" role="tabpanel" aria-label="출처">{{ dash.panel_sources(c) }}</section>
+    </div>
+  </div>
+
+  <div class="print-view" aria-label="인쇄 미리보기">
+    <p class="pv-note">인쇄 미리보기 — 실제 인쇄·PDF와 같은 A4 가로 {{ page_total }}쪽입니다. [인쇄하기]를 누르면 이 모양 그대로 출력됩니다.</p>
+    {{ pages_html }}
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="past-pick">
+      <label for="past-select">과거 AI 신문 보기</label>
+      <select id="past-select" aria-describedby="past-hint"><option value="">발행본을 선택하십시오</option></select>
+      <p class="hint" id="past-hint">선택하면 해당 발행본으로 바로 이동합니다. · <a href="../../">아카이브 첫 화면</a> · <a href="../../latest/">항상 최신호</a></p>
+    </div>
+    <div class="credit">
+      AI 트렌드 브리핑 · {{ dd.week_label }} · {{ dd.report_date_kst }} 기준<br>
+      <a href="https://unfade.is-a.dev/" target="_blank" rel="noopener">Unfade</a>
+    </div>
+  </div>
+</footer>
+
+<div class="og-card" aria-hidden="true">
+  <div class="og-copy">
+    <div class="og-eyebrow">AI 트렌드 브리핑 · 제{{ dd.issue_no }}호{{ ' · 신규 기준선' if dd.is_baseline else '' }}</div>
+    <div class="og-title">{{ c.og_headline }}</div>
+    <div class="og-week">{{ dd.week_label }}</div>
+    <p class="og-sub">{{ dd.subtitle }}</p>
+    <div class="og-foot"><span>{{ dd.report_date_kst }} 기준 · 비교 기간 {{ c.period_start }} ~ {{ c.period_end }}</span><b>Unfade</b></div>
+  </div>
+  <div class="og-art"><i class="disc"></i><i class="ring"></i><span class="type">AI<br>TREND</span></div>
+</div>
+
+<button class="to-top" id="to-top" type="button" aria-label="맨 위로">{{ icon('arrow-up') }}</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="application/json" id="report-config">{{ config_json | safe }}</script>
+<script type="application/json" id="archive-data">{{ archive_json | safe }}</script>
+<script src="report.js"></script>
+</body>
+</html>

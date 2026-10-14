@@ -1,0 +1,98 @@
+# AI 트렌드 브리핑 — 추적 대상 서비스·도구 (지시서 4장 A)
+# 갱신: 2026-10-14 (제1호, 신규 기준선). 매 발행 시작 시 '현재 최신 모델명·존속 여부'를 공식 발표로 다시 확인해 고친다.
+# status: 운영 | 종료 | 후보(조사 중 반복 등장 — 2회 연속 등장하면 정식 추적으로 올림)
+# 모델명은 기억이 아니라 이번 실행에서 확인한 공식 표기만 적는다.
+
+checked_at: "2026-10-14"
+
+general_chat:            # 범용 대화형 AI
+  - service: ChatGPT
+    vendor: OpenAI
+    current: "GPT-6 Sol(유료) / GPT-6 Luna(무료·Go) — 앱 적용 2026-10-07~08"
+    api_flagship: "GPT-6 Astra · GPT-6.1 Sol · GPT-6 Luna"
+    status: 운영
+    official: [https://learn.chatgpt.com/docs/pricing, https://developers.openai.com/api/docs/changelog]
+    note: "openai.com·chatgpt.com·help.openai.com 은 자동 열람 시 403 — learn.chatgpt.com·developers.openai.com 사용"
+  - service: Claude
+    vendor: Anthropic
+    current: "Claude Opus 5.5(2026-09-22) · Sonnet 5.5(09-28) · Haiku 5.5(10-07) · 최상위 Fable 5.1"
+    status: 운영
+    official: [https://www.anthropic.com/news, https://claude.com/pricing, https://support.claude.com/en/articles/12138966-release-notes]
+  - service: Gemini
+    vendor: Google
+    current: "Gemini 4 Argon(2026-10-13 GA, 앱은 AI Pro·Ultra) · 앱 Pro 모델 3.1 Pro · 무료 Auto(Flash-Lite 중심, 10-09부터)"
+    status: 운영
+    official: [https://gemini.google/release-notes/, https://ai.google.dev/gemini-api/docs/changelog, https://gemini.google/kr/subscriptions/]
+  - service: Microsoft Copilot
+    vendor: Microsoft
+    current: "개인용 기반 모델 비공개 — 업무용 Home·Code·Autopilot 개편 발표(2026-09-25)"
+    status: 운영
+    official: [https://blogs.microsoft.com/, https://learn.microsoft.com/en-us/copilot/microsoft-365/release-notes]
+  - service: Grok
+    vendor: xAI(SpaceX Super Intelligence 표기 보도)
+    current: "Grok 4.7(2026-09-21) · X Subscription(10-12, Free/Plus $8/Premium $30/Super $100/Ultra $200)"
+    status: 운영
+    official: [https://docs.x.ai/docs/models, https://cursor.com/pricing]
+    note: "x.ai 403 — docs.x.ai 사용"
+  - service: Perplexity
+    vendor: Perplexity AI
+    current: "Sonar + 외부 모델(GPT-6.1 Sol·Claude Opus 5.5 등), Computer·Automations"
+    status: 운영
+    official: [https://www.perplexity.ai/changelog, https://docs.perplexity.ai/getting-started/pricing]
+    note: "Pro·Max 소비자 요금은 공식 페이지에서 미확인(2026-10-14)"
+
+image:
+  - {service: "ChatGPT Images / GPT-Image", vendor: OpenAI, current: "Images 2.5 · GPT-Image-2.5 Sunburst·Flare(2026-09-08)", status: 운영}
+  - {service: "Nano Banana", vendor: Google, current: "Nano Banana 2.1(2026-10-06 GA)", status: 운영}
+  - {service: Midjourney, vendor: Midjourney, current: "V8.2(2026-07-24), Thinking Mode 시험(10-08)", status: 운영, note: "docs.midjourney.com 403 — updates.midjourney.com 사용"}
+  - {service: "Adobe Firefly", vendor: Adobe, current: "Image Model 5 + 파트너 모델", status: 운영}
+video:
+  - {service: "Veo / Gemini Omni", vendor: Google, current: "Veo 3.1 · Gemini Omni 1.1 Flash", status: 운영}
+  - {service: Kling, vendor: Kuaishou, current: "Kling 4.0(2026-09-30 발표, 조기 접근)", status: 운영}
+  - {service: Runway, vendor: Runway, current: "Gen-4.5 + 타사 모델", status: 운영}
+  - {service: Seedance, vendor: ByteDance, current: "Seedance 2.5", status: 운영}
+  - {service: Luma, vendor: "Luma AI", current: "Ray3.2", status: 운영}
+  - {service: Pika, vendor: Pika, current: "새 Pika 통합 플랫폼(2026-09-17)", status: 운영}
+  - {service: Sora, vendor: OpenAI, current: "앱 2026-04-26 종료, API 2026-09-24 종료", status: 종료}
+voice_music:
+  - {service: Suno, vendor: Suno, current: "v6(2026-09-09), Speech 베타(10-01)", status: 운영, note: "UMG·Sony 2차 소송(2026-09-18) 추적"}
+  - {service: Udio, vendor: Udio, current: "라이선스 플랫폼 전환 중(미출시)", status: 운영}
+  - {service: ElevenLabs, vendor: ElevenLabs, current: "Eleven v4·v4 Turbo(2026-09-28)", status: 운영}
+  - {service: "Gemini TTS / Lyria", vendor: Google, current: "Gemini 3.8 TTS(2026-09-22) · Lyria 3.5", status: 운영}
+coding_work:
+  - {service: "GitHub Copilot", vendor: GitHub, current: "컴퓨터 사용(프리뷰, 10-01) · 로컬 샌드박스 GA(10-07)", status: 운영}
+  - {service: Cursor, vendor: "Anysphere(SpaceX)", current: "X Subscription 요금 개편(10-12)", status: 운영}
+  - {service: "Claude Code", vendor: Anthropic, current: "Pro 이상 포함", status: 운영}
+  - {service: "OpenAI Codex", vendor: OpenAI, current: "ChatGPT 요금제 포함", status: 운영}
+  - {service: "Antigravity / Jules", vendor: Google, current: "Gemini CLI 대체(2026-06)", status: 운영}
+enterprise_agents:
+  - {service: "Microsoft 365 Copilot", vendor: Microsoft, current: "Cowork·Autopilot, 사용량 과금(Copilot Credits)", status: 운영}
+  - {service: "Gemini Enterprise", vendor: Google, current: "범용 업무 에이전트 프리뷰(Gemini at Work, 10-08)", status: 운영}
+  - {service: "ChatGPT Work / Business", vendor: OpenAI, current: "다단계 업무 에이전트", status: 운영}
+  - {service: "Claude in Chrome / Cowork", vendor: Anthropic, current: "유료 플랜", status: 운영}
+secondary:               # 보조 추적 — 의미 있는 출시·가격 경쟁이 있을 때만 다룸
+  - {service: "Meta AI / Muse", vendor: Meta, current: "Muse Wonder(AA 측정 10-12)", status: 운영}
+  - {service: DeepSeek, vendor: DeepSeek, current: "V4.1-Flash(2026-09-10)", status: 운영}
+  - {service: Qwen, vendor: Alibaba, current: "Qwen3.8-max(Arena Vision 등재)", status: 운영, note: "qwen.ai 렌더링 실패 — 다음 호 재확인"}
+  - {service: Mistral, vendor: "Mistral AI", current: "Mistral Large 4(2026-10-06 프리뷰, 가중치 공개 예고)", status: 운영}
+
+candidates:              # 후보 — 2회 연속 등장하면 정식 추적으로 올림 (등장 횟수 기록)
+  - {service: "Wan", vendor: Alibaba, seen: 1, note: "AA 영상 1위(Wan 3.0)"}
+  - {service: "MiniMax H3", vendor: MiniMax, seen: 1, note: "Arena 이미지→영상 1위"}
+  - {service: "FLUX 3", vendor: "Black Forest Labs", seen: 1, note: "Arena 영상 3위권"}
+  - {service: "MiMo", vendor: Xiaomi, seen: 1, note: "FrontierCode 오픈 웨이트 1위"}
+  - {service: "Kimi", vendor: Moonshot, seen: 1}
+  - {service: "Ideogram", vendor: Ideogram, seen: 1}
+  - {service: "Solar", vendor: "Upstage(한국)", seen: 1, note: "AA 측정 Solar Mini 4, 다음 포털 금융 적용"}
+
+civil_platforms:         # 토목 특집 우선 추적 (지시서 4장 E)
+  formats: [DWG, DXF, IFC, "Civil 3D", OpenRoads, GIS, "드론·LiDAR(점군)"]
+  platforms:
+    - {name: Autodesk, watch: "차세대 Autodesk Assistant(2027 발표), Drawing Compliance Review(2027 초), Civil 3D–Forma 연결, Forma Street Design 베타"}
+    - {name: Bentley, watch: "Bentley Tech Summit(2027 봄, 토론토), OpenRoads Copilot 이행, MCP 서버 확대"}
+    - {name: Trimble, watch: "Dimensions 2026(11/9~11) 건설 AI 에이전트"}
+    - {name: Esri, watch: "ArcGIS AI 어시스턴트·GeoAI(esri.com 403 — 대체 경로 확보 필요)"}
+    - {name: "Nemetschek/Graphisoft", watch: "MCP 연결 계획, Bluebeam AI 도면 검토"}
+    - {name: buildingSMART, watch: "IFC5 진행(현재 alpha), 도쿄 서밋 성과"}
+    - {name: Hexagon, watch: "Rocscience 인수 종결(2026 4분기)"}
+  korea: ["국토교통부 스마트건설·BIM", "한국건설기술연구원", "한국도로공사", "서울시 시설안전", "국내 대형 건설사·엔지니어링사 보도자료"]

@@ -1,0 +1,129 @@
+{
+  "_comment": "AI 트렌드 브리핑 디자인 토큰. 밝은 뉴스 디자인 시스템(_system/AI_Trend_Light_Design_System.md, 사이트 공용 셸과 같은 팔레트). 잠금 후 변경은 사용자 요청 시에만 하고 CHANGELOG.md 에 기록한다.",
+  "version": "1.1",
+  "locked": true,
+  "locked_at": "2026-10-14 (제1호 게시, 사용자 결정: 밝은 뉴스 디자인 시스템)",
+  "design_system": "_system/AI_Trend_Light_Design_System.md",
+  "screen": {
+    "--bg": "#f3f4f6",
+    "--paper": "#ffffff",
+    "--bg-elev": "#ffffff",
+    "--bg-elev-2": "#f7f8fa",
+    "--bg-sunken": "#eceef1",
+    "--text": "#111214",
+    "--text-muted": "#626871",
+    "--line": "#dfe2e7",
+    "--line-strong": "#c8cdd5",
+    "--coral": "#ff8c86",
+    "--coral-wash": "#ffe4e1",
+    "--mint": "#99f0dc",
+    "--lime": "#a7e982",
+    "--lime-wash": "#e9f8df",
+    "--navy": "#17334b",
+    "--ledger-blue": "#c5ddff",
+    "--ledger-blue-wash": "#e2efff",
+    "--ledger-border": "#4f81aa",
+    "--ledger-ink": "#506f8d",
+    "--link": "#1f5a8c",
+    "--teal": "#0a7369",
+    "--teal-soft": "#e6f4f2",
+    "--violet": "#5b4bd6",
+    "--violet-soft": "#efedfc",
+    "--orange": "#a0520c",
+    "--orange-bar": "#c76a12",
+    "--orange-soft": "#fbf1e7"
+  },
+  "print": {
+    "--p-bg": "#FFFFFF",
+    "--p-ink": "#111214",
+    "--p-muted": "#55657D",
+    "--p-line": "#D9E0EA",
+    "--p-soft": "#F3F6FA",
+    "--p-navy": "#17334B",
+    "--p-head": "#EEF1F5",
+    "--p-teal": "#0E8F84",
+    "--p-violet": "#5B4BD6",
+    "--p-orange": "#C76A12",
+    "--p-teal-text": "#0A7369",
+    "--p-orange-text": "#A0520C",
+    "--p-violet-soft": "#EFEDFC",
+    "--p-teal-soft": "#E6F4F2",
+    "--p-coral": "#FF8C86",
+    "--p-coral-wash": "#FFE4E1",
+    "--p-lime-wash": "#E9F8DF",
+    "--p-blue-wash": "#E2EFFF"
+  },
+  "tags": {
+    "신규": {"key": "new", "icon": "sparkle", "screen": "#0A7369", "print": "#0A7369"},
+    "개선": {"key": "improve", "icon": "arrow-up", "screen": "#1D5FB8", "print": "#1D5FB8"},
+    "가격": {"key": "price", "icon": "coin", "screen": "#A0520C", "print": "#A0520C"},
+    "정책": {"key": "policy", "icon": "scale", "screen": "#A52A78", "print": "#A52A78"},
+    "주의": {"key": "caution", "icon": "alert", "screen": "#B42323", "print": "#B42323"},
+    "관찰": {"key": "watch", "icon": "eye", "screen": "#7A5E00", "print": "#7A5E00"},
+    "종료": {"key": "ended", "icon": "stop", "screen": "#4F5D73", "print": "#4F5D73"},
+    "정정": {"key": "fix", "icon": "pencil", "screen": "#23784A", "print": "#23784A"}
+  },
+  "levels": {
+    "●": {"label": "가능", "screen": "#0A7369", "print": "#0A7369"},
+    "◐": {"label": "제한적", "screen": "#7A5E00", "print": "#7A5E00"},
+    "○": {"label": "불가", "screen": "#4F5D73", "print": "#4F5D73"},
+    "?": {"label": "미확인", "screen": "#A52A78", "print": "#A52A78"}
+  },
+  "maturity": {
+    "실무 적용": {"screen": "#0A7369", "print": "#0A7369", "icon": "check"},
+    "시험·시범": {"screen": "#7A5E00", "print": "#7A5E00", "icon": "flask"},
+    "검증 부족": {"screen": "#A0520C", "print": "#A0520C", "icon": "question"},
+    "해당 없음": {"screen": "#4F5D73", "print": "#4F5D73", "icon": "dot"}
+  },
+  "grades": {
+    "A": {"label": "A 공식·원문", "screen": "#0A7369", "print": "#0A7369"},
+    "B": {"label": "B 전문 매체", "screen": "#1D5FB8", "print": "#1D5FB8"},
+    "C": {"label": "C 커뮤니티·관찰", "screen": "#7A5E00", "print": "#7A5E00"}
+  },
+  "vendors": {
+    "_comment": "차트 속 회사별 고정색(채도를 낮춤). 같은 회사는 모든 발행에서 같은 색을 쓴다. 목록에 없는 회사는 기타색.",
+    "OpenAI": "#7FB3A0",
+    "Anthropic": "#CF8E6D",
+    "Google": "#6E98D6",
+    "Microsoft": "#A9B85E",
+    "xAI": "#A8AFBD",
+    "Perplexity": "#5AB0C2",
+    "Meta": "#8A9FE0",
+    "DeepSeek": "#4F86A8",
+    "Alibaba": "#E0A458",
+    "Mistral": "#D9B44A",
+    "Moonshot": "#B98FD0",
+    "Zhipu": "#C77D9A",
+    "ByteDance": "#D47C7C",
+    "Kuaishou": "#E3906B",
+    "Runway": "#9AA6C9",
+    "Midjourney": "#B7A6D9",
+    "Black Forest Labs": "#8C9CB0",
+    "Adobe": "#D98880",
+    "Luma": "#7EC4CF",
+    "MiniMax": "#C9A27E",
+    "_other": "#8899AA"
+  },
+  "font": {
+    "family": "\"Pretendard Variable\", \"Pretendard Local\", Pretendard, SUIT, \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+    "family_en": "Inter, \"Pretendard Variable\", \"Pretendard Local\", Pretendard, \"Malgun Gothic\", sans-serif",
+    "web_css": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+      "https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    ],
+    "file": "assets/fonts/PretendardVariable.woff2",
+    "pptx": "Malgun Gothic",
+    "numeric": "tabular-nums"
+  },
+  "type_scale_screen_px": {
+    "body": 16, "small": 15, "fine": 13, "h4": 18, "h3": 20, "h2": 30, "h1": 64, "stat": 44
+  },
+  "type_scale_print_pt": {
+    "body": 10, "small": 9, "h3": 12.5, "h2": 19, "h1": 40, "min": 9
+  },
+  "space_px": [8, 16, 24, 32, 48, 64],
+  "content_width_px": 1200,
+  "radius_px": {"card": 0, "chip": 3, "small": 4},
+  "page": {"size": "A4 landscape", "width_mm": 297, "height_mm": 210, "margin_x_mm": 14, "head_mm": 13, "foot_mm": 9, "body_pad_top_mm": 7, "body_pad_bottom_mm": 5},
+  "pptx": {"width_in": 13.333, "height_in": 7.5, "min_font_pt": 18}
+}

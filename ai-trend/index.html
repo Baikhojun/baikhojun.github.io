@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI 트렌드 브리핑 — Unfade</title>
+<meta name="description" content="AI를 처음 접하는 사람을 위한 글로벌 신기술 뉴스와 토목설계 특집. 최신호와 지난 호를 모아 둔 아카이브.">
+<meta name="author" content="Unfade">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://unfade.is-a.dev/ai-trend/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Unfade">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="AI 트렌드 브리핑 — 아카이브">
+<meta property="og:description" content="최신호: 2026년 10월 2주차 · 2026-10-14 기준">
+<meta property="og:image" content="https://unfade.is-a.dev/ai-trend/reports/2026-10-w2_20261014/og.png">
+<meta property="og:url" content="https://unfade.is-a.dev/ai-trend/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+/* 밝은 뉴스 디자인 시스템(_system/AI_Trend_Light_Design_System.md) — A 표지 + B 카드 + 발행 목록 띠 */
+@font-face { font-family: "Pretendard Local"; font-weight: 45 920; font-display: swap;
+  src: url("assets/fonts/PretendardVariable.woff2") format("woff2-variations"), url("assets/fonts/PretendardVariable.woff2") format("woff2"); }
+:root {
+  --bg: #f3f4f6;
+  --paper: #ffffff;
+  --bg-elev: #ffffff;
+  --bg-elev-2: #f7f8fa;
+  --bg-sunken: #eceef1;
+  --text: #111214;
+  --text-muted: #626871;
+  --line: #dfe2e7;
+  --line-strong: #c8cdd5;
+  --coral: #ff8c86;
+  --coral-wash: #ffe4e1;
+  --mint: #99f0dc;
+  --lime: #a7e982;
+  --lime-wash: #e9f8df;
+  --navy: #17334b;
+  --ledger-blue: #c5ddff;
+  --ledger-blue-wash: #e2efff;
+  --ledger-border: #4f81aa;
+  --ledger-ink: #506f8d;
+  --link: #1f5a8c;
+  --teal: #0a7369;
+  --teal-soft: #e6f4f2;
+  --violet: #5b4bd6;
+  --violet-soft: #efedfc;
+  --orange: #a0520c;
+  --orange-bar: #c76a12;
+  --orange-soft: #fbf1e7;
+  --p-bg: #FFFFFF;
+  --p-ink: #111214;
+  --p-muted: #55657D;
+  --p-line: #D9E0EA;
+  --p-soft: #F3F6FA;
+  --p-navy: #17334B;
+  --p-head: #EEF1F5;
+  --p-teal: #0E8F84;
+  --p-violet: #5B4BD6;
+  --p-orange: #C76A12;
+  --p-teal-text: #0A7369;
+  --p-orange-text: #A0520C;
+  --p-violet-soft: #EFEDFC;
+  --p-teal-soft: #E6F4F2;
+  --p-coral: #FF8C86;
+  --p-coral-wash: #FFE4E1;
+  --p-lime-wash: #E9F8DF;
+  --p-blue-wash: #E2EFFF;
+  --font: &#34;Pretendard Variable&#34;, &#34;Pretendard Local&#34;, Pretendard, SUIT, &#34;Apple SD Gothic Neo&#34;, &#34;Malgun Gothic&#34;, sans-serif;
+  --font-en: Inter, &#34;Pretendard Variable&#34;, &#34;Pretendard Local&#34;, Pretendard, &#34;Malgun Gothic&#34;, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+.page-shell { max-width: 1200px; margin: 24px auto 72px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1.2 var(--font-en); letter-spacing: .04em; }
+.eyebrow::before { content: ""; width: 9px; height: 9px; background: var(--coral); }
+.cover-hero { display: grid; grid-template-columns: 1fr 1.05fr; min-height: 540px; background: var(--paper); border: 1px solid var(--line); }
+.cover-copy { display: flex; flex-direction: column; padding: 56px 58px 44px; min-width: 0; }
+.cover-title { max-width: 540px; margin: 22px 0 0; font-size: clamp(42px, 5.3vw, 66px); font-weight: 820; line-height: 1.04; letter-spacing: -.065em; }
+.cover-title .wk { display: block; margin-top: 14px; font-size: .46em; line-height: 1.15; letter-spacing: -.045em; color: var(--navy); }
+.cover-summary { max-width: 470px; margin: 18px 0 0; color: var(--text-muted); font-size: 17px; }
+.cover-meta { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: auto; padding-top: 30px; font-size: 13.5px; color: var(--text-muted); }
+.cover-meta__tag { padding: 6px 9px; background: var(--coral); color: var(--text); font-weight: 750; }
+.cover-meta__link { color: var(--text); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; font: 800 12px/1 var(--font-en); letter-spacing: .07em; text-decoration: none; }
+.cover-meta__link:hover { border-bottom-width: 3px; }
+.cover-art { position: relative; overflow: hidden; min-height: 370px; background: linear-gradient(90deg, transparent 0 50%, rgb(255 255 255 / 55%) 50% 100%), linear-gradient(0deg, transparent 0 50%, rgb(255 255 255 / 55%) 50% 100%), var(--coral-wash); background-size: 118px 118px; }
+.cover-art__disc { position: absolute; right: -56px; top: 54px; width: 410px; height: 410px; border-radius: 50%; background: var(--navy); }
+.cover-art__ring { position: absolute; right: 48px; top: 112px; width: 290px; height: 290px; border: 58px solid var(--coral); border-radius: 50%; }
+.cover-art__type { position: absolute; left: 48px; bottom: 40px; color: var(--navy); font: 800 70px/.84 var(--font-en); letter-spacing: -.09em; }
+.cover-art__issue { position: absolute; left: 48px; top: 40px; color: var(--navy); font: 700 13px/1.3 var(--font-en); letter-spacing: .06em; }
+.section-intro { padding: 28px 24px 16px; background: var(--paper); border: 1px solid var(--line); border-top: 0; }
+.section-intro h2 { margin: 6px 0 0; font-size: 27px; font-weight: 820; letter-spacing: -.055em; }
+.explainer-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--paper); border: 1px solid var(--line); border-top: 0; }
+.explainer-card { display: flex; flex-direction: column; min-height: 220px; padding: 25px 23px; border-right: 1px solid var(--line); color: inherit; text-decoration: none; min-width: 0; }
+.explainer-card:last-child { border-right: 0; }
+.explainer-card__index { color: #727a84; font: 600 12px/1 var(--font-en); letter-spacing: .04em; }
+.explainer-card h3 { margin: 18px 0 10px; font-size: 19px; line-height: 1.32; letter-spacing: -.045em; }
+.explainer-card p { margin: 0; color: var(--text-muted); font-size: 15px; }
+.explainer-card small { margin-top: auto; padding-top: 18px; font: 700 11px/1 var(--font-en); letter-spacing: .06em; }
+.explainer-card:hover { background: var(--lime-wash); }
+.start-band { display: grid; grid-template-columns: .8fr 1.2fr; margin-top: 22px; background: var(--paper); border: 1px solid var(--line); }
+.start-band__title { padding: 44px 42px; background: var(--lime-wash); }
+.start-band__title h2 { margin: 8px 0 0; font-size: 34px; font-weight: 820; line-height: 1.08; letter-spacing: -.06em; }
+.start-band__title p { margin: 14px 0 0; color: var(--text-muted); font-size: 15px; }
+.start-list { padding: 6px 42px; }
+.start-list a { display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.start-list a:last-of-type { border-bottom: 0; }
+.start-list a:hover b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.start-list small { font: 700 12px/1.3 var(--font-en); letter-spacing: .04em; }
+.start-list b { display: block; font-size: 18px; letter-spacing: -.035em; }
+.start-list .sum { display: block; margin-top: 4px; color: var(--text-muted); font-size: 14.5px; font-weight: 500; }
+.start-list span.state { color: var(--text-muted); font: 700 12px/1 var(--font-en); letter-spacing: .05em; white-space: nowrap; }
+.pick { padding: 22px 0 30px; border-top: 1px solid var(--line); }
+.pick label { display: block; font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px; }
+.pick select { min-width: 360px; max-width: 100%; height: 44px; padding: 0 14px; background: var(--paper); color: var(--text); border: 1px solid var(--line-strong); font-size: 15.5px; font-family: inherit; }
+.site-footer { max-width: 1200px; margin: 0 auto; padding: 0 0 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--text-muted); font-size: 14px; }
+.site-footer a.latest { color: var(--link); }
+.site-footer a.credit { color: var(--text); font: 800 18px/1 var(--font-en); letter-spacing: -.04em; text-decoration: none; }
+.site-footer a.credit:hover { text-decoration: underline; }
+@media (max-width: 1240px) { .page-shell, .site-footer { margin-left: 24px; margin-right: 24px; } }
+@media (max-width: 800px) {
+  .page-shell { margin: 12px 12px 48px; }
+  .site-footer { margin: 0 12px; padding: 0 6px 24px; }
+  .cover-hero, .start-band { grid-template-columns: minmax(0, 1fr); }
+  .cover-copy { padding: 34px 24px 28px; }
+  .cover-title { font-size: 40px; }
+  .cover-art { min-height: 300px; }
+  .cover-art__disc { right: -100px; }
+  .cover-art__type { left: 26px; font-size: 54px; }
+  .cover-art__issue { left: 26px; }
+  .explainer-grid { grid-template-columns: minmax(0, 1fr); }
+  .explainer-card { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .explainer-card:last-child { border-bottom: 0; }
+  .start-band__title { padding: 30px 24px; }
+  .start-band__title h2 { font-size: 28px; }
+  .start-list { padding: 4px 20px; }
+  .start-list a { grid-template-columns: 58px minmax(0, 1fr); }
+  .start-list span.state { display: none; }
+  .pick select { min-width: 0; width: 100%; }
+}
+</style>
+<!-- UNFADE-SHELL:START -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../css/unfade-shell.css">
+<script defer src="../js/unfade-shell.js" data-unfade-root="../"></script>
+<!-- UNFADE-SHELL:END -->
+</head>
+<body>
+<main class="page-shell">
+  <section class="cover-hero" aria-labelledby="latest-title">
+    <div class="cover-copy">
+      <div class="eyebrow">AI 트렌드 브리핑 · 최신호 제1호</div>
+      <h1 class="cover-title" id="latest-title">새 AI 3종과 에이전트 사고<span class="wk">AI 트렌드 브리핑 | 2026년 10월 2주차</span></h1>
+      <p class="cover-summary">AI를 처음 접하는 사람을 위한 글로벌 신기술 뉴스와 토목설계 특집. 발행할 때마다 직전 호와 달라진 점만 정리한다.</p>
+      <div class="cover-meta">
+        <span class="cover-meta__tag">최신호</span>
+        <span><span style="white-space:nowrap">2026-10-14 기준</span> · 비교 기간 <span style="white-space:nowrap">2026-09-15 ~ 2026-10-14</span></span>
+        <a class="cover-meta__link" href="reports/2026-10-w2_20261014/">READ ↗</a>
+        <a class="cover-meta__link" href="reports/2026-10-w2_20261014/report.pdf" download="AI_트렌드_2026년_10월_2주차.pdf">PDF ↓</a>
+        <a class="cover-meta__link" href="reports/2026-10-w2_20261014/report.pptx" download="AI_트렌드_2026년_10월_2주차.pptx">PPTX ↓</a>
+      </div>
+    </div>
+    <a class="cover-art" href="reports/2026-10-w2_20261014/" aria-label="최신호 열기: 2026년 10월 2주차">
+      <span class="cover-art__issue">ISSUE 01<br>2026.10.14</span>
+      <span class="cover-art__disc"></span><span class="cover-art__ring"></span>
+      <span class="cover-art__type">AI<br>TREND</span>
+    </a>
+  </section>
+
+  <div class="section-intro"><span class="eyebrow">THIS ISSUE</span><h2>이번 호에서 가장 먼저 알아야 할 것</h2></div>
+  <div class="explainer-grid">
+    <a class="explainer-card" href="reports/2026-10-w2_20261014/">
+      <span class="explainer-card__index">01</span>
+      <h3>OpenAI·Google·Anthropic 차세대 모델이 일반 앱에 들어왔다(9/22~10/13)</h3>
+      <small>READ ↗</small>
+    </a>
+    <a class="explainer-card" href="reports/2026-10-w2_20261014/">
+      <span class="explainer-card__index">02</span>
+      <h3>Gemini 무료 경량화·Sora 종료 등 서비스 조건이 바뀌었다</h3>
+      <small>READ ↗</small>
+    </a>
+    <a class="explainer-card" href="reports/2026-10-w2_20261014/">
+      <span class="explainer-card__index">03</span>
+      <h3>AI 에이전트 무단 행동 사고 공개 — 권한·승인 관리가 핵심이 됐다</h3>
+      <small>READ ↗</small>
+    </a>
+    <a class="explainer-card" href="latest/">
+      <span class="explainer-card__index">LATEST</span>
+      <h3>항상 최신호로 열리는 고정 주소</h3>
+      <p>https://unfade.is-a.dev/ai-trend/latest/</p>
+      <small>OPEN ↗</small>
+    </a>
+  </div>
+
+  <section class="start-band" aria-labelledby="past-title">
+    <div class="start-band__title">
+      <span class="eyebrow">ARCHIVE</span>
+      <h2 id="past-title">발행한 호는 모두 그대로 보존한다</h2>
+      <p>각 호는 발행 당시의 모양 그대로 남는다. 정정이 있으면 새 폴더로 다시 발행하고 이전 호에 표시한다.</p>
+    </div>
+    <div class="start-list">
+      <a href="reports/2026-10-w2_20261014/">
+        <small>제1호</small>
+        <span><b>2026년 10월 2주차</b><span class="sum">2026-10-14 기준 · OpenAI·Google·Anthropic 차세대 모델이 일반 앱에 들어왔다(9/22~10/13)</span></span>
+        <span class="state">LATEST ↗</span>
+      </a>
+      <div class="pick">
+        <label for="past-select">과거 AI 신문 보기</label>
+        <select id="past-select"><option value="">발행본을 선택하십시오</option><option value="reports/2026-10-w2_20261014/">2026년 10월 2주차 · 2026-10-14</option></select>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><span>항상 최신호로 열리는 주소: <a class="latest" href="latest/">https://unfade.is-a.dev/ai-trend/latest/</a></span><a class="credit" href="https://unfade.is-a.dev/" target="_blank" rel="noopener">Unfade</a></footer>
+<script>
+(function () {
+  var sel = document.getElementById("past-select");
+  if (location.protocol === "file:") {   /* PC 에서 직접 연 경우: 폴더 주소 링크에 index.html 을 붙인다 */
+    Array.prototype.forEach.call(document.querySelectorAll('a[href$="/"]'), function (a) {
+      var h = a.getAttribute("href");
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(h) && h.charAt(0) !== "/") a.setAttribute("href", h + "index.html");
+    });
+  }
+  if (sel) sel.addEventListener("change", function () {
+    if (!sel.value) return;
+    location.href = sel.value + (location.protocol === "file:" && /\/$/.test(sel.value) ? "index.html" : "");
+  });
+  if (location.protocol !== "http:" && location.protocol !== "https:") return;
+  if (/^(localhost|127\.|\[::1\]|0\.0\.0\.0)/.test(location.hostname)) return;
+  var gc = document.createElement("script");
+  gc.setAttribute("data-goatcounter", "https://unfade.goatcounter.com/count");
+  gc.async = true; gc.src = "https://gc.zgo.at/count.js";
+  document.head.appendChild(gc);
+})();
+</script>
+</body>
+</html>

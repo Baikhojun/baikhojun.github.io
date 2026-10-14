@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0;url=../{{ latest.report_url }}">
+  <link rel="canonical" href="{{ site }}{{ latest.report_url }}">
+  <title>AI 트렌드 브리핑 — 최신호로 이동</title>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Unfade">
+  <meta property="og:title" content="AI 트렌드 브리핑 | {{ latest.week_label }}">
+  <meta property="og:description" content="{{ latest.summary[0] if latest.summary else '' }}">
+  <meta property="og:image" content="{{ site }}{{ latest.report_url }}og.png">
+  <meta property="og:url" content="{{ site }}latest/">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <p><a href="../{{ latest.report_url }}">최신호({{ latest.week_label }})로 이동</a></p>
+</body>
+</html>

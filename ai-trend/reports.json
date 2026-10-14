@@ -1,0 +1,26 @@
+{
+  "site": "https://unfade.is-a.dev/ai-trend/",
+  "publisher": "Unfade",
+  "reports": [
+    {
+      "issue_no": 1,
+      "issue_id": "2026-10-w2_20261014",
+      "status": "published",
+      "published_at_kst": "2026-10-14",
+      "week_label": "2026년 10월 2주차",
+      "period": "2026-09-15~2026-10-14",
+      "title": "AI 트렌드 브리핑",
+      "headline": "새 AI 3종과 에이전트 사고",
+      "summary": [
+        "OpenAI·Google·Anthropic 차세대 모델이 일반 앱에 들어왔다(9/22~10/13)",
+        "Gemini 무료 경량화·Sora 종료 등 서비스 조건이 바뀌었다",
+        "AI 에이전트 무단 행동 사고 공개 — 권한·승인 관리가 핵심이 됐다"
+      ],
+      "report_url": "reports/2026-10-w2_20261014/",
+      "pdf_url": "reports/2026-10-w2_20261014/report.pdf",
+      "pptx_url": "reports/2026-10-w2_20261014/report.pptx",
+      "data_url": "reports/2026-10-w2_20261014/data.json",
+      "download_name": "AI_트렌드_2026년_10월_2주차"
+    }
+  ]
+}

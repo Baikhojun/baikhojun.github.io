@@ -1,0 +1,100 @@
+# AI 트렌드 브리핑 — 필수 방문 출처 (지시서 5.1-3, 5.2)
+# 매 발행 시작 시 이 목록을 먼저 직접 연다. access 는 2026-10-14 자동 열람 결과(403 등)와 대체 경로.
+# 등급: A = 공식·정부·원 논문·독립 벤치마크, B = 신뢰 매체 원문 취재, C = 커뮤니티·예측시장·개인 블로그(반응 항목만)
+
+checked_at: "2026-10-14"
+
+official:
+  openai:
+    - {url: "https://developers.openai.com/api/docs/changelog", grade: A}
+    - {url: "https://developers.openai.com/api/docs/models", grade: A}
+    - {url: "https://developers.openai.com/api/docs/deprecations", grade: A}
+    - {url: "https://learn.chatgpt.com/docs/pricing", grade: A, note: "ChatGPT 요금(Free·Go·Plus·Pro·Business)"}
+    - {url: "https://learn.chatgpt.com/docs/changelog", grade: A}
+    - {url: "https://status.openai.com/history", grade: A}
+    - {url: "https://openai.com/news", grade: A, access: "403 — 위 개발자 문서와 B 매체로 대체"}
+  anthropic:
+    - {url: "https://www.anthropic.com/news", grade: A}
+    - {url: "https://claude.com/pricing", grade: A}
+    - {url: "https://support.claude.com/en/articles/12138966-release-notes", grade: A}
+    - {url: "https://platform.claude.com/docs/en/about-claude/models/overview", grade: A}
+    - {url: "https://platform.claude.com/docs/en/about-claude/model-deprecations", grade: A}
+    - {url: "https://status.claude.com/history.rss", grade: A, note: "HTML 은 렌더링 실패 — RSS 사용"}
+  google:
+    - {url: "https://gemini.google/release-notes/", grade: A}
+    - {url: "https://ai.google.dev/gemini-api/docs/changelog", grade: A}
+    - {url: "https://ai.google.dev/gemini-api/docs/pricing", grade: A}
+    - {url: "https://gemini.google/kr/subscriptions/?hl=ko", grade: A, note: "원화 요금"}
+    - {url: "https://gemini.google/us/subscriptions/?hl=en", grade: A}
+    - {url: "https://blog.google/innovation-and-ai/", grade: A}
+  microsoft:
+    - {url: "https://blogs.microsoft.com/", grade: A}
+    - {url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/release-notes", grade: A}
+    - {url: "https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products", grade: A}
+  xai:
+    - {url: "https://docs.x.ai/docs/models", grade: A}
+    - {url: "https://docs.x.ai/docs/release-notes", grade: A}
+    - {url: "https://x.ai/news", grade: A, access: "403"}
+  perplexity:
+    - {url: "https://www.perplexity.ai/changelog", grade: A}
+    - {url: "https://docs.perplexity.ai/getting-started/pricing", grade: A}
+  others:
+    - {url: "https://github.blog/changelog/", grade: A}
+    - {url: "https://cursor.com/pricing", grade: A}
+    - {url: "https://cursor.com/changelog", grade: A}
+    - {url: "https://mistral.ai/news", grade: A}
+    - {url: "https://api-docs.deepseek.com/news/", grade: A}
+    - {url: "https://updates.midjourney.com/", grade: A}
+    - {url: "https://suno.com/release-notes", grade: A}
+    - {url: "https://elevenlabs.io/blog", grade: A}
+    - {url: "https://kling.ai/blog", grade: A}
+    - {url: "https://docs.dev.runwayml.com/api-details/api_changelog/", grade: A}
+
+benchmarks:              # 원 사이트 우선, 미러 사이트 점수 금지
+  - {name: "Arena", url: "https://arena.ai/leaderboard", grade: A, access: "403 — 공식 공개 데이터셋 https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset 사용", changelog: "https://arena.ai/company/leaderboard-changelog"}
+  - {name: "Artificial Analysis", url: "https://artificialanalysis.ai/leaderboards/models", grade: A, version_page: "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"}
+  - {name: "SWE-bench", url: "https://www.swebench.com", grade: A, access: "표가 JS — https://github.com/SWE-bench/swe-bench.github.io data/leaderboards.json"}
+  - {name: "SWE-Bench Pro", url: "https://labs.scale.com/leaderboard/swe_bench_pro_public", grade: A}
+  - {name: "Humanity's Last Exam", url: "https://labs.scale.com/leaderboard/humanitys_last_exam", grade: A}
+  - {name: "ARC Prize", url: "https://arcprize.org/results", grade: A}
+  - {name: "Epoch ECI", url: "https://epoch.ai/benchmarks/eci", grade: A, access: "표 로딩 안 됨 — 허브 요약"}
+
+fx:
+  - {name: "한국은행 ECOS 원/달러 매매기준율", url: "https://ecos.bok.or.kr/api/StatisticSearch/sample/json/kr/1/10/731Y001/D/{start}/{end}/0000001", grade: A}
+  - {name: "미 연준 H.10", url: "https://www.federalreserve.gov/releases/h10/current/", grade: A}
+
+policy:
+  - {name: "EU AI Act·디지털 전략", url: "https://digital-strategy.ec.europa.eu/", grade: A}
+  - {name: "미국 백악관", url: "https://www.whitehouse.gov/presidential-actions/", grade: A}
+  - {name: "캘리포니아 주지사실", url: "https://www.gov.ca.gov/", grade: A}
+  - {name: "대한민국 정책브리핑", url: "https://www.korea.kr/", grade: A}
+  - {name: "과학기술정보통신부", url: "https://www.msit.go.kr/", grade: A}
+
+civil:
+  - {name: "Autodesk 뉴스룸", url: "https://adsknews.autodesk.com/en/news/", grade: A, note: "autodesk.com 403 — 뉴스룸·일본 법인 digitalpr.jp 사용"}
+  - {name: "Autodesk Platform Services 블로그", url: "https://aps.autodesk.com/blog", grade: A}
+  - {name: "Bentley 뉴스", url: "https://www.bentley.com/news/", grade: A}
+  - {name: "Bentley MCP", url: "https://www.bentley.com/en/infrastructure-ai/mcp-servers/", grade: A}
+  - {name: "Trimble 뉴스룸", url: "https://news.trimble.com/", grade: A}
+  - {name: "Esri 뉴스룸", url: "https://www.esri.com/about/newsroom/", grade: A, access: "403 — 다음 호에 대체 경로(공식 블로그 RSS 등) 확보 필요"}
+  - {name: "Nemetschek 보도자료", url: "https://www.nemetschek.com/en/news-media/press-releases", grade: A}
+  - {name: "buildingSMART", url: "https://www.buildingsmart.org/news/", grade: A, access: "403 — GitHub IFC5-development 로 일부 대체"}
+  - {name: "한국건설기술연구원 보도자료", url: "https://www.kict.re.kr/board.es?mid=a10501050000&bid=pressrls", grade: A}
+  - {name: "국토교통부 보도자료", url: "https://www.molit.go.kr/", grade: A, access: "리다이렉트 오류 — KDI 경제정보센터 게재본 사용"}
+  - {name: "일본 국토교통성", url: "https://www.mlit.go.jp/report/press/", grade: A}
+  - {name: "arXiv(도면·CAD·BIM)", url: "https://arxiv.org/", grade: A}
+  - {name: "전문 매체", urls: ["https://www.geoweeknews.com/", "https://www.constructiondive.com/", "https://www.constructionbriefing.com/", "https://architosh.com/", "https://www.engineering.com/", "http://www.engdaily.com/"], grade: B}
+
+news:                    # B — 결론 수치는 B 2곳 이상 또는 A 1곳 이상
+  - {name: TechCrunch, url: "https://techcrunch.com/category/artificial-intelligence/", grade: B}
+  - {name: "AI타임스", url: "https://www.aitimes.com/", grade: B}
+  - {name: "The Next Web", url: "https://thenextweb.com/", grade: B}
+  - {name: VentureBeat, url: "https://venturebeat.com/", grade: B}
+  - {name: "9to5Mac", url: "https://9to5mac.com/", grade: B}
+  - {name: Engadget, url: "https://www.engadget.com/", grade: B}
+  - {name: "Reuters·The Verge·Wired", grade: B, access: "검색 도구 도메인 제한 — 재인용으로만 다룸(표시)"}
+
+community:               # C — 반응 항목에만, 이용자 아이디 비노출
+  - {name: "Hacker News", url: "https://news.ycombinator.com/front?day={YYYY-MM-DD}", grade: C}
+  - {name: "Product Hunt 월간", url: "https://www.producthunt.com/leaderboard/monthly/{YYYY}/{M}", grade: C}
+  - {name: "Reddit(r/OpenAI 등 9곳)", grade: C, access: "자동 열람 차단 — 우회하지 않음"}

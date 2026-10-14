@@ -1,0 +1,687 @@
+{#- 인쇄 페이지(A4 가로) 흐름 블록 매크로. build.py 가 순서대로 불러 측정·분할한다.
+    분할 표 매크로 인자: (c, arg, s, e, first, last) — rows[s:e] 만 그리고, first 가 아니면 제목에 (계속) -#}
+
+{% macro cont(first) %}{% if not first %} <span class="cont">(계속)</span>{% endif %}{% endmacro %}
+
+{% macro h3(title, first=True, civil=False) %}<h3 class="p-h3{{ ' civil' if civil }}"><span class="bar"></span>{{ title }}{{ cont(first) }}</h3>{% endmacro %}
+
+{# ───────── 표지 ───────── #}
+{% macro cover(c) %}
+{% set d = c.d %}
+<div class="cv">
+  <div class="cv-copy">
+    <div class="cv-eyebrow">제{{ d.issue_no }}호 · {{ '신규 기준선' if d.is_baseline else '직전 발행일 ' ~ d.previous_report.report_date_kst ~ ' 대비' }}</div>
+    <h1 class="cv-title">{{ d.title }}<span class="wk">{{ d.week_label }}</span></h1>
+    <p class="cv-sub">{{ d.subtitle }}</p>
+    <p class="cv-lead">{{ d.headline.lead }}</p>
+    <div class="cv-top">
+      <h2>이번 호 핵심</h2>
+      <ol>{% for it in c.top[:3] %}<li>{{ it.title_ko }}</li>{% endfor %}</ol>
+    </div>
+  </div>
+  <div class="cv-side">
+    <div class="cv-art" aria-hidden="true">
+      <span class="issue">ISSUE {{ "%02d"|format(d.issue_no) }}<br>{{ d.report_date_kst | replace('-', '.') }}</span>
+      <i class="disc"></i><i class="ring"></i><span class="type">AI<br>TREND</span>
+    </div>
+    <div class="cv-basis">
+      <h2>작성 기준</h2>
+      <dl>
+        <dt>기준일</dt><dd>{{ d.report_date_kst }} ({{ d.get('weekday_ko', '') }}) KST</dd>
+        <dt>비교 기간</dt><dd>{{ c.period_start }} ~ {{ c.period_end }}{% if d.is_baseline %} (최근 30일){% endif %}</dd>
+        <dt>직전 발행일</dt><dd>{{ d.previous_report.report_date_kst or '없음 — 신규 기준선' }}</dd>
+        <dt>작성 목적</dt><dd>{{ d.basis.purpose }}</dd>
+        <dt>데이터 기준</dt><dd>{{ d.basis.data_basis }}</dd>
+        <dt>조사 규모</dt><dd>검색 {{ d.search_count }}회 · 출처 {{ c.source_count }}개 (A&nbsp;{{ c.grade_counts.A }} · B&nbsp;{{ c.grade_counts.B }} · C&nbsp;{{ c.grade_counts.C }})</dd>
+        <dt>환율 기준</dt><dd>{{ fmt_num(c.fx.get('usd_krw'), 1) }}원/달러 ({{ c.fx.get('date', '') }}, {{ c.fx.get('source', '') }})</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="cv-foot">
+    <div class="cv-pub">Unfade<span>{{ d.report_date_kst }} 기준 발행</span></div>
+    <div class="cover-tabs">
+      {% for k, v in TABS.items() if k not in ('archive',) %}<span class="{{ 'civil' if k == 'civil' }}">{{ v }}</span>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{# ───────── 공통 머리 ───────── #}
+{% macro sec_head(c, key) %}
+{% set s = c.d.sections[key] %}
+<div class="p-sec{{ ' civil' if key == 'civil' }}">
+  <div class="no">{{ SECTION_NO[key] }}</div>
+  <div class="kk">{{ SECTION_NAME[key] }}</div>
+  <h2>{{ s.title }}</h2>
+</div>
+{% if s.get('lead') %}<p class="p-lead" style="margin-top:2mm">{{ s.lead }}</p>{% endif %}
+{% endmacro %}
+
+{% macro sub_head(c, key) %}
+{% set s = c.d.sections[key] %}
+<h3 class="p-h3{{ ' civil' if key.startswith('civil') }}"><span class="bar"></span>{{ s.title }}</h3>
+{% if s.get('lead') %}<p class="p-lead" style="margin-top:1mm">{{ s.lead }}</p>{% endif %}
+{% endmacro %}
+
+{# ───────── 01 핵심 변화 ───────── #}
+{% macro summary_stats(c, arg) %}
+{% set d = c.d %}
+{% set st = c.status_counts %}
+<div class="p-grid" style="grid-template-columns:1.45fr 1fr;align-items:start;gap:7mm">
+  <div>
+    {{ h3('3분 요약') }}
+    <ul class="p-summary" style="margin-top:2.5mm">
+      {% for t in d.headline.three_min_summary %}
+      <li><span class="s3-ico">{{ icon(d.headline.three_min_icons[loop.index0] if d.headline.three_min_icons|length > loop.index0 else 'sparkle') }}</span><span>{{ t }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+    {{ h3('숫자로 본 이번 호') }}
+    <div class="p-stats" style="grid-template-columns:1fr 1fr;margin-top:2.5mm">
+      <div class="stat"><div class="v">{{ st.new }}</div><div class="l">{{ tag('신규') }} 새로 나온 것</div></div>
+      <div class="stat"><div class="v">{{ st.changed }}</div><div class="l">{{ tag('개선') }} 기능·가격·정책 변경</div></div>
+      <div class="stat"><div class="v">{{ st.ended }}</div><div class="l">{{ tag('종료') }} 서비스·모델 종료</div></div>
+      <div class="stat"><div class="v">{{ st.watch }}</div><div class="l">{{ tag('관찰') }} 다음 호까지 추적</div></div>
+    </div>
+    <p class="p-src" style="margin-top:2mm">출처 {{ c.source_count }}개 (A {{ c.grade_counts.A }} · B {{ c.grade_counts.B }} · C {{ c.grade_counts.C }}) · 검색 {{ d.search_count }}회 · 태그는 색·아이콘·글자를 함께 쓴다.</p>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro top_list(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.top.title, first) }}
+<ol class="p-top split-grid">
+  {% for it in c.top[s:e] %}
+  <li>
+    <div class="n">{{ '%02d' % (s + loop.index) }}<small>{{ IMP_LABEL.get(it.importance, '참고') }}</small></div>
+    <div><h3>{{ it.title_ko }}</h3><p>{{ it.summary_ko }}</p></div>
+    <div class="tg">{{ tag(it.tag) }}{% if it.get('service') %}<span class="p-src" style="margin:0">{{ it.service }}</span>{% endif %}</div>
+  </li>
+  {% endfor %}
+</ol>
+{% endmacro %}
+
+{% macro summary3(c, arg) %}
+{% set d = c.d %}
+{{ h3('3분 요약 — ' ~ d.sections.top.get('kicker', '이번 기준일 꼭 알아야 할 것')) }}
+<ul class="p-summary" style="margin-top:2.5mm">
+  {% for t in d.headline.three_min_summary %}
+  <li><span class="s3-ico">{{ icon(d.headline.three_min_icons[loop.index0] if d.headline.three_min_icons|length > loop.index0 else 'sparkle') }}</span><span>{{ t }}</span></li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro stats(c, arg) %}
+{% set st = c.status_counts %}
+<div class="p-stats">
+  <div class="stat"><div class="v">{{ st.new }}</div><div class="l">{{ tag('신규') }} 건</div></div>
+  <div class="stat"><div class="v">{{ st.changed }}</div><div class="l">{{ tag('개선') }} 가격·정책 포함 변경</div></div>
+  <div class="stat"><div class="v">{{ st.ended }}</div><div class="l">{{ tag('종료') }} 건</div></div>
+  <div class="stat"><div class="v">{{ st.watch }}</div><div class="l">{{ tag('관찰') }} 추적 항목</div></div>
+  <div class="stat"><div class="v">{{ c.source_count }}</div><div class="l">출처 (A {{ c.grade_counts.A }} · B {{ c.grade_counts.B }} · C {{ c.grade_counts.C }})</div></div>
+</div>
+{% endmacro %}
+
+{% macro top_cards(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.top.title, first) }}
+<div class="p-grid p-g3 split-grid" style="margin-top:2.5mm">
+  {% for it in c.top[s:e] %}
+  <div class="p-card">
+    <div class="p-row">{{ imp(it.importance) }}{{ tag(it.tag) }}</div>
+    <h3 style="margin-top:1.5mm">{{ it.title_ko }}</h3>
+    <p>{{ it.summary_ko }}</p>
+    <p class="why"><b>왜 중요한가</b> {{ it.why_it_matters_ko }}</p>
+    <div class="meta">{{ src_links(it.sources, 2, True, True) }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro core_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.core.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:10%"><col style="width:46%"><col style="width:30%"><col style="width:14%"></colgroup>
+  <thead><tr><th>중요도·태그</th><th>무엇이 달라졌는가</th><th>초보자에게 왜 중요한가 · 영향 대상</th><th>근거</th></tr></thead>
+  <tbody>
+  {% for it in c.core[s:e] %}
+  <tr>
+    <td>{{ imp(it.importance) }}<div style="margin-top:1mm">{{ tag(it.tag) }}</div></td>
+    <td><div class="t-title">{{ it.title_ko }}</div><div class="t-sub">{{ it.summary_ko }}</div></td>
+    <td>{{ it.why_it_matters_ko }}{% if it.get('audience') %}<div class="t-sub">대상: {{ it.audience }}</div>{% endif %}</td>
+    <td>{{ src_links(it.sources, 2, True, True) }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<p class="p-src">{{ '신규 기준선: 비교 기간(' ~ c.period_start ~ '~' ~ c.period_end ~ ')에 발표된 변화만 실었다.' if c.d.is_baseline else '직전 발행일 ' ~ c.d.previous_report.report_date_kst ~ ' 대비 달라진 사실만 실었다.' }}</p>{% endif %}
+{% endmacro %}
+
+{% macro timeline(c, arg) %}
+{{ h3(c.d.sections.timeline.title) }}
+<div class="p-fig" style="margin-top:2mm">
+  {{ svg_timeline(c.timeline, c.period_start, c.period_end, 'print', 985) }}
+  <p class="p-cap"><b>이 그림으로 알 수 있는 것</b>{{ c.d.sections.timeline.get('caption', '비교 기간의 사건이 언제 몰렸는지와 종류(태그 색)') }}</p>
+  <p class="p-src">출처 · 각 사건의 공식 발표·보도 (전체 목록은 출처 장) · 확인일 {{ c.d.report_date_kst }}</p>
+</div>
+{% endmacro %}
+
+{% macro unchanged(c, arg) %}
+<div class="p-grid p-g2">
+  <div class="p-card soft">
+    <h3>직전 추적 항목 결과</h3>
+    <p>{{ '최초 발행(신규 기준선)이므로 해당 없음. 이번 호의 추적 항목은 다음 발행에서 결과를 점검한다.' if c.d.is_baseline else '' }}</p>
+  </div>
+  <div class="p-card soft">
+    <h3>변화가 없었던 항목</h3>
+    <ul class="p-list" style="margin-top:1mm">{% for u in c.d.unchanged %}<li>{{ u }}</li>{% endfor %}</ul>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro watch_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.watch.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:39%"><col style="width:11%"><col style="width:32%"><col style="width:18%"></colgroup>
+  <thead><tr><th>추적 항목</th><th>구분</th><th>지켜볼 신호</th><th>근거</th></tr></thead>
+  <tbody>
+  {% for it in c.watch[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ it.title_ko }}</div><div class="t-sub">{{ it.summary_ko }}</div></td>
+    <td>{{ wtype(it.get('watch_type', '보도')) }}</td>
+    <td>{{ it.get('signal', it.why_it_matters_ko) }}</td>
+    <td>{{ src_links(it.sources, 2, True, True) }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{# ───────── 02 AI 서비스 ───────── #}
+{% macro services_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.svc_table.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:15%"><col style="width:20%"><col style="width:18%"><col style="width:19%"><col style="width:15%"><col style="width:13%"></colgroup>
+  <thead><tr><th>서비스 · 주력 모델</th><th>가장 잘하는 일</th><th>초보자 추천 상황</th><th>유의할 한계</th><th>무료/유료</th><th>직전 발행 대비</th></tr></thead>
+  <tbody>
+  {% for r in c.d.services[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ r.service }}</div><div class="t-sub">{{ r.vendor }} · {{ r.flagship }}</div></td>
+    <td>{{ r.best_at }}</td>
+    <td>{{ r.recommend_for }}</td>
+    <td>{{ r.limits }}</td>
+    <td>{{ r.free_paid }}</td>
+    <td>{{ r.change }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<p class="p-src">출처 · 각 사 공식 발표·요금 페이지, 확인일 {{ c.d.report_date_kst }} · 근거 목록은 출처 장</p>{% endif %}
+{% endmacro %}
+
+{% macro media_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.media.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:8%"><col style="width:14%"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:17%"></colgroup>
+  <thead><tr><th>분야</th><th>서비스</th><th>최신 모델 (확인일 기준)</th><th>강점</th><th>한계·주의</th><th>요금·상태</th></tr></thead>
+  <tbody>
+  {% for r in c.d.media_services[s:e] %}
+  <tr>
+    <td>{{ r.group }}</td>
+    <td><div class="t-title">{{ r.service }}</div><div class="t-sub">{{ r.vendor }}</div></td>
+    <td>{{ r.latest }}</td>
+    <td>{{ r.strength }}</td>
+    <td>{{ r.limits }}</td>
+    <td>{% if r.status == '종료' %}{{ tag('종료') }} {% endif %}{{ r.price }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro guide_cards(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.guide.title, first) }}
+<div class="p-grid p-g3 split-grid" style="margin-top:2.5mm">
+  {% for g in c.d.selection_guide[s:e] %}
+  <div class="p-card">
+    <h3 class="p-row">{{ icon(g.icon) }} {{ g.purpose }}</h3>
+    <p><b>후보</b> {{ g.candidates | join(' · ') }}</p>
+    <p class="why">{{ g.why }}</p>
+    {% if g.get('caution') %}<p class="meta">유의: {{ g.caution }}</p>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro perf_figs(c, arg) %}
+{% set lbs = c.d.metrics.leaderboards %}
+{{ h3(c.d.sections.perf.title) }}
+<div class="p-grid p-g2" style="margin-top:2.5mm">
+  {% for lb in lbs if lb.get('print_chart') %}
+  <div class="p-fig">
+    <div class="p-row" style="justify-content:space-between"><b>{{ lb.name }}</b><span class="p-src" style="margin:0">{{ lb.purpose }} · {{ lb.version }}</span></div>
+    {% if lb.chart == 'dot' %}{{ svg_dotplot(lb.rows[:lb.get('chart_n', 8)], 'print', 470, lb.name) }}{% else %}{{ svg_bars(lb.bar_rows[:lb.get('chart_n', 8)], 'print', 470, lb.get('unit', ''), lb.name) }}{% endif %}
+    <p class="p-cap"><b>읽는 법</b>{{ lb.easy }}</p>
+    <p class="p-src">출처 · {{ lb.publisher }} ({{ lb.method }}) · 측정 {{ lb.checked_at }} · {{ short_url(lb.source_url, 40) }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro bench_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.bench.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:17%"><col style="width:11%"><col style="width:33%"><col style="width:15%"><col style="width:24%"></colgroup>
+  <thead><tr><th>지표 (비유)</th><th>목적</th><th>상위권 (점수)</th><th>버전 · 측정일</th><th>해석 한계</th></tr></thead>
+  <tbody>
+  {% for lb in c.d.metrics.leaderboards[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ lb.name }}</div><div class="t-sub">{{ lb.get('analogy', '') }}</div></td>
+    <td>{{ lb.purpose }}</td>
+    <td>{% for r in lb.rows[:3] %}{{ r.rank }}. {{ r.model }} ({{ fmt_score(r.score) }}{{ ' ±' ~ r.ci_plus if r.get('ci_plus') else '' }}){{ '' if loop.last else ' · ' }}{% endfor %}</td>
+    <td>{{ lb.version }}<div class="t-sub">{{ lb.checked_at }} · {{ lb.method }}</div></td>
+    <td>{{ lb.note }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<p class="p-src">개발사 자체 발표 점수는 이 표에 섞지 않았다. 점수 차가 오차 범위(±) 안이면 동률권으로 본다.</p>{% endif %}
+{% endmacro %}
+
+{% macro candidates_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.candidates.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:14%"><col style="width:30%"><col style="width:30%"><col style="width:26%"></colgroup>
+  <thead><tr><th>목적</th><th>최상위권 (동률권 포함)</th><th>상위권</th><th>근거 지표</th></tr></thead>
+  <tbody>
+  {% for r in c.d.candidates[s:e] %}
+  <tr><td><div class="t-title">{{ r.purpose }}</div></td><td>{{ r.top | join(' · ') }}</td><td>{{ r.upper | join(' · ') }}</td><td>{{ r.basis }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro usertype_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.usertypes.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:16%"><col style="width:28%"><col style="width:30%"><col style="width:26%"></colgroup>
+  <thead><tr><th>이용자 유형</th><th>추천 선택</th><th>이유</th><th>유의점</th></tr></thead>
+  <tbody>
+  {% for r in c.d.user_types[s:e] %}
+  <tr><td><div class="t-title">{{ r.type }}</div></td><td>{{ r.pick }}</td><td>{{ r.why }}</td><td>{{ r.caution }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro price_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.prices.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:15%"><col style="width:20%"><col style="width:13%"><col style="width:15%"><col style="width:11%"><col style="width:26%"></colgroup>
+  <thead><tr><th>서비스</th><th>요금제</th><th>월 요금 (정가)</th><th>원화 환산</th><th>부가세</th><th>비고 · 확인일</th></tr></thead>
+  <tbody>
+  {% for r in c.d.metrics.prices[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ r.service }}</div></td>
+    <td>{{ r.plan }}</td>
+    <td class="nowrap">{{ r.get('price_label') or ('$' ~ fmt_num(r.price, 2 if (r.price|float) % 1 else 0)) if r.get('price') is not none else (r.get('price_label') or '미확인') }}</td>
+    <td>{{ r.get('krw_label') or krw(r.price, c.fx.get('usd_krw')) }}</td>
+    <td>{{ vat_label(r.get('vat_included')) }}</td>
+    <td>{{ r.get('note', '') }}<div class="t-sub">{{ r.checked_at }} · {{ short_url(r.source_url, 34) }}</div></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<p class="p-src">원화 환산 = 달러 정가 × {{ fmt_num(c.fx.get('usd_krw'), 1) }}원 ({{ c.fx.get('date') }} {{ c.fx.get('source') }}), 100원 단위 반올림. 실제 결제액은 부가세·카드 수수료·앱스토어 가격에 따라 다르다.</p>{% endif %}
+{% endmacro %}
+
+{% macro api_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.api.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:14%"><col style="width:22%"><col style="width:14%"><col style="width:14%"><col style="width:36%"></colgroup>
+  <thead><tr><th>개발사</th><th>모델</th><th>입력 (100만 토큰)</th><th>출력 (100만 토큰)</th><th>비고 · 확인일</th></tr></thead>
+  <tbody>
+  {% for r in c.d.metrics.api_prices[s:e] %}
+  <tr>
+    <td>{{ r.vendor }}</td><td><div class="t-title">{{ r.model }}</div></td>
+    <td class="nowrap">${{ fmt_num(r.input, 2) }}</td><td class="nowrap">${{ fmt_num(r.output, 2) }}</td>
+    <td>{{ r.get('note', '') }}<div class="t-sub">{{ r.checked_at }} · {{ short_url(r.source_url, 40) }}</div></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<div class="p-easy" style="margin-top:2mm"><b>쉽게 말하면</b>{{ c.d.sections.api.get('easy', '') }}</div>{% endif %}
+{% endmacro %}
+
+{# ───────── 03 가능해진 일 ───────── #}
+{% macro areas(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.cap_flow.title, first) }}
+<div class="p-grid p-g2 split-grid" style="margin-top:2.5mm">
+  {% for a in c.d.capability_areas[s:e] %}
+  <div class="p-card">
+    <h3 class="p-row">{{ icon(a.icon) }} {{ a.area }} — {{ a.title }}</h3>
+    <div class="p-flow">
+      <div class="st"><span class="k">입력</span>{{ a.input }}</div>
+      <div class="st ai"><span class="k">AI 작업</span>{{ a.ai }}</div>
+      <div class="st human"><span class="k">사람이 확인할 일</span>{{ a.human }}</div>
+      <div class="st"><span class="k">결과물</span>{{ a.output }}</div>
+    </div>
+    {% if a.get('level_note') %}<p class="meta">{{ a.level_note }}</p>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro matrix_table(c, arg, s, e, first, last) %}
+{% set mo = c.d.matrix_order %}
+{{ h3(c.d.sections.matrix.title, first) }}
+<table class="p-tbl p-matrix split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:22%">{% for sv in mo.services %}<col>{% endfor %}</colgroup>
+  <thead><tr><th>시나리오</th>{% for sv in mo.services %}<th>{{ sv }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for sc in mo.scenarios[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ sc }}</div></td>
+    {% for sv in mo.services %}
+    {% set cell = c.matrix.get(sc ~ '|' ~ sv) %}
+    <td>{% if cell %}{{ lvl(cell.level) }}{% if cell.get('plan') %}<span class="note">{{ cell.plan }}</span>{% endif %}{% else %}{{ lvl('?') }}{% endif %}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last %}<p class="p-src">● 가능 = 공식 기본 기능 · ◐ 제한적 = 코드 실행 우회·연동·상위 요금제·베타 · ○ 불가 · ? 미확인 (공식 근거 없음) · 판정 근거는 data.json 의 capabilities, 확인일 {{ c.d.report_date_kst }}</p>{% endif %}
+{% endmacro %}
+
+{% macro files_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.files.title, first) }}
+<table class="p-tbl p-matrix split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:15%"><col style="width:13%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:24%"></colgroup>
+  <thead><tr><th>형식</th><th>서비스</th><th>읽기</th><th>변환</th><th>생성</th><th>편집</th><th>방법 · 비고</th></tr></thead>
+  <tbody>
+  {% for r in c.d.metrics.file_support[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ r.format }}</div></td><td>{{ r.service }}</td>
+    <td>{{ lvl(r.read) }}</td><td>{{ lvl(r.convert) }}</td><td>{{ lvl(r.create) }}</td><td>{{ lvl(r.edit) }}</td>
+    <td style="text-align:left">{{ r.method }}{% if r.get('note') %}<span class="note">{{ r.note }}</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro reality(c, arg) %}
+{% set r = c.d.realistic_scope %}
+{{ h3(r.title) }}
+<div class="p-reality" style="margin-top:2mm">
+  <div class="can"><h4>{{ icon('check') }} AI에게 맡겨 볼 수 있는 일</h4><ul>{% for x in r.can %}<li>{{ x }}</li>{% endfor %}</ul></div>
+  <div class="must"><h4>{{ icon('shield') }} 사람이 판단·책임져야 하는 일</h4><ul>{% for x in r.must %}<li>{{ x }}</li>{% endfor %}</ul></div>
+</div>
+{% if r.get('note') %}<p class="p-src">{{ r.note }}</p>{% endif %}
+{% endmacro %}
+
+{% macro daily_scenes(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.daily.title, first) }}
+<div class="p-grid p-g3 split-grid" style="margin-top:2.5mm">
+  {% for sc in c.d.daily.scenes[s:e] %}
+  <div class="p-card">
+    <h3 class="p-row">{{ icon(sc.icon) }} {{ sc.title }}</h3>
+    <div class="p-flow" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+      <div class="st"><span class="k">입력</span>{{ sc.input }}</div>
+      <div class="st ai"><span class="k">AI가 하는 일</span>{{ sc.ai }}</div>
+      <div class="st"><span class="k">결과</span>{{ sc.result }}</div>
+    </div>
+    {% if sc.get('sources') %}<div class="meta">{{ src_links(sc.sources, 1, True, True) }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro daily_split(c, arg) %}
+{% set dl = c.d.daily %}
+<div class="p-grid" style="grid-template-columns:1fr 1fr 1.1fr">
+  <div class="p-card soft"><h3>{{ icon('agent') }} AI가 상당 부분 대신하는 일</h3><ul class="p-list" style="margin-top:1mm">{% for x in dl.replace %}<li>{{ x }}</li>{% endfor %}</ul></div>
+  <div class="p-card soft"><h3>{{ icon('users') }} 사람이 최종 판단해야 하는 일</h3><ul class="p-list" style="margin-top:1mm">{% for x in dl.human %}<li>{{ x }}</li>{% endfor %}</ul></div>
+  <div class="p-card">
+    <h3>{{ icon('sparkle') }} 한 번 해 보기 — {{ dl.try_it.title }}</h3>
+    <p class="meta" style="margin-top:1mm">{{ dl.try_it.service }}</p>
+    <ol class="p-list" style="margin-top:1mm">{% for x in dl.try_it.steps %}<li>{{ x }}</li>{% endfor %}</ol>
+    <p class="p-easy" style="margin-top:2mm"><b>예시 지시문</b>{{ dl.try_it.prompt }}</p>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro case_card(c, arg) %}
+{% set k = c.d.daily.case_card %}
+<div class="p-card soft">
+  <h3>{{ icon('building') }} 기업 사례 한 장 요약 — {{ k.company }} ({{ k.country }})</h3>
+  <p>{{ k.task }}</p><p class="why"><b>확인된 효과</b> {{ k.effect }}</p>
+  <div class="meta">{{ src_links(k.sources, 2, True, True) }}</div>
+</div>
+{% endmacro %}
+
+{# ───────── 04 토목설계 AI 특집 ───────── #}
+{% macro civil_banner(c, arg) %}
+{% set cv = c.d.civil %}
+<div class="p-grid" style="grid-template-columns:1.6fr 1fr;align-items:start">
+  <div class="p-card civil" style="background:var(--p-violet-soft);border-color:transparent">
+    <h3 style="font-size:13pt">{{ cv.banner.title }}</h3>
+    <p>{{ cv.banner.lead }}</p>
+  </div>
+  <div class="p-grid p-g2">
+    {% for k in cv.key_stats %}<div class="p-card"><div style="font-size:16pt;font-weight:820;color:var(--p-violet)">{{ k.v }}</div><div class="meta" style="margin-top:0">{{ k.label }}</div></div>{% endfor %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro civil_flow(c, arg) %}
+{% set f = c.d.civil.cad_flow %}
+{{ sub_head(c, 'civil_cad') }}
+<div class="p-flow civil" style="margin-top:2mm">
+  <div class="st"><span class="k">① 파일 입력</span>{{ f.input }}</div>
+  <div class="st ai"><span class="k">② AI 처리</span>{{ f.ai }}</div>
+  <div class="st human"><span class="k">③ 설계자 검토</span>{{ f.human }}</div>
+  <div class="st"><span class="k">④ 산출물</span>{{ f.output }}</div>
+</div>
+{% endmacro %}
+
+{% macro ladder_table(c, arg, s, e, first, last) %}
+{% set L = c.d.civil.ladder %}
+{{ h3(L.title, first, True) }}
+<table class="p-ladder split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:6%"><col style="width:34%">{% for col in L.columns %}<col>{% endfor %}</colgroup>
+  <thead><tr><th>단계</th><th>확인 내용</th>{% for col in L.columns %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for st in L.steps[s:e] %}
+  <tr>
+    <td><span class="no">{{ st.no }}</span></td>
+    <td><b>{{ st.q }}</b>{% if st.get('sub') %}<span class="note">{{ st.sub }}</span>{% endif %}</td>
+    {% for cell in st.cells %}<td>{{ lvl(cell.lv) }}{% if cell.get('note') %}<span class="note">{{ cell.note }}</span>{% endif %}</td>{% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if last and L.get('source_note') %}<p class="p-src">{{ L.source_note }}</p>{% endif %}
+{% endmacro %}
+
+{% macro platform_files(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.civil_files.title, first, True) }}
+<table class="p-tbl p-matrix civil split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:17%"><col style="width:12%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:31%"></colgroup>
+  <thead><tr><th>플랫폼 · 기능</th><th>형식</th><th>읽기</th><th>변환</th><th>생성</th><th>편집</th><th>방법 · 비고</th></tr></thead>
+  <tbody>
+  {% for r in c.d.civil.platform_files[s:e] %}
+  <tr>
+    <td><div class="t-title">{{ r.platform }}</div><div class="t-sub">{{ r.product }}</div></td><td>{{ r.format }}</td>
+    <td>{{ lvl(r.read) }}</td><td>{{ lvl(r.convert) }}</td><td>{{ lvl(r.create) }}</td><td>{{ lvl(r.edit) }}</td>
+    <td style="text-align:left">{{ r.method }}{% if r.get('note') %}<span class="note">{{ r.note }}</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro lifecycle(c, arg) %}
+{{ sub_head(c, 'civil_bim') }}
+<div class="p-fig" style="margin-top:2mm">
+  {{ svg_lifecycle(c.d.civil.lifecycle, 'print', 985) }}
+  <p class="p-cap"><b>이 그림으로 알 수 있는 것</b>{{ c.d.sections.civil_bim.get('caption', '') }}</p>
+</div>
+{% endmacro %}
+
+{% macro civil_cards(c, sub, s, e, first, last) %}
+{% set lst = c.civil_by_sub.get(sub, []) %}
+{% set key = c.civil_sub_key[sub] %}
+{{ h3(c.d.sections[key].title if first else c.d.sections[key].title, first, True) }}
+{% if first and c.d.sections[key].get('lead') %}<p class="p-lead" style="margin-top:1mm">{{ c.d.sections[key].lead }}</p>{% endif %}
+<div class="p-grid p-g3 split-grid" style="margin-top:2.5mm">
+  {% for it in lst[s:e] %}
+  <div class="p-card civil">
+    <div class="p-row">{{ mat(it.maturity) }}{{ tag(it.tag) }}</div>
+    <h3 style="margin-top:1.5mm">{{ it.title_ko }}</h3>
+    <p>{{ it.summary_ko }}</p>
+    <div class="meta">{{ it.get('country', '') }} · {{ it.get('org', '') }}{% if it.get('project') %} · {{ it.project }}{% endif %}{% if it.get('effect') %}<br>효과: {{ it.effect }}{% endif %}</div>
+    <div class="meta">{{ src_links(it.sources, 2, True, True) }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro infra_matrix(c, arg) %}
+{% set M = c.d.civil.infra_matrix %}
+{{ h3(c.d.sections.civil_matrix.title, True, True) }}
+<table class="p-tbl p-matrix civil" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:12%">{% for col in M.cols %}<col>{% endfor %}</colgroup>
+  <thead><tr><th>분야</th>{% for col in M.cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for row in M.rows %}
+  <tr><td><div class="t-title">{{ row }}</div></td>
+    {% for col in M.cols %}{% set v = M.cells.get(row ~ '|' ~ col) %}<td>{% if v %}{% for x in v %}<span class="note" style="color:var(--p-ink)">{{ x }}</span>{% endfor %}{% else %}<span class="note">—</span>{% endif %}</td>{% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if M.get('note') %}<p class="p-src">{{ M.note }}</p>{% endif %}
+{% endmacro %}
+
+{% macro vs_cards(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.civil_prod.title, first, True) }}
+<div class="p-grid p-g2 split-grid" style="margin-top:2.5mm">
+  {% for v in c.d.civil.compare[s:e] %}
+  <div class="p-card civil">
+    <div class="p-row" style="justify-content:space-between"><h3>{{ v.task }}</h3>{{ mat(v.maturity) }}</div>
+    <div class="p-vs" style="margin-top:1.5mm">
+      <div class="old"><span class="k">기존 방식</span>{{ v.old }}</div><div class="arrow">→</div>
+      <div class="new"><span class="k">AI 보조 방식</span>{{ v.new }}</div>
+    </div>
+    {% if v.get('sources') %}<div class="meta">{{ src_links(v.sources, 2, True, True) }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro civil_tilemap(c, arg) %}
+<div class="p-grid" style="grid-template-columns:1.25fr 1fr;align-items:start">
+  <div class="p-fig">
+    <b>토목 특집 사례의 국가 분포</b>
+    {{ svg_tilemap(c.civil_regions, 'print', 520, 'violet') }}
+    <p class="p-cap"><b>이 그림으로 알 수 있는 것</b>이번 호 토목 특집 사례가 어느 나라에서 나왔는지(숫자 = 사례 수)</p>
+  </div>
+  <div class="p-card soft"><h3>성숙도 태그 읽는 법</h3>
+    <ul class="p-list" style="margin-top:1mm">
+      <li>{{ mat('실무 적용') }} 실제 프로젝트·운영에 쓰이고 있음</li>
+      <li>{{ mat('시험·시범') }} 파일럿·실증 단계</li>
+      <li>{{ mat('검증 부족') }} 발표·주장만 있고 독립 검증이 부족함</li>
+    </ul>
+    <p class="meta">모든 사례는 엔지니어의 검토·책임을 전제로 한다. ‘완전 자동 설계’는 이번 조사에서 확인되지 않았다.</p>
+  </div>
+</div>
+{% endmacro %}
+
+{# ───────── 05 글로벌 사례 ───────── #}
+{% macro radar(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.radar.title, first) }}
+<div class="p-radar split-grid" style="margin-top:2.5mm">
+  {% for z in c.radar_zones[s:e] %}
+  <div class="p-zone" style="--zp:{{ z.color_p }}">
+    <div class="zh">{{ icon(z.icon) }} {{ z.name }}</div>
+    {% for r in z['items'] %}
+    <div class="ri"><b>{{ r.title }}</b><br>사실: {{ r.fact }}<br>사례: {{ r.case }}<br>신호: {{ r.signal }}</div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro cases_table(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.cases.title, first) }}
+<table class="p-tbl split" style="table-layout:fixed;margin-top:2mm">
+  <colgroup><col style="width:8%"><col style="width:15%"><col style="width:30%"><col style="width:24%"><col style="width:10%"><col style="width:13%"></colgroup>
+  <thead><tr><th>구분</th><th>기업 · 국가</th><th>적용 업무</th><th>확인된 효과</th><th>성숙도</th><th>근거</th></tr></thead>
+  <tbody>
+  {% for k in c.d.cases[s:e] %}
+  <tr>
+    <td>{{ k.scope }}</td><td><div class="t-title">{{ k.company }}</div><div class="t-sub">{{ k.country }} · {{ k.date }}</div></td>
+    <td>{{ k.task }}</td><td>{{ k.effect }}</td><td>{{ mat(k.maturity) }}</td><td>{{ src_links(k.sources, 2, False, True) }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro community_cards(c, arg, s, e, first, last) %}
+{{ h3(c.d.sections.community.title, first) }}
+<div class="p-grid p-g3 split-grid" style="margin-top:2.5mm">
+  {% for k in c.d.community[s:e] %}
+  <div class="p-card">
+    <div class="p-row">{{ senti(k.sentiment) }}{{ grade('C') }}</div>
+    <h3 style="margin-top:1.5mm">{{ k.topic }}</h3>
+    <p>{{ k.summary }}</p>
+    <p class="why"><b>바탕이 된 사실</b> {{ k.basis }}</p>
+    <div class="meta">{{ k.where }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# ───────── 06 출처·방법론·용어집 ───────── #}
+{% macro methodology(c, arg) %}
+{% set m = c.d.methodology %}
+<div class="p-grid p-g2" style="align-items:start">
+  <div class="p-card">
+    <h3>{{ icon('search') }} 조사 방법</h3>
+    <dl class="p-dl" style="margin-top:2mm">
+      <dt>기준일</dt><dd>{{ c.d.report_date_kst }} KST (코드로 계산)</dd>
+      <dt>비교 기간</dt><dd>{{ c.period_start }} ~ {{ c.period_end }}</dd>
+      <dt>검색 횟수</dt><dd>{{ c.d.search_count }}회 (원문 열람 {{ m.get('fetch_count', '—') }}회)</dd>
+      <dt>출처</dt><dd>{{ c.source_count }}개 · A {{ c.grade_counts.A }} · B {{ c.grade_counts.B }} · C {{ c.grade_counts.C }}</dd>
+      {% for k in m.criteria %}<dt>{{ k.k }}</dt><dd>{{ k.v }}</dd>{% endfor %}
+    </dl>
+  </div>
+  <div class="p-card soft">
+    <h3>{{ icon('alert') }} 조사 한계 · 추가 확인 필요</h3>
+    <ul class="p-list tight" style="margin-top:2mm">{% for x in c.d.limitations %}<li>{{ x }}</li>{% endfor %}</ul>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro glossary(c, arg, s, e, first, last) %}
+{{ h3('용어집 — 처음 보는 말을 쉬운 말로', first) }}
+<div class="p-gloss split-grid" style="margin-top:2.5mm">
+  {% for g in c.d.glossary[s:e] %}<div><b>{{ g.term }}</b>{{ g.easy_ko }} <span class="an">· 비유: {{ g.analogy }}</span></div>{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro sources_table(c, arg, s, e, first, last) %}
+{{ h3('전체 출처 (' ~ c.source_count ~ '개, 등급순 · 확인일 ' ~ c.d.report_date_kst ~ ')', first) }}
+<div class="p-srcgrid split-grid" style="margin-top:2.5mm">
+  {% for x in c.sources[s:e] %}
+  <div class="sg">
+    <div class="l1"><span class="n">{{ s + loop.index }}</span>{{ grade(x.grade) }}<b>{{ x.get('publisher', '') }}</b>{% if x.get('published_at') %}<span class="d">{{ x.published_at }}</span>{% endif %}</div>
+    <a class="l2" href="{{ x.url }}">{{ x.get('title', '') }}</a>
+    <div class="l3">{{ short_url(x.url, 60) }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% if last %}<p class="p-src">등급 A = 공식·원문·독립 측정, B = 신뢰 매체, C = 커뮤니티·관찰(반응 항목에만 사용). 제목을 누르면 원문이 열린다.</p>{% endif %}
+{% endmacro %}
