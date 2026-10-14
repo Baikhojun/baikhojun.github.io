@@ -5,7 +5,7 @@
   const themedTools = new Set(['house', 'cukoo', 'tv', 'lk1800']);
   const links = [
     ['홈', ''], ['신혼 내집 가이드', 'house/'], ['쿠쿠 해독기', 'cukoo/'],
-    ['TV 해독기', 'tv/'], ['일정표', 'schedule/'], ['매트리스 비교', 'lk1800/'],
+    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'],
   ];
   const nav = links.map(([label, path]) => `<a href="${root}${path}">${label}</a>`).join('');
   let chrome = document.getElementById('unfade-site-chrome');
@@ -23,6 +23,19 @@
   if (['cukoo', 'tv', 'lk1800'].includes(tool)) {
     document.body.classList.add('unfade-premium');
   }
+  // Publish how much of the header is still on screen so fixed/sticky tool bars never leave a gap.
+  const header = chrome.querySelector('.site-header');
+  const rootStyle = document.documentElement.style;
+  let queued = false;
+  const syncOffset = () => {
+    queued = false;
+    const visible = header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 0;
+    rootStyle.setProperty('--unfade-shell-offset', `${visible}px`);
+  };
+  const queueSync = () => { if (!queued) { queued = true; requestAnimationFrame(syncOffset); } };
+  addEventListener('scroll', queueSync, { passive: true });
+  addEventListener('resize', queueSync);
+  syncOffset();
   const open = () => { document.body.classList.add('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'true'); };
   const close = () => { document.body.classList.remove('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false'); };
   chrome.querySelector('.menu-toggle')?.addEventListener('click', open);

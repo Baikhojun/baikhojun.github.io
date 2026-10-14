@@ -94,7 +94,7 @@ body.unfade-tool-theme[data-unfade-tool="cukoo"] .mast {
 }
 
 body.unfade-tool-theme[data-unfade-tool="tv"] .mast {
-  top: var(--unfade-sitebar-height);
+  top: var(--unfade-shell-offset);
   background: rgb(255 255 255 / 94%);
 }
 
@@ -107,12 +107,19 @@ body.unfade-tool-theme[data-unfade-tool="lk1800"] .hd {
   border-bottom: 4px solid var(--unfade-coral);
 }
 
+/* House PC: the credit bar and the sidebar are position:fixed. The body keeps its
+   padding for the credit bar, the shell header is pulled up into that padding, and both
+   fixed parts follow the visible header height. */
 @media (min-width: 1001px) {
+  body.unfade-tool-theme[data-unfade-tool="house"] #unfade-site-chrome {
+    margin-top: calc(-1 * var(--credit-h));
+    margin-bottom: var(--credit-h);
+  }
   body.unfade-tool-theme[data-unfade-tool="house"] .top-shell {
-    top: var(--unfade-sitebar-height);
+    top: var(--unfade-shell-offset);
   }
   body.unfade-tool-theme[data-unfade-tool="house"] .sidebar {
-    top: calc(var(--unfade-sitebar-height) + var(--credit-h));
+    top: calc(var(--unfade-shell-offset) + var(--credit-h));
   }
 }
 

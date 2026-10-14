@@ -37,10 +37,9 @@
 | `/cukoo/` · `/cukoo/m/` | **쿠쿠 밥솥 모델코드 해독기 v3** | 모델명과 제시 가격으로 “진짜 특가”인지 5단계 판정 | 2026-09-16 (213개 모델) | `projects/cuckoo-decoder/` |
 | `/tv/` · `/tv/m/` | **대형 TV 해독기** | 75~86인치 TV를 모델코드·오늘 가격·실측 화질로 판정 | 2026-09-15 (178개 모델) | `projects/cuckoo-decoder/TV/` |
 | `/lk1800/` | **LK1800 매트리스 비교** | 라지킹 매트리스 10개 모델을 6개 항목 100점으로 비교 | 2026-08 (v2.1) | `lk1800/` |
-| `/plan/` · `/plan/m/` · `/m/` | **업무 일정표** | A4 가로 월간 일정표 편집기와 모바일 조회 앱 | — | `css/` · `js/` |
 | `/ai-trend/` | **AI 트렌드 브리핑** | AI를 처음 접하는 사람을 위한 글로벌 AI 뉴스와 토목설계 특집 | 제1호 2026-10-14 | `ai-trend/_system/` |
 
-> `/schedule/`은 `/plan/`으로, `/cuckoo/`는 `/cukoo/`로 넘겨 주는 이전 주소입니다.
+> `/cuckoo/`는 `/cukoo/`로 넘겨 주는 이전 주소입니다. 개인용 일정표는 목록·메뉴에 싣지 않습니다.
 
 ## 도구별 소개
 
@@ -79,16 +78,6 @@
 
 - 요약 · 원가성 · 품질 · 가성비(가중치 8개 시나리오) · 렌탈 vs 구매 · 1:1 매칭 · 교차검증 · 사양 원장 · 주의 사항
 - 휴대폰 화면 기준(본문 최대 520px)의 단일 HTML이며 빌드 과정 없이 직접 고칩니다.
-
-### 🗓️ 업무 일정표 · `/plan/`
-
-A4 가로 한 장짜리 월간 일정표를 브라우저에서 만들고 저장하고 인쇄합니다.
-
-- 공정별 일정(마일스톤 표시), 기간 일괄 추가, 휴가·근무 형태 6종, 교대근무(D/E/N/Off), 개인 일정
-- 주차별 누적 진행률, 주요 일정 요약, 한국 공휴일 자동 채우기(대체공휴일 포함), 전체 검색, 월간 통계, 실행 취소
-- JSON 내보내기/가져오기, PNG 저장, 인쇄·PDF
-- 데이터는 브라우저(localStorage)에 저장되고, 원하면 GitHub 동기화로 `data/schedule-data.json`에 올릴 수 있습니다. 동기화용 토큰은 브라우저에만 보관됩니다.
-- **모바일 조회** `/m/`: 동기화한 일정을 휴대폰에서 월별 목록으로 보는 읽기 전용 PWA(홈 화면 추가·오프라인 캐시). `/plan/m/`은 같은 화면을 `/plan/` 아래에 둔 사본입니다.
 
 ### 📰 AI 트렌드 브리핑 · `/ai-trend/`
 
@@ -132,18 +121,15 @@ AI를 처음 접하는 사람을 위한 글로벌 AI 뉴스와 **토목설계 AI
 │   ├── unfade-tool-theme.css     # 결정 도구 4종 토큰 연결
 │   ├── unfade-premium.css        # 쇼핑 도구 3종 Atelier 테마
 │   ├── home.css                  # 홈 레이아웃
-│   └── style.css                 # 업무 일정표 UI·A4 시트·인쇄
+│   └── style.css                 # 개인용 페이지 스타일
 ├── js/
 │   ├── unfade-shell.js           # 셸 생성·프로젝트 메뉴
-│   └── app · calendar · compute · editor · holidays · print · stats · store · sync .js   # 업무 일정표 모듈
+│   └── 그 밖의 .js               # 개인용 페이지 모듈
 ├── house/  (+ m/)                # 신혼부부 내집마련의 정석 배포본
 ├── cukoo/  (+ m/)                # 쿠쿠 해독기 배포본 · cuckoo/ = 이전 주소
 ├── tv/     (+ m/)                # 대형 TV 해독기 배포본
 ├── lk1800/                       # 매트리스 비교(단일 HTML)
-├── plan/   (+ m/)                # 업무 일정표 · plan/m/ = 모바일 조회 사본
-├── m/                            # 업무 일정표 모바일 조회(PWA)
-├── schedule/                     # 이전 주소 → /plan/
-├── data/schedule-data.json       # 일정표 동기화 데이터
+├── plan/ · m/ · schedule/ · data/  # 개인용 페이지(목록·메뉴에 싣지 않음)
 ├── ai-trend/                     # AI 트렌드 브리핑
 │   ├── index.html · latest/ · reports.json   # 아카이브 첫 화면 · 최신호 고정 주소 · 발행 목록
 │   ├── reports/<발행 ID>/        # 호별 발행본(HTML·PDF·PPTX·조사근거·데이터)
@@ -171,7 +157,7 @@ python scripts/build_deploy.py
 
 체크인된 데이터만으로 배포 HTML을 다시 만들고 공용 셸을 다시 넣습니다(웹 수집은 하지 않음). 결과 diff를 확인한 뒤 커밋·푸시합니다.
 
-**lk1800 · 업무 일정표** — 빌드 과정 없이 해당 파일(`lk1800/index.html`, `css/`, `js/`)을 직접 고칩니다.
+**lk1800** — 빌드 과정 없이 `lk1800/index.html`을 직접 고칩니다.
 
 **AI 트렌드 브리핑** — `ai-trend/_system/scripts/`의 Python 스크립트(Jinja2 · Playwright · python-pptx)가 `data.json` 하나로 모든 산출물을 만듭니다.
 
@@ -187,10 +173,9 @@ python ai-trend/_system/scripts/make_research.py --issue <발행 ID>  # 조사�
 
 ## 검색 노출·개인정보 원칙
 
-- **검색 노출**: `robots.txt`가 홈(`/`)만 허용하고 도구 경로(`/house`, `/cukoo`, `/cuckoo`, `/tv`, `/lk1800`, `/plan`, `/schedule`, `/m`, `/data`, `/ai-trend`)는 막습니다. 업무 일정표와 AI 트렌드 브리핑 페이지에는 `noindex, nofollow`도 넣었습니다. 링크를 아는 사람만 찾아오는 구조입니다.
+- **검색 노출**: `robots.txt`가 홈(`/`)만 허용하고 도구 경로(`/house`, `/cukoo`, `/cuckoo`, `/tv`, `/lk1800`, `/ai-trend` 등)는 막습니다. AI 트렌드 브리핑과 개인용 페이지에는 `noindex, nofollow`도 넣었습니다. 링크를 아는 사람만 찾아오는 구조입니다.
 - **로그인·서버 없음**: 진단 입력값, 최근 판정 기록, 오늘 본 가격 같은 데이터는 방문자의 브라우저(localStorage)에만 저장합니다.
 - **방문 집계**: 일부 페이지(house·cukoo·tv·ai-trend)는 [GoatCounter](https://www.goatcounter.com/)로 쿠키 없이 방문 수만 셉니다. 웹으로 접속했을 때만 작동합니다.
-- **업무 일정표 동기화 주의**: GitHub 동기화를 켜면 일정 데이터가 이 **공개 저장소**에 커밋됩니다. 공개되어도 괜찮은 내용만 올려 주세요.
 
 ## 데이터와 상표 고지
 

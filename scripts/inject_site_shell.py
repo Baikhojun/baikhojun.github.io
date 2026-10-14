@@ -51,6 +51,9 @@ def inject(page: Path) -> None:
             f'<body class="unfade-tool-theme unfade-premium" data-unfade-tool="{page.parts[0]}">',
             1,
         )
+    elif page.parts[0] == "house" and 'data-unfade-tool="house"' not in html:
+        # The house layout offsets (fixed credit bar and sidebar) must apply before the first paint.
+        html = re.sub(r"<body(?=[\s>])", '<body class="unfade-tool-theme" data-unfade-tool="house"', html, count=1)
     html = re.sub(r"\n?<!-- UNFADE-SHELL:START -->.*?<!-- UNFADE-SHELL:END -->", "", html, flags=re.DOTALL)
     if "</head>" not in html:
         raise ValueError(f"Missing </head>: {destination}")

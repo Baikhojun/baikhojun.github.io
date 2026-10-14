@@ -15,6 +15,8 @@
   --unfade-navy: #17334b;
   --unfade-content-width: 1200px;
   --unfade-sitebar-height: 72px;
+  /* Visible height of the shell header; unfade-shell.js lowers it to 0 as the header scrolls away. */
+  --unfade-shell-offset: var(--unfade-sitebar-height);
 }
 
 #unfade-site-chrome,
@@ -25,9 +27,10 @@
   font-family: var(--unfade-font-kr);
 }
 
+/* The header scrolls with the page. Tool bars that stay on screen use --unfade-shell-offset,
+   so they sit right under the header at the top and move to 0 once it is gone (no gap). */
 #unfade-site-chrome .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1000;
   background: var(--unfade-paper);
   border-bottom: 1px solid var(--unfade-line);
@@ -154,7 +157,7 @@ body.unfade-menu-open #unfade-site-chrome .side-menu { transform: translateX(0);
 #unfade-site-chrome nav a::after { content: "↗"; font: 500 16px/1 var(--unfade-font-en); }
 
 body.unfade-site-page { background: var(--unfade-wash); }
-body.unfade-site-page .appbar { top: var(--unfade-sitebar-height); }
+body.unfade-site-page .appbar { top: var(--unfade-shell-offset); }
 
 @media (max-width: 800px) {
   :root { --unfade-sitebar-height: 58px; }
