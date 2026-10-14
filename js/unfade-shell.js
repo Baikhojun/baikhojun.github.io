@@ -14,8 +14,8 @@
     chrome.id = 'unfade-site-chrome';
     chrome.innerHTML = `<header class="site-header"><div class="sitebar"><button class="menu-toggle" type="button" aria-label="프로젝트 메뉴 열기" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span><span>MENU</span></button><a class="wordmark" href="${root}">unfade</a><div class="header-meta">TOOLS <strong>LIGHT MODE</strong></div></div></header><div class="menu-scrim" aria-hidden="true"></div><aside class="side-menu" aria-label="프로젝트 메뉴"><div class="side-menu__top"><a class="wordmark" href="${root}">unfade</a><button class="side-menu__close" type="button" aria-label="메뉴 닫기">×</button></div><nav>${nav}</nav></aside>`;
     document.body.insertAdjacentElement('afterbegin', chrome);
-    document.body.classList.add('unfade-site-page');
   }
+  document.body.classList.add('unfade-site-page');
   if (themedTools.has(tool)) {
     document.body.classList.add('unfade-tool-theme');
     document.body.dataset.unfadeTool = tool;
@@ -36,8 +36,38 @@
   addEventListener('scroll', queueSync, { passive: true });
   addEventListener('resize', queueSync);
   syncOffset();
-  const open = () => { document.body.classList.add('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'true'); };
-  const close = () => { document.body.classList.remove('unfade-menu-open'); chrome.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false'); };
+  // 지금 있는 구역을 서랍 메뉴에 표시한다(홈은 '/'와 정확히 같을 때만)
+  const section = (path) => path.split('/').filter(Boolean)[0] || '';
+  chrome.querySelectorAll('nav a').forEach((a) => {
+    const target = section(a.pathname);   // a.pathname 사용: 일부 도구가 전역 URL 이름을 덮어써서 new URL() 을 못 씀
+    if (target === (tool || '')) a.setAttribute('aria-current', 'page');
+  });
+  // 오른쪽 머리 정보: 모바일판이 있는 도구는 PC↔모바일 전환 링크, 그 밖에는 비운다
+  const meta = chrome.querySelector('.header-meta');
+  if (meta) {
+    if (['house', 'cukoo', 'tv'].includes(tool)) {
+      const onMobile = /\/m\/?(index\.html)?$/.test(location.pathname);
+      meta.innerHTML = onMobile ? `<a href="${root}${tool}/?pc">PC 버전</a>` : `<a href="${root}${tool}/m/">모바일 버전</a>`;
+      meta.classList.add('has-switch');
+    } else {
+      meta.textContent = '';
+    }
+  }
+  // '맨 위로' 버튼이 없는 긴 화면에 하나 넣는다
+  if (!document.querySelector('#back-top, #totop, .totop, #to-top, .to-top, .back-top')) {
+    const top = document.createElement('button');
+    top.type = 'button'; top.className = 'unfade-to-top'; top.setAttribute('aria-label', '맨 위로'); top.textContent = '↑';
+    top.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+    document.body.appendChild(top);
+    const toggleTop = () => top.classList.toggle('is-on', scrollY > 600);
+    addEventListener('scroll', toggleTop, { passive: true }); toggleTop();
+  }
+  const toggleBtn = chrome.querySelector('.menu-toggle'), closeBtn = chrome.querySelector('.side-menu__close');
+  const open = () => { document.body.classList.add('unfade-menu-open'); toggleBtn?.setAttribute('aria-expanded', 'true'); setTimeout(() => closeBtn?.focus(), 30); };
+  const close = () => {
+    if (!document.body.classList.contains('unfade-menu-open')) return;
+    document.body.classList.remove('unfade-menu-open'); toggleBtn?.setAttribute('aria-expanded', 'false'); toggleBtn?.focus();
+  };
   chrome.querySelector('.menu-toggle')?.addEventListener('click', open);
   chrome.querySelector('.side-menu__close')?.addEventListener('click', close);
   chrome.querySelector('.menu-scrim')?.addEventListener('click', close);

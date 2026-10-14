@@ -170,3 +170,47 @@ body.unfade-site-page .appbar { top: var(--unfade-shell-offset); }
   #unfade-site-chrome { display: none !important; }
   body.unfade-site-page .appbar { top: 0; }
 }
+
+/* ── 사이트 전체 통일 (2026-10-14 UI 검토) ───────────────────────────────── */
+/* 셸은 자기 토큰을 다시 선언한다 — 도구 테마가 body 에 덮어쓴 색을 물려받지 않게(헤더가 모든 화면에서 같음) */
+#unfade-site-chrome {
+  --unfade-ink: #111214; --unfade-muted: #626871; --unfade-paper: #ffffff;
+  --unfade-line: #dfe2e7; --unfade-mint: #99f0dc; --unfade-coral: #ff8c86; --unfade-navy: #17334b;
+  line-height: 1.5;
+}
+:root { --unfade-focus: #17334b; }
+
+/* 닫힌 서랍은 키보드 순서에서 빠진다 */
+#unfade-site-chrome :is(.side-menu, .menu-scrim) {
+  visibility: hidden;
+  transition: transform 220ms ease, opacity 180ms ease, visibility 0s linear 220ms;
+}
+body.unfade-menu-open #unfade-site-chrome :is(.side-menu, .menu-scrim) { visibility: visible; transition-delay: 0s; }
+#unfade-site-chrome :focus-visible { outline: 2px solid var(--unfade-ink); outline-offset: 3px; }
+#unfade-site-chrome .side-menu__close { width: 44px; height: 44px; }
+#unfade-site-chrome nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--unfade-coral); padding-left: 14px; }
+#unfade-site-chrome nav a::after { content: "→"; }
+
+/* 오른쪽 머리 정보: 장식 배지 대신 PC↔모바일 전환 링크(있는 도구만) */
+#unfade-site-chrome .header-meta strong { background: none; padding: 0; margin: 0; color: var(--unfade-muted); }
+#unfade-site-chrome .header-meta a { color: var(--unfade-ink); text-decoration: underline; text-underline-offset: 3px; font: 600 13px/1 var(--unfade-font-kr); }
+@media (max-width: 800px) {
+  #unfade-site-chrome .header-meta.has-switch { display: block; }
+  #unfade-site-chrome .header-meta a { font-size: 12px; }
+}
+
+/* 모든 화면 공통 포커스 표시 */
+body.unfade-site-page :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--unfade-focus); outline-offset: 2px;
+}
+
+/* '맨 위로' 버튼 — 없던 화면에는 셸이 넣고, 있던 화면은 모양만 맞춘다 */
+.unfade-to-top,
+body.unfade-site-page :is(#back-top, #totop, .totop) {
+  width: 44px; height: 44px; border-radius: 12px; border: 1px solid #dfe2e7;
+  background: #ffffff; color: #111214; box-shadow: 0 6px 18px rgb(17 18 20 / 8%);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.unfade-to-top { position: fixed; right: 20px; bottom: 20px; z-index: 900; opacity: 0; pointer-events: none; transition: opacity .2s; font: 600 18px/1 var(--unfade-font-en); }
+.unfade-to-top.is-on { opacity: 1; pointer-events: auto; }
+@media print { .unfade-to-top { display: none !important; } }

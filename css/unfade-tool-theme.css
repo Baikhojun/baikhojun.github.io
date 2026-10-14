@@ -39,7 +39,7 @@ body.unfade-tool-theme {
   /* Housing-guide and mattress token families */
   --white: #ffffff;
   --text: var(--unfade-ink);
-  --faint: #7b828b;
+  --faint: #6b7280;
   --forest: var(--unfade-navy);
   --green: #267359;
   --soft: #e9f8df;
@@ -79,8 +79,8 @@ body.unfade-tool-theme textarea {
 body.unfade-tool-theme input:focus,
 body.unfade-tool-theme select:focus,
 body.unfade-tool-theme textarea:focus {
-  outline-color: var(--unfade-coral);
-  border-color: var(--unfade-coral);
+  outline-color: var(--unfade-focus);
+  border-color: var(--unfade-focus);
 }
 
 body.unfade-tool-theme .mast {
@@ -122,6 +122,28 @@ body.unfade-tool-theme[data-unfade-tool="lk1800"] .hd {
     top: calc(var(--unfade-shell-offset) + var(--credit-h));
   }
 }
+
+/* ── 사이트 전체 통일 (2026-10-14 UI 검토) ─────────────────────────────── */
+/* 흐린 글자 대비 AA 이상 */
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.item-id, .id, .profile-label, .profile-cell small, .section-count, .nav-count, footer, .footer-dev) { color: var(--unfade-muted); }
+/* house 크레딧 띠: 셸·히어로와 같은 남색 계열, 모바일에서는 숨겨 고정 영역을 줄인다 */
+body.unfade-tool-theme[data-unfade-tool="house"] .credit { background: var(--unfade-navy); color: #d6dee6; }
+@media (max-width: 1000px) {
+  body.unfade-tool-theme[data-unfade-tool="house"] { --credit-h: 0px; }
+  body.unfade-tool-theme[data-unfade-tool="house"] .credit { display: none; }
+}
+/* 하단 탭 바(모바일) */
+body.unfade-tool-theme :is(.tabbar, .m-tabbar) { border-top: 1px solid var(--unfade-line); box-shadow: none; }
+body.unfade-tool-theme :is(.tabbar button, .m-tab) { font-size: 11px; font-weight: 600; min-height: 48px; }
+/* 바닥글 */
+body.unfade-tool-theme footer { font-size: 12px; line-height: 1.75; color: var(--unfade-muted); }
+body.unfade-tool-theme footer a { color: var(--unfade-ink); text-decoration: underline; text-underline-offset: 3px; }
+/* 최소 글자 크기 11px */
+body.unfade-tool-theme :is(.stage, .jump-chip, .tiny-source, .route-card small, .badge, .dtag, .conf, .lb, .tabbar small) { font-size: 11px; }
+/* 모서리: 카드 16 · 조작 8 · 알약 999 */
+body.unfade-tool-theme { --r-card: 16px; --r-ctl: 8px; --r-pill: 999px; }
+body.unfade-tool-theme :is(.card, .panel, .category-section, .profile, .filters, .support-details) { border-radius: var(--r-card); }
+body.unfade-tool-theme :is(.btn, .tab, .secnav a) { border-radius: var(--r-ctl); }
 
 @media print {
   body.unfade-tool-theme { background: #ffffff !important; }

@@ -16,7 +16,7 @@ body.unfade-tool-theme.unfade-premium {
   --steel: #f2ece3; --steel-2: #e9dfd2; --paper: #fffefa;
   --line: #e6ded3; --line-2: #cdbda9; --line2: #f0e9df;
   --ink: #342e29; --ink-2: #5e5146; --text: #342e29;
-  --muted: #776c62; --sub: #6b5f54; --mute: #81766b; --faint: #81766b;
+  --muted: #776c62; --sub: #6b5f54; --mute: #776c62; --faint: #776c62;
   --gold1: #a68761; --gold2: #806244; --gold3: #c2a985;
   --brass: #806244; --seal: #975649; --warm: #8a6440;
   --fair: #806244; --fair-tx: #806244; --warm-tx: #8a6440;
@@ -45,9 +45,6 @@ body.unfade-tool-theme.unfade-premium {
 }
 
 body.unfade-premium ::selection { background: #e8ddca; color: #342e29; }
-body.unfade-premium #unfade-site-chrome .site-header { background: #fffefa; }
-body.unfade-premium #unfade-site-chrome .header-meta strong { background: #eee5d7; color: #665140; }
-body.unfade-premium #unfade-site-chrome .side-menu { background: #fffefa; }
 
 body.unfade-tool-theme.unfade-premium .wrap { max-width: 1140px; padding: 46px 32px 100px; }
 body.unfade-tool-theme.unfade-premium .mast {
@@ -59,21 +56,21 @@ body.unfade-tool-theme.unfade-premium .mast::after,
 body.unfade-tool-theme.unfade-premium .mast-in::after { display: none; }
 body.unfade-tool-theme.unfade-premium .brand {
   background: none; -webkit-text-fill-color: #806244; color: #806244;
-  font-family: var(--unfade-font-en); font-size: 11px; font-weight: 600;
-  letter-spacing: .35em; margin-bottom: 16px;
+  font-family: var(--unfade-font-en); font-size: 12px; font-weight: 600;
+  letter-spacing: .12em; margin-bottom: 16px;
 }
 body.unfade-tool-theme.unfade-premium .brand span { -webkit-text-fill-color: #776c62; }
 body.unfade-tool-theme.unfade-premium .mast h1 {
   font-family: var(--serif); font-size: clamp(24px, 2.5vw, 32px);
   font-weight: 600; line-height: 1.5; letter-spacing: -.05em;
 }
-body.unfade-tool-theme.unfade-premium .mast h1 .ver { font-size: 12px; color: #967454; }
+body.unfade-tool-theme.unfade-premium .mast h1 .ver { font-size: 12px; color: #806244; }
 body.unfade-tool-theme.unfade-premium .mast-r { align-self: flex-end; }
 body.unfade-tool-theme.unfade-premium .mast .sub { font-family: inherit; line-height: 1.8; font-size: 12px; }
 body.unfade-tool-theme.unfade-premium .secnav { gap: 8px; margin-bottom: 28px; }
 body.unfade-tool-theme.unfade-premium .secnav a {
   padding: 9px 15px; border: 1px solid #e6ded3; background: #fffefa;
-  color: #6b5f54; border-radius: 6px;
+  color: #6b5f54; border-radius: 8px;
 }
 
 body.unfade-tool-theme.unfade-premium :is(.card, .console, .panel, .category-section, .anat, .concl) {
@@ -100,7 +97,7 @@ body.unfade-tool-theme.unfade-premium :is(input, select, textarea):focus {
   box-shadow: 0 0 0 3px rgb(150 116 84 / 12%);
 }
 body.unfade-tool-theme.unfade-premium :is(#q, #price, .field input) { border-radius: 8px; border-width: 1px; box-shadow: none; }
-body.unfade-tool-theme.unfade-premium :is(#q, #price)::placeholder { opacity: 1; color: #81766b; }
+body.unfade-tool-theme.unfade-premium :is(#q, #price)::placeholder { opacity: 1; color: #776c62; }
 body.unfade-tool-theme.unfade-premium :is(.btn, .go, .pill, .pill-link, .chip-btn) {
   border-radius: 8px; font-family: var(--unfade-font-kr); letter-spacing: 0;
   font-weight: 600; box-shadow: none; transition: background .18s, border-color .18s;
@@ -155,10 +152,12 @@ body.unfade-tool-theme.unfade-premium .tabbar button.on::after { background: #96
 body.unfade-tool-theme.unfade-premium section { scroll-margin-top: 24px; }
 
 /* Mattress comparison: a readable desktop canvas and the existing mobile flow. */
-body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] { max-width: 1100px; }
+/* 셸·머리·탭은 화면 끝까지, 내용만 1100px */
+body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] { max-width: none; }
+body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] :is(main, body > footer) { max-width: 1100px; margin-inline: auto; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .hd {
   position: relative; background: #fffefa; color: #342e29;
-  padding: 36px 32px 28px; border-bottom: 1px solid #e6ded3;
+  padding: 36px max(32px, calc((100% - 1100px) / 2 + 32px)) 28px; border-bottom: 1px solid #e6ded3;
 }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .hd h1 {
   font: 600 28px/1.5 var(--serif); letter-spacing: -.045em;
@@ -166,8 +165,8 @@ body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .hd h1 {
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .hd .meta { color: #776c62; margin-top: 12px; font-size: 12px; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .hd .meta span { color: #776c62 !important; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tier { background: #eee5d7 !important; color: #665140; }
-body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tabs { padding: 14px 24px; gap: 8px; background: #fffefa; }
-body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tab { border-radius: 6px; background: #f2ece3; padding: 0 16px; font-weight: 600; }
+body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tabs { padding: 14px max(24px, calc((100% - 1100px) / 2 + 24px)); gap: 8px; background: #fffefa; }
+body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tab { border-radius: 8px; background: #f2ece3; padding: 0 16px; font-weight: 600; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .tab[aria-selected="true"] { background: #665140; color: #fffefa; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] main { padding: 30px 32px; }
 body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .lead { margin: 8px 0 20px; max-width: 75ch; }
@@ -206,6 +205,25 @@ body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .lu .pr b { fon
   body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] :is(.lu, .pod, .mt, .rt, .fx) { padding: 18px 16px; }
   body.unfade-tool-theme.unfade-premium[data-unfade-tool="lk1800"] .lu .pr b { font-size: 18px; }
 }
+/* ── 사이트 전체 통일 (2026-10-14 UI 검토) ─────────────────────────────── */
+body.unfade-premium { --unfade-focus: #806244; }
+/* 선택 상태는 세 도구 모두 같은 갈색 */
+body.unfade-premium :is(.filters button.on, .chip.on, .chip[aria-pressed="true"], .seg-ctl button[aria-pressed="true"]) {
+  background: #665140; background-image: none; color: #fffefa; border-color: #665140; box-shadow: none;
+}
+/* 하단 탭 바 아이콘: 선택된 탭만 색, 나머지는 차분하게 */
+body.unfade-premium .tabbar :is(.ic, .ico) { filter: grayscale(1) sepia(.3); opacity: .7; }
+body.unfade-premium .tabbar button.on :is(.ic, .ico) { filter: none; opacity: 1; }
+/* 입력 안내문은 한글 글꼴, 숫자는 고정폭 */
+body.unfade-premium :is(input, textarea)::placeholder { font-family: var(--unfade-font-kr); }
+body.unfade-premium { font-variant-numeric: tabular-nums; }
+/* TV: 모바일 제목이 잘리지 않게, PC 섹션 바로가기는 따라 내려오게, 읽기 진행 막대는 셸 아래로 */
+body.unfade-premium[data-unfade-tool="tv"] .appbar h1 { font-size: clamp(14px, 4vw, 16.5px); }
+body.unfade-premium[data-unfade-tool="tv"] .secnav { position: sticky; top: var(--unfade-shell-offset); z-index: 20; background: #f7f4ef; padding: 10px 0; border-bottom: 1px solid #e6ded3; }
+body.unfade-premium[data-unfade-tool="tv"] #prog { top: var(--unfade-shell-offset); }
+/* 'NEW' 배지는 두 도구 모두 녹색 */
+body.unfade-premium .badge.new { background: #eff2e9; color: #3f5a43; border-color: transparent; }
+
 @media print {
   body.unfade-tool-theme.unfade-premium { background: white; }
   body.unfade-tool-theme.unfade-premium :is(.card, .console, .lcd, .screen) { box-shadow: none; }
