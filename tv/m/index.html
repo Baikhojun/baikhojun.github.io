@@ -780,7 +780,7 @@ function showTab(t,noScroll){document.querySelectorAll('.view').forEach(v=>v.cla
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{vib(6);showTab(b.dataset.tab)}));
 /* 점수 범위(p05~p95)는 기본(영화+게임) 가중치로만 계산돼 있다 — 다른 가중치에서는 범위를 보여 주지 않는다 */
 const RNG=()=>Object.keys(W0.base).every(k=>(Wt[k]||0)===(W0.base[k]||0))&&Object.keys(Wt).every(k=>(Wt[k]||0)===(W0.base[k]||0));
-function ring(s,lo){const r=44,c=2*Math.PI*r;return`<div class="ring"><svg viewBox="0 0 108 108"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DD3FF"/><stop offset="1" stop-color="#EBCF8A"/></linearGradient></defs><circle class="bg" cx="54" cy="54" r="${r}"/><circle class="fg" cx="54" cy="54" r="${r}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${c.toFixed(1)}" data-off="${(c*(1-s/100)).toFixed(1)}"/></svg><div class="val"><b>${s.toFixed(1)}</b>${lo!=null?`<small>낮게 잡으면 ${lo}점</small>`:""}</div></div>`}
+function ring(s,lo){const r=44,c=2*Math.PI*r;return`<div class="ring"><svg viewBox="0 0 108 108"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DD3FF"/><stop offset="1" stop-color="#EBCF8A"/></linearGradient></defs><circle class="bg" cx="54" cy="54" r="${r}"/><circle class="fg" cx="54" cy="54" r="${r}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${c.toFixed(1)}" data-off="${(c*(1-s/100)).toFixed(1)}"/></svg><div class="val"><b>${s.toFixed(1)}</b>${lo!=null?`<small>하한 ${lo}</small>`:""}</div></div>`}
 function kchip(l,v,est){return`<div class="kchip${est?' est':''}"><small>${l}</small><b>${v}</b></div>`}
 function mc(m){const s=scoreOf(m),lp=livePrice(m),sold=isSold(m);return`<div class="mcard${sold?' out':''}" data-go="${m.code}"><span class="n"><span class="dot" style="background:${BC[m.brand]};color:${BC[m.brand]}"></span>${esc(m.name)}${sold?' <span class="badge out">품절</span>':''}</span><span class="p">${W(lp)}<small>${sold?'품절 표시':isMine(m)?'내 입력가':'기준 시세'}</small></span><span class="m">${s.toFixed(1)}점 · ${valueAt(m,lp).toFixed(1)}점/100만 · ${LV[m.level]} · ${esc(tierOf(m))}</span><span class="m" style="text-align:right">시장값 대비 ${sgn((m.fair_neutral/lp-1)*100)}</span></div>`}
 function missCard(raw,cands,d){
@@ -960,7 +960,7 @@ function drawCmp(){
     <div class="k">총점</div><div class="tot ${sa>sb?'win':''}">${sa.toFixed(1)}</div><div class="tot ${sb>sa?'win':''}">${sb.toFixed(1)}</div>
     <div class="k">가격</div><div class="tot ${la<lb?'win':''}">${MW(la)}</div><div class="tot ${lb<la?'win':''}">${MW(lb)}</div>
     <div class="k">100만원당</div><div class="${valueAt(A,la)>valueAt(B,lb)?'win':''}">${valueAt(A,la).toFixed(1)}</div><div class="${valueAt(B,lb)>valueAt(A,la)?'win':''}">${valueAt(B,lb).toFixed(1)}</div>
-    <div class="k">성능 대비</div><div>${sgn((A.fair_neutral/la-1)*100)}</div><div>${sgn((B.fair_neutral/lb-1)*100)}</div>
+    <div class="k">시장값 대비</div><div>${sgn((A.fair_neutral/la-1)*100)}</div><div>${sgn((B.fair_neutral/lb-1)*100)}</div>
     <div class="k">근거</div><div>${lvBadge(A)}</div><div>${lvBadge(B)}</div></div>
     <details class="fold"><summary>12개 항목 해부 (${presetName()})</summary><div class="cmp">${rows}</div></details>`;
 }

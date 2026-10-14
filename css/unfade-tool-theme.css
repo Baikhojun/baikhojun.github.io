@@ -138,6 +138,10 @@ body.unfade-tool-theme[data-unfade-tool="house"] .stage.purple { color: #6e4f7a;
 body.unfade-tool-theme[data-unfade-tool="house"] .stage.amber { color: #7a5f2a; }
 body.unfade-tool-theme[data-unfade-tool="house"] .stage.blue { color: #3f6385; }
 body.unfade-tool-theme[data-unfade-tool="house"] :is(.lane-item .id, .road-col li button span, .chip.notopen) { color: var(--unfade-muted); font-size: 11px; }
+body.unfade-tool-theme[data-unfade-tool="house"] .chip.check { color: #6f5520; }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.breadcrumb span, .sidebar-dev, .results-heading small, .results-actions .text-button, .road-arrow, .source-line) { color: var(--unfade-muted); }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.nav-eyebrow, .sidebar-help) { color: var(--unfade-muted); font-size: 11px; }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.important-note span, footer .footer-brand) { color: #5b6b52; }
 /* house 크레딧 띠: 셸·히어로와 같은 남색 계열, 모바일에서는 숨겨 고정 영역을 줄인다 */
 body.unfade-tool-theme[data-unfade-tool="house"] .credit { background: var(--unfade-navy); color: #d6dee6; }
 @media (max-width: 1000px) {

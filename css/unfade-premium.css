@@ -231,8 +231,9 @@ body.unfade-premium[data-unfade-tool="tv"] :is(small, .t) { font-size: 11px; }
 body.unfade-premium[data-unfade-tool="tv"] .t { color: #806244; }
 body.unfade-premium[data-unfade-tool="lk1800"] .hd .meta b { color: #806244 !important; }
 body.unfade-premium .toast { box-shadow: 0 18px 48px -20px rgb(89 65 38 / 24%); }
-body.unfade-premium[data-unfade-tool="tv"] .val small { font-size: 10px; line-height: 1.2; white-space: normal; }
-body.unfade-premium[data-unfade-tool="cukoo"] td.num span { font-size: 11px; }
+body.unfade-premium[data-unfade-tool="tv"] .val small { font-size: 10px; line-height: 1.2; white-space: nowrap; }
+body.unfade-premium[data-unfade-tool="cukoo"] td.num span { font-size: 11px !important; }
+body.unfade-premium .badge.weak { color: #7a5636; }
 body.unfade-premium { --warm: #7a5636; --warm-tx: #7a5636; --warn: #7a5636; }
 /* 'NEW' 배지는 두 도구 모두 녹색 */
 body.unfade-premium .badge.new { background: #eff2e9; color: #3f5a43; border-color: transparent; }
