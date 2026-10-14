@@ -131,6 +131,13 @@ body.unfade-tool-theme[data-unfade-tool="house"] .m-tab[aria-selected="true"] { 
 body.unfade-tool-theme[data-unfade-tool="house"] :is(.chip.general, .mark.general) { color: #6f5520; }
 body.unfade-tool-theme[data-unfade-tool="house"] .stage.neutral { color: #55634f; }
 body.unfade-tool-theme[data-unfade-tool="house"] .jump-chip { color: #476a3b; }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.diag-why h4, .item-meta .chip.gold, .item-meta .chip.general) { color: #6f5520; }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.nav-letter, .group-tab, .group-tab span, .sub-head small, .item-meta .chip.plain) { color: var(--unfade-muted); }
+body.unfade-tool-theme[data-unfade-tool="house"] .section-heading small { color: #5b6b52; }
+body.unfade-tool-theme[data-unfade-tool="house"] .stage.purple { color: #6e4f7a; }
+body.unfade-tool-theme[data-unfade-tool="house"] .stage.amber { color: #7a5f2a; }
+body.unfade-tool-theme[data-unfade-tool="house"] .stage.blue { color: #3f6385; }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.lane-item .id, .road-col li button span, .chip.notopen) { color: var(--unfade-muted); font-size: 11px; }
 /* house 크레딧 띠: 셸·히어로와 같은 남색 계열, 모바일에서는 숨겨 고정 영역을 줄인다 */
 body.unfade-tool-theme[data-unfade-tool="house"] .credit { background: var(--unfade-navy); color: #d6dee6; }
 @media (max-width: 1000px) {
