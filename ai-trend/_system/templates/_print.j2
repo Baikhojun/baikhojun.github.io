@@ -84,7 +84,7 @@
       <div class="stat"><div class="v">{{ st.ended }}</div><div class="l">{{ tag('종료') }} 서비스·모델 종료</div></div>
       <div class="stat"><div class="v">{{ st.watch }}</div><div class="l">{{ tag('관찰') }} 다음 호까지 추적</div></div>
     </div>
-    <p class="p-src" style="margin-top:2mm">출처 {{ c.source_count }}개 (A {{ c.grade_counts.A }} · B {{ c.grade_counts.B }} · C {{ c.grade_counts.C }}) · 검색 {{ d.search_count }}회 · 태그는 색·아이콘·글자를 함께 쓴다.</p>
+    <p class="p-src" style="margin-top:2mm">{% if st.corrected %}이 밖에 정정 {{ st.corrected }}건 · {% endif %}출처 {{ c.source_count }}개 (A {{ c.grade_counts.A }} · B {{ c.grade_counts.B }} · C {{ c.grade_counts.C }}) · 검색 {{ d.search_count }}회 · 태그는 색·아이콘·글자를 함께 쓴다.</p>
   </div>
 </div>
 {% endmacro %}
