@@ -5,7 +5,7 @@
   const themedTools = new Set(['house', 'cukoo', 'tv', 'lk1800']);
   const links = [
     ['홈', ''], ['신혼 내집 가이드', 'house/'], ['쿠쿠 해독기', 'cukoo/'],
-    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'],
+    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'], ['여성 러닝화 비교', 'running/'],
   ];
   const nav = links.map(([label, path]) => `<a href="${root}${path}">${label}</a>`).join('');
   let chrome = document.getElementById('unfade-site-chrome');
@@ -15,6 +15,9 @@
     chrome.innerHTML = `<header class="site-header"><div class="sitebar"><button class="menu-toggle" type="button" aria-label="프로젝트 메뉴 열기" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span><span>MENU</span></button><a class="wordmark" href="${root}">unfade</a><div class="header-meta">TOOLS <strong>LIGHT MODE</strong></div></div></header><div class="menu-scrim" aria-hidden="true"></div><aside class="side-menu" aria-label="프로젝트 메뉴"><div class="side-menu__top"><a class="wordmark" href="${root}">unfade</a><button class="side-menu__close" type="button" aria-label="메뉴 닫기">×</button></div><nav>${nav}</nav></aside>`;
     document.body.insertAdjacentElement('afterbegin', chrome);
   }
+  // 생성된 셸과 HTML에 미리 들어 있는 셸 모두 같은 프로젝트 목록을 쓴다.
+  const projectNav = chrome.querySelector('.side-menu nav');
+  if (projectNav) projectNav.innerHTML = nav;
   document.body.classList.add('unfade-site-page');
   if (themedTools.has(tool)) {
     document.body.classList.add('unfade-tool-theme');
