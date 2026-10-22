@@ -5,7 +5,7 @@
   const themedTools = new Set(['house', 'cukoo', 'tv', 'lk1800']);
   const links = [
     ['홈', ''], ['신혼 내집 가이드', 'house/'], ['쿠쿠 해독기', 'cukoo/'],
-    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'], ['여성 러닝화 비교', 'running/'],
+    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'], ['여성 러닝화 비교', 'running/'], ['Polo 보관함', 'polo/'],
   ];
   const nav = links.map(([label, path]) => `<a href="${root}${path}">${label}</a>`).join('');
   let chrome = document.getElementById('unfade-site-chrome');
