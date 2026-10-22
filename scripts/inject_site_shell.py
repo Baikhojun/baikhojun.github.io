@@ -13,8 +13,8 @@ PAGES = (
     Path("house/index.html"), Path("house/m/index.html"),
     Path("cukoo/index.html"), Path("cukoo/m/index.html"),
     Path("tv/index.html"), Path("tv/m/index.html"),
-    Path("lk1800/index.html"), Path("plan/index.html"), Path("plan/m/index.html"),
-    Path("schedule/index.html"), Path("m/index.html"),
+    Path("lk1800/index.html"),
+    # plan/ (private couple calendar) and its redirect pages must not receive the public site shell.
 )
 THEMED_PAGES = {
     Path("house/index.html"), Path("house/m/index.html"),
