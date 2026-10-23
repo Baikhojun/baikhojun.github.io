@@ -15,6 +15,7 @@
     D: { label: '데이', color: 'var(--shift-D)' },
     E: { label: '이브닝', color: 'var(--shift-E)' },
     N: { label: '나이트', color: 'var(--shift-N)' },
+    M: { label: '09:00–17:00', color: 'var(--shift-M)' },
     OF: { label: '오프', color: 'var(--shift-OF)' }
   };
   var SHIFT_ORDER = ['D', 'E', 'N', 'OF'];
@@ -176,6 +177,8 @@
       var dt = parse(d), w = dt.getDay();
       var hol = window.CoupleHolidays ? CoupleHolidays.name(d) : null;
       var sh = state.shifts[d];
+      // 비정기 근무는 날짜를 선택했을 때만 시간을 표시한다.
+      if (sh && sh.code === 'M') sh = null;
       var evs = state.events[d] || [];
       var cls = ['cell'];
       if (d.slice(0, 7) !== mKey) cls.push('out');
@@ -210,7 +213,7 @@
     var html = '<div class="day-head"><h2>' + (dt.getMonth() + 1) + '월 ' + dt.getDate() + '일 ' + WEEK[dt.getDay()] + '요일</h2>' +
       (d === todayStr() ? '<span class="by">오늘</span>' : '') + (hol ? '<span class="hol">' + esc(hol) + '</span>' : '') + '</div>';
     html += '<div class="day-shift">🐰 은붕이 근무 ' + (sh
-      ? '<span class="shift-chip" style="--c:' + SHIFTS[sh.code].color + '">' + sh.code + ' · ' + SHIFTS[sh.code].label + '</span>' +
+      ? '<span class="shift-chip" style="--c:' + SHIFTS[sh.code].color + '">' + (sh.code === 'M' ? '' : sh.code + ' · ') + SHIFTS[sh.code].label + '</span>' +
         (pname(sh.updated_by) ? '<span class="by">입력 ' + esc(pname(sh.updated_by)) + '</span>' : '')
       : '<span class="by">입력 없음</span>') + '</div>';
     if (!evs.length) {
@@ -333,7 +336,7 @@
   function parseSeq(text) {
     var tokens = [];
     var s = String(text || '').toUpperCase().replace(/[^A-Z\-]/g, ' ');
-    var re = /OF|O|D|E|N|-/g, m;
+    var re = /OF|O|D|E|N|M|-/g, m;
     while ((m = re.exec(s))) tokens.push(m[0] === 'O' ? 'OF' : m[0]);
     return tokens;
   }
