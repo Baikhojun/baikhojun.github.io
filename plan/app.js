@@ -15,6 +15,7 @@
     D: { label: '데이', color: 'var(--shift-D)' },
     E: { label: '이브닝', color: 'var(--shift-E)' },
     N: { label: '나이트', color: 'var(--shift-N)' },
+    M: { label: '미드 09:00–17:00', color: 'var(--shift-M)' },
     OF: { label: '오프', color: 'var(--shift-OF)' }
   };
   var SHIFT_ORDER = ['D', 'E', 'N', 'OF'];
@@ -333,7 +334,7 @@
   function parseSeq(text) {
     var tokens = [];
     var s = String(text || '').toUpperCase().replace(/[^A-Z\-]/g, ' ');
-    var re = /OF|O|D|E|N|-/g, m;
+    var re = /OF|O|D|E|N|M|-/g, m;
     while ((m = re.exec(s))) tokens.push(m[0] === 'O' ? 'OF' : m[0]);
     return tokens;
   }
