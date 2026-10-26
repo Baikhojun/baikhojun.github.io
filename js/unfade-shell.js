@@ -5,7 +5,7 @@
   const themedTools = new Set(['house', 'cukoo', 'tv', 'lk1800']);
   const links = [
     ['홈', ''], ['신혼 내집 가이드', 'house/'], ['쿠쿠 해독기', 'cukoo/'],
-    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'], ['여성 러닝화 비교', 'running/'], ['Polo 보관함', 'polo/'],
+    ['TV 해독기', 'tv/'], ['매트리스 비교', 'lk1800/'], ['여성 러닝화 비교', 'running/'], ['브리타 정수기 비교', 'brita/'], ['Polo 보관함', 'polo/'],
   ];
   const nav = links.map(([label, path]) => `<a href="${root}${path}">${label}</a>`).join('');
   let chrome = document.getElementById('unfade-site-chrome');
@@ -48,7 +48,7 @@
   // 오른쪽 머리 정보: 모바일판이 있는 도구는 PC↔모바일 전환 링크, 그 밖에는 비운다
   const meta = chrome.querySelector('.header-meta');
   if (meta) {
-    if (['house', 'cukoo', 'tv'].includes(tool)) {
+    if (['house', 'cukoo', 'tv', 'brita'].includes(tool)) {
       const onMobile = /\/m\/?(index\.html)?$/.test(location.pathname);
       meta.innerHTML = onMobile ? `<a href="${root}${tool}/?pc">PC 버전</a>` : `<a href="${root}${tool}/m/">모바일 버전</a>`;
       meta.classList.add('has-switch');

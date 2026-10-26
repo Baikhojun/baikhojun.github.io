@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>브리타 정수기 비교 모바일 | unfade</title>
+<meta name="description" content="한국 수돗물 기준 브리타 정수기 7종·필터 2종 비교, 수질 박사 검토 42개 항목. 모바일 버전.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1565c0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://unfade.is-a.dev/brita/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../../css/unfade-shell.css">
+<link rel="stylesheet" href="../brita.css?v=1">
+<script defer src="../../js/unfade-shell.js" data-unfade-root="../../"></script>
+<style>
+  body.brita { font-size: 15px; padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  #unfade-site-chrome .sitebar { padding: 0 16px; min-height: 56px; }
+  .m-top { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .m-top b { font-size: 1rem; letter-spacing: -0.02em; }
+  .m-top b span { color: var(--blue); }
+  .m-top .seg button { padding: 6px 10px; min-height: 32px; font-size: .78rem; }
+  .m-hero { padding: 22px 16px 6px; display: grid; grid-template-columns: 1fr 110px; gap: 10px; align-items: center; }
+  .m-hero h1 { font-size: 1.55rem; line-height: 1.22; letter-spacing: -0.04em; margin: 2px 0 8px; }
+  .m-hero h1 em { font-style: normal; color: var(--blue); }
+  .m-hero p { font-size: .9rem; color: var(--ink-2); margin: 0; }
+  .m-hero img { filter: drop-shadow(0 10px 14px rgb(13 34 54 / 18%)); }
+  .panel { padding: 8px 16px 24px; }
+  .panel[hidden] { display: none; }
+  .m-sec { padding-top: 22px; }
+  .m-sec > h2 { font-size: 1.3rem; margin-bottom: 4px; }
+  .m-sec > p.lead { color: var(--muted); font-size: .86rem; margin-bottom: 12px; }
+  .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: repeat(5, 1fr); background: var(--paper); border-top: 1px solid var(--line); padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -8px 24px -18px rgb(0 0 0 / 40%); }
+  .tabbar button { border: 0; background: transparent; color: var(--muted); display: grid; justify-items: center; gap: 2px; font: 700 .7rem var(--font); padding: 6px 0; border-radius: 12px; cursor: pointer; min-height: 52px; }
+  .tabbar button i { font-style: normal; font-size: 1.25rem; line-height: 1; }
+  .tabbar button[aria-selected="true"] { color: var(--blue); background: var(--wash); }
+  .next-tab { display: flex; justify-content: center; margin-top: 22px; }
+  /* 모바일 카드: 본체를 가로로 넘겨 보기 */
+  #models .model-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -16px; padding: 4px 16px 12px; -webkit-overflow-scrolling: touch; }
+  #models .model { flex: 0 0 86%; scroll-snap-align: center; }
+  .swipe-hint { font-size: .78rem; color: var(--muted); text-align: right; margin: -4px 0 6px; }
+  .review-list { grid-template-columns: 1fr !important; }
+  .foot { text-align: center; color: var(--muted); font-size: .76rem; padding: 18px 16px 8px; }
+</style>
+</head>
+<body class="brita" data-asset="../assets/">
+<div class="m-top">
+  <b>브리타 <span>정수기 비교</span></b>
+  <div class="seg" role="group" aria-label="가격 기준"><button data-mode-global="member" data-mode="member">쿠폰가</button><button data-mode-global="sale" data-mode="sale">판매가</button></div>
+</div>
+
+<section class="panel" id="p-home" role="tabpanel">
+  <div class="m-hero">
+    <div><span class="eyebrow">신혼부부 가이드 · 2026.10.26</span>
+      <h1><em>한국 수돗물</em>에서<br>브리타, 뭘 살까</h1>
+      <p>본체 7종 · 필터 2종 · 판매 구성 33개 · 박사 검토 42항목</p></div>
+    <img src="../assets/style-essential.webp" alt="" aria-hidden="true">
+  </div>
+  <div class="m-sec"><div id="summary"></div></div>
+  <div class="m-sec"><h2>한국 물 ≠ 유럽 물</h2><p class="lead">유럽의 강점(석회질 제거)은 한국에서 작고, 염소 냄새 제거가 핵심입니다.</p><div id="korea"></div></div>
+  <div class="next-tab"><button class="btn" data-go="p-models">본체 7종 보러 가기 →</button></div>
+</section>
+
+<section class="panel" id="p-models" role="tabpanel" hidden>
+  <div class="m-sec"><h2>본체 7종</h2><p class="lead">모두 같은 필터 1개를 씁니다. 좌우로 넘겨 보세요.</p><p class="swipe-hint">← 밀어서 7개 모두 보기 →</p><div id="models"></div></div>
+  <div class="next-tab"><button class="btn" data-go="p-money">필터·유지비 보기 →</button></div>
+</section>
+
+<section class="panel" id="p-money" role="tabpanel" hidden>
+  <div class="m-sec"><h2>필터 2종 · 최저가</h2><p class="lead">한국은 퓨어 퍼포먼스면 충분합니다.</p><div id="filters"></div></div>
+  <div class="m-sec"><h2>유지비 계산기</h2><p class="lead">우리 집 사용량을 넣어 보세요.</p><div id="calc"></div></div>
+  <div class="next-tab"><button class="btn" data-go="p-review">박사 검토 보기 →</button></div>
+</section>
+
+<section class="panel" id="p-review" role="tabpanel" hidden>
+  <div class="m-sec"><h2>수질 박사 검토 42</h2><p class="lead">판정 칩을 눌러 골라 보세요.</p><div id="review"></div></div>
+  <div class="next-tab"><button class="btn" data-go="p-buy">구매·관리 보기 →</button></div>
+</section>
+
+<section class="panel" id="p-buy" role="tabpanel" hidden>
+  <div class="m-sec"><h2>공식 구매처</h2><p class="lead">네이버 공식 브랜드스토어로 연결합니다.</p><div id="buy"></div></div>
+  <div class="m-sec"><h2>사용·관리</h2><div id="care"></div></div>
+  <div class="m-sec"><h2>데이터 원장 33행</h2><p class="lead">좌우로 밀어 보기 · 열 제목으로 정렬</p><div id="ledger"></div></div>
+  <p class="foot">가격 기준일 2026-10-26 · 광고·제휴 링크 없음 · 제품 이미지 © BRITA<br><a href="../?pc">PC 버전으로 보기</a></p>
+</section>
+
+<nav class="tabbar" role="tablist" aria-label="화면 이동">
+  <button role="tab" data-tab="p-home" aria-selected="true"><i>💧</i>결론</button>
+  <button role="tab" data-tab="p-models" aria-selected="false"><i>🫙</i>본체</button>
+  <button role="tab" data-tab="p-money" aria-selected="false"><i>💰</i>필터·비용</button>
+  <button role="tab" data-tab="p-review" aria-selected="false"><i>🔬</i>박사 검토</button>
+  <button role="tab" data-tab="p-buy" aria-selected="false"><i>🛒</i>구매</button>
+</nav>
+
+<script src="../data.js?v=1"></script>
+<script src="../review.js?v=1"></script>
+<script src="../app.js?v=1"></script>
+<script>
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('.tabbar button'));
+    function show(id, push) {
+      document.querySelectorAll('.panel').forEach(function (p) { p.hidden = p.id !== id; });
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.tab === id)); });
+      window.scrollTo(0, 0);
+      if (push !== false) history.replaceState(null, '', '#' + id.slice(2));
+    }
+    tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+    document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go); }); });
+    // 결론 카드의 '#models' 링크를 탭 이동으로 바꾼다
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href="#models"]');
+      if (a) { e.preventDefault(); show('p-models'); }
+    });
+    var start = 'p-' + (location.hash.slice(1) || 'home');
+    if (document.getElementById(start)) show(start, false);
+    var m = BritaApp.state.mode;
+    document.querySelectorAll('.m-top [data-mode]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === m)); });
+  })();
+</script>
+</body>
+</html>
