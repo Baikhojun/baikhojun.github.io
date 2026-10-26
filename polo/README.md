@@ -7,3 +7,9 @@
 서버는 CSP `frame-ancestors 'self' https://unfade.is-a.dev`로 소유 도메인의 임베드만 허용한다. HTTPS·HTTP-only·SameSite=None·Partitioned 세션을 사용하며 로그인·로그아웃의 Origin 검사는 계속 적용한다. CHIPS를 지원하는 최신 Chrome을 기준으로 확인한다. 브라우저에서 임베드 인증이 지원되지 않으면 상단의 새 창 열기를 사용한다.
 
 앱 원본과 운영 기록은 비공개 `Baikhojun/unfade` 저장소의 `NewProject/Polo-Sale-Launcher/`에서 관리한다. iframe 원점이 바뀌면 index.html의 src·새 창 링크·frame-src를 함께 갱신한다.
+
+## 2026-10-27 아이콘과 방문 집계
+
+- 탭 아이콘·홈 화면 아이콘과 상단 표시에 사용자 제공 폴로 포니 그림(`icon.png`, `apple-touch-icon.png`)을 사용한다. 보관함 앱(`app/icon.png`)과 같은 그림이다.
+- `stats.js`가 사이트 공용 GoatCounter(`unfade.goatcounter.com`)에 `/polo/` 방문을 보낸다. 휴대폰은 바로 보관함으로 이동하므로 외부 스크립트 대신 `sendBeacon`을 먼저 보낸다. CSP는 `connect-src https://unfade.goatcounter.com`만 추가하였다.
+- 방문 통계(일별 방문 수 등)는 GoatCounter 대시보드 `https://unfade.goatcounter.com`에서 로그인하여 본다.
