@@ -127,7 +127,7 @@ body.unfade-tool-theme[data-unfade-tool="lk1800"] .hd {
 /* 흐린 글자 대비 AA 이상 */
 body.unfade-tool-theme[data-unfade-tool="house"] :is(.item-id, .id, .profile-label, .profile-cell small, .section-count, .nav-count, footer, .footer-dev) { color: var(--unfade-muted); }
 body.unfade-tool-theme[data-unfade-tool="house"] :is(.toc-num, .m-tab) { color: var(--unfade-muted); }
-body.unfade-tool-theme[data-unfade-tool="house"] .m-tab[aria-selected="true"] { color: var(--unfade-navy); }
+body.unfade-tool-theme[data-unfade-tool="house"] :is(.m-tab[aria-selected="true"], .m-tab[aria-current="page"]) { color: var(--unfade-navy); }
 body.unfade-tool-theme[data-unfade-tool="house"] :is(.chip.general, .mark.general) { color: #6f5520; }
 body.unfade-tool-theme[data-unfade-tool="house"] .stage.neutral { color: #55634f; }
 body.unfade-tool-theme[data-unfade-tool="house"] .jump-chip { color: #476a3b; }
