@@ -678,6 +678,13 @@ html.app.tabs .cat-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;m
 html.app.tabs .cat-chips::-webkit-scrollbar{display:none}
 html.app.tabs .cat-chips .nav-item{flex-shrink:0;min-height:44px}
 html.tabs .m-subtab{min-height:40px}
+/* 좁은 화면: 아래로 스크롤하면 크레딧·앱 바를 접고 하위 탭만 남긴다 */
+html.tabs .top-shell{transition:transform .2s ease}
+html.tabs.m-compact .top-shell{transform:translateY(calc(-1 * var(--m-hide,0px)))}
+html.tabs .part-tabs{transition:top .2s ease}
+@media(prefers-reduced-motion:reduce){html.tabs .top-shell,html.tabs .part-tabs{transition:none}}
+html.tabs .law-index .jump-chip.mini{min-height:32px;padding:5px 10px;margin:3px;font-size:12px}
+.m-live[data-live="diag"] .icon{transform:rotate(-90deg)}
 .law-index .jump-chip.mini{font-size:11px;padding:1px 7px;margin:1px 1px;cursor:pointer}
 .law-index .jump-chip.mini:hover{background:#dfeadb}
 /* 홈: 바로 하기 */
@@ -3273,6 +3280,9 @@ function initDiagnosis() {
     if (opt.record) replaceHash('#lane-' + l);
   }
   DiagApi.selectLane = selectLane;
+  const mark = () => store.set(KEY + ':diagUser', true);
+  $('#diag-form').addEventListener('input', mark);
+  $('#diag-form').addEventListener('click', ev => { if (ev.target.closest('button')) mark(); });
   runDiagnosis();
   selectLane(LANES.find(l => DATA.items.some(it => lastDiag[it.id].lane === l)) || 'now');
 }
@@ -3955,7 +3965,27 @@ function initApp() {
   const narrow = () => root.classList.contains('tabs');
   /* 고정 머리 아래 경계: 좁은 화면은 위쪽 앱 바, 넓은 화면은 공용 셸이 내려 둔 크레딧 바의 아래 */
   const topOffset = () => narrow() ? shell.offsetHeight : Math.max(0, shell.getBoundingClientRect().bottom);
-  const setTop = () => root.style.setProperty('--m-top', (narrow() ? shell.offsetHeight : 0) + 'px');
+  let compact = false, lastY = window.scrollY;
+  const hideH = () => ($('.credit', shell) || { offsetHeight: 0 }).offsetHeight + ($('.m-app', shell) || { offsetHeight: 0 }).offsetHeight;
+  function setTop() {
+    const n = narrow();
+    root.style.setProperty('--m-hide', (n ? hideH() : 0) + 'px');
+    root.style.setProperty('--m-top', (n ? shell.offsetHeight - (compact ? hideH() : 0) : 0) + 'px');
+  }
+  /* 고정 영역 아래 경계: 고정 머리(좁은 화면은 펼친 높이) + 보이는 고정 부분 탭 */
+  const stickyTop = () => {
+    let t = narrow() ? shell.offsetHeight : topOffset();
+    const tl = active && $('#' + active + ' .part-tabs');
+    if (tl && tl.offsetParent) t += tl.offsetHeight;
+    return t;
+  };
+  /* 새 내용의 시작을 고정 영역 바로 아래에 둔다. 이미 화면 위쪽 절반 안에 있으면 움직이지 않는다(force면 항상 맞춘다) */
+  function scrollToStart(el, extra = 0, force = false) {
+    if (!el || !el.getClientRects().length) return;
+    const y = el.getBoundingClientRect().top - stickyTop() - extra - 8;
+    if (force || y < 0 || y > window.innerHeight * 0.5) window.scrollTo(0, Math.max(0, window.scrollY + y));
+  }
+  Tabs.scrollToStart = scrollToStart;
   /* 방금 보이게 된 범위의 차트를 바로 다시 그린다(숨김 상태에서 그린 차트는 폭이 기본값이라서) */
   const redraw = scope => registry.forEach(r => { if (!scope || scope.contains(r.host)) r.draw(); });
   const push = h => { try { history.pushState({ ch: active }, '', h); } catch (_) { /* file:// */ } };
@@ -3980,16 +4010,18 @@ function initApp() {
   $('.cover .hero').after(quick);
   function drawQuick() {
     const c = DiagApi.counts || {}, fav = +($('#favorites-count') || {}).textContent || 0, done = (store.get(KEY + ':ck', []) || []).length, total = $$('.check-item').length;
-    quick.innerHTML = '<a href="#lane-now"><small>진단 · 지금 가능</small><b>' + (c.now || 0) + '개</b><span>결과 보기 ›</span></a>'
+    quick.innerHTML = (store.get(KEY + ':diagUser', false)
+        ? '<a href="#lane-now"><small>진단 · 지금 가능</small><b>' + (c.now || 0) + '개</b><span>결과 보기 ›</span></a>'
+        : '<a href="#ch-diag"><small>우리 부부 진단</small><b>아직 안 함</b><span>조건 넣기 ›</span></a>')
       + '<a href="#ch-dict" data-fav><small>관심 항목</small><b>' + fav + '개</b><span>' + (fav ? '모아 보기 ›' : '사전 보기 ›') + '</span></a>'
       + '<a href="#ch-start"><small>체크리스트</small><b>' + done + ' / ' + total + '</b><span>이어 하기 ›</span></a>';
   }
   quick.addEventListener('click', ev => { if (ev.target.closest('[data-fav]') && DictApi.favorites) DictApi.favorites((+($('#favorites-count') || {}).textContent || 0) > 0); });
   // PC판·모바일판 전환 링크: 지금 보는 화면을 넘긴다
   document.addEventListener('click', ev => {
-    const a = ev.target.closest('a[href]'); if (!a || !location.hash) return;
+    const a = ev.target.closest('a[href]'); if (!a) return;
     let u; try { u = new URL(a.getAttribute('href'), location.href); } catch (_) { return; }
-    if (u.origin === location.origin && u.pathname !== location.pathname && /\/house\/(m\/)?(index\.html)?$/.test(u.pathname) && !u.hash) a.href = u.href + location.hash;
+    if (u.origin === location.origin && u.pathname !== location.pathname && /\/house\/(m\/)?(index\.html)?$/.test(u.pathname)) a.href = u.origin + u.pathname + u.search + location.hash;
   }, true);
   // 이전·다음 장
   const pager = document.createElement('nav'); pager.className = 'ch-pager'; pager.setAttribute('aria-label', '이전·다음 장');
@@ -4005,7 +4037,7 @@ function initApp() {
     tl.innerHTML = parts[ch.id].map(p => '<button type="button" role="tab" id="tab-' + p.id + '" aria-controls="' + p.id + '" data-part-tab="' + p.id + '">' + esc(p.label) + '</button>').join('');
     parts[ch.id].forEach(p => { p.el.setAttribute('role', 'tabpanel'); p.el.setAttribute('aria-labelledby', 'tab-' + p.id); });
     $('.chapter-head', ch).after(tl);
-    tl.addEventListener('click', ev => { const t = ev.target.closest('[data-part-tab]'); if (t) { setPart(ch.id, t.dataset.partTab, { record: true }); toPartTop(ch.id); } });
+    tl.addEventListener('click', ev => { const t = ev.target.closest('[data-part-tab]'); if (t) { setPart(ch.id, t.dataset.partTab, { record: true }); scrollToStart(document.getElementById(t.dataset.partTab)); } });
     tl.addEventListener('keydown', tabKeys(() => $$('[role="tab"]', tl), t => setPart(ch.id, t.dataset.partTab, { record: true })));
     setPart(ch.id, parts[ch.id][0].id);
   });
@@ -4019,12 +4051,6 @@ function initApp() {
     if (opt.record) replaceHash('#' + p.id);
     if (chId === active) drawPager();
   }
-  /* 부분을 바꿨는데 탭 줄이 화면 위로 지나가 있으면 탭 줄로 올린다(한 화면 이내) */
-  function toPartTop(chId) {
-    const tl = $('#' + chId + ' .part-tabs'); if (!tl || !tl.offsetParent) return;
-    const y = tl.getBoundingClientRect().top - topOffset() - 10;
-    if (y < 0) window.scrollTo(0, Math.max(0, window.scrollY + y));
-  }
 
   function renderSub(gk) {
     const g = groups.find(x => x.key === gk);
@@ -4034,12 +4060,14 @@ function initApp() {
     if (cur) sub.scrollLeft = Math.max(0, cur.offsetLeft - (sub.clientWidth - cur.offsetWidth) / 2);
   }
   /* 부분이 있는 장은 부분을 먼저 차례로 거치고, 마지막 부분에서 다음 장으로 간다(진단처럼 좁은 화면 전용 부분은 제외) */
+  const pagedParts = id => parts[id] && (!document.getElementById(id).hasAttribute('data-parts-narrow') || narrow()) ? parts[id] : null;
   function drawPager() {
-    const i = order.indexOf(active), ps = !$('#' + active).hasAttribute('data-parts-narrow') && parts[active];
+    const i = order.indexOf(active), ps = pagedParts(active), pc = order[i - 1], nc = order[i + 1];
     const k = ps ? ps.findIndex(x => x.id === lastPart[active]) : -1;
+    const edge = (id, last) => { const p = pagedParts(id); return p ? p[last ? p.length - 1 : 0].id : id; };
     const link = (cls, href, lab, txt) => '<a class="' + cls + '" href="#' + href + '"><small>' + lab + '</small><span>' + esc(txt) + '</span></a>';
-    const prev = ps && k > 0 ? link('prev', ps[k - 1].id, '‹ 이전 화면', ps[k - 1].label) : order[i - 1] ? link('prev', order[i - 1], '‹ 이전 장', fullLabel(order[i - 1])) : '<span></span>';
-    const next = ps && k < ps.length - 1 ? link('next', ps[k + 1].id, '다음 화면 ›', ps[k + 1].label) : order[i + 1] ? link('next', order[i + 1], '다음 장 ›', fullLabel(order[i + 1])) : '';
+    const prev = ps && k > 0 ? link('prev', ps[k - 1].id, '‹ 이전 화면', ps[k - 1].label) : pc ? link('prev', edge(pc, true), '‹ 이전 장', fullLabel(pc)) : '<span></span>';
+    const next = ps && k < ps.length - 1 ? link('next', ps[k + 1].id, '다음 화면 ›', ps[k + 1].label) : nc ? link('next', edge(nc, false), '다음 장 ›', fullLabel(nc)) : '';
     pager.innerHTML = prev + next;
   }
   /* 장 하나를 보여 준다. opt: push(기록 추가), hash(false면 주소 유지), restore(false면 스크롤 유지), top(맨 위), focus(장 제목) */
@@ -4102,7 +4130,7 @@ function initApp() {
     else if (opt.first && h) replaceHash(r.missing ? '#ch-dict' : (r.el ? h : '#' + r.ch));
     if (r.missing) toast('항목을 찾을 수 없습니다.');
     const toEl = r.el && !opt.pop && r.el !== document.getElementById(r.part);
-    const place = () => { if (toEl) { const y = r.el.getBoundingClientRect().top - topOffset() - 12; window.scrollTo(0, Math.max(0, window.scrollY + y)); } else if (opt.first) window.scrollTo(0, 0); };
+    const place = () => { if (toEl) scrollToStart(r.el, 0, true); else if (opt.first) window.scrollTo(0, 0); };
     setTimeout(place, 0);
     /* 첫 로드: 문서 로드가 끝나면 브라우저가 주소의 #id로 스스로 스크롤하므로 그 뒤에 위치를 다시 잡는다 */
     if (opt.first && document.readyState !== 'complete') window.addEventListener('load', () => setTimeout(place, 0), { once: true });
@@ -4115,7 +4143,7 @@ function initApp() {
     if (!a || ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
     const h = a.getAttribute('href'); if (h === '#') return;
     ev.preventDefault();
-    if (h === '#main') { const t = $('#' + active + ' .chapter-title'); if (t) { t.tabIndex = -1; t.focus(); } return; }
+    if (h === '#main') { const t = $('#' + active + ' .chapter-title'); if (t) { t.tabIndex = -1; t.focus({ preventScroll: true }); scrollToStart(t); } return; }
     route(h, { push: true });
   });
   window.addEventListener('popstate', () => route(location.hash, { pop: true }));
@@ -4129,10 +4157,18 @@ function initApp() {
   sub.addEventListener('click', ev => { const b = ev.target.closest('[data-sub]'); if (b && b.dataset.sub !== active) show(b.dataset.sub, { push: true, focus: true }); });
   $('#m-search').addEventListener('click', () => { show('ch-dict', { push: true, top: true }); $('#search').focus({ preventScroll: true }); });
   $$('.m-live').forEach(b => b.addEventListener('click', () => {
-    if (b.dataset.live === 'diag' && parts['ch-diag']) { setPart('ch-diag', 'diag-results'); push('#diag-results'); toPartTop('ch-diag'); $('#tab-diag-results').focus({ preventScroll: true }); return; }
+    if (b.dataset.live === 'diag' && parts['ch-diag']) { setPart('ch-diag', 'diag-results'); push('#diag-results'); scrollToStart($('.diag-summary'), 0, true); $('#tab-diag-results').focus({ preventScroll: true }); return; }
     const t = $(b.dataset.target); if (t) t.scrollIntoView({ behavior: MOTION(), block: 'start' });
   }));
-  function applyLayout() { root.classList.toggle('tabs', forced || mq.matches); setTop(); if (active) renderSub(chGroup[active]); redraw(); }
+  $('.diag-summary').addEventListener('click', ev => { const b = ev.target.closest('[data-goto-lane]'); if (b) scrollToStart($('#lane-' + b.dataset.gotoLane), narrow() ? 0 : $('.diag-summary').offsetHeight); });
+  // 좁은 화면: 아래로 스크롤하면 위쪽 바를 접고, 위로 스크롤하면 편다
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY; if (Math.abs(y - lastY) < 8) return;
+    const c = narrow() && y > lastY && y > 200 && !ItemSheet.isOpen();
+    if (c !== compact) { compact = c; root.classList.toggle('m-compact', c); setTop(); }
+    lastY = y;
+  }, { passive: true });
+  function applyLayout() { root.classList.toggle('tabs', forced || mq.matches); if (!root.classList.contains('tabs')) { compact = false; root.classList.remove('m-compact'); } setTop(); if (active) { renderSub(chGroup[active]); drawPager(); } redraw(); }
   if (mq.addEventListener) mq.addEventListener('change', applyLayout); else if (mq.addListener) mq.addListener(applyLayout);
   window.addEventListener('resize', debounce(setTop, 150));
   applyLayout();
