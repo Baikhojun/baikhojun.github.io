@@ -16,12 +16,13 @@
   <meta name="apple-mobile-web-app-title" content="우리 일정">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <!-- 시스템 글꼴을 사용하여 외부 글꼴 응답을 기다리지 않는다. -->
   <link rel="stylesheet" href="seasons.css">
-  <link rel="stylesheet" href="app.css?v=20261023-mid-calendar">
+  <link rel="stylesheet" href="app.css?v=20261028-housing">
 </head>
 <body>
   <div class="season-fx" aria-hidden="true"></div>
+  <p id="boot-status" class="boot-status" role="status">우리 일정표를 여는 중이다…</p>
 
   <!-- 로그인 -->
   <div id="login" class="login hidden">
@@ -59,13 +60,19 @@
       </div>
     </header>
 
+    <nav class="view-tabs" aria-label="화면 선택">
+      <button id="calendar-tab" type="button" aria-pressed="true">우리 일정</button>
+      <button id="housing-tab" type="button" aria-pressed="false">월별 주거비</button>
+    </nav>
+    <p id="sync-status" class="sync-status" role="status"></p>
+
     <div id="menu" class="menu hidden" role="menu">
       <div class="info">이 기기에 로그인되어 있다</div>
       <button id="refresh" type="button" role="menuitem">새로 불러오기</button>
       <button id="logout" type="button" role="menuitem">로그아웃</button>
     </div>
 
-    <div class="layout">
+    <div id="calendar-view" class="layout">
       <section id="cal" class="cal" aria-label="달력">
         <div class="wk" aria-hidden="true"><span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span></div>
         <div id="grid" class="grid"></div>
@@ -81,6 +88,7 @@
       </section>
       <section id="day" class="day" aria-live="polite"></section>
     </div>
+    <section id="housing-view" class="housing hidden" aria-label="월별 주거비"></section>
   </div>
 
   <!-- 교대 입력 -->
@@ -109,6 +117,7 @@
   <script src="vendor/supabase-js-2.117.2.min.js"></script>
   <script src="config.js"></script>
   <script src="holidays.js"></script>
-  <script src="app.js?v=20261023-mid-calendar"></script>
+  <script src="housing.js?v=20261028-housing"></script>
+  <script src="app.js?v=20261028-housing"></script>
 </body>
 </html>
