@@ -37,7 +37,7 @@
   function pname(k) { return PEOPLE[k] ? PEOPLE[k].name : ''; }
   // "9:00"과 "19:00"이 올바른 순서가 되도록 시각을 두 자리로 맞춘 정렬 키를 만든다. 시각이 아닌 글은 시각 뒤에 둔다.
   function timeKey(t) { var m = /^(\d{1,2})[:시]\s*(\d{2})?/.exec(t || ''); return m ? pad(+m[1]) + ':' + (m[2] || '00') : '~' + (t || ''); }
-  function isNetworkError(err) { return /Failed to fetch|NetworkError|Load failed|network/i.test((err && (err.message || String(err))) || ''); }
+  function isNetworkError(err) { return (err && err.name === 'AuthRetryableFetchError') || /Failed to fetch|fetch failed|NetworkError|Load failed|network|timeout|timed out/i.test((err && (err.message || String(err))) || ''); }
   function defaultPerson() {
     try { var saved = localStorage.getItem(LS_PERSON); if (saved === 'eun' || saved === 'ho') return saved; } catch (e) {}
     var ua = navigator.userAgent || '';
@@ -52,7 +52,10 @@
     });
     function check(r) { if (r.error) throw r.error; return r.data; }
     return {
-      session: async function () { var r = await sb.auth.getSession(); return r.data.session; },
+      session: async function () { var r = await sb.auth.getSession(); if (r.error) throw r.error; return r.data.session; },
+      savedSession: function () {
+        try { return JSON.parse(localStorage.getItem('unfade-couple-auth')); } catch (e) { return null; }
+      },
       signIn: async function (person, password) {
         var r = await sb.auth.signInWithPassword({ email: PEOPLE[person].email, password: password });
         if (r.error) throw r.error;
@@ -77,13 +80,21 @@
         if (ev.id) return check(await sb.from('couple_events').update(row).eq('id', ev.id).select().single());
         return check(await sb.from('couple_events').insert(row).select().single());
       },
-      deleteEvent: async function (id) { check(await sb.from('couple_events').delete().eq('id', id)); }
+      deleteEvent: async function (id) { check(await sb.from('couple_events').delete().eq('id', id)); },
+      loadHousing: async function () { return check(await sb.from('couple_housing_costs').select('*').order('month', { ascending: false })); },
+      saveHousing: async function (row, version) {
+        var r = version
+          ? await sb.from('couple_housing_costs').update(row).eq('month', row.month).eq('updated_at', version).select().maybeSingle()
+          : await sb.from('couple_housing_costs').insert(row).select().single();
+        if ((r.error && r.error.code === '23505') || (!r.error && !r.data)) throw { code: 'conflict', message: '다른 기기에서 먼저 변경한 기록이다.' };
+        return check(r);
+      }
     };
   }
 
   // 모의 모드: localhost 에서만 동작하며 서버에 접속하지 않는다.
   function mockBackend() {
-    var me = null, shifts = {}, events = [], seq = 1;
+    var me = null, shifts = {}, events = [], costs = [], seq = 1;
     var t = todayStr();
     var pattern = ['D', 'D', 'E', 'E', 'N', 'N', 'OF', 'OF', 'OF'];
     for (var i = -40; i < 50; i++) shifts[addDays(t, i)] = { day: addDays(t, i), code: pattern[(i + 90) % pattern.length], updated_by: 'eun', updated_at: new Date().toISOString() };
@@ -97,6 +108,7 @@
     function now() { return new Date().toISOString(); }
     return {
       session: function () { return wait(me ? { mock: true } : null); },
+      savedSession: function () { return null; },
       signIn: function (person) { me = person; return wait(); },
       signOut: function () { me = null; return wait(); },
       whoami: function () { return wait(me); },
@@ -118,7 +130,15 @@
         events.push(row);
         return wait(Object.assign({}, row));
       },
-      deleteEvent: function (id) { events = events.filter(function (e) { return e.id !== id; }); return wait(); }
+      deleteEvent: function (id) { events = events.filter(function (e) { return e.id !== id; }); return wait(); },
+      loadHousing: function () { return wait(costs.map(function (r) { return Object.assign({}, r); })); },
+      saveHousing: function (row, version) {
+        var previous = costs.find(function (r) { return r.month === row.month; });
+        if ((previous && previous.updated_at !== version) || (!previous && version)) return Promise.reject({ code: 'conflict' });
+        var saved = Object.assign({}, row, { updated_at: now(), updated_by: me });
+        costs = costs.filter(function (r) { return r.month !== row.month; }); costs.push(saved);
+        return wait(Object.assign({}, saved));
+      }
     };
   }
 
@@ -129,6 +149,9 @@
   var t0 = todayStr();
   var state = {
     me: null,
+    userId: null,
+    verified: false,
+    view: 'calendar',
     year: +t0.slice(0, 4), month: +t0.slice(5, 7),
     selected: t0,
     shifts: {},          // day -> row
@@ -144,6 +167,65 @@
 
   var $ = function (id) { return document.getElementById(id); };
   var els = {};
+
+  // 캐시는 서버에서 구성원으로 확인된 계정별로 나눈다. 인증 API 응답은 캐시하지 않는다.
+  var CACHE_PREFIX = 'unfade-plan-v1:', cacheEpoch = 0;
+  var CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+  function cacheKey(name) { return CACHE_PREFIX + (isMock ? 'mock:' : '') + state.userId + ':' + name; }
+  function readCache(name) {
+    if (!state.userId) return null;
+    try {
+      var value = JSON.parse(localStorage.getItem(cacheKey(name)));
+      return value && value.at <= Date.now() && Date.now() - value.at < CACHE_TTL ? value.data : null;
+    } catch (e) { return null; }
+  }
+  function writeCache(name, data) {
+    if (!state.userId || !state.me) return;
+    try {
+      localStorage.setItem(cacheKey(name), JSON.stringify({ at: Date.now(), data: data }));
+      var prefix = cacheKey('calendar:');
+      var keys = Object.keys(localStorage).filter(function (k) { return k.indexOf(prefix) === 0; });
+      keys.sort(function (a, b) {
+        try { return JSON.parse(localStorage.getItem(b)).at - JSON.parse(localStorage.getItem(a)).at; } catch (e) { return 0; }
+      });
+      keys.slice(18).forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) { /* 저장 공간이 부족해도 서버 조회와 저장을 계속한다. */ }
+  }
+  function clearPrivateCache() {
+    ++cacheEpoch; ++loadSeq; state.verified = false;
+    try { Object.keys(localStorage).filter(function (k) { return k.indexOf(CACHE_PREFIX) === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {}
+    state.shifts = {}; state.events = {}; state.pendingShifts = {}; state.range = null;
+    if (window.CoupleHousing) CoupleHousing.stop();
+  }
+  function syncStatus(message) { els.sync.textContent = message; }
+  function calendarKey() { return 'calendar:' + state.year + '-' + pad(state.month); }
+  function applyData(data) {
+    state.shifts = {}; state.events = {};
+    data.shifts.forEach(function (s) { if (SHIFTS[s.code]) state.shifts[s.day] = s; });
+    data.events.forEach(function (e) { if (PEOPLE[e.owner]) (state.events[e.day] = state.events[e.day] || []).push(e); });
+    Object.keys(state.pendingShifts).forEach(function (d) { var p = state.pendingShifts[d]; if (p) state.shifts[d] = p; else delete state.shifts[d]; });
+    Object.keys(state.events).forEach(function (d) { state.events[d].sort(sortEvents); });
+  }
+  function setView(view) {
+    state.view = view;
+    if (view === 'housing') state.shiftMode = false;
+    $('calendar-view').classList.toggle('hidden', view !== 'calendar');
+    $('housing-view').classList.toggle('hidden', view !== 'housing');
+    $('calendar-tab').setAttribute('aria-pressed', String(view === 'calendar'));
+    $('housing-tab').setAttribute('aria-pressed', String(view === 'housing'));
+    els.shiftBtn.classList.toggle('hidden', view !== 'calendar');
+    renderShiftBar();
+    try { localStorage.setItem('unfade-plan-view', view); } catch (e) {}
+  }
+  function initHousing() {
+    var epoch = cacheEpoch;
+    CoupleHousing.init($('housing-view'), {
+      api: api, month: state.year + '-' + pad(state.month), read: readCache,
+      write: function (k, v) { if (epoch === cacheEpoch) writeCache(k, v); },
+      error: handleError, verified: function () { return state.verified; },
+      onMonth: function (m) { state.year = +m.slice(0, 4); state.month = +m.slice(5, 7); state.selected = m + '-01'; render(); load(); }
+    });
+  }
 
   // ---------- 화면 ----------
   function monthGrid(y, m) {
@@ -254,25 +336,30 @@
   // ---------- 데이터 적재 ----------
   var loadSeq = 0;
   async function load() {
+    if (!state.me) return;
     var days = monthGrid(state.year, state.month);
     var from = days[0], to = days[days.length - 1];
     var my = ++loadSeq;
+    var epoch = cacheEpoch, key = calendarKey();
+    var cached = readCache(key);
+    if (cached && Array.isArray(cached.shifts) && Array.isArray(cached.events)) {
+      applyData(cached); state.range = [from, to]; render();
+      syncStatus('기기 저장본 · 최신 일정 확인 중');
+    } else {
+      if (!state.range || state.range[0] !== from) { state.shifts = {}; state.events = {}; render(); }
+      syncStatus('최신 일정 확인 중…');
+    }
     state.loading = true; renderGrid();
     try {
       var data = await api.load(from, to);
-      if (my !== loadSeq) return;
-      state.shifts = {}; state.events = {};
-      // 알 수 없는 값은 받지 않는다(화면 오류와 HTML 주입 방지)
-      data.shifts.forEach(function (s) { if (SHIFTS[s.code]) state.shifts[s.day] = s; });
-      data.events.forEach(function (e) { if (PEOPLE[e.owner]) (state.events[e.day] = state.events[e.day] || []).push(e); });
-      Object.keys(state.pendingShifts).forEach(function (d) {
-        var p = state.pendingShifts[d];
-        if (p) state.shifts[d] = p; else delete state.shifts[d];
-      });
-      Object.keys(state.events).forEach(function (d) { state.events[d].sort(sortEvents); });
+      if (my !== loadSeq || epoch !== cacheEpoch) return;
+      writeCache(key, data);
+      applyData(data);
       state.range = [from, to];
+      syncStatus('최신 일정 · ' + fmtStamp(new Date().toISOString()));
     } catch (err) {
       if (my !== loadSeq) return;
+      syncStatus(cached ? '기기 저장본 · 갱신 실패, 연결 후 다시 불러온다' : '일정을 불러오지 못하였다 · 연결을 확인한다');
       handleError(err, '불러오지 못했다');
     } finally {
       if (my === loadSeq) { state.loading = false; render(); }
@@ -288,6 +375,7 @@
     if (isNetworkError(err)) { toast('인터넷 연결을 확인한다'); return; }
     if (/JWT/i.test(msg) || (err && (err.status === 401 || err.code === 'PGRST301' || err.code === '42501'))) {
       toast('다시 로그인이 필요하다');
+      clearPrivateCache(); state.me = null; state.userId = null;
       showLogin();
       return;
     }
@@ -296,6 +384,7 @@
 
   function goMonth(delta) {
     var d = new Date(state.year, state.month - 1 + delta, 1);
+    if (!CoupleHousing.month(d.getFullYear() + '-' + pad(d.getMonth() + 1))) return;
     state.year = d.getFullYear(); state.month = d.getMonth() + 1;
     var sel = parse(state.selected);
     var keepDay = Math.min(sel.getDate(), new Date(state.year, state.month, 0).getDate());
@@ -304,6 +393,7 @@
   }
   function goToday() {
     var t = todayStr();
+    if (!CoupleHousing.month(t.slice(0, 7))) return;
     state.lastToday = t;
     state.year = +t.slice(0, 4); state.month = +t.slice(5, 7); state.selected = t;
     render(); load();
@@ -312,6 +402,8 @@
   // ---------- 교대 입력 ----------
   // 교대 한 칸을 저장한다. code 가 'X' 이면 지운다. 성공하면 true 를 돌려준다.
   async function paintShift(day, code) {
+    if (!state.verified) { toast('연결과 계정 확인 후 저장할 수 있다'); return false; }
+    ++loadSeq;
     var prev = state.shifts[day];
     if (code === 'X' && !prev) return true;
     if (code !== 'X' && prev && prev.code === code) return true;
@@ -328,6 +420,9 @@
       return false;
     } finally {
       if (state.pendingShifts[day] === next) delete state.pendingShifts[day];
+      if (state.me && !Object.keys(state.pendingShifts).length) {
+        writeCache(calendarKey(), { shifts: Object.values(state.shifts), events: Object.values(state.events).flat() });
+      }
     }
   }
 
@@ -364,6 +459,7 @@
   // ---------- 일정 입력 시트 ----------
   var editing = null;
   function openSheet(ev) {
+    if (!state.verified) { toast('연결과 계정 확인 후 수정할 수 있다'); return; }
     editing = ev ? Object.assign({}, ev) : { day: state.selected, owner: state.me || 'ho', title: '', time_text: '', memo: '' };
     var e = editing;
     var meta = '';
@@ -420,6 +516,7 @@
   // ---------- 로그인 ----------
   var loginPerson = defaultPerson();
   function showLogin() {
+    $('boot-status').classList.add('hidden');
     els.app.classList.add('hidden');
     els.login.classList.remove('hidden');
     state.shiftMode = false; renderShiftBar();
@@ -452,11 +549,13 @@
         : /invalid/i.test((err && err.message) || '') ? '비밀번호가 맞지 않는다' : '로그인하지 못하였다. 잠시 후 다시 시도한다';
     } finally { els.loginGo.disabled = false; }
   }
-  async function enter() {
+  async function enter(session) {
+    var epoch = cacheEpoch;
     var me;
     try { me = await api.whoami(); }
     catch (err) {
       if (isNetworkError(err)) {
+        if (state.me) { syncStatus('기기 저장본 · 오프라인, 계정 확인 후 수정할 수 있다'); return; }
         // 로그인은 유지한 채 연결 문제만 안내한다
         els.loginErr.textContent = '인터넷에 연결되지 않았다. 연결 후 "들어가기"를 누르면 다시 연다(로그인은 유지되어 있다).';
         showLogin();
@@ -465,23 +564,39 @@
       throw err;
     }
     if (me !== 'eun' && me !== 'ho') {
+      clearPrivateCache(); state.me = null; state.userId = null;
       await api.signOut();
       els.loginErr.textContent = '등록되지 않은 계정이다';
       showLogin();
       return;
     }
+    if (epoch !== cacheEpoch) return;
+    session = session || await api.session();
+    if (epoch !== cacheEpoch) return;
+    if (!session) { clearPrivateCache(); state.me = null; state.userId = null; showLogin(); return; }
+    var nextId = session.user ? session.user.id : 'mock-' + me;
+    if (state.userId && state.userId !== nextId) clearPrivateCache();
+    var alreadyOpen = !!state.me && state.userId === nextId;
     state.me = me;
+    state.userId = nextId;
+    state.verified = true;
+    writeCache('member', {person: me});
     els.loginErr.textContent = '';
     els.login.classList.add('hidden');
     els.app.classList.remove('hidden');
-    goToday();
+    $('boot-status').classList.add('hidden');
+    if (!alreadyOpen) { render(); load(); initHousing(); }
+    CoupleHousing.verified();
+    try { setView(localStorage.getItem('unfade-plan-view') === 'housing' ? 'housing' : 'calendar'); } catch (e) { setView('calendar'); }
   }
   async function logout() {
     closeMenu();
     if (!confirm('이 기기에서 로그아웃할까요? 다시 들어오려면 비밀번호가 필요하다.')) return;
-    await api.signOut();
+    clearPrivateCache(); closeSheet();
     state.me = null;
+    state.userId = null;
     showLogin();
+    await api.signOut();
   }
 
   function toggleMenu() { els.menu.classList.toggle('hidden'); }
@@ -495,6 +610,9 @@
       overlay: $('overlay'), sheet: $('sheet'), toast: $('toast'), menu: $('menu'),
       loginPw: $('login-pw'), loginUser: $('login-user'), loginGo: $('login-go'), loginErr: $('login-err')
     };
+    els.sync = $('sync-status');
+    $('calendar-tab').addEventListener('click', function () { setView('calendar'); });
+    $('housing-tab').addEventListener('click', function () { setView('housing'); });
     $('prev').addEventListener('click', function () { goMonth(-1); });
     $('next').addEventListener('click', function () { goMonth(1); });
     $('today-btn').addEventListener('click', goToday);
@@ -511,6 +629,7 @@
       var d = c.getAttribute('data-day');
       if (state.shiftMode) { if (state.seqBusy) return; state.selected = d; paintShift(d, state.brush); return; }
       var dd = parse(d);
+      if (dd.getMonth() + 1 !== state.month && !CoupleHousing.month(dd.getFullYear() + '-' + pad(dd.getMonth() + 1))) return;
       state.selected = d;
       if (dd.getMonth() + 1 !== state.month) { state.year = dd.getFullYear(); state.month = dd.getMonth() + 1; render(); load(); return; }
       renderGrid(); renderDay();
@@ -537,7 +656,7 @@
     els.me.addEventListener('click', function (e) { e.stopPropagation(); toggleMenu(); });
     document.addEventListener('click', function (e) { if (!e.target.closest('#menu')) closeMenu(); });
     $('logout').addEventListener('click', logout);
-    $('refresh').addEventListener('click', function () { closeMenu(); load(); });
+    $('refresh').addEventListener('click', function () { closeMenu(); load(); CoupleHousing.refresh(); verifyAccess(); });
 
     els.login.addEventListener('click', function (e) {
       var b = e.target.closest('[data-person]'); if (!b) return;
@@ -558,8 +677,31 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden || !state.me) return;
       var t = todayStr();
-      if (t !== state.lastToday) { state.lastToday = t; goToday(); } else if (els.overlay.classList.contains('hidden')) load();
+      if (t !== state.lastToday && !CoupleHousing.isDirty()) { state.lastToday = t; goToday(); } else if (els.overlay.classList.contains('hidden')) load();
+      CoupleHousing.refresh();
+      verifyAccess();
     });
+    window.addEventListener('online', function () {
+      if (state.me) { verifyAccess(); load(); CoupleHousing.refresh(); }
+    });
+    window.addEventListener('storage', function (e) {
+      if (e.key !== 'unfade-couple-auth' || !state.me) return;
+      var saved; try { saved = JSON.parse(e.newValue); } catch (x) {}
+      if (!saved || !saved.user || saved.user.id !== state.userId) {
+        clearPrivateCache(); state.me = null; state.userId = null; closeSheet(); showLogin();
+      }
+    });
+    window.addEventListener('beforeunload', function (e) { if (CoupleHousing.isDirty()) { e.preventDefault(); e.returnValue = ''; } });
+  }
+
+  async function verifyAccess() {
+    var epoch = cacheEpoch;
+    try {
+      var session = await api.session();
+      if (epoch !== cacheEpoch) return;
+      if (session) await enter(session);
+      else { clearPrivateCache(); state.me = null; state.userId = null; closeSheet(); showLogin(); }
+    } catch (err) { if (epoch === cacheEpoch) handleError(err, '계정을 확인하지 못했다'); }
   }
 
   async function start() {
@@ -577,10 +719,32 @@
       return;
     }
     try {
+      // 갱신 토큰의 네트워크 응답을 기다리기 전에, 같은 계정의 확인된 저장본만 표시한다.
+      var saved = api.savedSession();
+      if (saved && saved.user && saved.refresh_token) {
+        state.userId = saved.user.id;
+        var member = readCache('member');
+        if (member && PEOPLE[member.person] && member.person !== 'both') {
+          state.me = member.person;
+          els.app.classList.remove('hidden'); $('boot-status').classList.add('hidden');
+          render(); load(); initHousing();
+          try { setView(localStorage.getItem('unfade-plan-view') === 'housing' ? 'housing' : 'calendar'); } catch (e) {}
+        }
+      }
       var s = await api.session();
-      if (s) { await enter(); return; }
-    } catch (err) { /* 세션 확인 실패 시 로그인 화면으로 */ }
+      if (s) { await enter(s); return; }
+      clearPrivateCache(); state.me = null; state.userId = null;
+    } catch (err) {
+      if (state.me && isNetworkError(err)) { syncStatus('기기 저장본 · 연결 후 최신 내역을 확인한다'); return; }
+      clearPrivateCache(); state.me = null; state.userId = null;
+    }
     showLogin();
+  }
+
+  if ('serviceWorker' in navigator && !isMock) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/plan/sw.js', { scope: '/plan/', updateViaCache: 'none' }).catch(function () { /* 캐시 불가 환경에서도 앱을 사용할 수 있다. */ });
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

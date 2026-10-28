@@ -87,7 +87,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .cell.sel { background: var(--accent-soft); border-radius: 10px; }
 .cell.today .num { background: var(--accent); color: var(--accent-ink); border-radius: 999px; min-width: 24px; height: 24px; display: inline-grid; place-items: center; padding: 0 4px; }
 .shift-mode .cell:not(.out) { outline: 1px dashed var(--line); outline-offset: -3px; }
-.cal.loading .grid { opacity: .55; transition: opacity .2s; }
+.cal.loading .grid { opacity: 1; }
 
 .legend { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 10px 6px 0; font-size: 12px; color: var(--muted); }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
@@ -193,3 +193,54 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
   .cell .shift { height: 22px; font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+/* 주거비와 갱신 상태이다. */
+.boot-status { margin: 30vh auto; text-align: center; color: var(--muted); }
+.view-tabs { display: flex; gap: 6px; margin-top: 16px; border-bottom: 1px solid var(--line); }
+.view-tabs button { min-height: 46px; padding: 8px 18px; font-weight: 700; color: var(--muted); border-bottom: 3px solid transparent; }
+.view-tabs button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+.sync-status, .cost-status { color: var(--muted); font-size: 12px; min-height: 18px; margin: 8px 4px; }
+.housing { padding-top: 16px; }
+.cost-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.cost-heading h2 { font-size: 24px; margin: 0; letter-spacing: -.04em; }
+.eyebrow { font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+.cost-month-label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+.housing input, .housing textarea { min-width: 0; width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 10px; font: inherit; font-size: 16px; }
+.housing input[type="month"] { min-height: 44px; }
+.housing button:focus-visible, .housing input:focus-visible, .housing textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cost-summary { display: flex; justify-content: space-between; gap: 22px; align-items: center; margin: 16px 0 22px; background: var(--accent-soft); border-radius: 18px; padding: 24px; }
+.cost-summary span, .cost-summary small { display: block; color: var(--muted); font-size: 12px; }
+.cost-summary strong { display: block; font-size: clamp(28px, 5vw, 38px); font-variant-numeric: tabular-nums; letter-spacing: -.04em; margin: 5px 0; }
+.cost-subtotal b { display: block; margin: 6px 0; font-size: 18px; }
+.cost-form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.cost-form-grid fieldset { margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 18px; }
+.cost-form-grid legend { font-weight: 800; padding: 0 6px; }
+.cost-form-grid p { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+.cost-form-grid small { color: var(--muted); font-size: 12px; }
+.cost-field { display: grid; gap: 6px; font-size: 13px; margin: 14px 0; }
+.cost-field span { position: relative; }
+.cost-field span input { padding-right: 36px; text-align: right; font-variant-numeric: tabular-nums; }
+.cost-field span b { position: absolute; right: 12px; top: 12px; font-size: 13px; color: var(--muted); }
+.cost-memo { display: grid; gap: 8px; margin-top: 20px; font-size: 13px; }
+.cost-message { min-height: 22px; font-size: 13px; color: var(--muted); }
+.cost-actions { display: flex; gap: 10px; max-width: 420px; margin-left: auto; }
+.cost-actions .pill { height: 46px; }
+button:disabled { opacity: .5; cursor: wait; }
+.cost-history { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 12px; }
+.cost-history h3 { font-size: 16px; }
+.cost-history ul { padding: 0; margin: 0; list-style: none; }
+.cost-history li + li { border-top: 1px solid var(--line); }
+.cost-history button { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 14px 12px; text-align: left; border-radius: 10px; }
+.cost-history button[aria-current] { background: var(--accent-soft); }
+.cost-history small { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
+@media (max-width: 700px) {
+  .season-fx { display: none; }
+  body { background-attachment: scroll; }
+  .cost-form-grid { grid-template-columns: 1fr; gap: 18px; }
+  .cost-summary { padding: 20px; flex-direction: column; align-items: stretch; gap: 16px; }
+  .cost-subtotal { padding-top: 12px; border-top: 1px solid var(--line); }
+  .cost-heading { align-items: flex-end; gap: 8px; }
+  .cost-heading h2 { font-size: 22px; }
+  .cost-month-label { max-width: 160px; }
+  .cost-form-grid fieldset { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .season-fx { display: none; } }
