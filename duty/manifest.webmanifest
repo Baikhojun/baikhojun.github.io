@@ -1,0 +1,19 @@
+{
+  "name": "근무표",
+  "short_name": "근무표",
+  "description": "이번 달 근무표 보기",
+  "lang": "ko",
+  "id": "/duty/",
+  "start_url": "/duty/",
+  "scope": "/duty/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F5F7",
+  "theme_color": "#F4F5F7",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

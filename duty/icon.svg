@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="근무표">
+  <rect width="512" height="512" rx="112" fill="#14161A"/>
+  <rect x="84" y="206" width="104" height="104" rx="30" fill="#A9CCFF"/>
+  <rect x="204" y="176" width="104" height="104" rx="30" fill="#FFC6A1"/>
+  <rect x="324" y="206" width="104" height="104" rx="30" fill="#8F8CF2"/>
+  <rect x="84" y="346" width="344" height="18" rx="9" fill="#FFFFFF" opacity=".22"/>
+</svg>
