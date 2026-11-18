@@ -1,8 +1,12 @@
 // 이 파일은 근무표 화면의 서버 호출을 맡는다.
 // 실제 서버: POST {url}/rest/v1/rpc/<함수명> (Supabase 함수 duty_*).
 // 시험 모드: localhost에서 주소에 ?mock을 붙이면 서버 없이 mock-data.js의 가짜 자료로 같은 모양의 응답을 돌려준다.
-//   ?mock          구성원 화면      ?mock=admin   관리자 화면
-//   ?mock=pending  공개 전 화면     ?mock=error   근무표를 받지 못하는 화면
+//   ?mock             구성원 화면              ?mock=admin        관리자 화면(관리자로 로그인된다)
+//   ?mock=pending     공개 전 화면             ?mock=error        근무표 통신 실패
+//   ?mock=notfound    그 달이 없음(not_found)  ?mock=servererror  서버 문제(error)
+//   ?mock=expired     접속 만료(expired)       ?mock=broken       그릴 수 없는 응답
+//   ?mock=admin&publish=forbidden|expired|error|not_found   공개·공개 취소의 실패 사유
+//   번호: 0000 틀림, 9999 잠김, 8888 통신 실패, 7777 서버 문제. &refresh=초 는 다시 받는 간격, &today=YYYY-MM-DD 는 오늘 날짜.
 (function () {
   'use strict';
 
@@ -101,10 +105,11 @@
     try { window.sessionStorage.setItem(PUBLISHED_KEY, id || 'none'); } catch (e) { /* 무시 */ }
   }
 
+  // 역할은 실제 서버처럼 토큰이 정한다.
   function mockRole(token) {
-    if (token !== MOCK_STAFF_TOKEN && token !== MOCK_ADMIN_TOKEN) return null;
-    // 시험 모드에서는 주소의 ?mock 값이 역할을 정한다.
-    return mockMode === 'admin' ? 'admin' : 'staff';
+    if (token === MOCK_ADMIN_TOKEN) return 'admin';
+    if (token === MOCK_STAFF_TOKEN) return 'staff';
+    return null;
   }
 
   function mockMe(db) {
@@ -118,6 +123,7 @@
         var c = String(code == null ? '' : code).trim();
         if (c === '8888') throw fail('network');
         if (c === '9999') return { ok: false, reason: 'locked', retry_after_sec: 600 };
+        if (c === '7777') return { ok: false, reason: 'error' };
         if (!/^\d{3,}$/.test(c) || c === '0000') return { ok: false, reason: 'invalid' };
         if (mockMode === 'admin') return { ok: true, role: 'admin', token: MOCK_ADMIN_TOKEN, me: null };
         return { ok: true, role: 'staff', token: MOCK_STAFF_TOKEN, me: mockMe(db) };
@@ -133,9 +139,11 @@
     roster: function (token, ym) {
       return later(function (db) {
         if (mockMode === 'error') throw fail('network');
+        if (mockMode === 'servererror') return { ok: false, reason: 'error' };
         var role = mockRole(token);
-        if (!role) return { ok: false, reason: 'expired' };
-        if (ym !== db.ym) return { ok: false, reason: 'no_month' };
+        if (!role || mockMode === 'expired') return { ok: false, reason: 'expired' };
+        if (ym !== db.ym || mockMode === 'notfound') return { ok: false, reason: 'not_found' };
+        if (mockMode === 'broken') return { ok: true, role: role, ym: db.ym, status: 'published', me: mockMe(db), days: 31, staff: {}, roster: {} };
         var pubId = mockPublished(db);
         if (mockMode === 'pending' && role === 'staff') pubId = null;
         var pub = db.candidates.filter(function (c) { return c.id === pubId; })[0] || null;
@@ -167,8 +175,11 @@
     },
     publish: function (token, ym, candidate) {
       return later(function (db) {
+        var forced = params.get('publish');
+        if (forced === 'forbidden' || forced === 'expired' || forced === 'error' || forced === 'not_found') return { ok: false, reason: forced };
+        if (!mockRole(token)) return { ok: false, reason: 'expired' };
         if (mockRole(token) !== 'admin') return { ok: false, reason: 'forbidden' };
-        if (ym !== db.ym) return { ok: false, reason: 'no_month' };
+        if (ym !== db.ym) return { ok: false, reason: 'not_found' };
         if (candidate != null && !db.candidates.some(function (c) { return c.id === candidate; })) {
           return { ok: false, reason: 'not_found' };
         }

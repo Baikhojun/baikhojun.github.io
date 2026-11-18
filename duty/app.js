@@ -1,5 +1,6 @@
 // 이 파일은 근무표 보기 화면의 동작이다. 번호 입력, 내 달력, 날짜 상세, 다른 사람, 전체 표, 설정, 관리자 화면을 그린다.
 // 서버에서 받은 값은 모두 글자(textContent)로만 넣는다. 사번은 기기에 저장하지 않고 접속 토큰만 저장한다.
+// 구성원 토큰은 쿠키와 localStorage에 1년 두고, 관리자 토큰은 sessionStorage에만 두어 창을 닫으면 사라지게 한다.
 (function () {
   'use strict';
 
@@ -9,7 +10,22 @@
   var YM = CFG.ym || '2026-12';
   var MOCK = Api.mock;
   var TOKEN_KEY = MOCK ? 'duty_token_mock' : 'duty_token';
+  var ADMIN_KEY = MOCK ? 'duty_admin_token_mock' : 'duty_admin_token';
   var COOKIE_PATH = '/duty/';
+  // 화면이 다시 보일 때 마지막 수신 후 이 시간이 지났으면 근무표를 조용히 다시 받는다.
+  var REFRESH_MS = 3 * 60 * 1000;
+  if (MOCK) {
+    // 시험 모드에서는 ?mock&refresh=초 로 줄일 수 있다.
+    var refreshParam = new URLSearchParams(window.location.search).get('refresh');
+    if (refreshParam !== null && refreshParam !== '' && isFinite(Number(refreshParam)) && Number(refreshParam) >= 0) {
+      REFRESH_MS = Number(refreshParam) * 1000;
+    }
+  }
+  var TEXT = {
+    network: '연결하지 못했어요. 잠시 후 다시 시도하세요.',
+    server: '서버에 문제가 생겼어요. 잠시 뒤 다시 열어 주세요.',
+    draw: '화면을 그리지 못했어요. 새로 고쳐 보세요.'
+  };
   var DOW = ['일', '월', '화', '수', '목', '금', '토'];
 
   // 근무 코드의 뜻과 색 묶음. 모르는 코드는 글자 그대로 보인다.
@@ -59,7 +75,14 @@
 
   var state = {
     token: null,
+    tokenRole: null,     // 토큰을 둔 곳: 'staff'(쿠키·localStorage) | 'admin'(sessionStorage)
     data: null,
+    dataKey: null,       // 받은 응답의 글자열. 다시 받은 내용이 같은지 견준다.
+    todayKey: null,      // 마지막으로 그린 날의 날짜. 자정을 넘겼는지 본다.
+    loadedAt: 0,         // 마지막으로 근무표를 받은 때
+    loadSeq: 0,
+    loading: 0,
+    notice: null,        // 근무표 대신 안내 화면을 보이는 중이면 그 종류와 때
     tab: 'cal',          // cal | table | settings
     viewId: null,        // 달력에서 보고 있는 사람
     adminCand: null,     // 관리자가 고른 후보안
@@ -102,7 +125,8 @@
     logout: ['M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4', 'M15 8l4 4l-4 4', 'M19 12H9'],
     eye: ['M2.5 12S6 5.5 12 5.5S21.5 12 21.5 12S18 18.5 12 18.5S2.5 12 2.5 12z', 'M12 9.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5z'],
     eyeOff: ['M4 4l16 16', 'M9.9 5.8A9.6 9.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-3 3.7M14.5 17.9a9 9 0 0 1-2.5.6C6 18.5 2.5 12 2.5 12a17 17 0 0 1 4-4.6'],
-    check: ['M5 12.5l4.5 4.5L19 7.5']
+    check: ['M5 12.5l4.5 4.5L19 7.5'],
+    refresh: ['M20 12a8 8 0 1 1-2.6-5.9', 'M20 4v5h-5']
   };
 
   function icon(name) {
@@ -202,6 +226,52 @@
     document.cookie = TOKEN_KEY + '=; Max-Age=0; Path=' + COOKIE_PATH + '; Secure; SameSite=Lax';
   }
 
+  // 관리자 토큰은 이 창에만 둔다(sessionStorage). 쿠키와 localStorage에는 쓰지 않는다.
+  function readAdminToken() {
+    try { return window.sessionStorage.getItem(ADMIN_KEY) || null; } catch (e) { return null; }
+  }
+
+  function writeAdminToken(token) {
+    try { window.sessionStorage.setItem(ADMIN_KEY, token); } catch (e) { /* 저장하지 못하면 이번 화면에서만 쓴다. */ }
+  }
+
+  function clearAdminToken() {
+    try { window.sessionStorage.removeItem(ADMIN_KEY); } catch (e) { /* 무시 */ }
+  }
+
+  function useToken(token, role) {
+    state.token = token;
+    state.tokenRole = role;
+  }
+
+  // 지금 쓰는 토큰만 지운다. 관리자로 접속 중이면 구성원 토큰은 그대로 둔다.
+  function dropCurrentToken() {
+    if (state.tokenRole === 'admin') clearAdminToken();
+    else clearToken();
+    state.token = null;
+    state.tokenRole = null;
+    state.data = null;
+    state.dataKey = null;
+    state.loadSeq++;
+  }
+
+  function todayKey() {
+    var t = todayParts();
+    return t.year + '-' + t.month + '-' + t.day;
+  }
+
+  // 누르는 동작에서 난 오류를 통신 오류와 섞지 않고 알린다.
+  function guard(fn) {
+    return function () {
+      try {
+        return fn.apply(this, arguments);
+      } catch (err) {
+        console.error('[duty] 화면을 그리지 못했다.', err);
+        toast(TEXT.draw);
+      }
+    };
+  }
+
   // ---------- 공통 화면 조각 ----------
   var appEl = document.getElementById('app');
   var toastEl = document.getElementById('toast');
@@ -209,6 +279,7 @@
 
   function mount(node) {
     stopLockTimer();
+    state.notice = null;
     while (appEl.firstChild) appEl.removeChild(appEl.firstChild);
     appEl.appendChild(node);
     appEl.removeAttribute('aria-busy');
@@ -334,7 +405,8 @@
     function showLock(sec) {
       lockedUntil = Date.now() + Math.max(1, Number(sec) || 600) * 1000;
       var minutes = Math.max(1, Math.ceil((Number(sec) || 600) / 60));
-      msg.textContent = '여러 번 틀려서 잠겼어요. 약 ' + minutes + '분 뒤에 다시 입력하세요.';
+      // 전체 잠금에서는 한 번도 틀리지 않은 사람도 이 문구를 본다. 이유를 단정하지 않는다.
+      msg.textContent = '잠시 접속이 잠겼어요. ' + minutes + '분 뒤에 다시 넣어 주세요.';
       submit.disabled = true;
       input.disabled = true;
       timer.hidden = false;
@@ -366,19 +438,31 @@
         Api.login(code).then(function (res) {
           if (res && res.ok && res.token) {
             input.value = '';
-            state.token = res.token;
-            writeToken(res.token);
+            if (res.role === 'admin') {
+              writeAdminToken(res.token);
+              useToken(res.token, 'admin');
+            } else {
+              writeToken(res.token);
+              useToken(res.token, 'staff');
+            }
             loadRoster();
             return;
           }
           setBusy(false);
-          if (res && res.reason === 'locked') { input.value = ''; showLock(res.retry_after_sec); return; }
-          msg.textContent = '번호가 맞지 않아요. 다시 입력하세요.';
-          input.value = '';
-          input.focus();
-        }).catch(function () {
+          var reason = res && res.reason;
+          if (reason === 'locked') { input.value = ''; showLock(res.retry_after_sec); return; }
+          if (reason === 'invalid') {
+            msg.textContent = '번호가 맞지 않아요. 다시 입력하세요.';
+            input.value = '';
+            input.focus();
+            return;
+          }
+          msg.textContent = TEXT.server;      // error 등: 번호 탓이 아니다.
+        }).catch(function (err) {
           setBusy(false);
-          msg.textContent = '연결하지 못했어요. 잠시 후 다시 시도하세요.';
+          if (err && err.kind) { msg.textContent = err.kind === 'http' ? TEXT.server : TEXT.network; return; }
+          console.error('[duty] 화면을 그리지 못했다.', err);
+          msg.textContent = TEXT.draw;
         });
       }
     } },
@@ -390,7 +474,8 @@
       h('div', { class: 'brand', 'aria-hidden': 'true' }, tile('D'), tile('E'), tile('N')),
       h('h1', { class: 'login-title' }, '근무표'),
       form,
-      MOCK ? h('p', { class: 'mock-hint' }, '시험 모드예요. 숫자를 3자리 이상 넣으면 들어가요. 0000은 틀린 번호, 9999는 잠김, 8888은 연결 실패예요.') : null);
+      MOCK ? h('p', { class: 'mock-hint' }, '시험 모드예요. 숫자를 3자리 이상 넣으면 ' + (MOCK === 'admin' ? '관리자로 ' : '') +
+        '들어가요. 0000은 틀린 번호, 9999는 잠김, 8888은 연결 실패, 7777은 서버 문제예요.') : null);
 
     mount(h('main', { class: 'login' },
       h('div', { class: 'login-top' }, themeButton()),
@@ -405,60 +490,143 @@
       h('p', null, '근무표를 불러오는 중이에요…')));
   }
 
-  function renderLoadError() {
-    mount(h('main', { class: 'center-page' },
-      emptyCard('연결하지 못했어요', '인터넷 연결을 확인하고 다시 시도하세요.',
-        h('div', { class: 'empty-actions' },
-          h('button', { class: 'btn btn-primary', type: 'button', on: { click: function () { loadRoster(); } } }, '다시 시도'),
-          h('button', { class: 'btn btn-ghost', type: 'button', on: { click: function () { logout(true); } } }, '나가기')))));
+  // 근무표 대신 보이는 안내 화면. 종류: network 연결 실패, server 서버 문제, draw 그리기 실패, pending 준비 중.
+  function renderNotice(kind) {
+    var p = ymParts(YM);
+    var copy = {
+      network: ['연결하지 못했어요', '인터넷 연결을 확인하고 다시 시도하세요.', '다시 시도'],
+      server: ['서버에 문제가 생겼어요', '잠시 뒤 다시 열어 주세요.', '다시 시도'],
+      draw: ['화면을 그리지 못했어요', '새로 고쳐 보세요.', '새로 고침'],
+      pending: [p.month + '월 근무표를 준비하고 있어요', '공개되면 여기에서 바로 볼 수 있어요.', '새로 고침']
+    }[kind];
+    mount(h('main', { class: 'login' },
+      h('div', { class: 'login-top' }, themeButton()),
+      h('div', { class: 'notice', 'data-notice': kind },
+        emptyCard(copy[0], copy[1],
+          h('div', { class: 'empty-actions' },
+            h('button', { class: 'btn btn-primary', type: 'button', on: {
+              click: function () { if (kind === 'draw') window.location.reload(); else loadRoster(); }
+            } }, copy[2]),
+            h('button', { class: 'btn btn-ghost', type: 'button', on: { click: function () { logout(true); } } }, '나가기'))))));
+    state.notice = { kind: kind, at: Date.now() };
   }
 
+  // 접속이 만료됐을 때: 지금 쓰던 토큰만 지우고 번호 입력으로 보낸다.
+  function expireSession() {
+    dropCurrentToken();
+    state.tab = 'cal';
+    state.viewId = null;
+    state.adminCand = null;
+    renderLogin('접속 정보가 만료됐어요. 번호를 다시 입력하세요.');
+  }
+
+  // 받은 근무표를 그린다. keep이면 스크롤과 표의 가로 위치를 그대로 둔다.
+  function draw(keep) {
+    var y = window.scrollY;
+    var oldTable = document.querySelector('.rt-wrap');
+    var x = oldTable ? oldTable.scrollLeft : null;
+    state.todayKey = todayKey();
+    if (state.data.role === 'admin') renderAdmin();
+    else renderStaff();
+    if (keep) {
+      var table = document.querySelector('.rt-wrap');
+      if (table && x !== null) table.scrollLeft = x;
+      window.scrollTo(0, y);
+    }
+  }
+
+  // 근무표를 받는다. silent이면 화면을 비우지 않고, 받은 내용이 같으면 다시 그리지도 않는다.
+  // 결과: updated 새로 그림, same 변화 없음, expired 만료, pending 아직 없음, server 서버 문제, network 연결 실패, draw 그리기 실패, stale 그사이 다른 요청이 앞섬
   function loadRoster(opts) {
-    var silent = opts && opts.silent;
+    var silent = !!(opts && opts.silent);
+    var token = state.token;
+    var seq = ++state.loadSeq;
+    state.loading++;
     if (!silent) renderLoading();
-    return Api.roster(state.token, YM).then(function (data) {
+    return Api.roster(token, YM).then(function (data) {
+      if (seq !== state.loadSeq || token !== state.token) return 'stale';
       if (!data || !data.ok) {
         var reason = data && data.reason;
-        if (reason === 'expired' || reason === 'invalid' || reason === 'revoked' || reason === 'unauthorized') {
-          clearToken();
-          state.token = null;
-          state.data = null;
-          renderLogin('접속 정보가 만료됐어요. 사번을 다시 입력하세요.');
-          return false;
-        }
-        if (!silent) renderLoadError();
-        return false;
+        if (reason === 'expired') { expireSession(); return 'expired'; }
+        if (reason === 'not_found') { if (!silent) renderNotice('pending'); return 'pending'; }
+        if (!silent) renderNotice('server');      // error, invalid 등: 토큰은 지우지 않는다.
+        return 'server';
       }
-      writeToken(state.token);      // 쿠키 기한을 새로 고친다.
-      var keepY = silent ? window.scrollY : 0;
+      if (data.role === 'admin') {
+        // 관리자 토큰이 쿠키·localStorage에 남아 있었다면(예전 방식) 지우고 이 창에만 둔다.
+        if (state.tokenRole !== 'admin') { clearToken(); writeAdminToken(token); state.tokenRole = 'admin'; }
+      } else if (state.tokenRole === 'staff') {
+        writeToken(token);      // 구성원 쿠키의 기한을 새로 고친다.
+      }
+      var key = JSON.stringify(data);
+      state.loadedAt = Date.now();
+      if (silent && state.data && key === state.dataKey && todayKey() === state.todayKey) return 'same';
       state.data = data;
-      if (data.role === 'admin') renderAdmin();
-      else renderStaff();
-      if (silent) window.scrollTo(0, keepY);
-      return true;
-    }).catch(function () {
-      if (!silent) renderLoadError();
-      return false;
+      state.dataKey = key;
+      draw(silent);
+      return 'updated';
+    }).catch(function (err) {
+      if (err && err.kind) {
+        var kind = err.kind === 'http' ? 'server' : 'network';
+        if (!silent && seq === state.loadSeq) renderNotice(kind);
+        return kind;
+      }
+      // 통신은 됐는데 그리다가 난 오류이다.
+      console.error('[duty] 화면을 그리지 못했다.', err);
+      state.data = null;
+      state.dataKey = null;
+      renderNotice('draw');
+      return 'draw';
+    }).then(function (result) {
+      state.loading--;
+      return result;
     });
   }
 
+  // 화면이 다시 보일 때(다른 앱에서 돌아옴, 뒤로 가기 복원): 오래됐으면 조용히 다시 받는다.
+  function onReturn() {
+    if (document.visibilityState === 'hidden') return;
+    if (!state.token || state.loading) return;
+    if (document.querySelector('dialog[open]')) return;      // 확인 창이나 날짜 상세가 열려 있으면 건너뛴다.
+    if (!state.data) {
+      var n = state.notice;
+      if (n && n.kind !== 'draw' && Date.now() - n.at >= REFRESH_MS) loadRoster();
+      return;
+    }
+    if (Date.now() - state.loadedAt >= REFRESH_MS) { loadRoster({ silent: true }); return; }
+    if (todayKey() !== state.todayKey) {
+      // 자정을 넘겼으면 "오늘" 강조만 다시 맞춘다.
+      try { draw(true); } catch (err) { console.error('[duty] 화면을 그리지 못했다.', err); }
+    }
+  }
+
+  document.addEventListener('visibilitychange', onReturn);
+  window.addEventListener('pageshow', onReturn);
+
   function logout(skipConfirm) {
+    var wasAdmin = state.tokenRole === 'admin';
     var go = function () {
       var token = state.token;
-      clearToken();
-      state.token = null;
-      state.data = null;
+      dropCurrentToken();
       state.tab = 'cal';
       state.viewId = null;
       state.adminCand = null;
       if (token) Api.logout(token).catch(function () { /* 서버에 알리지 못해도 기기에서는 지운다. */ });
+      // 관리자가 나가면 관리자 토큰만 지운다. 이 기기에 구성원 토큰이 있으면 구성원 화면으로 돌아간다.
+      var staffToken = wasAdmin ? readToken() : null;
+      if (staffToken) {
+        useToken(staffToken, 'staff');
+        loadRoster();
+        toast('관리자 화면에서 나갔어요.');
+        return;
+      }
       renderLogin();
       toast('나갔어요.');
     };
     if (skipConfirm) { go(); return; }
     confirmDialog({
       title: '나갈까요?',
-      body: '다음에 들어올 때 번호를 다시 입력해야 해요.',
+      body: wasAdmin ? '관리자 화면에서 나가요. 다시 들어오려면 관리자 번호를 넣어야 해요.' : '다음에 들어올 때 번호를 다시 입력해야 해요.',
       okLabel: '나가기',
       danger: true
     }).then(function (yes) { if (yes) go(); });
@@ -483,11 +651,11 @@
     ];
     var nav = h('nav', { class: 'tabbar', 'aria-label': '화면 이동' }, tabs.map(function (t) {
       return h('button', { class: 'tab', type: 'button', 'data-tab': t.id, on: {
-        click: function () {
+        click: guard(function () {
           if (t.id === 'cal' && state.tab === 'cal') state.viewId = meId();
           state.tab = t.id;
           paintStaffView(true);
-        }
+        })
       } }, icon(t.icon), h('span', null, t.label));
     }));
 
@@ -524,7 +692,7 @@
     while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
     if (state.tab === 'cal' && state.viewId !== meId()) {
       wrap.appendChild(h('button', { class: 'return-pill', type: 'button', on: {
-        click: function () { state.viewId = meId(); paintStaffView(true); }
+        click: guard(function () { state.viewId = meId(); paintStaffView(true); })
       } }, icon('back'), h('span', null, '내 달력으로')));
     }
 
@@ -568,7 +736,7 @@
     out.push(h('div', { class: 'people', role: 'group', 'aria-label': '근무표를 볼 사람' }, people.map(function (s) {
       return h('button', { class: 'chip' + (s.id === me ? ' chip-me' : ''), type: 'button',
         'aria-pressed': s.id === pid ? 'true' : 'false', on: {
-          click: function () { state.viewId = s.id; paintStaffView(false); }
+          click: guard(function () { state.viewId = s.id; paintStaffView(false); })
         } }, s.id === me ? [h('span', { class: 'chip-badge' }, '나'), s.name] : s.name);
     })));
 
@@ -638,7 +806,7 @@
         (mark && MARK_NAMES[mark] ? ', ' + MARK_NAMES[mark] : '') +
         (day.holiday ? ', 공휴일' : '') + (day.d === today ? ', 오늘' : '');
       grid.appendChild(h('button', { class: cls, type: 'button', 'aria-label': label, on: {
-        click: function () { openDay(day.d); }
+        click: guard(function () { openDay(day.d); })
       } },
         h('span', { class: 'day-num' }, String(day.d)),
         tile(code),
@@ -685,14 +853,16 @@
     var current = dayNo;
     var ctl;
     var body = h('div', { class: 'sheet-content' });
+    var days = d.days || [];
+    var cells = roster.cells || {};
 
     function paint() {
-      var day = (d.days || [])[current - 1];
+      var day = days[current - 1];
       while (body.firstChild) body.removeChild(body.firstChild);
       if (!day) return;
       var groups = { D: [], E: [], N: [], half: [], rest: [] };
       sortedStaff(d).forEach(function (s) {
-        var code = (roster.cells[s.id] || [])[current - 1];
+        var code = (cells[s.id] || [])[current - 1];
         if (code == null || code === '-') return;
         if (code === 'D' || code === 'E' || code === 'N') groups[code].push({ s: s, code: code });
         else if (codeInfo(code).cat === 'half') groups.half.push({ s: s, code: code });
@@ -706,10 +876,10 @@
         ['OF', '휴무', groups.rest, true]
       ];
       var prevBtn = h('button', { class: 'icon-btn', type: 'button', 'aria-label': '전날 보기', disabled: current <= 1, on: {
-        click: function () { if (current > 1) { current--; paint(); } }
+        click: guard(function () { if (current > 1) { current--; paint(); } })
       } }, icon('left'));
-      var nextBtn = h('button', { class: 'icon-btn', type: 'button', 'aria-label': '다음 날 보기', disabled: current >= d.days.length, on: {
-        click: function () { if (current < d.days.length) { current++; paint(); } }
+      var nextBtn = h('button', { class: 'icon-btn', type: 'button', 'aria-label': '다음 날 보기', disabled: current >= days.length, on: {
+        click: guard(function () { if (current < days.length) { current++; paint(); } })
       } }, icon('right'));
       var titleCls = 'sheet-title' + (day.dow === 0 || day.holiday ? ' is-sun' : day.dow === 6 ? ' is-sat' : '');
       body.appendChild(h('div', { class: 'sheet-head' },
@@ -873,14 +1043,37 @@
     }));
   }
 
+  // 설정의 "새로 고침": 홈 화면에 추가한 앱에는 브라우저의 새로 고침이 없어서 둔다.
+  function refreshNow(btn) {
+    btn.disabled = true;
+    btn.classList.add('is-busy');
+    loadRoster({ silent: true }).then(function (result) {
+      if (result === 'updated') toast('근무표를 새로 받았어요.');
+      else if (result === 'same') toast('이미 최신 근무표예요.');
+      else if (result === 'network') toast(TEXT.network);
+      else if (result === 'server') toast(TEXT.server);
+      else if (result === 'pending') { state.data = null; state.dataKey = null; renderNotice('pending'); }
+      if (document.contains(btn)) { btn.disabled = false; btn.classList.remove('is-busy'); }
+    });
+  }
+
   function settingsView() {
     var d = state.data;
+    var publishedAt = d.status === 'published' && d.roster ? fmtDateTime(d.roster.publishedAt) : '';
+    var refreshBtn = h('button', { class: 'btn btn-ghost btn-block', type: 'button', on: {
+      click: function () { refreshNow(refreshBtn); }
+    } }, icon('refresh'), '새로 고침');
     return [
       h('h2', { class: 'section-title' }, '설정'),
       d.me ? h('section', { class: 'card profile' },
         h('span', { class: 'avatar', 'aria-hidden': 'true' }, String(d.me.name || '').slice(0, 1)),
         h('div', null, h('strong', { class: 'profile-name' }, d.me.name, h('span', { class: 'title-sub' }, ' 님')),
           h('p', { class: 'profile-sub' }, '이 기기에서 접속 중이에요.'))) : null,
+      h('section', { class: 'card' },
+        h('h3', { class: 'card-title' }, '근무표'),
+        h('p', { class: 'pub-line' }, d.status !== 'published' || !d.roster ? '아직 공개 전이에요.'
+          : publishedAt ? publishedAt + ' 공개' : '공개된 근무표예요.'),
+        refreshBtn),
       h('section', { class: 'card' },
         h('h3', { class: 'card-title' }, '화면 모드'),
         themeSegment()),
@@ -960,7 +1153,7 @@
       var groups = softGroups(c);
       var softCount = (c.soft || []).length;
       var input = h('input', { type: 'radio', name: 'duty-cand', class: 'cand-input', id: 'cand-' + c.id, value: c.id, on: {
-        change: function () { state.adminCand = c.id; paintAdminDetail(true); }
+        change: guard(function () { state.adminCand = c.id; paintAdminDetail(true); })
       } });
       input.checked = c.id === state.adminCand;
       return h('div', { class: 'cand' },
@@ -1106,17 +1299,30 @@
   }
 
   function publish(candId, doneText) {
-    return Api.publish(state.token, YM, candId).then(function (res) {
-      if (!res || !res.ok) { toast(candId ? '공개하지 못했어요. 다시 시도하세요.' : '공개를 취소하지 못했어요. 다시 시도하세요.'); return; }
+    var token = state.token;
+    return Api.publish(token, YM, candId).then(function (res) {
+      if (token !== state.token) return;
+      if (!res || !res.ok) {
+        var reason = res && res.reason;
+        if (reason === 'expired') { expireSession(); return; }
+        if (reason === 'forbidden') { toast('관리자만 할 수 있어요.'); return; }
+        if (reason === 'error' || reason === 'invalid') { toast(TEXT.server); return; }
+        toast(candId ? '공개하지 못했어요. 다시 시도하세요.' : '공개를 취소하지 못했어요. 다시 시도하세요.');
+        return;
+      }
       toast(doneText);
-      return loadRoster({ silent: true }).then(function (ok) {
-        if (!ok && state.data) {
+      return loadRoster({ silent: true }).then(function (result) {
+        // 다시 받지 못했으면 가진 자료에서 공개 상태만 고쳐 그린다.
+        if ((result === 'network' || result === 'server' || result === 'pending') && state.data) {
           state.data.publishedId = res.published || null;
-          renderAdmin();
+          state.dataKey = null;
+          draw(true);
         }
       });
-    }).catch(function () {
-      toast('연결하지 못했어요. 잠시 후 다시 시도하세요.');
+    }).catch(function (err) {
+      if (err && err.kind) { toast(err.kind === 'http' ? TEXT.server : TEXT.network); return; }
+      console.error('[duty] 화면을 그리지 못했다.', err);
+      toast(TEXT.draw);
     });
   }
 
@@ -1138,10 +1344,23 @@
   }
 
   // ---------- 시작 ----------
+  function framed() {
+    try { return window.top !== window.self; } catch (e) { return true; }
+  }
+
   function boot() {
-    state.token = readToken();
-    if (state.token) loadRoster();
-    else renderLogin();
+    // 다른 사이트의 틀(프레임) 안에서는 화면을 그리지 않는다.
+    if (framed()) {
+      mount(h('p', { class: 'boot' }, '새 창에서 열어 주세요.'));
+      return;
+    }
+    // 이 창의 관리자 토큰을 먼저 보고, 없으면 기기에 둔 구성원 토큰을 본다.
+    var adminToken = readAdminToken();
+    if (adminToken) { useToken(adminToken, 'admin'); loadRoster(); return; }
+    // 시험 모드의 ?mock=admin은 관리자 화면을 보려는 것이므로 구성원 토큰으로 들어가지 않는다.
+    var staffToken = MOCK === 'admin' ? null : readToken();
+    if (staffToken) { useToken(staffToken, 'staff'); loadRoster(); return; }
+    renderLogin();
   }
 
   boot();

@@ -360,6 +360,9 @@ button { cursor: pointer; touch-action: manipulation; }
   animation: rise .35s cubic-bezier(.2, .8, .2, 1) both;
 }
 .center-page .empty { margin-top: 0; max-width: 380px; }
+.notice { align-self: center; width: 100%; max-width: 380px; margin: 0 auto 12vh; }
+.notice .empty { margin-top: 0; }
+.pub-line { margin-bottom: 12px; font-size: 15px; font-weight: 600; color: var(--text-2); font-variant-numeric: tabular-nums; }
 .empty-art { display: inline-flex; gap: 5px; margin-bottom: 10px; opacity: .9; }
 .empty-art .tile:nth-child(2) { transform: translateY(-6px); }
 .empty-title { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
