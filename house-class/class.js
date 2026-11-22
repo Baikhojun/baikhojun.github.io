@@ -332,7 +332,7 @@
     var reqColor = function (r) { return r === '2y' ? 'var(--warm)' : r === 'none' ? 'var(--s3)' : 'var(--s1)'; };
     var selectTown = function (id) {
       var t = G.towns.filter(function (x) { return x.id === id; })[0]; if (!t || !mapInfo) return;
-      $$('.ntmap__town', mapHost).forEach(function (g) { g.classList.toggle('on', g.getAttribute('data-id') === id); });
+      $$('.ntmap__town', mapHost).forEach(function (g) { var on = g.getAttribute('data-id') === id; g.classList.toggle('on', on); g.setAttribute('aria-pressed', on ? 'true' : 'false'); });
       var line = function (l, v) { return v ? '<div class="nt__row"><span>' + l + '</span><b>' + esc(v) + '</b></div>' : ''; };
       var tierCls = /인기|브랜드/.test(t.tier || '') ? 'chip--key' : /가성비/.test(t.tier || '') ? 'chip--good' : '';
       mapInfo.innerHTML = '<div class="card nt"><div class="chip ' + tierCls + '">' + esc(t.tier || '') + '</div>' +
@@ -355,7 +355,7 @@
       var ox = (W - (lon1 - lon0) * cl * k) / 2, oy = (H - (la1 - la0) * k) / 2;
       var P = function (lon, lat) { return [ox + (lon - lon0) * cl * k, oy + (la1 - lat) * k]; };
       var path = function (arr) { return arr.map(function (p) { var q = P(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join('L'); };
-      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, 'class': 'viz ntmap', role: 'img', 'aria-label': '서울과 3기 신도시 위치 지도. 지구별 거리와 거주 요건은 아래 표에 있습니다.' });
+      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, 'class': 'viz ntmap', role: 'group', 'aria-label': '서울과 3기 신도시 위치 지도. 지구를 고르면 거리·교통·가격이 나옵니다.' });
       var ch = (G.hubs || []).filter(function (h) { return /시청|광화문/.test(h.name); })[0];
       if (ch) {
         var c = P(ch.lon, ch.lat);
@@ -395,7 +395,7 @@
   /* ── 이번 달·다음 달 전입 확률 표 — D.moveNow ── */
   var mnHost = $('#moveNowRows');
   if (mnHost && D.moveNow) {
-    var pcTxt = function (v) { return v == null ? '-' : fmt(v, v >= 99.95 || v === 0 ? 0 : 1) + '%'; };
+    var pcTxt = function (v) { return v == null ? '-' : v >= 99.95 ? '약 100%' : fmt(v, v === 0 ? 0 : 1) + '%'; };
     mnHost.innerHTML = D.moveNow.rows.map(function (r) {
       return '<tr><th scope="row">' + esc(r.town) + '</th><td>' + esc(r.req) + '</td><td>' + esc(r.qualifies) + '</td>' +
         '<td><b>' + pcTxt(r.p3) + '</b>' + (r.ci3 ? '<br><small>' + fmt(r.ci3[0], 0) + '~' + fmt(r.ci3[1], 0) + '%</small>' : '') + '</td>' +
