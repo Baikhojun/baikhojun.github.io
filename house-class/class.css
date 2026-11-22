@@ -93,7 +93,8 @@ b, strong { font-weight: 700; }
 
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); }
 .card + .card { margin-top: 14px; }
-.grid2 { display: grid; gap: 14px; }
+.grid2 { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.grid2 > * { min-width: 0; }
 @media (min-width: 900px) { .grid2 { grid-template-columns: 1fr 1fr; } .grid2--wide { grid-template-columns: 1.4fr 1fr; } }
 .cap { font-size: 13px; color: var(--ink-3); margin-top: 8px; line-height: 1.5; }
 
@@ -287,3 +288,26 @@ dl.gloss { margin: 4px 0 8px; display: grid; grid-template-columns: max-content 
 dl.gloss dt { font-weight: 700; }
 dl.gloss dd { margin: 0; color: var(--ink-2); }
 @media (max-width: 600px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dd { margin-bottom: 6px; } }
+
+/* 3기 신도시 지도 */
+.ntmap-wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 899px) { .ntmap-wrap { grid-template-columns: 1fr; } }
+.ntmap__town { cursor: pointer; outline: none; }
+.ntmap__town .ntmap__dot { transition: r .15s, stroke-width .15s; }
+.ntmap__town.on .ntmap__dot, .ntmap__town:focus-visible .ntmap__dot { stroke: var(--ink); stroke-width: 3; }
+.ntmap-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--ink-2); margin: 8px 0 0; }
+.ntmap-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.ntmap-legend .hub { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); background: var(--ink); }
+.nt__one { margin: 0 0 10px; color: var(--ink-2); }
+.nt__row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.nt__row span { color: var(--ink-3); }
+.nt__row b { text-align: right; }
+.nt__tr { margin: 0; padding-left: 18px; font-size: 15px; }
+.nt__tr li { margin: 4px 0; }
+.prob-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.prob { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.prob b { display: block; font: 800 28px var(--mono); letter-spacing: -0.02em; }
+.prob small { color: var(--ink-3); font-size: 13px; line-height: 1.4; display: block; }
+.prob--good b { color: #136b38; } .prob--warn b { color: #a8401a; }
+.tbl-rent { min-width: 760px; }
+.tbl-rent td:first-child { min-width: 150px; }
