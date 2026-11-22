@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>두 사람의 내집마련 지도 | unfade</title>
+<meta name="description" content="프리랜서 예비부부(30대 후반)를 위한 맞춤 내집마련 강의. 3기 신도시 해당지역 거주, 청약 자격, 공고 시점 확률, 자금 계획을 한 흐름으로 정리했습니다.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#2a78d6">
+<link rel="canonical" href="https://unfade.is-a.dev/house-class/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="두 사람의 내집마련 지도">
+<meta property="og:description" content="경기로 먼저 이사한 한 사람이 기회를 몇 배로 늘린다. 1년이면 되는 곳, 2년이 필요한 곳, 6억이라는 갈림길.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../css/unfade-shell.css">
+<link rel="stylesheet" href="class.css?v=8">
+<script defer src="../js/unfade-shell.js" data-unfade-root="../"></script>
+<script defer src="data.js?v=9"></script>
+<script defer src="class.js?v=9"></script>
+</head>
+<body>
+
+<nav class="toc" aria-label="장 목록">
+  <div class="toc__in">
+    <a href="#top"><span class="n">0</span>요약</a>
+    <a href="#ask"><span class="n">1</span>질문지</a>
+    <a href="#big"><span class="n">2</span>큰 그림</a>
+    <a href="#who"><span class="n">3</span>누구 이름으로</a>
+    <a href="#where"><span class="n">4</span>어디서 기다리나</a>
+    <a href="#when"><span class="n">5</span>언제 나오나</a>
+    <a href="#money"><span class="n">6</span>돈</a>
+    <a href="#road"><span class="n">7</span>두 사람 연표</a>
+    <a href="#alt"><span class="n">8</span>다른 길</a>
+    <a href="#todo"><span class="n">9</span>숙제</a>
+  </div>
+  <div class="toc__bar"></div>
+</nav>
+
+<main>
+<!-- 0. 요약 -->
+<header class="hero" id="top">
+  <div class="hero__kicker">두 사람만을 위한 내집마련 강의 · 2026-11-22 기준</div>
+  <h1>한 사람이 먼저 <em>경기로 이사</em>하면,<br>3기 신도시 청약 기회가 몇 배로 늘어납니다</h1>
+  <ul class="three three--hero">
+    <li>3기 신도시 대부분은 그 시에 <b>1년만</b> 살면 그 시 사람 몫(30%)에 들어갑니다. <b>2년</b>이 필요한 곳은 투기과열지구인 하남·과천·광명입니다.</li>
+    <li>이사는 <b>신청할 한 사람만</b> 먼저 가도 됩니다. 경기 어디든 <b>6개월</b>이면 비규제 지구의 경기 몫(20%)이 열립니다.</li>
+    <li>아이가 생기면(임신 포함) 문이 가장 넓어지고, 집값은 <b>6억 원 아래</b>를 고르면 저금리 정책대출로 내 돈 2~3억 원이 됩니다.</li>
+  </ul>
+  <p class="hero__meta">대상: 결혼 예정(2027~2028) 30대 후반 프리랜서 커플 · 헬스 트레이너 + 웹소설 작가 · 지금 둘 다 서울 · 무주택 가정</p>
+</header>
+
+<!-- 1. 질문지 -->
+<section class="ch" id="ask">
+  <div class="ch__head"><span class="ch__no">1</span><h2>강의 전에, 두 사람에게 먼저 물어보세요</h2></div>
+  <p class="ch__lead">답을 누르면 다음 질문이 열리고, 마지막에 두 사람에게 맞는 길이 나옵니다. 질문 하나하나가 열리고 닫히는 제도를 가릅니다.</p>
+  <div id="qt">
+    <div class="qt__meter-wrap" aria-hidden="true"><div class="qt__meter"></div></div>
+    <div class="qt">
+      <div class="qt__steps"></div>
+      <div class="qt__result" aria-live="polite"></div>
+    </div>
+  </div>
+  <details class="more">
+    <summary>강사용: 말로 묻는 순서</summary>
+    <div class="prose" id="script"></div>
+  </details>
+</section>
+
+<!-- 2. 큰 그림 -->
+<section class="ch" id="big">
+  <div class="ch__head"><span class="ch__no">2</span><h2>집은 네 가지가 한꺼번에 맞아야 생깁니다</h2></div>
+  <ul class="three">
+    <li><b>누구 이름으로</b> 넣느냐(자격)와 <b>어디 살며</b> 기다리느냐(거주)가 당첨 확률을 정합니다.</li>
+    <li><b>공고가 언제</b> 나오느냐가 거주 기간을 채웠는지를 가릅니다. 날짜는 거꾸로 셉니다.</li>
+    <li><b>돈</b>은 당첨 뒤의 문제처럼 보이지만, 6억 원 경계 때문에 어떤 집을 넣을지부터 바꿉니다.</li>
+  </ul>
+  <div class="card" style="margin-top:16px">
+    <svg class="viz big-svg" viewBox="0 0 680 330" role="img" aria-label="자격, 거주, 공고 시점, 돈 네 축이 만나 당첨과 입주로 이어지는 그림">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--ink-3)"/></marker>
+      </defs>
+      <g>
+        <rect x="16" y="16" width="200" height="66" rx="14" fill="var(--accent-wash)" stroke="var(--s1)" stroke-width="1.5"/>
+        <text x="32" y="44" class="t-strong" style="font-size:16px">① 자격 · 누구 이름으로</text>
+        <text x="32" y="66" class="t-muted">신생아 · 신혼 · 생애최초 · 청년</text>
+        <rect x="16" y="96" width="200" height="66" rx="14" fill="var(--good-wash)" stroke="var(--s3)" stroke-width="1.5"/>
+        <text x="32" y="124" class="t-strong" style="font-size:16px">② 거주 · 어디서 기다리나</text>
+        <text x="32" y="146" class="t-muted">해당 시 1년 · 경기 6개월 · 2년</text>
+        <rect x="16" y="176" width="200" height="66" rx="14" fill="var(--warm-wash)" stroke="var(--s2)" stroke-width="1.5"/>
+        <text x="32" y="204" class="t-strong" style="font-size:16px">③ 시간 · 공고는 언제</text>
+        <text x="32" y="226" class="t-muted">평균 7.6개월 늦음 · 거꾸로 셈</text>
+        <rect x="16" y="256" width="200" height="66" rx="14" fill="var(--wash)" stroke="var(--s7)" stroke-width="1.5"/>
+        <text x="32" y="284" class="t-strong" style="font-size:16px">④ 돈 · 얼마 필요한가</text>
+        <text x="32" y="306" class="t-muted">계약금 현금 · 6억 경계 · 잔금</text>
+      </g>
+      <g stroke="var(--ink-3)" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+        <path d="M216,49 C300,49 300,150 352,160"/>
+        <path d="M216,129 C290,129 300,160 352,166"/>
+        <path d="M216,209 C290,209 300,172 352,172"/>
+        <path d="M216,289 C300,289 300,184 352,180"/>
+      </g>
+      <rect x="356" y="128" width="140" height="76" rx="16" fill="var(--ink)"/>
+      <text x="426" y="160" text-anchor="middle" style="fill:var(--bg);font-size:17px;font-weight:800">당첨</text>
+      <text x="426" y="182" text-anchor="middle" style="fill:var(--bg);font-size:12px;opacity:.75">네 축이 같은 날 맞을 때</text>
+      <path d="M496,166 H540" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="544" y="128" width="120" height="76" rx="16" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="604" y="160" text-anchor="middle" class="t-strong" style="font-size:16px">입주</text>
+      <text x="604" y="182" text-anchor="middle" class="t-muted">공고 3~4년 뒤</text>
+    </svg>
+    
+    <ol class="big-m">
+      <li><b>① 자격 · 누구 이름으로</b><small>신생아 · 신혼 · 생애최초 · 청년</small></li>
+      <li><b>② 거주 · 어디서 기다리나</b><small>그 시 1년 · 경기 6개월 · 2년</small></li>
+      <li><b>③ 시간 · 공고는 언제</b><small>평균 7.6개월 늦음 · 거꾸로 셈</small></li>
+      <li><b>④ 돈 · 얼마 필요한가</b><small>계약금 현금 · 6억 경계 · 잔금</small></li>
+      <li class="big-m__end"><b>↓ 네 축이 같은 날 맞으면 당첨 → 공고 3~4년 뒤 입주</b></li>
+    </ol>
+    <p class="cap">이 강의는 네 축을 따로 가르치지 않습니다. 한 연표 위에 올려 "언제 무엇을 해야 같은 날 맞는가"를 봅니다(7장).</p>
+  <details class="more">
+    <summary>낱말 풀이</summary>
+    <dl class="gloss">
+      <dt>특공(특별공급)</dt><dd>신혼·신생아·생애최초처럼 조건이 맞는 사람끼리만 따로 추첨하는 물량</dd>
+      <dt>그 시 몫(해당지역)</dt><dd>그 지구가 있는 시에 정해진 기간 이상 산 사람에게 먼저 주는 30%</dd>
+      <dt>투기과열지구</dt><dd>정부가 집값 과열로 지정한 곳. 하남·과천·광명이 해당하고 거주 기간이 2년으로 길어짐</dd>
+      <dt>거주의무</dt><dd>입주 뒤 정해진 기간(3년 등) 직접 살아야 하는 조건. 전세를 놓을 수 없음</dd>
+      <dt>집단대출</dt><dd>중도금을 당첨자들이 함께 빌리는 대출. LH가 은행을 알선함</dd>
+      <dt>시뮬레이션</dt><dd>과거 공고 지연을 무작위로 다시 뽑아 미래 공고 날짜를 수만 번 그려 보고 평균을 낸 계산</dd>
+    </dl>
+  </details>
+  </div>
+</section>
+
+<!-- 3. 누구 이름으로 -->
+<section class="ch" id="who">
+  <div class="ch__head"><span class="ch__no">3</span><h2>누구 이름으로 넣을까: 두 사람에게 열린 문</h2></div>
+  <ul class="three">
+    <li>가장 넓은 문은 <b>신생아</b>입니다. 부천대장 A2는 신생아 몫이 110세대로, 신혼 몫(55세대)의 두 배였습니다.</li>
+    <li>결혼 전이라도 <b>예비신혼부부</b>로 신혼 특공을 넣을 수 있습니다. 그러니 미혼 자격을 쓰려고 혼인신고를 미룰 이유가 없습니다.</li>
+    <li><b>생애최초</b>는 사업소득으로 세금을 신고한 해가 5년 있어야 합니다. 작가 원고료가 기타소득(8.8%)이면 그 해는 빠집니다.</li>
+  </ul>
+
+  <h3>문마다 이 커플의 판정</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>문(유형)</th><th>열리는 조건</th><th>닫히는 때</th><th>이 커플</th></tr></thead>
+      <tbody id="doors"></tbody>
+    </table>
+  </div>
+  <p class="cap">공공분양 기준. 소득 기준(3인 이하 100% = 월 753만 원)은 두 사람 신고소득으로 모두 통과합니다. 자산은 부동산 2억 1,550만·자동차 4,542만 원 이하(예금·전세보증금은 안 봄). 신혼희망타운은 예금까지 합친 총자산 3.62억 원 이하를 따로 봅니다(전세보증금 포함 여부는 확인 필요).<sup class="s"><a href="#src">LH</a></sup></p>
+
+  <div class="callout callout--key">
+    <b>누구 이름으로 넣나: 유형마다 신청자가 다릅니다</b>
+    거주 우선권은 <b>신청자 본인 주소</b>로 봅니다. 신혼·신생아 특공은 먼저 이사한 <b>작가 이름</b>으로 넣어 그 시 몫을 씁니다. 생애최초는 5년 세금 신고가 있는 <b>트레이너 이름</b>이어야 해서, 트레이너가 같은 시로 옮겨 기간을 채우기 전까지는 수도권 몫으로만 넣습니다. 결혼 뒤 트레이너가 작가 집으로 들어오면 그날부터 트레이너의 기간을 셉니다.
+  </div>
+
+  <div class="callout callout--warn">
+    <b>혼인신고를 늦춰 '미혼 자격'을 쓰는 것은 하지 않습니다</b>
+    2026-11-10 정부 점검에서 위장전입 334건, 위장미혼 18건이 적발되었습니다. 위장미혼은 결혼해 함께 살면서 혼인신고 없이 미혼 자격으로 청약한 경우입니다. 결과는 계약 취소·형사처벌·최대 10년 청약 제한입니다. 결혼 전 따로 살 때 각자 넣거나, 예비신혼으로 넣는 것은 정상입니다.<sup class="s"><a href="#src">정책브리핑</a></sup>
+  </div>
+
+  <h3>기회의 창: 두 사람의 날짜를 넣어 보세요</h3>
+  <p class="prose">문마다 열리고 닫히는 때가 다릅니다. 창이 <b>겹치는 기간</b>에 공고가 나오면 가장 많은 문으로 들어갈 수 있습니다.</p>
+  <div class="card">
+    <div class="win-ctl" id="winCtl"></div>
+    <div id="winChart"></div>
+    <p class="cap">예시 값은 바꿀 수 있습니다. 신생아 문은 임신 확인(출산 약 9개월 전)부터 아이가 만 2세가 되는 날까지로 그립니다. 입력값은 이 화면에만 남습니다.</p>
+  </div>
+</section>
+
+<!-- 4. 어디서 기다리나 -->
+<section class="ch" id="where">
+  <div class="ch__head"><span class="ch__no">4</span><h2>어디서 기다릴까: 1년이면 되는 곳, 2년이 필요한 곳</h2></div>
+  <ul class="three">
+    <li>남양주·고양·부천은 <b>1년</b>, 인천계양은 <b>공고일에 살고만 있으면</b>, 하남·과천·광명은 <b>2년</b>입니다(하남은 예상).</li>
+    <li>그 시에 살면 <b>세 번</b> 추첨받습니다. 실제 경쟁률로 계산하면 서울에 남을 때보다 당첨 확률이 <b>약 3.6~7.7배</b>, 경기 6개월만 채워도 <b>약 1.8배</b>로 추정됩니다(실제 경쟁률 + 일부 가정).</li>
+    <li>남은 물량의 중심은 <b>2027~2030 남양주왕숙</b>입니다. 2027년에 사전청약 없는 블록 5,373호가 예고되었습니다.</li>
+  </ul>
+
+  <div class="grid2 grid2--wide" style="margin-top:16px">
+    <div class="card">
+      <h3 style="margin-top:0">한 번 넣고 세 번 뽑힌다</h3>
+      <div class="tiers" role="img" aria-label="해당 시 30%, 경기 20%, 수도권 50% 순서로 추첨하는 그림">
+        <div class="tier tier--1"><span class="tier__pct">30%</span><span class="tier__who"><b>그 시 사람</b><small>남양주 1년 이상 등</small></span></div>
+        <div class="tier__arrow">떨어지면 ↓ 다시</div>
+        <div class="tier tier--2"><span class="tier__pct">20%</span><span class="tier__who"><b>경기 사람</b><small>경기 어디든 6개월 이상(하남·과천·광명 지구는 2년 추정)</small></span></div>
+        <div class="tier__arrow">떨어지면 ↓ 다시</div>
+        <div class="tier tier--3"><span class="tier__pct">50%</span><span class="tier__who"><b>수도권 사람</b><small>서울·인천 포함, 기간 없음</small></span></div>
+      </div>
+      <p class="cap">경기 66만㎡ 이상 대규모 택지의 배정 순서. 서울에 그대로 살면 맨 아래 50% 한 번만 뽑힙니다. 인천계양은 인천 50% → 수도권 50%의 두 단계입니다.<sup class="s"><a href="#src">공고문</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">지구별 거주 조건</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>지구</th><th>그 시 몫 조건</th><th>근거</th></tr></thead>
+          <tbody id="towns"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>같은 공고, 다른 줄: 어디 사느냐가 내 줄을 정한다</h3>
+  <div class="card">
+    <div data-chart="cityStrategy"></div>
+    <p class="cap">2026-12 전입 가정, 3기 신도시만, 과거 지연을 다시 뽑는 시뮬레이션 4만 회 평균. 공고 수는 어디 살든 18건 안팎으로 같습니다. 다른 것은 <b>몇 번째 줄에 서느냐</b>입니다. 서울에 남으면 전부 맨 뒷줄(수도권)입니다.<sup class="s"><a href="#src">계산</a></sup></p>
+    <p class="cap">배수 근거: 왕숙2 A3 특공 191.2 대 1 등 보도된 경쟁률 5건과 신청자 중 경기 거주 52.2%(실측), 그 시 거주 비중(미공개, 10~30% 가정).</p>
+  </div>
+
+  <details class="more">
+    <summary>더 보기: 지구별 남은 물량과 분양가</summary>
+    <div class="tbl-wrap"><table><thead><tr><th>지구</th><th>남은 공공분양</th><th>최근 59㎡ 분양가</th><th>규제</th></tr></thead><tbody id="supply"></tbody></table></div>
+    <div class="callout callout--key"><b>사전청약 블록은 새로 넣을 몫이 적습니다</b>남양주왕숙2 A-3는 686세대 중 새로 신청할 수 있는 몫이 81세대였습니다. 사전청약이 없던 블록이 두 사람의 진짜 기회입니다.</div>
+  </details>
+</section>
+
+<!-- 5. 언제 -->
+<section class="ch" id="when">
+  <div class="ch__head"><span class="ch__no">5</span><h2>언제 나올까: 공고 날짜는 맞힐 수 없으니 여유로 이긴다</h2></div>
+  <ul class="three">
+    <li>사전청약 때 안내한 날짜보다 실제 공고는 <b>평균 7.6개월</b> 늦었습니다(20건). 그래도 <b>40%</b>는 제때 또는 더 일찍 나왔습니다.</li>
+    <li>거주 기간은 <b>공고일에서 거꾸로</b> 셉니다. 하루라도 모자라면 그 시 몫에서 빠집니다.</li>
+    <li>그래서 공고를 맞히려 하지 말고 <b>한 달이라도 일찍</b> 옮기는 쪽이 이깁니다.</li>
+  </ul>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3 style="margin-top:0">안내보다 몇 달 늦게 나왔나</h3>
+      <div data-chart="delayHist"></div>
+      <p class="cap">가로축은 늦어진 개월 수(3개월 구간, 0은 0~2개월, 이전은 앞당김). 사전청약 당시 안내한 본청약 예정월 → 실제 입주자모집공고, 20건. 국토부 99개 블록 집계(지연 블록 평균 12.8개월)와 거의 같습니다.<sup class="s"><a href="#src">계산</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">이사가 한 달 늦을 때마다 줄어드는 기회</h3>
+      <div data-chart="moveInCurve"></div>
+      <p class="cap" id="moveInCap">옮기는 달에 따라, 2028년 말까지 앞줄(그 시 몫 또는 경기 6개월 몫)로 넣을 공고 수. 3기 밖 LH 공공분양 포함 추정치입니다. 경기는 <b>한 달 늦을 때마다 약 2.5건</b>씩 줄고, 인천은 약 0.2건만 줄어듭니다.</p>
+    </div>
+  </div>
+
+  <h3>아깝게 놓치는 장면</h3>
+  <div class="card">
+    <div class="miss" id="miss"></div>
+    <p class="cap">예: 2026-12-01 전입 → 1년 조건은 2027-12-01 공고부터 충족. 안내대로 2027-10 말에 공고가 나면 약 한 달 차이로 그 시 몫을 놓칩니다(남양주왕숙 A20, 모델상 80%). 그래도 경기 6개월 단계로는 넣을 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- 6. 돈 -->
+<section class="ch" id="money">
+  <div class="ch__head"><span class="ch__no">6</span><h2>돈: 6억 원이 갈림길입니다</h2></div>
+  <ul class="three">
+    <li>분양가가 <b>6억 원 이하</b>이면 저금리 정책대출(디딤돌 신혼 최대 3.2억)이 나와 내 돈 <b>2~3억 원</b>으로 됩니다. 대신 월 상환이 <b>약 134만 원</b>입니다.</li>
+    <li>6억 원을 넘으면 정책대출 두 개가 함께 막혀 내 돈이 <b>약 4~5.4억 원</b>으로 뜁니다. 같은 지구에서 51·55㎡를 고르면 피할 수 있습니다.</li>
+    <li>당첨되면 <b>계약금(분양가의 10%, 약 5천~6천만 원)</b>은 바로 현금으로 냅니다. 지금부터 그 돈을 먼저 모읍니다.</li>
+  </ul>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3 style="margin-top:0">고르는 집에 따라 필요한 내 돈</h3>
+      <div data-chart="equity"></div>
+      <p class="cap">두 사람 합산 신고소득 3천만 원 가정, 가장 큰 대출을 쓴 경우. 하남교산 값은 2029년 공고에서 10% 오른다고 가정. 합산 소득 3천만 원이면 월 상환 134만~140만 원으로 소득의 절반이 넘습니다. 신혼희망타운은 연 1.6% 전용 대출을 쓰는 대신 팔 때 시세차익 10~50%를 나눕니다.<sup class="s"><a href="#src">계산</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">분양 대금은 이렇게 나뉩니다</h3>
+      <div class="pay" role="img" aria-label="계약금 10%, 중도금 60%, 잔금 30%">
+        <div class="pay__seg pay__seg--1" style="flex:10"><b>10%</b><small>계약금</small></div>
+        <div class="pay__seg pay__seg--2" style="flex:60"><b>60%</b><small>중도금 · 집단대출, 이자 후불</small></div>
+        <div class="pay__seg pay__seg--3" style="flex:30"><b>30%</b><small>잔금 · 입주 때</small></div>
+      </div>
+      <ol class="flowlist">
+        <li><b>당첨 직후:</b> 계약금은 전액 현금입니다.</li>
+        <li><b>3~4년 동안:</b> 중도금은 LH가 알선하는 집단대출로 내고, 그 이자는 입주 때 한꺼번에(약 1,700만~2,900만 원) 냅니다.</li>
+        <li><b>입주 때:</b> 잔금은 정책대출로 내고, 그때 정해진 대출 조건을 받습니다. 거주의무 3년이라 전세를 놓아 메울 수 없습니다.</li>
+      </ol>
+      <p class="cap">하남교산 A2 공고문(2025-03-31) 기준. 집단대출이 막히면 중도금을 직접 내야 한다는 문구가 공고문에 있습니다.<sup class="s"><a href="#src">공고문</a></sup></p>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" style="margin-top:14px"><b>확인 필요: 6억은 분양가인가, 입주 때 감정가인가</b>디딤돌은 '주택 평가액 6억 이하'를 봅니다. 새 아파트 잔금 때 이 값을 분양가로 보는지 입주 시점 감정가로 보는지 확인하지 못했습니다. 감정가라면 분양가 5억대라도 입주 때 시세가 6억을 넘어 막힐 수 있습니다. 당첨 뒤 수탁은행에 먼저 묻습니다. 막히면 보금자리론도 같은 6억 상한에 함께 걸리므로, 아이가 있으면 신생아 특례(9억 이하), 없으면 은행 대출로 내 돈이 4~5억 원대로 늘어난다고 보고 준비합니다.</div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <h3 style="margin-top:0">프리랜서 소득, 이것만 지키면 됩니다</h3>
+      <ol class="flowlist">
+        <li><b>매년 5월 종합소득세 신고.</b> 소득을 낮게 잡아도 청약에서 얻는 건 거의 없습니다(두 사람 소득은 모든 특공 기준 아래).</li>
+        <li><b>작가 정산은 사업소득(3.3%)으로.</b> 기타소득(8.8%)이면 생애최초 5년에도, '맞벌이' 판정에도 들지 않습니다.</li>
+        <li><b>세금이 0원이어도 신고는 합니다.</b> 신고한 해는 '세금 낸 해'로 인정됩니다. 3.3%만 떼고 신고하지 않은 해는 3.3% 영수증으로 인정될 가능성이 높지만, 공고 전에 LH에 꼭 확인합니다.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">신생아 특례대출은 "어떻게 당첨됐나"에 달렸습니다</h3>
+      <p style="margin:0 0 8px">특례대출은 <b>대출 신청일 기준 2년 안에 낳은</b> 아이가 있어야 합니다. 잔금은 당첨 3~4년 뒤라 아이가 2세를 넘기 쉽습니다.</p>
+      <div class="callout callout--key" style="margin:8px 0 0"><b>예외는 하나</b>신생아 특공 또는 일반공급 '신생아 우선공급'으로 당첨되면 아이가 2세를 넘어도 쓸 수 있습니다. 신혼 특공으로 당첨되면 이 예외가 없고, 대출 신청일 기준 2년 안에 낳은 아이가 있을 때만 씁니다.<sup class="s"><a href="#src">마이홈</a></sup></div>
+    </div>
+  </div>
+
+  <h3>기다리는 동안 사는 집</h3>
+  <div class="card">
+    <div data-chart="rentCost"></div>
+    <p class="cap">거주 기간 동안의 월 부담(이자 + 내 돈의 기회비용). 신혼 버팀목은 보증금 4억 원 이하만 받아서, 고양·남양주·하남의 59㎡ 아파트 전세(4.6억~5.5억)에는 쓸 수 없습니다. 구축·빌라·LH 전세임대가 현실적입니다. 결혼 3개월 전보다 일찍 혼자 옮기는 사람은 신혼 버팀목이 아니라 <b>버팀목 일반</b>(보증금 3억 이하, 한도 1.2억)이고, 소득이 없는 작가 이름의 대출은 심사를 따로 확인해야 합니다.<sup class="s"><a href="#src">계산</a></sup></p>
+  </div>
+</section>
+
+<!-- 7. 연표 -->
+<section class="ch" id="road">
+  <div class="ch__head"><span class="ch__no">7</span><h2>두 사람 연표: 같은 날 네 축을 맞추기</h2></div>
+  <ul class="three">
+    <li>지금은 <b>신청할 사람 한 명의 이사</b>와 <b>세금 신고 정리</b>가 먼저입니다.</li>
+    <li>2027년에는 경기 몫으로 <b>살 생각이 있는 6억 아래 집에만</b> 넣습니다. 혼인신고 전에는 예비신혼, 뒤에는 신혼 특공입니다.</li>
+    <li>2028년부터가 본게임입니다. 그 시 몫과 신생아 문이 함께 열리는 공고를 노립니다.</li>
+  </ul>
+  <div class="tl" id="timeline" style="margin-top:18px"></div>
+</section>
+
+<!-- 8. 다른 길 -->
+<section class="ch" id="alt">
+  <div class="ch__head"><span class="ch__no">8</span><h2>다른 길: 3기 신도시가 맞지 않는다면</h2></div>
+  <ul class="three">
+    <li><b>서울에 남는 길:</b> 미리내집(장기전세Ⅱ)은 예비신혼도 넣을 수 있고, 아이를 낳으면 최장 20년 살 수 있습니다.</li>
+    <li><b>인천으로 가는 길:</b> 인천은 기간 조건 없이 공고일에 살고 있으면 인천 몫 50%입니다(계양·영종·가정2 공고문 확인). 2년 동안 인천 몫으로 넣을 공고는 약 5건(추정)이고, 늦게 옮겨도 손해가 작습니다.</li>
+    <li><b>다음 물결:</b> 서리풀(서초, 2029 목표), 남양주 도심지구(2.17만 호) 같은 새 택지가 2029~2030년부터 나옵니다.</li>
+  </ul>
+  <h3>3기 신도시 전략이 안 맞을 수 있는 이유와 대응</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>안 맞는 이유</th><th>대응</th></tr></thead>
+      <tbody id="risks"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 9. 숙제 -->
+<section class="ch" id="todo">
+  <div class="ch__head"><span class="ch__no">9</span><h2>숙제: 이번 달부터 할 일</h2></div>
+  <p class="ch__lead">체크하면 이 기기에 기억됩니다.</p>
+  <ul class="check" id="checks"></ul>
+</section>
+
+<section class="ch" id="src">
+  <div class="ch__head"><span class="ch__no">출처</span><h2>근거와 기준</h2></div>
+  <div class="src prose" id="sources"></div>
+</section>
+</main>
+
+<footer class="foot">
+  이 자료는 2026-11-22까지 확인한 공고문·법령·공식 안내와 계산을 바탕으로 한 교육 자료입니다. 개인 투자 자문이 아닙니다. 청약 자격과 날짜는 반드시 해당 입주자모집공고문으로 다시 확인하십시오.
+</footer>
+</body>
+</html>
