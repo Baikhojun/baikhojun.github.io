@@ -325,6 +325,85 @@
     winCtl.addEventListener('change', draw); draw();
   }
 
+  /* ── 3기 신도시 지도(SVG) — D.geo: {seoulOutline, hanRiver, hubs, towns} ── */
+  var mapHost = $('#ntMap'), mapInfo = $('#ntInfo');
+  if (mapHost && D.geo && D.geo.towns) {
+    var G = D.geo;
+    var reqColor = function (r) { return r === '2y' ? 'var(--warm)' : r === 'none' ? 'var(--s3)' : 'var(--s1)'; };
+    var selectTown = function (id) {
+      var t = G.towns.filter(function (x) { return x.id === id; })[0]; if (!t || !mapInfo) return;
+      $$('.ntmap__town', mapHost).forEach(function (g) { g.classList.toggle('on', g.getAttribute('data-id') === id); });
+      var line = function (l, v) { return v ? '<div class="nt__row"><span>' + l + '</span><b>' + esc(v) + '</b></div>' : ''; };
+      var tierCls = /인기|브랜드/.test(t.tier || '') ? 'chip--key' : /가성비/.test(t.tier || '') ? 'chip--good' : '';
+      mapInfo.innerHTML = '<div class="card nt"><div class="chip ' + tierCls + '">' + esc(t.tier || '') + '</div>' +
+        '<div class="res__title">' + esc(t.name) + '</div>' + (t.oneLine ? '<p class="nt__one">' + esc(t.oneLine) + '</p>' : '') +
+        (t.rows || []).map(function (r) { return line(r[0], r[1]); }).join('') +
+        (t.transit && t.transit.length ? '<h3 class="res__h">교통</h3><ul class="nt__tr">' + t.transit.map(function (x) {
+          var sc = /운행|개통/.test(x.status || '') ? ' chip--good' : /공사/.test(x.status || '') ? ' chip--key' : '';
+          return '<li><b>' + esc(x.line) + '</b> <span class="chip' + sc + '">' + esc(x.status || '') + (x.openYear ? ' ' + esc(x.openYear) : '') + '</span>' + (x.note ? ' <small>' + esc(x.note) + '</small>' : '') + '</li>';
+        }).join('') + '</ul>' : '') + '</div>';
+    };
+    var drawMap = function () {
+      mapHost.innerHTML = '';
+      var W = chartW(mapHost), narrow = W < 520, H = Math.round(W * (narrow ? 1.0 : 0.95));
+      var pts = (G.seoulOutline || []).slice();
+      G.towns.forEach(function (t) { pts.push([t.lon, t.lat]); });
+      var lons = pts.map(function (p) { return p[0]; }), lats = pts.map(function (p) { return p[1]; });
+      var lon0 = Math.min.apply(null, lons), lon1 = Math.max.apply(null, lons), la0 = Math.min.apply(null, lats), la1 = Math.max.apply(null, lats);
+      var cl = Math.cos((la0 + la1) / 2 * Math.PI / 180), padX = narrow ? 74 : 72, padY = narrow ? 30 : 40;
+      var k = Math.min((W - 2 * padX) / ((lon1 - lon0) * cl), (H - 2 * padY) / (la1 - la0));
+      var ox = (W - (lon1 - lon0) * cl * k) / 2, oy = (H - (la1 - la0) * k) / 2;
+      var P = function (lon, lat) { return [ox + (lon - lon0) * cl * k, oy + (la1 - lat) * k]; };
+      var path = function (arr) { return arr.map(function (p) { var q = P(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join('L'); };
+      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, 'class': 'viz ntmap', role: 'img', 'aria-label': '서울과 3기 신도시 위치 지도. 지구별 거리와 거주 요건은 아래 표에 있습니다.' });
+      var ch = (G.hubs || []).filter(function (h) { return /시청|광화문/.test(h.name); })[0];
+      if (ch) {
+        var c = P(ch.lon, ch.lat);
+        [10, 20, 30].forEach(function (km) {
+          var r = km / 111 * k;
+          el('circle', { cx: c[0], cy: c[1], r: r, fill: 'none', stroke: 'var(--ink-3)', 'stroke-opacity': .35, 'stroke-dasharray': '3 5' }, svg);
+          txt(svg, c[0], c[1] - r - 4, km + 'km', 't-muted', 'middle');
+        });
+      }
+      if (G.seoulOutline) el('path', { d: 'M' + path(G.seoulOutline) + 'Z', fill: 'var(--wash)', stroke: 'var(--ink-3)', 'stroke-width': 1.5 }, svg);
+      if (G.hanRiver) el('path', { d: 'M' + path(G.hanRiver), fill: 'none', stroke: 'var(--s1)', 'stroke-opacity': .35, 'stroke-width': narrow ? 4 : 6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, svg);
+      (G.hubs || []).forEach(function (h) {
+        var p = P(h.lon, h.lat);
+        el('rect', { x: p[0] - 4, y: p[1] - 4, width: 8, height: 8, fill: 'var(--ink)', transform: 'rotate(45 ' + p[0] + ' ' + p[1] + ')' }, svg);
+        txt(svg, p[0], p[1] + 17, h.short || h.name, 't-muted', 'middle');
+      });
+      G.towns.forEach(function (t) {
+        var p = P(t.lon, t.lat), r = Math.max(7, Math.min(15, Math.sqrt(t.units || 10000) / 14));
+        var g = el('g', { 'class': 'ntmap__town', 'data-id': t.id, tabindex: '0', role: 'button', 'aria-label': t.name + ' 자세히 보기' }, svg);
+        el('circle', { cx: p[0], cy: p[1], r: r + 10, fill: 'transparent' }, g);
+        el('circle', { 'class': 'ntmap__dot', cx: p[0], cy: p[1], r: r, fill: reqColor(t.req), stroke: 'var(--paper)', 'stroke-width': 2 }, g);
+        var side = t.labelSide || (p[0] < W * 0.6 ? 'right' : 'left');
+        var dx = side === 'right' ? r + 5 : -(r + 5), anchor = side === 'right' ? 'start' : 'end';
+        var dy = t.labelDy || 0;
+        txt(g, p[0] + dx, p[1] - 1 + dy, t.short || t.name, 't-strong', anchor);
+        if (t.kmToGangnam != null) txt(g, p[0] + dx, p[1] + 14 + dy, '강남 ' + fmt(t.kmToGangnam, 0) + 'km', 't-muted', anchor);
+        g.addEventListener('click', function () { selectTown(t.id); });
+        g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTown(t.id); } });
+      });
+      mapHost.appendChild(svg);
+    };
+    drawMap();
+    selectTown(G.defaultTown || G.towns[0].id);
+  }
+
+
+  /* ── 이번 달·다음 달 전입 확률 표 — D.moveNow ── */
+  var mnHost = $('#moveNowRows');
+  if (mnHost && D.moveNow) {
+    var pcTxt = function (v) { return v == null ? '-' : fmt(v, v >= 99.95 || v === 0 ? 0 : 1) + '%'; };
+    mnHost.innerHTML = D.moveNow.rows.map(function (r) {
+      return '<tr><th scope="row">' + esc(r.town) + '</th><td>' + esc(r.req) + '</td><td>' + esc(r.qualifies) + '</td>' +
+        '<td><b>' + pcTxt(r.p3) + '</b>' + (r.ci3 ? '<br><small>' + fmt(r.ci3[0], 0) + '~' + fmt(r.ci3[1], 0) + '%</small>' : '') + '</td>' +
+        '<td>' + pcTxt(r.p3late) + '</td><td>' + pcTxt(r.p5) + '</td><td>' + fmt(r.e2, 1) + '건 → ' + fmt(r.e2late, 1) + '건</td><td>' + pcTxt(r.p3half) + '</td></tr>';
+    }).join('');
+    $$('[data-mn]').forEach(function (n) { var v = D.moveNow.nam[n.getAttribute('data-mn')]; if (v != null) n.textContent = fmt(v, v % 1 ? 1 : 0); });
+  }
+
   /* ── 아깝게 놓침(SVG) ── */
   var missHost = $('#miss');
   if (missHost) {
